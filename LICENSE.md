@@ -1,5 +1,7 @@
 The MIT License
 
+Copyright (c) Justin Woo
+
 Copyright (c) Zach Holman, http://zachholman.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
