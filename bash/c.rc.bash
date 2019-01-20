@@ -16,7 +16,7 @@ _c() {
   if [ "$COMP_CWORD" == 1 ]
   then
     cur="${COMP_WORDS[COMP_CWORD]}"
-    opts="$(ls ~/Code)"
+    opts="$(ls "$PROJECTS")"
 
     # shellcheck disable=2207
     COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
