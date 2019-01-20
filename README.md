@@ -1,5 +1,5 @@
 ```sh
-git clone https://github.com/justinwoo/dotfiles.git ~/.dotfiles
+git clone https://github.com/justinwoo/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 script/bootstrap
 ```
