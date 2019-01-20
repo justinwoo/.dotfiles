@@ -1,0 +1,22 @@
+#!/usr/bin/perl -w
+
+my $numArgs = $#ARGV;
+
+if ($numArgs < 2) {
+  print "I need input images and an output image name for the last arg";
+  print "stitch-images input.jpg input2.jpg output.jpg";
+  exit;
+}
+
+my $exec = "convert";
+
+for my $input (@ARGV[0..($numArgs-1)]) {
+  $exec .= " ";
+  $exec .= $input;
+}
+
+$exec .= " +append ";
+$exec .= $ARGV[$numArgs];
+
+print $exec;
+print `$exec`;

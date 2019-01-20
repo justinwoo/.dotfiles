@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: md-hask-code-block
+# key: hask
+# --
+\`\`\`hs$0
+\`\`\`

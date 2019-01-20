@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nix-shell -p emacs --run "emacs $1 & disown" 2> /dev/null

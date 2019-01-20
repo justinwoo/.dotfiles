@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+use feature 'say';
+
+if ($#ARGV < 2) {
+  die "need method, url, body args";
+}
+
+my ($method, $url, $body) = @ARGV;
+
+say `curl -X $method '$url' -d $body -H "Content-type: application/json"`;

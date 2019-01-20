@@ -1,0 +1,71 @@
+# -*- mode: shell-script -*-
+
+shopt -s globstar
+
+# Eternal bash history.
+# ---------------------
+export HISTFILESIZE=-1
+export HISTSIZE=-1
+export HISTTIMEFORMAT="[%F %T] "
+export HISTFILE=~/.bash_eternal_history
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export EDITOR='nvim' >> ~/.bashrc
+export GIT_EDITOR='nvim' >> ~/.bashrc
+export PATH="$HOME/.cabal/bin:$HOME/.local/bin:./bin:$PATH:$DOT/bin:$HOME/.bin"
+export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+
+export XDG_DATA_DIRS="$HOME/.nix-profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+
+  NIX_SHARE_COMPLETION=~/.nix-profile/share/bash-completion/bash_completion
+  if [ -f $NIX_SHARE_COMPLETION ]; then
+    . $NIX_SHARE_COMPLETION
+  fi
+fi
+
+export LC_CTYPE=en_IE.UTF-8
+export DOT=$HOME/.dotfiles
+export NIX_PROFILE=$HOME/.nix-profile
+export TERMINAL=gnome-terminal
+export PROJECTS=~/Code
+export TERM="screen-256color"
+
+if [[ -a $(command -v xset) ]]
+then
+  xset r rate 350 50
+fi
+
+if [[ -a $(command -v xmodmap) ]]
+then
+  xmodmap -e "keycode 94 = Shift_L"
+  xmodmap -e "keycode 67 = Escape"
+  xmodmap -e "keycode 166 = Prior"
+  xmodmap -e "keycode 167 = Next"
+  xmodmap -e "keycode 107 = Menu"
+fi
+
+for file in "$DOT"/*/*.rc.bash; do
+  # shellcheck source=/dev/null
+  source "$file";
+done;
+
+if [[ -f ~/.nix-profile/z/z.sh ]]; then
+    # shellcheck source=/dev/null
+  . ~/.nix-profile/z/z.sh
+fi
+
+# local should come last???
+if [[ -f ~/.localrc ]]
+then
+  # shellcheck source=/dev/null
+  source ~/.localrc
+fi
+
+LOCALE_ARCHIVE="$(readlink ~/.nix-profile/lib/locale)/locale-archive"
+export LOCALE_ARCHIVE

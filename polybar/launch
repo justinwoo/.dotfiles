@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+killall -q polybar
+killall -q .polybar-wrapped
+
+polybar example -c "$DOT/polybar/config" &

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+export ORIG='/usr/bin/gnome-settings-daemon'
+export ELSE='/usr/lib/gnome-settings-daemon/gsd-xsettings'
+
+if [[ -a $ORIG ]]
+then
+  exec $ORIG & disown
+else
+  exec $ELSE & disown
+fi
+

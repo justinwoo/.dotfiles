@@ -1,0 +1,306 @@
+# i3 config file (v4)
+# start up the gnome daemon
+exec ~/.dotfiles/i3/gnome-settings-daemon
+exec fcitx-autostart
+
+# backgrounds
+exec ~/.dotfiles/bin/set-bg
+
+# polybar
+exec_always ~/.dotfiles/polybar/launch
+
+# start up wifi manager?
+exec ~/.dotfiles/i3/start-wifi
+
+# set the font
+font pango: Noto Sans CJK JP Bold 10
+
+# for_window
+# see xprop, xwindow
+# wm_name = title
+for_window [instance="slack"] move window to scratchpad
+for_window [title="Telegram"] move window to scratchpad, scratchpad show
+for_window [instance="nautilus"] move window to scratchpad, scratchpad show
+for_window [instance="vlc"] move window to scratchpad, scratchpad show
+for_window [instance="eog"] move window to scratchpad, scratchpad show
+for_window [instance="feh"] move window to scratchpad, scratchpad show
+for_window [instance="filezilla"] move window to scratchpad, scratchpad show
+for_window [instance="VirtualBox"] move window to scratchpad, scratchpad show
+for_window [instance="Pinta"] move window to scratchpad, scratchpad show
+for_window [class="Shotwell"] move window to scratchpad, scratchpad show
+for_window [window_role="pop-up"] move window to scratchpad, scratchpad show
+for_window [window_role="dialog"] move window to scratchpad, scratchpad show
+
+ # normal, dialog, utility, toolbar, splash, menu, dropdown_menu, popup_menu, tooltip and notification
+
+# border
+for_window [class="^.*"] border normal 1
+hide_edge_borders both
+
+# aliases
+set $sup Mod4
+set $mod Mod1
+set $ctrl Control
+set $up k
+set $down j
+set $left h
+set $right l
+
+# back and forth
+bindsym $mod+Tab workspace back_and_forth
+bindsym $sup+Tab exec rofi -show window
+bindsym $sup+bracketright workspace next
+bindsym $sup+Shift+Tab workspace prev
+bindsym $sup+bracketleft workspace prev
+
+# screenshot
+bindsym Print exec gnome-screenshot
+bindsym $sup+Print exec gnome-screenshot -a
+bindsym $sup+Shift+s exec gnome-screenshot -a
+
+# use Mouse+$sup to drag floating windows to their wanted position
+floating_modifier $sup
+
+# suspend and lock?
+bindsym $ctrl+$mod+l exec lockscreen
+bindsym XF86ScreenSaver exec lockscreen
+bindsym $ctrl+$sup+$mod+l exec lockscreen && systemctl suspend
+bindsym XF86PowerOff exec lockscreen && systemctl suspend
+
+# disable and enable touchpad
+bindsym $ctrl+$sup+$mod+e exec touchpad-enable
+bindsym $ctrl+$sup+$mod+d exec touchpad-disable
+
+# start a terminal
+#bindsym $sup+Return exec i3-sensible-terminal
+bindsym $sup+Return exec open-terminal
+
+# kill focused window
+bindsym $sup+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $sup+d exec "rofi -combi-modi 'drun,run' -show combi -modi combi"
+bindsym $sup+Shift+d exec dmenu_run -fn 'Ubuntu Mono-14'
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $sup+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $sup+$left focus left
+bindsym $sup+$down focus down
+bindsym $sup+$up focus up
+bindsym $sup+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $sup+Left focus left
+bindsym $sup+Down focus down
+bindsym $sup+Right focus right
+bindsym $sup+Up focus up
+
+# move focused window
+bindsym $sup+Shift+$left move left
+bindsym $sup+Shift+$down move down
+bindsym $sup+Shift+$up move up
+bindsym $sup+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $sup+Shift+Left move left
+bindsym $sup+Shift+Down move down
+bindsym $sup+Shift+Up move up
+bindsym $sup+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $sup+b split h
+
+# split in vertical orientation
+bindsym $sup+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $sup+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $sup+s layout stacking
+bindsym $sup+w layout tabbed
+bindsym $sup+e layout toggle split
+
+# toggle tiling / floating
+bindsym $sup+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $sup+space focus mode_toggle
+
+# focus the parent container
+bindsym $sup+a focus parent
+
+# focus the child container
+bindsym $sup+q focus child
+
+# move the currently focused window to the scratchpad
+bindsym $sup+Shift+grave move scratchpad
+bindsym $sup+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $sup+minus scratchpad show
+bindsym $sup+grave scratchpad show
+bindsym $mod+grave scratchpad show
+bindsym $mod+$sup+x exec resize-sticky 1250 800
+bindsym $mod+$sup+c exec resize-sticky 1500 950
+bindsym $ctrl+$sup+$mod+c exec resize-sticky 2000 1200
+
+# switch to workspace
+bindsym $sup+1 workspace 1
+bindsym $sup+2 workspace 2
+bindsym $sup+3 workspace 3
+bindsym $sup+4 workspace 4
+bindsym $sup+5 workspace 5
+bindsym $sup+6 workspace 6
+bindsym $sup+7 workspace 7
+bindsym $sup+8 workspace 8
+bindsym $sup+9 workspace 9
+bindsym $sup+0 workspace 10
+
+# move focused container to workspace
+bindsym $sup+Shift+1 move container to workspace 1
+bindsym $sup+Shift+2 move container to workspace 2
+bindsym $sup+Shift+3 move container to workspace 3
+bindsym $sup+Shift+4 move container to workspace 4
+bindsym $sup+Shift+5 move container to workspace 5
+bindsym $sup+Shift+6 move container to workspace 6
+# who needs 10
+# bindsym $sup+Shift+7 move container to workspace 7
+# bindsym $sup+Shift+8 move container to workspace 8
+# bindsym $sup+Shift+9 move container to workspace 9
+# bindsym $sup+Shift+0 move container to workspace 10
+
+# move workspaces
+bindsym $sup+Shift+bracketright move workspace to output right
+bindsym $sup+Shift+bracketleft move workspace to output left
+
+# reload the configuration file
+bindsym $sup+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $sup+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $sup+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#resize
+bindsym $ctrl+$sup+$left  resize shrink width 10 px or 5 ppt
+bindsym $ctrl+$sup+$down  resize grow height 10 px or 5 ppt
+bindsym $ctrl+$sup+$up    resize shrink height 10 px or 5 ppt
+bindsym $ctrl+$sup+$right resize grow width 10 px or 5 ppt
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym Shift+$left resize shrink width 100 px or 10 ppt
+        bindsym Shift+$down  resize grow height 100 px or 10 ppt
+        bindsym Shift+$up    resize shrink height 100 px or 10 ppt
+        bindsym Shift+$right resize grow width 100 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $sup+r mode "resize"
+
+# quick programs
+mode "quickprograms" {
+        bindsym q exec google-chrome
+        bindsym w exec slack
+        bindsym e exec telegram
+        bindsym r exec spotify
+        bindsym a exec nautilus
+        bindsym s exec filezilla
+        bindsym d exec pinta
+        bindsym f exec firefox
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $sup+t mode "quickprograms"
+
+# shortcuts
+bindsym $sup+Shift+0 exec gimp
+bindsym $sup+Shift+Return exec firefox
+bindsym $sup+Shift+p exec nautilus ~/Pictures
+bindsym $sup+semicolon [instance="vlc"] scratchpad show
+bindsym $sup+Shift+semicolon [instance="filezilla"] scratchpad show
+bindsym $sup+o [class="(Alacritty|Gnome-terminal)"] scratchpad show
+bindsym $sup+p [instance="nautilus"] scratchpad show
+bindsym $sup+y [window_role="browser$"] scratchpad show
+bindsym $sup+m [instance="emacs"] scratchpad show
+bindsym $sup+i [title="Slack"] scratchpad show
+bindsym $sup+c [title="Slack"] scratchpad show
+bindsym $sup+u [title="Telegram"] scratchpad show
+bindsym $sup+x [title="Telegram"] scratchpad show
+bindsym $sup+Shift+u [title="Hangouts"] scratchpad show
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym $sup+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
+bindsym $sup+Next exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
+bindsym $sup+Home exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym $sup+End exec playerctl play-pause
+bindsym $sup+Shift+Prior exec playerctl previous
+bindsym $sup+Shift+Next exec playerctl next
+
+# mic?
+bindsym XF86AudioMicMute exec amixer set Capture toggle
+
+# Sreen brightness controls
+bindsym $ctrl+$sup+$mod+b exec xbacklight -set 1 # set minimum brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym $sup+$ctrl+Prior exec xbacklight -inc 10 # increase screen brightness
+bindsym $sup+$ctrl+Next exec xbacklight -dec 10 # decrease screen brightness
+
+#colors border background text
+# solarized
+set $base03 #002b36
+set $base02 #073642
+set $base01 #586e75
+set $base00 #657b83
+set $base0 #839496
+set $base1 #93a1a1
+set $base2 #eee8d5
+set $base3 #fdf6e3
+set $yellow #b58900
+set $orange #cb4b16
+set $red #dc322f
+set $magenta #d33682
+set $violet #6c71c4
+set $blue #268bd2
+set $cyan #2aa198
+set $green #859900
+
+client.focused          $blue  $blue  $base2
+client.unfocused        $base1 $base1 $base2
+client.focused_inactive $base1 $base1 $base2
+client.urgent           $red   $red   $base2

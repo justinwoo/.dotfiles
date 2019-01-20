@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Run all dotfiles installers.
+
+set -e
+
+cd "$(dirname "$0")"/..
+
+echo 'Installing from install.bash files'
+echo
+
+# find the installers and run them iteratively
+# shellcheck disable=SC2156
+find . -name install.bash -exec bash -c {} \;
+
+echo
+echo 'Done.'

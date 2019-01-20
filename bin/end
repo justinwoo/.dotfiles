@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nix-shell -p emacs --run "emacs --daemon $1"

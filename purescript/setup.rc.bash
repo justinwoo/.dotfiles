@@ -1,0 +1,8 @@
+alias bi='bower install'
+alias pp='psc-package'
+alias ppb='psc-package build'
+alias p='pulp --psc-package'
+alias pu='pulp'
+alias pub='pulp build'
+alias puspe='pulp build --src-path ~/empty'
+alias puit='pulp build --include test'

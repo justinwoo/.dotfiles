@@ -1,0 +1,4 @@
+# vim: set syntax=sh:
+for file in $HOME/.nix-profile/etc/bash_completion.d/* ; do
+  . $file
+done

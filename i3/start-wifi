@@ -1,0 +1,10 @@
+#!/bin/bash
+
+WICD=/usr/bin/wicd-client
+
+if [[ -a $WICD ]]
+then
+  $WICD -t
+else
+  /usr/bin/nm-applet
+fi

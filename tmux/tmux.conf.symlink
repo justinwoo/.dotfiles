@@ -1,0 +1,79 @@
+set-option -g default-shell $SHELL
+set -g default-terminal "screen-256color"
+
+# open new windows in whatever that's not my home
+bind % split-window -h -c "#{pane_current_path}"
+bind v split-window -h -c "#{pane_current_path}"
+bind '"' split-window -c "#{pane_current_path}"
+bind s split-window -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+bind z resize-pane -Z
+set -g status-keys vi
+set -g history-limit 10000
+
+# clipboard should work or i want a refund
+# move x clipboard into tmux paste buffer
+unbind C-p
+bind C-p run "tmux set-buffer \"$(xclip -o -selection clipboard)\"; tmux paste-buffer"
+# move tmux copy buffer into x clipboard
+unbind C-c
+bind C-c run "tmux show-buffer | xclip -i -selection clipboard &>/dev/null"
+
+# reload shit
+bind r source-file ~/.tmux.conf
+
+# copy-mode-vi rebinds jesus
+bind -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
+bind -T copy-mode-vi 'v' send-keys -X begin-selection
+bind -T copy-mode-vi 'x' send-keys -X clear-selection
+bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard'
+
+unbind ']'
+bind ']' run "tmux set-buffer \"$(xclip -o -selection clipboard)\"; tmux paste-buffer"
+
+# bind a new prefix
+set -g prefix '`'
+# allow me to freaking use grave
+bind-key ` send-prefix
+
+# set vi style keys
+setw -g mode-keys vi
+
+# new omniconfig for mouse
+set-option -g -q mouse on
+
+# take some of JaredCTaylor's tmux config
+set -sg escape-time 0
+set-option -g renumber-windows on
+setw -g aggressive-resize on
+setw -g monitor-activity on
+set -g visual-activity on
+set -g base-index 1
+set -g pane-base-index 1
+set -g display-panes-time 2000
+
+# random styling
+# status line
+set -g status-justify left
+set -g status-fg black
+set -g status-bg white
+set -g status-interval 30
+
+# Split
+set-option -g pane-active-border-fg blue
+set-option -g pane-active-border-bg default
+set-option -g pane-border-fg white
+set-option -g pane-border-bg default
+
+# Title
+set-option -g set-titles on
+set-option -g set-titles-string "#{pane_current_path} - #W (#S)"
+
+# Status
+set -g status-left-length 20
+set -g status-right-length 150
+set -g status-left '#[fg=blue](#S) #[default]'
+set-option -g status-right '#[default] %Y年%m月%d日 %a %H:%M %Z'
+set-window-option -g window-status-format '#[fg=black]#{window_index} #[fg=default]#{pane_current_command} #[fg=default]#(echo "#{pane_current_path}" | rev | cut -d'/' -f-1 | rev) #[bg=default]'
+set-window-option -g window-status-current-format '#[fg=magenta]#{window_index} #[fg=blue]#{pane_current_command} #[fg=blue]#(echo "#{pane_current_path}" | rev | cut -d'/' -f-1 | rev) #[bg=default]'
+set -g window-status-activity-style 'fg=cyan,bg=white'
