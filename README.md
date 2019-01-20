@@ -4,6 +4,8 @@ cd ~/.dotfiles
 script/bootstrap
 ```
 
-forked from holman files forever ago, probably should remove history at some point and rework some of the shit. i dont use osx anymore, so that shit is gonezo
+forked from holman files forever ago. no OSX support is kept.
 
-copy at your own risk, and get ready to read a bunch of angry comments
+copy at your own risk, and get ready to read a bunch of angry comments.
+
+i expect that once you are here, you are mostly DIY. i can answer a few questions, but will largely ignore issues opened in this repository if they annoy me.
