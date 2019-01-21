@@ -64,6 +64,7 @@ This function should only modify configuration layer settings."
                                       counsel
                                       web-mode
                                       rjsx-mode
+                                      eglot
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(editorconfig
@@ -446,7 +447,7 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; i dont want to have archives to slowly download packages from
   ;; this can be toggled to manually install some few broken packages though
-  (setq configuration-layer-elpa-archives '())
+  ;; (setq configuration-layer-elpa-archives '())
   )
 
 (defun dotspacemacs/user-load ()
@@ -526,79 +527,14 @@ dump."
       (switch-to-buffer-other-window success-buffer-name)
       (message "Project build succeeded."))))
 
-(defun my-psc-ide-server-kill-buffer ()
-  "die"
-  (interactive)
-  (kill-buffer (get-buffer "*psc-ide-server*")))
-
-(defun my-psc-ide-server-restart ()
-  "die"
-  (interactive)
-  (kill-buffer (get-buffer "*psc-ide-server*"))
-  (psc-ide-server-start (psc-ide-suggest-project-dir)))
-
 (defun my/purescript-config ()
   "purescript"
+  (require 'eglot)
+  (add-to-list 'eglot-server-programs '(purescript-mode . ("purescript-language-server" "--stdio")))
+
   (use-package purescript-mode
     :load-path "~/Code/new-purescript-mode/")
-    ;; :load-path "~/.nix-profile/elisp/purescript-mode-local/"
-    ;; :diminish 'purescript-indentation-mode)
-
-  (use-package psc-ide
-    ;; :load-path "~/.nix-profile/elisp/psc-ide-local/"
-    :load-path "~/Code/psc-ide-emacs/"
-    :init
-    (progn
-      (add-hook 'purescript-mode-hook 'psc-ide-mode)
-      (add-hook 'purescript-mode-hook 'company-mode)
-      (add-hook 'purescript-mode-hook 'flycheck-mode)
-      (spacemacs/declare-prefix-for-mode 'purescript-mode "mm" "purescript/psc-ide")
-
-      (spacemacs/set-leader-keys-for-major-mode 'purescript-mode
-        "mt"  'psc-ide-add-clause
-        "mcs" 'psc-ide-case-split
-        "ms"  'psc-ide-server-start
-        "mr"  'my-psc-ide-server-restart
-        "mb"  'psc-ide-rebuild
-        "mB"  'my-build-psc-package-project
-        "mq"  'my-psc-ide-server-kill-buffer
-        "ml"  'psc-ide-load-all
-        "mL"  'psc-ide-load-module
-        "mia" 'psc-ide-add-import
-        "mis" 'psc-ide-flycheck-insert-suggestion
-        "mii" 'my/purescript-region-imports-suggestions
-        "gg"  'psc-ide-goto-definition
-        "hT"  'psc-ide-show-type-expanded
-        "ht"  'psc-ide-show-type)
-      ))
-
-  (defun my/purescript-region-imports-suggestions ()
-    "Apply imports suggestions on region"
-    (interactive)
-    (if (region-active-p)
-        (progn
-          (let* ((line-start (line-number-at-pos (region-beginning)))
-                 (line-end (line-number-at-pos (region-end))))
-            (dolist (line (number-sequence line-start
-                                           (- line-end 1)))
-              (goto-line line)
-              (psc-ide-flycheck-insert-suggestion))
-            (goto-line line-start)
-            (evil-visual-line)
-            (evil-next-line (- line-end 1 line-start))
-            (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
-      (message "You need an active region to use this.")))
-
-  (defun psc-ide-show-type-expanded ()
-    "show the type at point, expanded"
-    (interactive)
-    (psc-ide-show-type t))
-
-  ;; for references: M-?
-  (add-to-list 'xref-backend-functions 'psc-ide-xref-backend)
-
-  (with-eval-after-load 'company
-    (add-to-list 'company-backends 'company-psc-ide-backend)))
+  )
 
 (defun my/company-config ()
   "company config"

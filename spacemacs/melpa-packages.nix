@@ -41,6 +41,7 @@
   doom-modeline
   dotenv-mode
   dumb-jump
+  eglot
   eldoc-eval
   elisp-slime-nav
   epl
@@ -129,6 +130,7 @@
   indent-guide
   ivy
   js2-mode
+  json-rpc
   link-hint
   log4e
   lorem-ipsum
