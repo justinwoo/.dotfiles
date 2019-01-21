@@ -1,5 +1,12 @@
 # -*- mode: shell-script -*-
 
+# nix needs setup
+if [ -e "$HOME"/.nix-profile/etc/profile.d/nix.sh ]
+then
+  # shellcheck source=/dev/null
+  . "$HOME"/.nix-profile/etc/profile.d/nix.sh;
+fi
+
 shopt -s globstar
 
 # Eternal bash history.
@@ -11,20 +18,22 @@ export HISTFILE=~/.bash_eternal_history
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 export EDITOR='nvim' >> ~/.bashrc
 export GIT_EDITOR='nvim' >> ~/.bashrc
-export PATH="$HOME/.cabal/bin:$HOME/.local/bin:./bin:$PATH:$DOT/bin:$HOME/.bin"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 export XDG_DATA_DIRS="$HOME/.nix-profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
 
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
+    # shellcheck source=/dev/null
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
+    # shellcheck source=/dev/null
     . /etc/bash_completion
   fi
 
   NIX_SHARE_COMPLETION=~/.nix-profile/share/bash-completion/bash_completion
   if [ -f $NIX_SHARE_COMPLETION ]; then
+    # shellcheck source=/dev/null
     . $NIX_SHARE_COMPLETION
   fi
 fi
