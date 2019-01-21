@@ -107,42 +107,45 @@ in   i3-pkgs
   // ps-pkgs
   // gnome3-pkgs
   // {
-    inherit prefetch-github;
-    inherit update-fetch-derivations;
-    inherit polyglot;
+
     inherit alacritty;
     inherit firefox;
+    inherit liquidprompt;
+    inherit polyglot;
+    inherit prefetch-github;
+    inherit update-fetch-derivations;
+    inherit z;
+
     inherit (pkgs)
-    noto-fonts-cjk
-    gnumake
-    emacs
-    neovim
-    bash-completion
-    playerctl
-    pavucontrol
-    nodejs-10_x
-    disper
+
     autorandr
-    tig
-    tmux
-    fzf
-    xdotool
-    ripgrep
-    fd
-    jq
+    bash-completion
     colordiff
     colormake
-    nix-bash-completions
-    sqlitebrowser
+    disper
+    emacs
+    fd
+    fzf
     gitg
+    gnumake
+    jq
+    neovim
+    nix-bash-completions
+    nodejs-10_x
+    noto-fonts-cjk
+    pavucontrol
     perl
     perlcritic
-    shellcheck;
+    playerctl
+    ripgrep
+    shellcheck
+    sqlitebrowser
+    tig
+    tmux
+    xdotool
+    ;
 
     inherit(pkgs.gitAndTools)
     git-extras
     hub;
-
-    inherit z;
-    inherit liquidprompt;
   }
