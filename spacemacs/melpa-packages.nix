@@ -120,6 +120,7 @@
   highlight-numbers
   highlight-parentheses
   hl-todo
+  ht
   htmlize
   hungry-delete
   hydra
