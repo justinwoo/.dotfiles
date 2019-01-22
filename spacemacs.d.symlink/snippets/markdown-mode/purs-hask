@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: md-purs-code-block
-# key: purs
-# --
-\`\`\`purs$0
-\`\`\`
