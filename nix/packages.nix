@@ -28,6 +28,13 @@ let
     rofi;
   };
 
+  prefetch-url = import (pkgs.fetchFromGitHub {
+    owner = "justinwoo";
+    repo = "prefetch-url";
+    rev = "18b809cdab5c5b3c7756581267272616691a3a8e";
+    sha256 = "1kk69ddmv1jhck642nnlkixik64bfmdq7g3555q67xkbdnklfmjy";
+  });
+
   prefetch-github = import (pkgs.fetchFromGitHub {
     owner = "justinwoo";
     repo = "prefetch-github";
@@ -113,6 +120,7 @@ in   i3-pkgs
     inherit liquidprompt;
     inherit polyglot;
     inherit prefetch-github;
+    inherit prefetch-url;
     inherit update-fetch-derivations;
     inherit z;
 
