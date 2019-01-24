@@ -1,5 +1,6 @@
+{ pkgs ? import ./pinned.nix {} }:
+
 let
-  pkgs = import <nixpkgs> {};
   easy-dhall = import ./easy-dhall.nix;
   easy-ps = import ./easy-ps.nix {};
 
@@ -33,7 +34,7 @@ let
     repo = "prefetch-url";
     rev = "18b809cdab5c5b3c7756581267272616691a3a8e";
     sha256 = "1kk69ddmv1jhck642nnlkixik64bfmdq7g3555q67xkbdnklfmjy";
-  });
+  }) {};
 
   prefetch-github = import (pkgs.fetchFromGitHub {
     owner = "justinwoo";
