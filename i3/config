@@ -300,7 +300,7 @@ set $blue #268bd2
 set $cyan #2aa198
 set $green #859900
 
-client.focused          $blue  $blue  $base2
-client.unfocused        $base1 $base1 $base2
-client.focused_inactive $base1 $base1 $base2
-client.urgent           $red   $red   $base2
+client.focused          $blue  $blue  $base3
+client.unfocused        $base1 $base1 $base3
+client.focused_inactive $base1 $base1 $base3
+client.urgent           $red   $red   $base3
