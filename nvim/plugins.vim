@@ -38,8 +38,6 @@ Plug 'purescript-contrib/purescript-vim', { 'for': ['purescript', 'purs'] }
 " Haskell
 Plug 'neovimhaskell/haskell-vim'
 Plug 'ujihisa/unite-haskellimport'
-Plug 'eagletmt/unite-haddock'
-Plug 'parsonsmatt/intero-neovim'
 
 " CSS
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
@@ -63,12 +61,5 @@ Plug 'Shougo/denite.nvim'
 Plug 'vmchale/dhall-vim' " Dhall
 Plug 'LnL7/vim-nix' " Nix
 Plug 'ntpeters/vim-better-whitespace' " whitespace
-
-" Ale linter
-Plug 'w0rp/ale'
-
-let g:ale_linters = {'haskell': ['hlint', 'ghc']}
-let g:ale_haskell_ghc_options = '-fno-code -v0 -isrc'
-
 
 call plug#end()
