@@ -3,8 +3,8 @@
 pkgs.stdenv.mkDerivation {
   name = "firefox-simple";
   src = pkgs.fetchurl {
-    url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/64.0.2/linux-x86_64/en-US/firefox-64.0.2.tar.bz2";
-    sha256 = "19q9rsx7vh5w28fb3fyb7nb1gq98f29g3jlgnqi5cn6qkjyzm844";
+    url = "https://download-installer.cdn.mozilla.net/pub/firefox/releases/65.0/linux-x86_64/en-US/firefox-65.0.tar.bz2";
+    sha256 = "13fgq1ihqb9vngqvmfg8hff9q1vms6g5phzqirj6ir2syryw9f7s";
   };
   phases = "unpackPhase installPhase";
   installPhase = ''
