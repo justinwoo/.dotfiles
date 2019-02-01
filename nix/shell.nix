@@ -1,8 +1,7 @@
-let
-  pkg = import <nixpkgs> {};
+{ pkg ? import <nixpkgs> {} }:
 
-in pkg.stdenv.mkDerivation {
+pkg.stdenv.mkDerivation {
   name = "my-shell";
 
-  buildInputs = builtins.attrValues (import ./packages.nix);
+  buildInputs = builtins.attrValues (import ./packages.nix {});
 }
