@@ -1,11 +1,6 @@
 alias reload!='. ~/.bashrc'
 alias vi='nvim'
 alias nv="nvim"
-alias emd='emacs --daemon'
-alias em='emacsclient -t'
-alias ge='emacsclient -nc'
-alias en='nix-shell -p emacs --run "emacsclient -t"'
-alias gn='nix-shell -p emacs --run "emacsclient -nc"'
 alias pb='pbcopy'
 alias po='pbpaste'
 alias l='ls -lht --color'
