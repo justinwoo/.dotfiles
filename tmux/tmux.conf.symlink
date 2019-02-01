@@ -3,10 +3,10 @@ set -g default-terminal "screen-256color"
 
 # open new windows in whatever that's not my home
 bind % split-window -h -c "#{pane_current_path}"
-bind v split-window -h -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
-bind s split-window -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
+bind Tab next-window
+bind S-Tab next-window
 bind z resize-pane -Z
 set -g status-keys vi
 set -g history-limit 10000
@@ -28,6 +28,7 @@ bind -T copy-mode-vi 'v' send-keys -X begin-selection
 bind -T copy-mode-vi 'x' send-keys -X clear-selection
 bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard'
 
+bind v copy-mode
 unbind ']'
 bind ']' run "tmux set-buffer \"$(xclip -o -selection clipboard)\"; tmux paste-buffer"
 
