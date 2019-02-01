@@ -1,11 +1,21 @@
+EMACS="nix-shell -p emacs --run"
+
 # start emacs with given argument (usually a directory) or nothing
 enc() {
-  nix-shell -p emacs --run "emacs $1 & disown" 2> /dev/null
+  $EMACS "emacs $1 & disown" 2> /dev/null
 }
 
-# TODO
-# alias emd='emacs --daemon'
-# alias em='emacsclient -t'
-# alias ge='emacsclient -nc'
-# alias en='nix-shell -p emacs --run "emacsclient -t"'
-# alias gn='nix-shell -p emacs --run "emacsclient -nc"'
+# start daemon
+emd() {
+  $EMACS "emacs --daemon"
+}
+
+# start a terminal client with arg
+em() {
+  $EMACS "emacsclient -t $1"
+}
+
+# start a gui client with arg
+ge() {
+  $EMACS "emacsclient -nc $1"
+}
