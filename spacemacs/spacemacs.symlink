@@ -467,7 +467,7 @@ dump."
                                               new-line
                                               save
                                               ))
-  (setq flycheck-idle-change-delay 0.02)
+  (setq flycheck-idle-change-delay 0.5)
 
   (defun set-flycheck-save-only ()
     "set flycheck to check on save only"
