@@ -152,6 +152,7 @@ in   i3-pkgs
     tig
     tmux
     xdotool
+    watchexec
     ;
 
     inherit(pkgs.gitAndTools)
