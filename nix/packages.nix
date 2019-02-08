@@ -90,7 +90,8 @@ let
     purs
     psc-package-simple
     purp
-    spacchetti-cli;
+    spago
+    psc-package2nix;
   };
 
   dhall-pkgs = {
