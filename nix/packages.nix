@@ -130,6 +130,7 @@ in   i3-pkgs
 
     autorandr
     bash-completion
+    cabal-install
     colordiff
     colormake
     disper
@@ -155,6 +156,7 @@ in   i3-pkgs
     tmux
     watchexec
     xdotool
+
     ;
 
     inherit(pkgs.gitAndTools)
