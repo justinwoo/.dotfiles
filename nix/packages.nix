@@ -136,6 +136,7 @@ in   i3-pkgs
     emacs
     fd
     fzf
+    ghc
     gitg
     gnumake
     jq
@@ -152,8 +153,8 @@ in   i3-pkgs
     sqlitebrowser
     tig
     tmux
-    xdotool
     watchexec
+    xdotool
     ;
 
     inherit(pkgs.gitAndTools)
