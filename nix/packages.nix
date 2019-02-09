@@ -5,17 +5,17 @@ let
   easy-ps = import ./easy-ps.nix {};
 
   i3-pkgs = rec {
-    # i3 = pkgs.i3;
+    i3 = pkgs.i3;
     # old overrides:
-    i3 = pkgs.i3.overrideAttrs (old: rec {
-      name = "i3-${version}";
-      version = "4.16.1";
+    # i3 = pkgs.i3.overrideAttrs (old: rec {
+    #   name = "i3-${version}";
+    #   version = "4.16.1";
 
-      src = pkgs.fetchurl {
-        url = "https://i3wm.org/downloads/i3-4.16.tar.bz2";
-        sha256 = "1d2mnryn7m9c6d69awd7lwzadliapd0ahi5n8d0ppqy533ssaq6c";
-      };
-    });
+    #   src = pkgs.fetchurl {
+    #     url = "https://i3wm.org/downloads/i3-4.16.tar.bz2";
+    #     sha256 = "1d2mnryn7m9c6d69awd7lwzadliapd0ahi5n8d0ppqy533ssaq6c";
+    #   };
+    # });
 
     polybar = pkgs.polybar.override {
       i3Support = true;
