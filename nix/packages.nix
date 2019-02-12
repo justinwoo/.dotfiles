@@ -39,8 +39,8 @@ let
   prefetch-github = import (pkgs.fetchFromGitHub {
     owner = "justinwoo";
     repo = "prefetch-github";
-    rev = "3b99a6ee12ce428fcc7f92035ce78e1ada787b54";
-    sha256 = "0v2c0cq6lk0g7dm4hdplqfmqf6jzw216yqfk62dj6psw7h7z61kp";
+    rev = "ecc358529592f403d24a955c293922124c4354f7";
+    sha256 = "1wcyzmbrs0rzva7jwnqa4vqr34z1sv1cigpyyiaajkf8bx29pamw";
   }) {};
 
   update-fetch-derivations = import (pkgs.fetchFromGitHub {
