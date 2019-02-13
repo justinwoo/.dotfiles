@@ -25,6 +25,7 @@
   bind-key
   bind-map
   browse-at-remote
+  cargo
   centered-cursor-mode
   clean-aindent-mode
   column-enforce-mode
@@ -74,6 +75,7 @@
   flx-ido
   flycheck
   flycheck-pos-tip
+  flycheck-rust
   font-lock-plus
   fringe-helper
   fuzzy
@@ -171,10 +173,12 @@
   powerline
   prettier-js
   projectile
+  racer
   rainbow-delimiters
   request
   restart-emacs
   rjsx-mode
+  rust-mode
   s
   shrink-path
   smartparens
@@ -187,6 +191,7 @@
   swiper
   symon
   toc-org
+  toml-mode
   treepy
   undo-tree
   use-package

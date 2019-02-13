@@ -44,6 +44,7 @@ This function should only modify configuration layer settings."
      (auto-completion :variables
                       auto-completion-tab-key-behavior 'complete)
      emacs-lisp
+     rust
      git
      markdown
      (org :variables org-projectile-file "TODOs.org")
