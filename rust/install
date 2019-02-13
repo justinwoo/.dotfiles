@@ -1,0 +1,7 @@
+rustup component add rust-src
+rustup component add rust-docs
+rustup update
+
+cargo install clippy
+cargo install rustfmt
+cargo install rls
