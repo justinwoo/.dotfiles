@@ -53,6 +53,7 @@ map <leader>q :q<cr>
 
 "want some familiar keybindings
 map <leader>n :Vexplore<cr>
+map <leader>fj :Explore<cr>
 map <C-P> :FZF <cr>
 map <leader>/ :Ack
 map <leader>gb :Gblame<cr>
