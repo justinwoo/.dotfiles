@@ -130,6 +130,7 @@ in   i3-pkgs
 
     autorandr
     bash-completion
+    bat
     cabal-install
     colordiff
     colormake
