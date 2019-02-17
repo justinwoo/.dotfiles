@@ -46,8 +46,8 @@ let
   update-fetch-derivations = import (pkgs.fetchFromGitHub {
     owner = "justinwoo";
     repo = "update-fetch-derivations";
-    rev = "fe451e679fcf62e4471a4d717096f8a272cf3688";
-    sha256 = "0if84dgb7hz061i83j4a8v4g0crcj2y9v6cl7sr50djlcy4qgrc1";
+    rev = "7b58debd6cc8dbdcaee81aef7869fecb31d00463";
+    sha256 = "1m3g8zrzzhw65qc8spccykasqlw85dl4jw2a7wx3gy0df1a2ympb";
   }) {};
 
   polyglot = pkgs.stdenv.mkDerivation {
