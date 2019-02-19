@@ -157,9 +157,12 @@ bindsym $sup+4 workspace 4
 bindsym $sup+5 workspace 5
 bindsym $sup+6 workspace 6
 bindsym $sup+7 workspace 7
-bindsym $sup+8 workspace 8
-bindsym $sup+9 workspace 9
-bindsym $sup+0 workspace 10
+bindsym $sup+8 workspace 1
+bindsym $sup+9 workspace 2
+bindsym $sup+0 workspace 3
+# bindsym $sup+8 workspace 8
+# bindsym $sup+9 workspace 9
+# bindsym $sup+0 workspace 10
 
 # move focused container to workspace
 bindsym $sup+Shift+1 move container to workspace 1
