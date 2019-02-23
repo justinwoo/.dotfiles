@@ -5,3 +5,6 @@ rustup update
 cargo install clippy
 cargo install rustfmt
 cargo install rls
+
+rustup toolchain add nightly
+cargo +nightly install racer
