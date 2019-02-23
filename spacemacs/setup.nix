@@ -27,8 +27,8 @@ in pkgs.stdenv.mkDerivation {
     owner = "syl20bnr";
     repo = "spacemacs";
     # warning: do not let this update to the useless master branch
-    rev = "8b3a30f2409aa06053b32117504381c4cce1d8db";
-    sha256 = "1z1gxm4vghm8h45drdb6s8lg0x10dxlxxbvmf05yymnnfkshy6vg";
+    rev = "4b195ddfc9228256361e0b264fe974aa86ed51a8";
+    sha256 = "123mc3hb13kq812l4nv2c7qbasqadyjj3nyhj5y8psg5lqdrl6qx";
   };
   phases = "unpackPhase";
   shellHook = ''
