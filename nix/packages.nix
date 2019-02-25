@@ -50,27 +50,11 @@ let
     sha256 = "1m3g8zrzzhw65qc8spccykasqlw85dl4jw2a7wx3gy0df1a2ympb";
   }) {};
 
-  polyglot = pkgs.stdenv.mkDerivation {
-    name = "polyglot";
-    src = pkgs.fetchurl {
-      url = "https://github.com/vmchale/polyglot/releases/download/0.5.16/poly-x86_64-unknown-linux-icc";
-      sha256 = "1c9bk7bkrs39l660077cr356d5r0v0cmyh0swymcm6gy1dsivv4n";
-    };
-
-    unpackPhase = ''
-      mkdir -p $out/bin
-      cp $src $out/bin/polyglot
-      chmod +x $out/bin/polyglot
-    '';
-
-    dontInstall = true;
-  };
-
   alacritty = pkgs.stdenv.mkDerivation {
     name = "alacritty";
     src = pkgs.fetchurl {
-      url = "https://github.com/jwilm/alacritty/releases/download/v0.2.7/Alacritty-v0.2.7-x86_64.tar.gz";
-      sha256 = "0g11zah3mxz52768c2kr6fjkd2crr2jm194lv14bmpjgvidvj9y4";
+      url = "https://github.com/jwilm/alacritty/releases/download/v0.2.9/Alacritty-v0.2.9-x86_64.tar.gz";
+      sha256 = "1x6h0bfzhz9vc0ndv32szpmxrl30kkigxxx9vqq4p097x1bn2npi";
     };
 
     unpackPhase = ''
@@ -120,7 +104,6 @@ in   i3-pkgs
     inherit alacritty;
     inherit firefox;
     inherit liquidprompt;
-    inherit polyglot;
     inherit prefetch-github;
     inherit prefetch-url;
     inherit update-fetch-derivations;
