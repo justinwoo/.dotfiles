@@ -192,6 +192,9 @@
   symon
   toc-org
   toml-mode
+  treemacs
+  treemacs-evil
+  treemacs-projectile
   treepy
   undo-tree
   use-package
