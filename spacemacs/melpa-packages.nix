@@ -166,6 +166,7 @@
   password-generator
   pcre2el
   persp-mode
+  pfuture
   pkg-info
   popup
   popwin

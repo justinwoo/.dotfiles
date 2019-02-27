@@ -17,8 +17,8 @@ let
   brokenPackages = pkgs.fetchFromGitHub {
     owner = "justinwoo";
     repo = "broken-emacs-packages";
-    rev = "e9510ab06deb8581a57993d51904a2429471c2d6";
-    sha256 = "1f6lskmlf2l7iri6g18fpkfix4kl4w912h38spyw9nii5d5r6864";
+    rev = "772977babed4e90214067d3636e9130b8898ab71";
+    sha256 = "1j0yw0ar2w8plyldivzybf4c0p7hh6gxls63k8dfx9qcmns6bmhg";
   };
 
 in pkgs.stdenv.mkDerivation {
