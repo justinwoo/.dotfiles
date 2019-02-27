@@ -131,7 +131,6 @@ in   i3-pkgs
     noto-fonts-cjk
     pavucontrol
     perl
-    perlcritic
     playerctl
     ripgrep
     shellcheck
