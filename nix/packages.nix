@@ -123,6 +123,7 @@ in   i3-pkgs
     fzf
     ghc
     gitg
+    glibcLocales
     gnumake
     jq
     neovim
