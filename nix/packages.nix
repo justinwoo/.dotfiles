@@ -131,7 +131,6 @@ in   i3-pkgs
     nodejs-10_x
     noto-fonts-cjk
     pavucontrol
-    perl
     playerctl
     ripgrep
     shellcheck
