@@ -134,6 +134,7 @@ in   i3-pkgs
     playerctl
     ripgrep
     shellcheck
+    sqlite
     sqlitebrowser
     tig
     tmux
