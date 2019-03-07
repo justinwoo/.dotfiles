@@ -1,5 +1,5 @@
-export LP_MARK_DEFAULT="普"
-export LP_MARK_GIT="ギ"
+export LP_MARK_DEFAULT="$"
+export LP_MARK_GIT="$"
 export LP_MARK_BATTERY="電"
 export LP_MARK_ADAPTER="充"
 export LP_MARK_UNTRACKED="異物"
