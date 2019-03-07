@@ -56,7 +56,6 @@ then
   xmodmap -e "keycode 67 = Escape"
   xmodmap -e "keycode 166 = Prior"
   xmodmap -e "keycode 167 = Next"
-  xmodmap -e "keycode 107 = Menu"
 fi
 
 for file in "$DOT"/*/*.rc.bash; do
