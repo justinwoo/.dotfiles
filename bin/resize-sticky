@@ -1,4 +1,4 @@
 #!/bin/bash
 
 i3-msg resize set $1 $2
-i3-msg move absolute position center
+i3-msg move position center
