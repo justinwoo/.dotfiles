@@ -3,4 +3,5 @@
 killall -q polybar
 killall -q .polybar-wrapped
 
-polybar example -c "$DOT/polybar/config" &
+MONITOR=$(xrandr | rg 'connected primary' | sed 's/ .*//g') \
+  polybar example -c "$DOT/polybar/config" &
