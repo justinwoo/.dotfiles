@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell ./setup.nix --run exit
+#!nix-shell ./setup.nix --run exit -j 20
 
 { pkgs ? import ../nix/pinned.nix {} }:
 
