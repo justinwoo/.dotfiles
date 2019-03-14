@@ -7,7 +7,7 @@ exec fcitx-autostart
 exec ~/.dotfiles/bin/set-bg
 
 # polybar
-exec_always ~/.dotfiles/polybar/launch
+exec_always ~/.dotfiles/bin/launch-polybar
 
 # start up wifi manager?
 exec ~/.dotfiles/i3/start-wifi
