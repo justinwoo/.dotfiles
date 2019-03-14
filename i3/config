@@ -287,6 +287,9 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 bindsym $sup+$ctrl+Prior exec xbacklight -inc 10 # increase screen brightness
 bindsym $sup+$ctrl+Next exec xbacklight -dec 10 # decrease screen brightness
 
+# center titles for once
+title_align center
+
 #colors border background text
 # solarized
 set $base03 #002b36
