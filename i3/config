@@ -12,6 +12,9 @@ exec_always ~/.dotfiles/polybar/launch
 # start up wifi manager?
 exec ~/.dotfiles/i3/start-wifi
 
+# startup bluetooth?
+exec_always ~/.dotfiles/i3/start-bluetooth
+
 # set the font
 font pango: Noto Sans CJK JP Bold 10
 
