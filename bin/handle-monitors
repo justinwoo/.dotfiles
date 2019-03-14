@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# fuckin hell
+autorandr --change
+launch-polybar

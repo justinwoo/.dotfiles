@@ -188,6 +188,8 @@ bindsym $sup+Shift+bracketleft move workspace to output left
 bindsym $sup+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $sup+Shift+r restart
+# refresh monitor layout
+bindsym $sup+Shift+x exec handle-monitors
 # exit i3 (logs you out of your X session)
 bindsym $sup+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
