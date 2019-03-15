@@ -3,5 +3,30 @@
 killall -q polybar
 killall -q .polybar-wrapped
 
-MONITOR=$(xrandr | rg 'connected primary' | sed 's/ .*//g') \
-  polybar example -c "$DOT/polybar/config" &
+function find_monitor() {
+  connected_primary=$(xrandr | rg 'connected primary' | sed 's/ .*//g')
+
+  if [[ -n $connected_primary ]]
+  then
+    echo "Found primary, setting connected: $connected_primary";
+    MONITOR=$connected_primary
+    return 0
+  fi
+
+  connected_count=$(xrandr | rg ' connected' | wc -l)
+
+  if [[ $connected_count = '1' ]]
+  then
+    sole=$(xrandr | rg ' connected' | sed 's/ .*//g')
+    echo "Found sole display, setting connected: $sole"
+    return 0
+  else
+    echo "Error: could not figure out what monitor to use."
+    exit 1
+  fi
+}
+
+find_monitor
+echo "MONITOR: $MONITOR"
+
+MONITOR=$MONITOR polybar example -c "$DOT/polybar/config" &
