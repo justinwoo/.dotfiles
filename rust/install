@@ -2,7 +2,7 @@ rustup component add rust-src
 rustup component add rust-docs
 rustup update
 
-cargo install clippy
+rustup component add clippy-preview
 cargo install rustfmt
 cargo install rls
 
