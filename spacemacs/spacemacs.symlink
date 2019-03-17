@@ -447,7 +447,7 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; i dont want to have archives to slowly download packages from
   ;; this can be toggled to manually install some few broken packages though
-  (setq configuration-layer-elpa-archives '())
+  ;; (setq configuration-layer-elpa-archives '())
   )
 
 (defun dotspacemacs/user-load ()

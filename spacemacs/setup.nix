@@ -5,24 +5,17 @@
 
 let
   elpaDevelop = "~/.emacs.d/elpa/develop/";
-  melpaPackages = import ./melpa-packages.nix { inherit pkgs; };
-  cpMelpaPackages = drv: ''
-    mkdir -p ${elpaDevelop}
-    SITE_LOCATION=${drv.outPath}/share/emacs/site-lisp/elpa/*
-    echo "copying $SITE_LOCATION to ${elpaDevelop}"
-    cp -R --no-preserve=mode $SITE_LOCATION ${elpaDevelop}
-  '';
-  copyMelpaPackages = builtins.map cpMelpaPackages (builtins.attrValues melpaPackages);
 
-  brokenPackages = pkgs.fetchFromGitHub {
+  emacsTrash = pkgs.fetchFromGitHub {
     owner = "justinwoo";
-    repo = "broken-emacs-packages";
-    rev = "772977babed4e90214067d3636e9130b8898ab71";
-    sha256 = "1j0yw0ar2w8plyldivzybf4c0p7hh6gxls63k8dfx9qcmns6bmhg";
+    repo = "emacs-trash";
+    rev = "08305410c60f7d5c91eb44d7711e8754e91c9756";
+    sha256 = "1k9gp3lijd4caf88jk9alzfwbjqg4iifja25vaa5kpmkih1dl613";
   };
 
 in pkgs.stdenv.mkDerivation {
   name = "spacemacs-install";
+  # prefetch-github -owner syl20bnr -repo spacemacs -branch -rev develop
   src = pkgs.fetchFromGitHub {
     owner = "syl20bnr";
     repo = "spacemacs";
@@ -35,10 +28,11 @@ in pkgs.stdenv.mkDerivation {
     echo $src
     echo "copying $src to ~/.emacs.d"
     cp -TR --no-preserve=mode $src ~/.emacs.d
-    ${builtins.toString copyMelpaPackages}
-    echo "copying broken packages"
-    cp -R --no-preserve=mode ${brokenPackages.outPath}/* ${elpaDevelop}
-    find ${brokenPackages.outPath} -maxdepth 1 -type d \
-      -exec cp --no-preserve=mode -vR {} ${elpaDevelop} \;
+
+    echo "copying trash"
+    mkdir -p ~/.emacs.d/elpa/develop
+    cp -TR --no-preserve=mode ${emacsTrash} ~/.emacs.d/elpa/develop
+
+    nix-env -f local-packages.nix -i -j 10
   '';
 }
