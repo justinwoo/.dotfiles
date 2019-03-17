@@ -61,7 +61,9 @@ map <leader>gd :Gdiff<cr>
 map <leader>gw :Gwrite<cr>
 map <leader>gr :Gread<cr>
 map <leader>gs :Gstatus<cr>
-map <leader>gc :Gcommand<cr>
+map <leader>gcc :Gcommit<cr>
+map <leader>gca :Gcommit --amend<cr>
+map <leader>gce :Gcommit --amend --no-edit<cr>
 
 map <leader>do :diffget<cr>
 map <leader>dg :diffget<cr>
