@@ -44,7 +44,7 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Noto Sans CJK JP:weight=bold:size=10;2
+font-0 = Noto Sans CJK JP:weight=normal:size=12;2
 
 modules-left = i3 xwindow
 modules-center =
@@ -52,7 +52,7 @@ modules-right = wlan filesystem pulseaudio battery date
 
 tray-position = center
 tray-padding = 0
-tray-maxsize = 20
+tray-maxsize = 22
 
 cursor-click = pointer
 cursor-scroll = ns-resize
