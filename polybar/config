@@ -48,7 +48,7 @@ font-0 = Noto Sans CJK JP:weight=normal:size=12;2
 
 modules-left = i3 xwindow
 modules-center =
-modules-right = wlan filesystem pulseaudio battery date
+modules-right = wlan filesystem pulseaudio battery date-sh
 
 tray-position = center
 tray-padding = 0
@@ -130,17 +130,11 @@ label-connected = %local_ip%
 
 format-disconnected =
 
-[module/date]
-type = internal/date
-interval = 5
-
-date = " %Y年%m月%d日 %a"
-time = "%H:%M %Z"
-
+[module/date-sh]
+type = custom/script
+exec = LC_TIME=ja_JP.utf8 date +'%Y年%m月%d日 %a %H:%M %Z'
 format-prefix = "現在: "
 format-prefix-foreground = ${colors.foreground-alt}
-
-label = %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
