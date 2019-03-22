@@ -27,4 +27,17 @@ _tm() {
     fi
 }
 
+tk() {
+    if [ $# == 1 ]
+    then
+        tmux kill-session -t "$1"
+    elif [ $# == 0 ]
+    then
+        tmux ls
+    else
+        echo "tk only takes one argument, for tmux session to kill";
+    fi
+}
+
 complete -F _tm tm
+complete -F _tm tk
