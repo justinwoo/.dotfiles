@@ -48,7 +48,7 @@ font-0 = Noto Sans CJK JP:weight=normal:size=12;2
 
 modules-left = i3 xwindow
 modules-center =
-modules-right = wlan filesystem pulseaudio battery date-sh
+modules-right = wlan filesystem pulseaudio battery battery-2 date-sh
 
 tray-position = center
 tray-padding = 0
@@ -147,6 +147,10 @@ label-volume-foreground = ${root.foreground}
 format-muted-prefix = "無音: "
 format-muted-foreground = ${colors.yellow}
 label-muted = %percentage%%
+
+[module/battery-2]
+inherit = module/battery
+battery = BAT1
 
 [module/battery]
 type = internal/battery
