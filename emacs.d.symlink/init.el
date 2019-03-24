@@ -39,11 +39,12 @@
 	general
 	git
 	helm
-	helm-rg
 	helm-company
 	helm-projectile
+	helm-rg
 	helm-themes
 	ivy
+	js2-mode
 	key-chord
 	magit
 	markdown-mode
@@ -55,6 +56,7 @@
 	smartparens
 	swiper
 	use-package
+	web-mode
 	which-key
 	xref
 	))
@@ -356,8 +358,6 @@
 
 (global-company-mode)
 
-(evil-leader/set-key "o" 'other-window)
-
 (global-set-key (kbd "C-SPC") 'company-complete)
 (global-set-key (kbd "C-S-SPC") 'company-dabbrev)
 (global-set-key (kbd "M-SPC") 'company-dabbrev)
@@ -376,21 +376,23 @@
 	 "\\.css\\'"
 	 "\\.scss\\'"))
 
-;; fuck off
-(setq js2-strict-missing-semi-warning nil)
-(setq js2-missing-semi-one-line-override nil)
-
-;; wtf who doesn't use 2-space JS indent
-(setq-default
- ;; js2-mode
- js2-basic-offset 2
- ;; web-mode
- css-indent-offset 2
- web-mode-markup-indent-offset 2
- web-mode-css-indent-offset 2
- web-mode-code-indent-offset 2
- web-mode-attr-indent-offset 2)
-(setq-default js-indent-level 2)
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :init
+  (progn
+    (setq js2-strict-missing-semi-warning nil)
+    (setq js2-missing-semi-one-line-override nil)
+    ;; wtf who doesn't use 2-space JS indent
+    (setq-default
+     ;; js2-mode
+     js2-basic-offset 2
+     ;; web-mode
+     css-indent-offset 2
+     web-mode-markup-indent-offset 2
+     web-mode-css-indent-offset 2
+     web-mode-code-indent-offset 2
+     web-mode-attr-indent-offset 2)
+    (setq-default js-indent-level 2)))
 
 (setq c-default-style "java")
 (setq-default c-basic-offset 2)
@@ -498,11 +500,14 @@
 (defun turn-off-evil-auto-indent ()
   (setq-local evil-auto-indent nil))
 
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
 (add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
-(add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode)
-(add-to-list 'spacemacs-indent-sensitive-modes 'purescript-mode)
-(add-to-list 'spacemacs-indent-sensitive-modes 'haskell-mode)
+;; (add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode)
+;; (add-to-list 'spacemacs-indent-sensitive-modes 'purescript-mode)
+;; (add-to-list 'spacemacs-indent-sensitive-modes 'haskell-mode)
 
 ;; after this is trash
 (setq custom-file "/dev/null")
