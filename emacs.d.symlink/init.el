@@ -63,7 +63,6 @@
 (dolist (package package-list) (when (not (package-installed-p package)) (package-install package)))
 
 (require 'use-package)
-(require 'helm)
 
 (use-package key-chord :ensure t
   :config
@@ -122,6 +121,7 @@
   :init
   (progn
     (evil-mode 1)
+    (evil-select-search-module 'evil-search-module 'evil-search)
     (evil-declare-change-repeat 'company-complete)))
 
 (use-package evil-surround
@@ -437,8 +437,26 @@
 ;; rebind spc / and *
 (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case")
 
-;; wakeup helm
-(require 'helm)
+(use-package helm :ensure t
+  :init
+  (progn
+    (require 'helm)
+    (setq helm-mode-handle-completion-in-region t)
+    (setq helm-completion-in-region-fuzzy-match t)
+    (setq helm-recentf-fuzzy-match t)
+    (setq helm-buffers-fuzzy-matching t)
+    (setq helm-recentf-fuzzy-match t)
+    (setq helm-buffers-fuzzy-matching t)
+    (setq helm-locate-fuzzy-match t)
+    (setq helm-M-x-fuzzy-match t)
+    (setq helm-semantic-fuzzy-match t)
+    (setq helm-imenu-fuzzy-match t)
+    (setq helm-apropos-fuzzy-match t)
+    (setq helm-lisp-fuzzy-completion t)
+    (setq helm-session-fuzzy-match t)
+    (setq helm-etags-fuzzy-match t)
+    (evil-select-search-module 'evil-search-module 'evil-search)
+    (evil-declare-change-repeat 'company-complete)))
 
 ;; let's see
 (setq x-wait-for-event-timeout nil)
