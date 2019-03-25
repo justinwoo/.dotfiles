@@ -503,6 +503,8 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 
+(superword-mode t)
+
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
 (add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
 ;; (add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode)
