@@ -39,6 +39,7 @@
         general
         git
         helm
+        helm-ag
         helm-company
         helm-projectile
         helm-rg
@@ -96,7 +97,8 @@
    :keymaps 'normal
    "M-x"     'helm-M-x
    "Q"       'evil-execute-macro
-   "SPC /"   'helm-projectile-rg
+   "SPC ?"   'helm-projectile-rg
+   "SPC /"   'helm-do-ag-project-root
    "C--"     'text-scale-decrease
    "C-0"     '(lambda() (interactive) (text-scale-set 1))
    "C-="     'text-scale-increase
@@ -335,9 +337,10 @@
       ",mL"  'psc-ide-load-module
       ",mia" 'psc-ide-add-import
       ",mis" 'psc-ide-flycheck-insert-suggestion
-      ",mii" 'my-purescript-region-imports-suggestions
       ",gg"  'psc-ide-goto-definition
       ",ht"  'psc-ide-show-type)
+    (evil-define-key 'visual purescript-mode-map
+      ",mii" 'my-purescript-region-imports-suggestions)
     ))
 
 (defun my-purescript-region-imports-suggestions ()
@@ -443,13 +446,12 @@
 ;; holy hell
 (setq undo-tree-enable-undo-in-region nil)
 
-;; rebind spc / and *
-(setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case")
-
 (use-package helm :ensure t
   :init
   (progn
     (require 'helm)
+    ;; rebind spc / and *
+    (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case")
     (setq helm-mode-handle-completion-in-region t)
     (setq helm-completion-in-region-fuzzy-match t)
     (setq helm-recentf-fuzzy-match t)
