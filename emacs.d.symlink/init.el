@@ -20,46 +20,47 @@
 (global-hl-line-mode 1)
 (require 'package)
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-			 ("gnu"       . "http://elpa.gnu.org/packages/")
-			 ("melpa"     . "https://melpa.org/packages/")
-			 ("marmalade" . "https://marmalade-repo.org/packages/")))
+                         ("gnu"       . "http://elpa.gnu.org/packages/")
+                         ("melpa"     . "https://melpa.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")))
 (package-initialize)
 (setq package-list
       '(
-	company
-	counsel
-	counsel-projectile
-	diminish
-	doom-themes
-	evil
-	evil-escape
-	evil-magit
-	evil-surround
-	flycheck
-	general
-	git
-	helm
-	helm-company
-	helm-projectile
-	helm-rg
-	helm-themes
-	ivy
-	js2-mode
-	key-chord
-	magit
-	markdown-mode
-	org
-	powerline
-	prettier-js
-	projectile
-	rainbow-delimiters
-	smartparens
-	swiper
-	use-package
-	web-mode
-	which-key
-	xref
-	))
+        company
+        counsel
+        counsel-projectile
+        diminish
+        doom-themes
+        evil
+        evil-escape
+        evil-magit
+        evil-surround
+        flycheck
+        general
+        git
+        helm
+        helm-company
+        helm-projectile
+        helm-rg
+        helm-themes
+        ivy
+        js2-mode
+        key-chord
+        magit
+        markdown-mode
+        org
+        popwin
+        powerline
+        prettier-js
+        projectile
+        rainbow-delimiters
+        smartparens
+        swiper
+        use-package
+        web-mode
+        which-key
+        xref
+        ))
 
 (when (not package-archive-contents) (package-refresh-contents))
 (dolist (package package-list) (when (not (package-installed-p package)) (package-install package)))
@@ -83,13 +84,14 @@
    ";" 'evil-ex)
   (general-define-key
    :keymaps 'insert
-   "C-/" 'helm-company)
+   "C-/" 'helm-company
+   "C-p" 'company-dabbrev)
   (general-define-key
    :keymaps 'visual
    "SPC a r" 'align-regexp
    "SPC c l" 'comment-or-uncomment-region)
   (general-define-key :keymaps 'evil-insert-state-map
-		      (general-chord "kj") 'evil-normal-state)
+                      (general-chord "kj") 'evil-normal-state)
   (general-define-key
    :keymaps 'normal
    "M-x"     'helm-M-x
@@ -186,7 +188,7 @@
   :diminish company-mode
   :config
   (global-company-mode)
-  (setq company-idle-delay 0.25)
+  (setq company-idle-delay 'nil)
   :general
   (general-define-key
    :keymaps 'insert
@@ -217,8 +219,8 @@
 (use-package markdown-mode :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
-	 ("\\.md\\'" . markdown-mode)
-	 ("\\.markdown\\'" . markdown-mode))
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
 (use-package doom-themes :ensure t
@@ -226,20 +228,25 @@
   :config
   (load-theme 'doom-one-light t)
   (set-face-attribute 'default nil
-		      :family "Noto Sans Mono CJK JP"
-		      :height 130
-		      :weight 'normal
-		      :width 'normal))
+                      :family "Noto Sans Mono CJK JP"
+                      :height 130
+                      :weight 'normal
+                      :width 'normal))
 
 (add-hook 'sh-mode-hook 'flycheck-mode)
 
 ;; fucking flycheck
-(setq flycheck-check-syntax-automatically '(mode-enabled
-					    idle-change
-					    new-line
-					    save
-					    ))
-(setq flycheck-idle-change-delay 0.5)
+(use-package flycheck :ensure t
+  :init
+  (progn
+    (setq flycheck-check-syntax-automatically
+          '(mode-enabled
+            idle-change
+            new-line
+            save
+            ))
+    (setq flycheck-idle-change-delay 0.5))
+  (use-package popwin :ensure t))
 
 (defun set-flycheck-save-only ()
   "set flycheck to check on save only"
@@ -266,10 +273,10 @@
 (defun my/org-mode-hook ()
   "Stop the org-level headers from increasing in height relative to the other text."
   (dolist (face '(org-level-1
-		  org-level-2
-		  org-level-3
-		  org-level-4
-		  org-level-5))
+                  org-level-2
+                  org-level-3
+                  org-level-4
+                  org-level-5))
     (set-face-attribute face nil :weight 'semi-bold :height 1.0)))
 (add-hook 'org-mode-hook 'my/org-mode-hook)
 (setq org-bullets-bullet-list '("大" "中" "小" "・"))
@@ -279,15 +286,15 @@
   (interactive)
   (save-buffer)
   (let ((default-directory (projectile-project-root))
-	(success-buffer-name "*PSC-PACKAGE BUILD SUCCESS*")
-	(error-buffer-name "*PSC-PACKAGE BUILD ERRORS*"))
+        (success-buffer-name "*PSC-PACKAGE BUILD SUCCESS*")
+        (error-buffer-name "*PSC-PACKAGE BUILD ERRORS*"))
     (when (buffer-live-p (get-buffer success-buffer-name)) (kill-buffer success-buffer-name))
     (when (buffer-live-p (get-buffer error-buffer-name)) (kill-buffer error-buffer-name))
     (if (file-exists-p "psc-package.json")
-	(shell-command "psc-package build -- 'test/**/*.purs'" success-buffer-name error-buffer-name)
+        (shell-command "psc-package build -- 'test/**/*.purs'" success-buffer-name error-buffer-name)
       (error "wtf no psc-package.json"))
     (if (get-buffer error-buffer-name)
-	(switch-to-buffer-other-window error-buffer-name)
+        (switch-to-buffer-other-window error-buffer-name)
       (switch-to-buffer-other-window success-buffer-name)
       (message "Project build succeeded."))))
 
@@ -338,16 +345,16 @@
   (interactive)
   (if (region-active-p)
       (progn
-	(let* ((line-start (line-number-at-pos (region-beginning)))
-	       (line-end (line-number-at-pos (region-end))))
-	  (dolist (line (number-sequence line-start
-					 (- line-end 1)))
-	    (goto-line line)
-	    (psc-ide-flycheck-insert-suggestion))
-	  (goto-line line-start)
-	  (evil-visual-line)
-	  (evil-next-line (- line-end 1 line-start))
-	  (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
+        (let* ((line-start (line-number-at-pos (region-beginning)))
+               (line-end (line-number-at-pos (region-end))))
+          (dolist (line (number-sequence line-start
+                                         (- line-end 1)))
+            (goto-line line)
+            (psc-ide-flycheck-insert-suggestion))
+          (goto-line line-start)
+          (evil-visual-line)
+          (evil-next-line (- line-end 1 line-start))
+          (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
     (message "You need an active region to use this.")))
 
 ;; for references: M-?
@@ -373,8 +380,8 @@
 (use-package web-mode
   :ensure t
   :mode ("\\.html\\'"
-	 "\\.css\\'"
-	 "\\.scss\\'"))
+         "\\.css\\'"
+         "\\.scss\\'"))
 
 (use-package js2-mode
   :mode "\\.js\\'"
@@ -401,18 +408,18 @@
   "run prettier-standard"
   (interactive)
   (let* ((command (format "cd %s && prettier-standard %s" (projectile-project-root) buffer-file-name))
-	 (results "*PRETTIER-STANDARD SOURCES*")
-	 (errors "*PRETTIER-STANDARD ERRORS*"))
+         (results "*PRETTIER-STANDARD SOURCES*")
+         (errors "*PRETTIER-STANDARD ERRORS*"))
     (shell-command command results errors)
     (if (get-buffer errors)
-	(progn
-	  (with-current-buffer errors
-	    (message (string-trim (buffer-string))))
-	  (kill-buffer errors))
+        (progn
+          (with-current-buffer errors
+            (message (string-trim (buffer-string))))
+          (kill-buffer errors))
       (progn
-	(with-current-buffer results
-	  (message (string-trim (buffer-string))))
-	(kill-buffer results)))))
+        (with-current-buffer results
+          (message (string-trim (buffer-string))))
+        (kill-buffer results)))))
 
 (defun run-prettier ()
   "run normal prettier"
@@ -502,6 +509,9 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
+(setq tab-width 2)
+(setq-default evil-shift-width 2)
+(setq evil-shift-width 2)
 
 (superword-mode t)
 
