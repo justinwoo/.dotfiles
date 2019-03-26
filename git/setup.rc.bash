@@ -15,6 +15,7 @@ alias push-current-branch-to-origin='git push -u origin $(git rev-parse --abbrev
 alias gpj='push-current-branch-to-justinwoo'
 alias gpo='push-current-branch-to-origin'
 alias gfo='git fetch origin'
+alias gfp='gfo -p && dmb'
 alias gfu='git fetch upstream'
 alias gfj='git fetch justinwoo'
 alias hey-mom-i-fixed-it='echo fixed in $(ggbn): $(glc)'
