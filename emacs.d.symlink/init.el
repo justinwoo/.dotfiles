@@ -87,6 +87,7 @@
   (general-define-key
    :keymaps 'insert
    "C-/" 'helm-company
+   "M-/" 'helm-dabbrev
    "C-p" 'company-dabbrev)
   (general-define-key
    :keymaps 'visual
@@ -119,6 +120,7 @@
    "SPC f d" 'delete-frame
    "SPC f j" 'dired-other-frame
    "SPC f n" 'make-frame-command
+   "SPC h f" 'helm-find-files
    "SPC m p e" 'set-flycheck-on-change
    "SPC m p w" 'set-flycheck-save-only
    "SPC o"   'other-window
