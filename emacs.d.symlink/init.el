@@ -5,6 +5,7 @@
 (setq line-number-display-limit-width 10000)
 (setq gnutils-min-prime-bits 4096)
 (setq tags-revert-without-query t)
+(setq show-trailing-whitespace t)
 (prefer-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -95,15 +96,14 @@
                       (general-chord "kj") 'evil-normal-state)
   (general-define-key
    :keymaps 'normal
-   "M-x"     'helm-M-x
-   "Q"       'evil-execute-macro
-   "SPC ?"   'helm-projectile-rg
-   "SPC /"   'helm-do-ag-project-root
    "C--"     'text-scale-decrease
    "C-0"     '(lambda() (interactive) (text-scale-set 1))
    "C-="     'text-scale-increase
    "C-u"     'evil-scroll-up
-   "SPC b B" 'switch-to-buffer
+   "M-x"     'helm-M-x
+   "Q"       'evil-execute-macro
+   "SPC /"   'helm-do-ag-project-root
+   "SPC ?"   'helm-projectile-rg
    "SPC b b" 'helm-buffers-list
    "SPC b d" 'kill-this-buffer
    "SPC b m" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
@@ -114,12 +114,18 @@
    "SPC e l" 'flycheck-list-errors
    "SPC e n" 'flycheck-next-error
    "SPC e p" 'flycheck-previous-error
+   "SPC f D" 'delete-other-frames
+   "SPC f b" 'display-buffer-other-frame
+   "SPC f d" 'delete-frame
+   "SPC f j" 'dired-other-frame
+   "SPC f n" 'make-frame-command
    "SPC m p e" 'set-flycheck-on-change
    "SPC m p w" 'set-flycheck-save-only
    "SPC o"   'other-window
    "SPC t s" 'flycheck-mode
    "SPC w s" 'split-window-below
    "SPC w v" 'split-window-right
+   "SPC x" 'delete-trailing-whitespace
    ))
 
 (use-package evil
