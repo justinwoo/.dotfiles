@@ -5,6 +5,7 @@
 (setq line-number-display-limit-width 10000)
 (setq gnutils-min-prime-bits 4096)
 (setq tags-revert-without-query t)
+(setq-default show-trailing-whitespace t)
 (setq show-trailing-whitespace t)
 (prefer-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
