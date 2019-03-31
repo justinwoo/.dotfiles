@@ -444,6 +444,28 @@
 (require 's)
 (require 'projectile)
 
+(defun run-format-nix ()
+  "run format-nix"
+  (interactive)
+  (let* ((command (format "cd %s && format-nix %s" (projectile-project-root) buffer-file-name))
+         (results "*FORMAT-NIX STDOUT*")
+         (errors "*FORMAT-NIX ERRORS*"))
+    (shell-command command results errors)
+    (if (get-buffer errors)
+        (progn
+          (with-current-buffer errors
+            (message (string-trim (buffer-string))))
+          (kill-buffer errors))
+      (progn
+        (with-current-buffer results
+          (message (string-trim (buffer-string))))
+        (kill-buffer results)
+        (revert-buffer t t t)))))
+
+(general-define-key
+ :keymaps 'normal
+ "SPC m p n" 'run-format-nix)
+
 (general-define-key
  :keymaps 'normal
  "SPC m p s" 'run-prettier-standard
