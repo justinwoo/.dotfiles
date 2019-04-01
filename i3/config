@@ -246,8 +246,7 @@ mode "quickprograms" {
 bindsym $sup+t mode "quickprograms"
 
 # shortcuts
-bindsym $sup+Shift+0 exec gimp
-bindsym $sup+Shift+Return exec firefox
+bindsym $sup+Shift+Return exec chrome
 bindsym $sup+Shift+p exec nautilus ~/Pictures
 bindsym $sup+semicolon [instance="vlc"] scratchpad show
 bindsym $sup+Shift+semicolon [instance="filezilla"] scratchpad show
