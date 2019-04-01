@@ -59,6 +59,7 @@
         projectile
         rainbow-delimiters
         smartparens
+        spacemacs-theme
         swiper
         use-package
         web-mode
@@ -235,7 +236,7 @@
 (use-package doom-themes :ensure t
   :preface (defvar region-fg nil)
   :config
-  (load-theme 'doom-one-light t)
+  (load-theme 'spacemacs-light t)
   (set-face-attribute 'default nil
                       :family "Noto Sans Mono CJK JP"
                       :height 130
