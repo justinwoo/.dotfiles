@@ -329,6 +329,7 @@
   :load-path "~/Code/psc-ide-emacs/"
   :init
   (progn
+    (helm-mode 1)
     (add-hook 'purescript-mode-hook 'psc-ide-mode)
     (add-hook 'purescript-mode-hook 'company-mode)
     (add-hook 'purescript-mode-hook 'flycheck-mode)
@@ -549,6 +550,8 @@
 
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
 (add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
+
+(helm-mode 1)
 
 ;; after this is trash
 (setq custom-file "/dev/null")
