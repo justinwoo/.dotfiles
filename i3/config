@@ -22,7 +22,7 @@ font pango: Noto Sans CJK JP Bold 11
 # see xprop, xwindow
 # wm_name = title
 for_window [instance="slack"] move window to scratchpad
-for_window [title="Telegram"] move window to scratchpad, scratchpad show
+for_window [title="Telegram"] move window to scratchpad
 for_window [instance="nautilus"] move window to scratchpad, scratchpad show
 for_window [instance="vlc"] move window to scratchpad, scratchpad show
 for_window [instance="eog"] move window to scratchpad, scratchpad show
@@ -265,9 +265,9 @@ bindsym $sup+Shift+u [title="Hangouts"] scratchpad show
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym $sup+Prior exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
-bindsym $sup+Next exec --no-startup-id amixer -D pulse sset Master 5%- #decrease sound volume
-bindsym $sup+Home exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym $sup+Prior exec --no-startup-id amixer -D pulse set Master 5%+ #increase sound volume
+bindsym $sup+Next exec --no-startup-id amixer -D pulse set Master 5%- #decrease sound volume
+bindsym $sup+Home exec --no-startup-id amixer -D pulse set Master Playback Switch toggle
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -315,3 +315,23 @@ client.focused          $blue  $blue  $base3
 client.unfocused        $base1 $base1 $base3
 client.focused_inactive $base1 $base1 $base3
 client.urgent           $red   $red   $base3
+
+# bar {
+#   status_command LC_TIME=ja_JP.utf8 i3status --config ~/.dotfiles/i3/i3status.conf
+#   workspace_buttons yes
+#   separator_symbol " "
+#   tray_output primary
+#   tray_padding 6
+
+#   font pango: Noto Sans CJK JP 12
+
+#   colors {
+#     background         $base3
+#     statusline         $base03
+#     separator          $base0
+#     focused_workspace  $blue   $blue $base3
+#     active_workspace   $cyan   $cyan $base3
+#     inactive_workspace $blue   $blue $base02
+#     urgent_workspace   $red    $red  $base3
+#   }
+# }
