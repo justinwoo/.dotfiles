@@ -71,11 +71,8 @@
 (require 'use-package)
 
 (use-package key-chord :ensure t
-  :config
-  (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
   :init
-  (key-chord-mode 1)
-  )
+  (key-chord-mode 1))
 
 (use-package general :ensure t
   :config
@@ -550,9 +547,6 @@
 
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
 (add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
-;; (add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode)
-;; (add-to-list 'spacemacs-indent-sensitive-modes 'purescript-mode)
-;; (add-to-list 'spacemacs-indent-sensitive-modes 'haskell-mode)
 
 ;; after this is trash
 (setq custom-file "/dev/null")
