@@ -2,11 +2,13 @@
 
 let
   easy-dhall = import ./easy-dhall.nix;
+
   easy-ps = import ./easy-ps.nix {};
 
   i3-pkgs = rec {
     polybar = pkgs.polybar.override {
       i3Support = true;
+
       pulseSupport = true;
     };
 
@@ -14,46 +16,49 @@ let
   };
 
   ps-pkgs = {
-    inherit (easy-ps.inputs)
-    purs
-    psc-package-simple
-    purp
-    spago
-    psc-package2nix;
+    inherit (easy-ps.inputs) purs psc-package-simple purp spago psc-package2nix;
   };
 
   dhall-pkgs = {
-    inherit (easy-dhall)
-    dhall-simple
-    dhall-json-simple;
+    inherit (easy-dhall) dhall-simple dhall-json-simple;
   };
 
   gnome3-pkgs = {
-    inherit (pkgs.gnome3)
-    eog
-    evince;
+    inherit (pkgs.gnome3) eog evince;
   };
 
-  firefox = import ./firefox.nix { inherit pkgs; };
-  nix-utils = import ./nix-utils.nix { inherit pkgs; };
-  alacritty = import ./alacritty.nix { inherit pkgs; };
-  z = import ./z.nix { inherit pkgs; };
-  liquidprompt = import ./liquidprompt.nix { inherit pkgs; };
+  firefox = import ./firefox.nix {
+    inherit pkgs;
+  };
 
-in   i3-pkgs
-  // dhall-pkgs
-  // ps-pkgs
-  // gnome3-pkgs
-  // nix-utils
-  // {
-    inherit alacritty;
-    inherit firefox;
-    inherit liquidprompt;
-    inherit z;
+  nix-utils = import ./nix-utils.nix {
+    inherit pkgs;
+  };
 
-    inherit (pkgs.gitAndTools) git-extras hub;
+  alacritty = import ./alacritty.nix {
+    inherit pkgs;
+  };
 
-    inherit (pkgs)
+  z = import ./z.nix {
+    inherit pkgs;
+  };
+
+  liquidprompt = import ./liquidprompt.nix {
+    inherit pkgs;
+  };
+
+in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
+  inherit alacritty;
+
+  inherit firefox;
+
+  inherit liquidprompt;
+
+  inherit z;
+
+  inherit (pkgs.gitAndTools) git-extras hub;
+
+  inherit (pkgs)
     autorandr
     bash-completion
     bat
@@ -84,4 +89,4 @@ in   i3-pkgs
     tmux
     watchexec
     xdotool;
-  }
+}
