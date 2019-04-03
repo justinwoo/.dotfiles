@@ -117,6 +117,7 @@
    "SPC e p" 'flycheck-previous-error
    "SPC f D" 'delete-other-frames
    "SPC f b" 'display-buffer-other-frame
+   "SPC f f" 'make-flycheck-frame
    "SPC f d" 'delete-frame
    "SPC f j" 'dired-other-frame
    "SPC f n" 'make-frame-command
@@ -129,6 +130,13 @@
    "SPC w v" 'split-window-right
    "SPC x" 'delete-trailing-whitespace
    ))
+
+(defun make-flycheck-frame ()
+  "make a flycheck errors frame"
+  (interactive)
+  (flycheck-list-errors)
+  (delete-window (get-buffer-window  "*Flycheck errors*"))
+  (display-buffer-other-frame "*Flycheck errors*"))
 
 (use-package evil
   :ensure t
