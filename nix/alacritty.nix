@@ -4,9 +4,9 @@ pkgs.stdenv.mkDerivation {
   name = "alacritty";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/jwilm/alacritty/releases/download/v0.2.9/Alacritty-v0.2.9-x86_64.tar.gz";
+    url = "https://github.com/jwilm/alacritty/releases/download/v0.3.0-rc2/Alacritty-v0.3.0-rc2-x86_64.tar.gz";
 
-    sha256 = "1x6h0bfzhz9vc0ndv32szpmxrl30kkigxxx9vqq4p097x1bn2npi";
+    sha256 = "109y0yaqj2kc847d5b0a7xpnp5ffwgqxj2yvjz2vsfabcwpxm2m7";
   };
 
   unpackPhase = ''
