@@ -61,6 +61,7 @@ in   i3-pkgs
     colordiff
     colormake
     disper
+    direnv
     emacs
     fd
     fzf
