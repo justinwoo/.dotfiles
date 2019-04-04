@@ -4,6 +4,13 @@ export LP_MARK_BATTERY="電"
 export LP_MARK_ADAPTER="充"
 export LP_MARK_UNTRACKED="異物"
 export LP_MARK_STASH="在庫"
+export LP_MARK_SHORTEN_PATH="･･"
+export LP_MARK_PERM=" "
+export LP_MARK_BRACKET_OPEN="​"  # open bracket
+export LP_MARK_BRACKET_CLOSE="​" # close bracket
+export LP_MARK_PREFIX=" "        # prompt mark prefix
+export LP_PS1_PREFIX=""
+export LP_PS1_POSTFIX=""
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 if [ -n "$PS1" ]
