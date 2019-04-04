@@ -43,7 +43,6 @@ export DOT=$HOME/.dotfiles
 export NIX_PROFILE=$HOME/.nix-profile
 export TERMINAL=gnome-terminal
 export PROJECTS=~/Code
-export TERM="screen-256color"
 
 if [[ -a $(command -v xset) ]]
 then
