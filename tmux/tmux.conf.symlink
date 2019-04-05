@@ -1,5 +1,4 @@
 set-option -g default-shell $SHELL
-set -g default-terminal "tmux-256color"
 
 # open new windows in whatever that's not my home
 bind % split-window -h -c "#{pane_current_path}"
