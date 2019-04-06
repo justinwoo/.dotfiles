@@ -206,6 +206,7 @@
   :diminish company-mode
   :config
   (global-company-mode)
+  (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 'nil)
   :general
   (general-define-key
