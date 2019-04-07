@@ -6,7 +6,7 @@ let
   easy-ps = import ./easy-ps.nix {};
 
   i3-pkgs = rec {
-    polybar = pkgs.polybar.override {
+    polybar = pkgs.callPackage ./polybar.nix {
       i3Support = true;
 
       pulseSupport = true;

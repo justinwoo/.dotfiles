@@ -23,7 +23,6 @@ background = ${colors.base2}
 background-alt = ${colors.base1}
 
 [bar/example]
-monitor = ${env:MONITOR}
 width = 100%
 height = 30
 fixed-center = true
