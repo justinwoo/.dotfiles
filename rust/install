@@ -1,10 +1,9 @@
+rustup update
+rustup toolchain add stable
+
 rustup component add rust-src
 rustup component add rust-docs
-rustup update
-
 rustup component add clippy-preview
-cargo install rustfmt
-cargo install rls
-
-rustup toolchain add nightly
+rustup component add rustfmt
+rustup component add rls
 cargo +nightly install racer
