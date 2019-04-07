@@ -57,6 +57,7 @@
         powerline
         prettier-js
         projectile
+        racer
         rainbow-delimiters
         rust-mode
         smartparens
@@ -530,6 +531,9 @@
 (use-package rust-mode
   :ensure t
   :mode "\\.rs\\'")
+
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
 
 ;; nix
 (use-package nix-mode
