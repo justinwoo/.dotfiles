@@ -58,6 +58,7 @@
         prettier-js
         projectile
         rainbow-delimiters
+        rust-mode
         smartparens
         spacemacs-theme
         swiper
@@ -524,6 +525,11 @@
 (use-package haskell-mode
   :ensure t
   :mode "\\.hs\\'")
+
+;; rust
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs\\'")
 
 ;; nix
 (use-package nix-mode
