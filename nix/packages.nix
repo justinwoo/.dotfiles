@@ -43,16 +43,10 @@ let
     inherit pkgs;
   };
 
-  liquidprompt = import ./liquidprompt.nix {
-    inherit pkgs;
-  };
-
 in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
   inherit alacritty;
 
   inherit firefox;
-
-  inherit liquidprompt;
 
   inherit z;
 
