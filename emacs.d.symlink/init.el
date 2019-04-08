@@ -39,6 +39,7 @@
         evil-magit
         evil-surround
         flycheck
+        flycheck-rust
         general
         git
         helm
@@ -539,6 +540,8 @@
 
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;; nix
 (use-package nix-mode
