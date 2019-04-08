@@ -2,10 +2,11 @@
 
 TARGET=~/.config/alacritty
 
-if [[ ! -e $TARGET ]]
+if [[ ! -e $TARGET || $OVERRIDE == 'true' ]]
 then
   echo Installing alacritty config to "$TARGET"
-  ln -s "$DOT/alacritty" $TARGET
+  mkdir -p $TARGET
+  cp "$DOT/alacritty/alacritty.yml" $TARGET
 else
   echo Skipping alacritty config installation.
 fi
