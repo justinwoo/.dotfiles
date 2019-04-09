@@ -5,7 +5,7 @@ GREEN=$(tput setaf 2)
 YELLOW=$(tput setaf 3)
 # POWDER_BLUE=$(tput setaf 153)
 BLUE=$(tput setaf 4)
-# MAGENTA=$(tput setaf 5)
+MAGENTA=$(tput setaf 5)
 # CYAN=$(tput setaf 6)
 # WHITE=$(tput setaf 7)
 # BRIGHT=$(tput bold)
@@ -31,11 +31,11 @@ function my_prompt {
 
         # dirty
         if [ "$(git config --bool bash.showDirtyState)" != "false" ]; then
-            if [ -n "$(git diff --no-ext-diff --quiet)" ]; then
+            if ! git diff --no-ext-diff --quiet; then
                 git_info+="*"
                 git_color=$YELLOW
             fi
-            if [ -n "$(git diff --no-ext-diff --cached --quiet)" ]; then
+            if ! git diff --no-ext-diff --cached --quiet; then
                 git_info+="+"
                 git_color=$YELLOW
             fi
@@ -59,7 +59,7 @@ function my_prompt {
         # shellcheck disable=2154
         diff=$p
         if [[ $diff != *=* ]]; then
-            git_info+="\[$RED\]$diff"
+            git_info+="\[$MAGENTA\]$diff"
         fi
 
         git_info+=' '

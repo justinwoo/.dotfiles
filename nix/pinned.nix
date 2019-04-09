@@ -16,8 +16,8 @@ import (builtins.fetchTarball {
 
 #   # pinned to fix-gitlab-fetch...
 
-#   rev = "5b0a9ff19b89846c62deb69fb116407cad1ee68d";
+#   rev = "69d0465e50531b1c1ea81911f619acec1252c4d3";
 
-#   sha256 = "0ijxg5c45mv2dm1w7h5bqw08r4a140r3540d43spb75nn8lnbf4s";
+#   sha256 = "0ih046w3q8h1safl68lrgh97xyvscqip77lyrfamx34ps1azaani";
 
 # }) {}

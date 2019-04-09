@@ -18,9 +18,9 @@
 
     repo = "prefetch-github";
 
-    rev = "ecc358529592f403d24a955c293922124c4354f7";
+    rev = "46da8a320711f49c8f950d590cc821c4eaebde31";
 
-    sha256 = "1wcyzmbrs0rzva7jwnqa4vqr34z1sv1cigpyyiaajkf8bx29pamw";
+    sha256 = "111qffz5515ak9qdgarvzmfg3pi8afhw5qrydlcrw6f31wsnibsv";
   }) {
     inherit pkgs;
   };
