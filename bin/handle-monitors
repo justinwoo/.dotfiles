@@ -7,13 +7,13 @@ launch-polybar
 # adjust god damn alacritty font sizes
 font_size=10.0
 
-if [[ -n $(xrandr | rg 'eDP1 connected') ]]
+if [[ -n $(xrandr | rg 'DP1 connected') ]]
 then
+  echo "setting font-size to big sizes for desktop"
+  font_size=16.0
+else
   echo "setting font-size to 10.0 for laptop"
   font_size=10.0
-else
-  echo "setting font-size to big sizes for desktop"
-  font_size=18.0
 fi
 
 sed -i "s/^  size: ....$/  size: $font_size/" ~/.config/alacritty/alacritty.yml
