@@ -86,9 +86,9 @@ function my_prompt {
 
     if [ -z "$IN_NIX_SHELL"  ]
     then
-        prefix="\[$NORMAL\]bash"
+        prefix="\[$NORMAL\]馬"
     else
-        prefix="\[$BLUE\]nix"
+        prefix="\[$BLUE\]肉"
     fi
 
     local jobs_info
