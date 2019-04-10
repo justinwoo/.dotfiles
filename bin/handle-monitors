@@ -7,7 +7,7 @@ launch-polybar
 # adjust god damn alacritty font sizes
 font_size=10.0
 
-if [[ -n $(xrandr | rg 'DP.?1 connected') ]]
+if [[ -n $(xrandr | rg '^DP.?1 connected') ]]
 then
   echo "setting font-size to big sizes for desktop"
   font_size=14.0
