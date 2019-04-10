@@ -55,6 +55,20 @@ function my_prompt {
             git_color=$YELLOW
         fi
 
+        # https://github.com/nojhan/liquidprompt/blob/eda83efe4e0044f880370ed5e92aa7e3fdbef971/liquidprompt#L864-L876
+        local gitdir
+        gitdir="$(\git rev-parse --git-dir 2>/dev/null)"
+        if [[ -f "${gitdir}/MERGE_HEAD" ]]; then
+            git_info+=" MERGING"
+            git_color=$RED
+        elif [[ -d "${gitdir}/rebase-apply" || -d "${gitdir}/rebase-merge" ]]; then
+            git_info+=" REBASING"
+            git_color=$RED
+        elif [[ -f "${gitdir}/CHERRY_PICK_HEAD" ]]; then
+            git_info+=" CHERRY-PICKING"
+            git_color=$RED
+        fi
+
         __git_ps1_show_upstream
         # shellcheck disable=2154
         diff=$p
