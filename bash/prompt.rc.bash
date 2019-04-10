@@ -1,12 +1,9 @@
 # BLACK=$(tput setaf 0)
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
-# LIME_YELLOW=$(tput setaf 190)
 YELLOW=$(tput setaf 3)
-# POWDER_BLUE=$(tput setaf 153)
 BLUE=$(tput setaf 4)
 MAGENTA=$(tput setaf 5)
-# CYAN=$(tput setaf 6)
 # WHITE=$(tput setaf 7)
 # BRIGHT=$(tput bold)
 NORMAL=$(tput sgr0)
@@ -82,15 +79,24 @@ function my_prompt {
 
     if [ -z "$IN_NIX_SHELL"  ]
     then
-        prefix=bash
+        prefix="\[$NORMAL\]bash"
     else
         prefix="\[$BLUE\]nix"
+    fi
+
+    local jobs_info
+    local jobs_count
+    jobs_count=$(($(jobs -r | wc -l)+$(jobs -s | wc -l)))
+    if [[ $jobs_count -ne 0 ]];
+    then
+        jobs_info="$jobs_count "
     fi
 
     local dir="\[$BLUE\]\w"
     local git="\[$git_color\]$git_info"
     local usr="\[$NORMAL\]\$"
-    PS1="$prefix $dir $git$usr "
+    local jobs_="\[$MAGENTA\]$jobs_info"
+    PS1="$jobs_$prefix $dir $git$usr "
 }
 
 export PROMPT_COMMAND=my_prompt
