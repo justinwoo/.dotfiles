@@ -1,17 +1,15 @@
 # BLACK=$(tput setaf 0)
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-YELLOW=$(tput setaf 3)
-BLUE=$(tput setaf 4)
-MAGENTA=$(tput setaf 5)
-# WHITE=$(tput setaf 7)
-# BRIGHT=$(tput bold)
-NORMAL=$(tput sgr0)
-# BLINK=$(tput blink)
-# REVERSE=$(tput smso)
-# UNDERLINE=$(tput smul)
-
-# PS1="\[${WHITE}\](\[${YELLOW}\]\u@\h\[${WHITE}\])\[${NORMAL}\]$ "
+RED="\[$(tput setaf 1)\]"
+GREEN="\[$(tput setaf 2)\]"
+YELLOW="\[$(tput setaf 3)\]"
+BLUE="\[$(tput setaf 4)\]"
+MAGENTA="\[$(tput setaf 5)\]"
+# WHITE="\[$(tput setaf 7)\]"
+# BRIGHT="\[$(tput bold)\]"
+NORMAL="\[$(tput sgr0)\]"
+# BLINK="\[$(tput blink)\]"
+# REVERSE="\[$(tput smso)\]"
+# UNDERLINE="\[$(tput smul)\]"
 
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
@@ -77,7 +75,7 @@ function my_prompt {
         # shellcheck disable=2154
         diff=$p
         if [[ $diff != *=* ]]; then
-            git_info+="\[$MAGENTA\]$diff"
+            git_info+="$MAGENTA$diff"
         fi
 
         git_info+=' '
@@ -86,9 +84,9 @@ function my_prompt {
 
     if [ -z "$IN_NIX_SHELL"  ]
     then
-        prefix="\[$NORMAL\]馬"
+        prefix="$NORMAL馬"
     else
-        prefix="\[$BLUE\]肉"
+        prefix="$BLUE肉"
     fi
 
     local jobs_info
@@ -99,10 +97,10 @@ function my_prompt {
         jobs_info="$jobs_count "
     fi
 
-    local dir="\[$BLUE\]\w"
-    local git="\[$git_color\]$git_info"
-    local usr="\[$NORMAL\]\$"
-    local jobs_="\[$MAGENTA\]$jobs_info"
+    local dir="$BLUE\w"
+    local git="$git_color$git_info"
+    local usr="$NORMAL\$"
+    local jobs_="$MAGENTA$jobs_info"
     PS1="$jobs_$prefix $dir $git$usr "
 }
 
