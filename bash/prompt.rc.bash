@@ -19,6 +19,7 @@ export GIT_PS1_HIDE_IF_PWD_IGNORED=true
 export GIT_PS1_SHOWCOLORHINTS=true
 
 function my_prompt {
+    local EXIT=$?
     local git_info=''
     local git_color=$GREEN
     if git rev-parse --git-dir > /dev/null 2>&1; then
@@ -97,11 +98,17 @@ function my_prompt {
         jobs_info="$jobs_count "
     fi
 
+    local exit
+    if [[ $EXIT -ne 0 ]]
+    then
+        exit="$RED($EXIT) "
+    fi
+
     local dir="$BLUE\w"
     local git="$git_color$git_info"
     local usr="$NORMAL\$"
     local jobs_="$MAGENTA$jobs_info"
-    PS1="$jobs_$prefix $dir $git$usr "
+    PS1="$jobs_$prefix $dir $git$exit$usr "
 }
 
 export PROMPT_COMMAND=my_prompt
