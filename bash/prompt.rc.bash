@@ -22,26 +22,23 @@ function my_prompt {
     local EXIT=$?
     local git_info=''
     local git_color=$GREEN
-    if git rev-parse --git-dir > /dev/null 2>&1; then
+    if git rev-parse --git-dir &> /dev/null; then
         git_info=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
         # shellcheck disable=2181
-        if [ $? -ne 0 ]
-        then
+        if ! git rev-parse --abbrev-ref HEAD &> /dev/null; then
             git_info="新"
             git_color=$RED
         fi
 
         # dirty
-        if [ "$(git config --bool bash.showDirtyState)" != "false" ]; then
-            if ! git diff --no-ext-diff --quiet; then
-                git_info+="*"
-                git_color=$RED
-            fi
-            if ! git diff --no-ext-diff --cached --quiet; then
-                git_info+="+"
-                git_color=$YELLOW
-            fi
+        if ! git diff --no-ext-diff --cached --quiet; then
+            git_info+="+"
+            git_color=$YELLOW
+        fi
+        if ! git diff --no-ext-diff --quiet; then
+            git_info+="*"
+            git_color=$RED
         fi
 
         # untracked
