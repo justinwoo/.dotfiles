@@ -1,4 +1,5 @@
-EMACS="nix-shell -p emacs --run"
+# EMACS="nix-shell $DOT/nix/emacs.nix --run"
+EMACS="bash -c"
 
 # start emacs with given argument (usually a directory) or nothing
 enc() {
