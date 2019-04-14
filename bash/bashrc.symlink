@@ -44,19 +44,6 @@ export NIX_PROFILE=$HOME/.nix-profile
 export TERMINAL=gnome-terminal
 export PROJECTS=~/Code
 
-if [[ -a $(command -v xset) ]]
-then
-  xset r rate 350 50
-fi
-
-if [[ -a $(command -v xmodmap) ]]
-then
-  xmodmap -e "keycode 94 = Shift_L"
-  xmodmap -e "keycode 67 = Escape"
-  xmodmap -e "keycode 166 = Prior"
-  xmodmap -e "keycode 167 = Next"
-fi
-
 for file in "$DOT"/*/*.rc.bash; do
   # shellcheck source=/dev/null
   source "$file";
