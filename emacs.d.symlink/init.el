@@ -218,7 +218,9 @@
   (general-define-key
    :keymaps 'company-active-map
    "<tab>" 'company-complete-selection
+   "C-n" 'company-select-next
    "C-j" 'company-select-next
+   "C-p" 'company-select-previous
    "C-k" 'company-select-previous))
 
 (use-package swiper :ensure t
