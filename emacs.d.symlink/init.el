@@ -325,7 +325,8 @@
 (defun my-psc-ide-server-kill-buffer ()
   "die"
   (interactive)
-  (kill-buffer (get-buffer "*psc-ide-server*")))
+  (kill-buffer (get-buffer "*psc-ide-server*"))
+  (message "killed buffer psc-ide-server"))
 
 (defun my-psc-ide-server-restart ()
   "die"
