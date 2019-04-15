@@ -345,6 +345,7 @@
   :init
   (progn
     (helm-mode 1)
+    (rainbow-delimiters-mode -1)
     (add-hook 'purescript-mode-hook 'psc-ide-mode)
     (add-hook 'purescript-mode-hook 'company-mode)
     (add-hook 'purescript-mode-hook 'flycheck-mode)
