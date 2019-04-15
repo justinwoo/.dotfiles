@@ -6,3 +6,5 @@ then
 else
   echo 'Skipping font installation.'
 fi
+
+fc-cache -v
