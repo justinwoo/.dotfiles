@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 alias tks="tmux kill-session"
+alias tkS="tmux kill-server"
 
 tm() {
     if [ $# == 1 ]
