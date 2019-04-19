@@ -61,6 +61,8 @@ in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
 
   inherit (pkgs.gitAndTools) git-extras hub;
 
+  inherit (pkgs.unixtools) route;
+
   inherit (pkgs)
     autorandr
     bash-completion
