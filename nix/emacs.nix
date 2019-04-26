@@ -9,7 +9,6 @@ pkgs.emacs.overrideAttrs (old: rec {
 
   src = pkgs.fetchurl {
     url = "mirror://gnu/emacs/${name}.tar.xz";
-
     sha256 = "13n5m60i47k96mpv5pp6km2ph9rv2m5lmbpzj929v02vpsfyc70m";
   };
 

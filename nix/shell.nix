@@ -6,6 +6,8 @@ pkg.stdenv.mkDerivation {
   buildInputs = builtins.attrValues (import ./packages.nix {});
 
   src = "./packages.nix";
+
   phases = "buildPhase";
+
   buildPhase = "touch $out";
 }
