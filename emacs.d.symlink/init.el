@@ -125,6 +125,10 @@
    "SPC f j" 'dired-other-frame
    "SPC f n" 'make-frame-command
    "SPC h f" 'helm-find-files
+   "SPC r l" 'bookmark-bmenu-list
+   "SPC r m" 'bookmark-set
+   "SPC r b" 'bookmark-jump
+   "SPC r B" 'bookmark-jump-other-window
    "SPC m p e" 'set-flycheck-on-change
    "SPC m p w" 'set-flycheck-save-only
    "SPC o"   'other-window
