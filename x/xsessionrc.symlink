@@ -1,6 +1,6 @@
 if [[ -a $(command -v xset) ]]
 then
-  xset r rate 450 100
+  xset r rate 350 100
 fi
 
 if [[ -a $(command -v xmodmap) ]]
