@@ -1,15 +1,18 @@
-# BLACK=$(tput setaf 0)
-RED="\[$(tput setaf 1)\]"
-GREEN="\[$(tput setaf 2)\]"
-YELLOW="\[$(tput setaf 3)\]"
-BLUE="\[$(tput setaf 4)\]"
-MAGENTA="\[$(tput setaf 5)\]"
-# WHITE="\[$(tput setaf 7)\]"
-# BRIGHT="\[$(tput bold)\]"
-NORMAL="\[$(tput sgr0)\]"
-# BLINK="\[$(tput blink)\]"
-# REVERSE="\[$(tput smso)\]"
-# UNDERLINE="\[$(tput smul)\]"
+if [[ $- = *i* ]]
+then
+    # BLACK=$(tput setaf 0)
+    # BLINK="\[$(tput blink)\]"
+    # BRIGHT="\[$(tput bold)\]"
+    # REVERSE="\[$(tput smso)\]"
+    # UNDERLINE="\[$(tput smul)\]"
+    # WHITE="\[$(tput setaf 7)\]"
+    BLUE="\[$(tput setaf 4)\]"
+    GREEN="\[$(tput setaf 2)\]"
+    MAGENTA="\[$(tput setaf 5)\]"
+    NORMAL="\[$(tput sgr0)\]"
+    RED="\[$(tput setaf 1)\]"
+    YELLOW="\[$(tput setaf 3)\]"
+fi
 
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true

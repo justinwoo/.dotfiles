@@ -47,16 +47,12 @@ let
     inherit pkgs;
   };
 
-  myrica = pkgs.callPackage ./myrica.nix {};
-
 in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
   inherit alacritty;
 
   inherit emacs;
 
   inherit firefox;
-
-  inherit myrica;
 
   inherit z;
 
