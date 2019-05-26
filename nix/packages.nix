@@ -27,10 +27,6 @@ let
     inherit (pkgs.gnome3) eog evince;
   };
 
-  firefox = import ./firefox.nix {
-    inherit pkgs;
-  };
-
   nix-utils = import ./nix-utils.nix {
     inherit pkgs;
   };
