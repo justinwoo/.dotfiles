@@ -3,6 +3,7 @@
 # fuckin hell
 autorandr --change
 launch-polybar
+source ~/.xsessionrc
 
 # adjust god damn alacritty font sizes
 font_size=14.0
