@@ -48,8 +48,6 @@ in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
 
   inherit emacs;
 
-  inherit firefox;
-
   inherit z;
 
   inherit (pkgs.gitAndTools) git-extras hub;

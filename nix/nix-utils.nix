@@ -18,13 +18,4 @@
   }) {
     inherit pkgs;
   };
-
-  update-fetch-derivations = import (pkgs.fetchFromGitHub {
-    owner = "justinwoo";
-    repo = "update-fetch-derivations";
-    rev = "e749bf65b9a0b6243087013e98aa5bbe9ee5a045";
-    sha256 = "09axaklmdpc01kpkmh4hqc5gdil7l1rdbmh0fz0xbal9fqfqnjki";
-  }) {
-    inherit pkgs;
-  };
 }
