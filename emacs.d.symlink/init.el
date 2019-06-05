@@ -243,6 +243,8 @@
 
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(setq rainbow-delimiters-unmatched-face nil)
+(setq rainbow-delimiters-mismatched-face nil)
 
 (use-package markdown-mode :ensure t
   :commands (markdown-mode gfm-mode)
