@@ -55,15 +55,12 @@ set -g display-panes-time 2000
 # random styling
 # status line
 set -g status-justify left
-set -g status-fg black
-set -g status-bg white
+set -g status-style fg=black,bg=white
 set -g status-interval 30
 
 # Split
-set-option -g pane-active-border-fg blue
-set-option -g pane-active-border-bg default
-set-option -g pane-border-fg white
-set-option -g pane-border-bg default
+set-option -g pane-active-border-style bg=default,fg=blue
+set-option -g pane-border-style bg=default,fg=white
 
 # Title
 set-option -g set-titles on
