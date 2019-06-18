@@ -26,7 +26,6 @@ TODOs.org_archive
 .tern-port
 cc/
 .stack-work
-dist
 dist-newstyle
 .ghc.environment.*
 scratch.el
