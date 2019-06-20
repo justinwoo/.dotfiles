@@ -36,3 +36,4 @@ dhall.tix
 *.bak
 *.BAK
 result
+dist
