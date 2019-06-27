@@ -100,12 +100,14 @@
                       (general-chord "kj") 'evil-normal-state)
   (general-define-key
    :keymaps 'normal
+   "Q"       'evil-execute-macro
+   )
+  (general-define-key
    "C--"     'text-scale-decrease
    "C-0"     '(lambda() (interactive) (text-scale-set 1))
    "C-="     'text-scale-increase
    "C-u"     'evil-scroll-up
    "M-x"     'helm-M-x
-   "Q"       'evil-execute-macro
    "SPC /"   'helm-do-ag-project-root
    "SPC ?"   'helm-projectile-rg
    "SPC b b" 'helm-buffers-list
