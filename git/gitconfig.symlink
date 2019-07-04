@@ -9,6 +9,7 @@
         br = branch
         st = status
         re = rebase
+        wc = whatchanged
         count = !git shortlog -sn
 [color]
         diff = auto

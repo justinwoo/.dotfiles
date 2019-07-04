@@ -32,7 +32,7 @@ alias ga='git add'
 alias ga.='git add .'
 alias gap='git add -p'
 alias gac='ga . ; gc'
-alias gr='git remote'
+alias gr='git reflog | head -10'
 alias grs='git remote show'
 alias gic='git checkout'
 
