@@ -35,5 +35,5 @@ scratch*
 dhall.tix
 *.bak
 *.BAK
-result
+result*
 dist
