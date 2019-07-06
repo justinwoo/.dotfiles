@@ -1,5 +1,5 @@
 import (builtins.fetchTarball {
   name = "nixpkgs-justinwoo";
-  url = "https://github.com/justinwoo/nixpkgs/archive/43311f45c71b3a187d9557b78c96a047e7e0224e.tar.gz";
-  sha256 = "0ip7n26a71rgdykw7w5dwbydzca8q6ygczk5jmyqf3iylz4hkgp7";
+  url = "https://github.com/justinwoo/nixpkgs/archive/dc0dbaf0bd8ad9a04011ee734709b4f3e2ce15f0.tar.gz";
+  sha256 = "11yx4s18ydv1cpgr85q5146c1j0ncf2mqhjv4gqpyr7l5p73m5ky";
 })
