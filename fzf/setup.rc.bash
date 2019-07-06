@@ -6,6 +6,5 @@ then
   source "$HOME/.nix-profile/share/fzf/completion.bash"
 fi
 
-export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_COMMAND="fd --type f"
+export FZF_ALT_C_COMMAND="fd --type d"
