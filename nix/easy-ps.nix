@@ -3,6 +3,8 @@
 import (pkgs.fetchFromGitHub {
   owner = "justinwoo";
   repo = "easy-purescript-nix";
-  rev = "e3501174123c884d5878b42a48e361aa113cdead";
-  sha256 = "1c28ml262qnh7c1rsz86gnmrj9k9gi35rxh2mx1mwr2ac5dl213a";
-})
+  rev = "9a8d138663c5d751e3a84f1345166e1f0f760a07";
+  sha256 = "1c0mqn4wxh4bmxnf6hgrhk442kl2m9y315wik87wrw2ikb7s1szf";
+}) {
+  inherit pkgs;
+}
