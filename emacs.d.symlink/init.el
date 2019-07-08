@@ -7,6 +7,7 @@
 (setq tags-revert-without-query t)
 (setq-default show-trailing-whitespace t)
 (setq show-trailing-whitespace t)
+(setq inhibit-startup-screen t)
 (prefer-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
