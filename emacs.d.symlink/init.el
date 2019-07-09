@@ -118,12 +118,11 @@
    "SPC c l" 'comment-line
    "SPC e b" 'eval-buffer
    "SPC e c" 'flycheck-clear
-   "SPC e l" 'flycheck-list-errors
+   "SPC e l" 'spacemacs/toggle-flycheck-error-list
    "SPC e n" 'flycheck-next-error
    "SPC e p" 'flycheck-previous-error
    "SPC f D" 'delete-other-frames
    "SPC f b" 'display-buffer-other-frame
-   "SPC f f" 'make-flycheck-frame
    "SPC f d" 'delete-frame
    "SPC f j" 'dired-other-frame
    "SPC f n" 'make-frame-command
@@ -141,12 +140,14 @@
    "SPC x" 'delete-trailing-whitespace
    ))
 
-(defun make-flycheck-frame ()
-  "make a flycheck errors frame"
-  (interactive)
-  (flycheck-list-errors)
-  (delete-window (get-buffer-window  "*Flycheck errors*"))
-  (display-buffer-other-frame "*Flycheck errors*"))
+(add-to-list
+ 'display-buffer-alist
+ `(,(rx bos "*Flycheck errors*" eos)
+   (display-buffer-reuse-window
+    display-buffer-in-side-window)
+   (side            . bottom)
+   (reusable-frames . visible)
+   (window-height   . 0.33)))
 
 (use-package evil
   :ensure t
@@ -280,6 +281,17 @@
             ))
     (setq flycheck-idle-change-delay 0.5))
   (use-package popwin :ensure t))
+
+;; from spacemacs
+;; toggle flycheck window
+(defun spacemacs/toggle-flycheck-error-list ()
+  "Toggle flycheck's error list window.
+If the error list is visible, hide it.  Otherwise, show it."
+  (interactive)
+  (-if-let (window (flycheck-get-error-list-window))
+      (quit-window nil window)
+    (flycheck-list-errors)))
+
 
 (defun set-flycheck-save-only ()
   "set flycheck to check on save only"
