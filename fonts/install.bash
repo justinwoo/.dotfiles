@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-if [[ ! -e ~/.fonts && -e ~/.nix-profile/share/fonts ]]
-then
-  echo 'Symlinking fonts'
-  ln -s ~/.nix-profile/share/fonts ~/.fonts
-else
-  echo 'Skipping font installation.'
-fi
 
-fc-cache -v
+
+TARGET=~/.fonts
+
+echo "installing fonts"
+rm -f $TARGET
+nix-build "$(dirname "${BASH_SOURCE[0]}")"/fonts.nix -o $TARGET
+
+fc-cache
