@@ -1,13 +1,7 @@
 #!/bin/bash
 
-DIR=~/.config/autorandr
-TARGET=$DIR/postswitch
+TARGET=~/.config/autorandr/postswitch
 
-if [[ ! -e $TARGET ]]
-then
-  echo Installing autorandr postswitch to "$TARGET"
-  mkdir -p $DIR
-  ln -s "$DOT/autorandr/postswitch" $TARGET
-else
-  echo Skipping autorandr postswitch installation.
-fi
+echo "installing autorandr postswitch"
+rm -f $TARGET
+nix-build "$(dirname "${BASH_SOURCE[0]}")"/postswitch.nix -o $TARGET

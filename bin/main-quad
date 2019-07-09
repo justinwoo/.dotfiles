@@ -1,6 +1,0 @@
-#!/usr/bin/env zsh
-layout-main-quad
-chrome
-gnome-terminal
-slack
-telegram

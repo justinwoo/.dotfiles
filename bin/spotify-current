@@ -1,7 +1,0 @@
-#!/bin/bash
-
-SPOTIFY_WIN_ID=$(xwininfo -root -all | grep "\"spotify\" \"Spotify\"" | cut -d '"' -f 1 | sed -n 1p | sed -e 's/^[[:space:]]*//')
-
-NOWPLAYING=$(xprop -id $SPOTIFY_WIN_ID | grep _NET_WM_NAME | cut -d '"' -f 2 | sed -n 1p)
-
-echo -n "${NOWPLAYING}"
