@@ -113,6 +113,7 @@
    "SPC ?"   'helm-projectile-rg
    "SPC b b" 'helm-buffers-list
    "SPC b d" 'kill-this-buffer
+   "SPC b D" 'spacemacs/kill-matching-buffers-rudely
    "SPC b m" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
    "SPC b s" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
    "SPC c l" 'comment-line
@@ -139,6 +140,20 @@
    "SPC w v" 'split-window-right
    "SPC x" 'delete-trailing-whitespace
    ))
+
+;; from https://github.com/gempesaw/dotemacs/blob/emacs/dg-defun.el
+(defun spacemacs/kill-matching-buffers-rudely (regexp &optional internal-too)
+  "Kill buffers whose name matches the specified REGEXP. This
+function, unlike the built-in `kill-matching-buffers` does so
+WITHOUT ASKING. The optional second argument indicates whether to
+kill internal buffers too."
+  (interactive "sKill buffers matching this regular expression: \nP")
+  (dolist (buffer (buffer-list))
+    (let ((name (buffer-name buffer)))
+      (when (and name (not (string-equal name ""))
+                 (or internal-too (/= (aref name 0) ?\s))
+                 (string-match regexp name))
+        (kill-buffer buffer)))))
 
 (add-to-list
  'display-buffer-alist
@@ -346,8 +361,8 @@ If the error list is visible, hide it.  Otherwise, show it."
 (defun my-psc-ide-server-kill-buffer ()
   "die"
   (interactive)
-  (kill-buffer (get-buffer "*psc-ide-server*"))
-  (message "killed buffer psc-ide-server"))
+  (spacemacs/kill-matching-buffers-rudely "psc-ide-server")
+  (message "killed psc-ide-server"))
 
 (defun my-psc-ide-server-restart ()
   "die"
