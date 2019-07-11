@@ -127,6 +127,7 @@
    "SPC f d" 'delete-frame
    "SPC f j" 'dired-other-frame
    "SPC f n" 'make-frame-command
+   "SPC f q" 'evil-quit
    "SPC h f" 'helm-find-files
    "SPC r l" 'bookmark-bmenu-list
    "SPC r m" 'bookmark-set
