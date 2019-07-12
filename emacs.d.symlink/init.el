@@ -125,6 +125,7 @@
    "SPC f D" 'delete-other-frames
    "SPC f b" 'display-buffer-other-frame
    "SPC f d" 'delete-frame
+   "SPC f f" 'flycheck-errors-in-new-frame
    "SPC f j" 'dired-other-frame
    "SPC f n" 'make-frame-command
    "SPC f q" 'evil-quit
@@ -297,6 +298,10 @@ kill internal buffers too."
             ))
     (setq flycheck-idle-change-delay 0.5))
   (use-package popwin :ensure t))
+
+(defun flycheck-errors-in-new-frame ()
+  (interactive)
+  (display-buffer-pop-up-frame (get-buffer "*Flycheck errors*") '()))
 
 ;; from spacemacs
 ;; toggle flycheck window
