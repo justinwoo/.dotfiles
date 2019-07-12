@@ -563,6 +563,12 @@ If the error list is visible, hide it.  Otherwise, show it."
 (use-package dhall-mode
   :ensure t
   :mode "\\.dhall\\'")
+(setq dhall-format-arguments '("--ascii"))
+(setq dhall-format-at-save nil)
+
+(general-define-key
+ :keymaps 'normal
+ "SPC m p D" 'dhall-format-buffer)
 
 ;; haskell
 (use-package haskell-mode
