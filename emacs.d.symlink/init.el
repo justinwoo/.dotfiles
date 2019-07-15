@@ -367,7 +367,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 (defun my-psc-ide-server-kill-buffer ()
   "die"
   (interactive)
-  (spacemacs/kill-matching-buffers-rudely "psc-ide-server")
+  (spacemacs/kill-matching-buffers-rudely "psc-ide")
   (message "killed psc-ide-server"))
 
 (defun my-psc-ide-server-restart ()
