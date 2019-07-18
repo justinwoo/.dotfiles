@@ -139,6 +139,7 @@
    "SPC m p w" 'set-flycheck-save-only
    "SPC o"   'other-window
    "SPC t s" 'flycheck-mode
+   "SPC v"   'helm-buffers-list
    "SPC w s" 'split-window-below
    "SPC w v" 'split-window-right
    "SPC x" 'delete-trailing-whitespace
