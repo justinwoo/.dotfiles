@@ -282,7 +282,7 @@ kill internal buffers too."
   (load-theme 'spacemacs-light t)
   (set-face-attribute 'default nil
                       :family "Noto Sans Mono CJK JP"
-                      :height 150
+                      :height 100
                       :weight 'normal
                       :width 'normal))
 
