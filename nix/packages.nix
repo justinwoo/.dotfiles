@@ -5,6 +5,8 @@ let
 
   easy-ps = import ./easy-ps.nix {};
 
+  tin-summer = import ./tin-summer.nix {};
+
   i3-pkgs = rec {
     polybar = pkgs.callPackage ./polybar.nix {
       i3Support = true;
@@ -47,6 +49,8 @@ in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
   inherit alacritty;
 
   inherit emacs;
+
+  inherit tin-summer;
 
   inherit z;
 
