@@ -582,6 +582,24 @@ If the error list is visible, hide it.  Otherwise, show it."
   :ensure t
   :mode "\\.hs\\'")
 
+(use-package intero :ensure t
+  :init
+  (progn
+    (helm-mode 1)
+    (rainbow-delimiters-mode -1)
+    (add-hook 'intero-mode-hook 'company-mode)
+    (add-hook 'intero-mode-hook 'flycheck-mode)
+
+    (evil-define-key 'normal intero-mode-map
+      ",gg" 'intero-goto-definition
+      ",ht" 'intero-type-at
+      ",hi" 'intero-info
+      ",gl" 'intero-repl-load
+      ",ge" 'intero-repl-eval-region
+      ",gr" 'intero-repl
+      ",ga" 'intero-apply-suggestions
+    )))
+
 ;; rust
 (use-package rust-mode
   :ensure t
