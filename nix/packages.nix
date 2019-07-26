@@ -8,13 +8,7 @@ let
   tin-summer = import ./tin-summer.nix {};
 
   i3-pkgs = rec {
-    polybar = pkgs.callPackage ./polybar.nix {
-      i3Support = true;
-
-      pulseSupport = true;
-    };
-
-    inherit (pkgs) feh i3 i3status rofi scrot;
+    inherit (pkgs) feh i3 i3status rofi scrot polybarFull;
   };
 
   ps-pkgs = {
