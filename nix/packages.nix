@@ -35,9 +35,7 @@ let
     inherit pkgs;
   };
 
-  emacs = import ./emacs.nix {
-    inherit pkgs;
-  };
+  emacs = pkgs.emacs;
 
 in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
   inherit alacritty;
