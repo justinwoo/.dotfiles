@@ -74,7 +74,6 @@ map <leader>du :diffupdate<cr>
 map <leader>v :vsplit<cr><C-W><C-W>
 map <leader>s :split<cr><C-W><C-W>
 map <leader>u :MundoToggle<cr><C-W><C-W>
-map <leader>b :BuffergatorToggle<cr><C-W><C-W>
 map <leader>c :Commentary<cr>
 map <leader>= <C-W>=<cr>
 map <leader>w= <C-W>=<cr>
@@ -83,6 +82,12 @@ map <leader>ww :StripWhiteSpace<cr>
 if filereadable(glob("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+
+"buffer shortcuts
+map <leader>bl :BuffergatorToggle<cr><C-W><C-W>
+map <leader>bn :bn<cr>
+map <leader>bp :bp<cr>
+map <leader>bd :bd<cr>
 
 "Ackvim use rg
 if executable('rg')
