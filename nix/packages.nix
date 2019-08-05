@@ -3,7 +3,7 @@
 let
   easy-dhall = import ./easy-dhall.nix;
 
-  lorri = import ./lorri.nix {};
+  # lorri = import ./lorri.nix {};
 
   easy-ps = import ./easy-ps.nix {};
 
@@ -42,7 +42,7 @@ let
 in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
   inherit alacritty;
 
-  inherit lorri;
+  # inherit lorri;
 
   inherit emacs;
 
