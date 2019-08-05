@@ -1,10 +1,10 @@
 { pkgs ? import <nixpkgs> {} }:
 
 import (pkgs.fetchFromGitHub {
-  owner = "target";
-  repo = "lorri";
-  rev = "d3e452ebc2b24ab86aec18af44c8217b2e469b2a";
-  sha256 = "07yf3gl9sixh7acxayq4q8h7z4q8a66412z0r49sr69yxb7b4q89";
+  owner = "justinwoo";
+  repo = "my-lorri";
+  rev = "350a43902265a6b1bf7da5b057d07f6246b53555";
+  sha256 = "031rdy8ayarvfbh6qwqa0wppciiaa3zb12298b5768gzbyqvsjba";
 }) {
   inherit pkgs;
 }
