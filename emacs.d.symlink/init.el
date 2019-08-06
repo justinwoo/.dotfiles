@@ -22,7 +22,7 @@
 (setq fci-rule-column 81)
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
-(global-hl-line-mode 1)
+(global-hl-line-mode 0)
 (require 'package)
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
                          ("gnu"       . "http://elpa.gnu.org/packages/")
@@ -441,7 +441,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 (global-set-key (kbd "C-S-SPC") 'company-dabbrev)
 (global-set-key (kbd "M-SPC") 'company-dabbrev)
 
-(define-key evil-insert-state-map (kbd "<tab>") 'company-complete-common)
+(define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
 (define-key evil-insert-state-map (kbd "C-p") 'company-dabbrev)
 
 (setq company-idle-delay 'nil)
