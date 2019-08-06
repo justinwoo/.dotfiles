@@ -8,7 +8,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'mileszs/ack.vim' " search inside files using ack. Same as command line ack utility, but use :Ack
 Plug 'vim-airline/vim-airline' " fancy statusline
 Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
-Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 Plug 'simnalamburt/vim-mundo' " undo
 Plug 'jeetsukumaran/vim-buffergator' " i guess this can stay for now
 
