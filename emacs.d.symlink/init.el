@@ -118,6 +118,8 @@
    "SPC b m" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
    "SPC b s" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
    "SPC c l" 'comment-line
+   "SPC c c" 'open-config
+   "SPC c v" 'reload-config
    "SPC e b" 'eval-buffer
    "SPC e c" 'flycheck-clear
    "SPC e l" 'spacemacs/toggle-flycheck-error-list
@@ -144,6 +146,9 @@
    "SPC w v" 'split-window-right
    "SPC x" 'delete-trailing-whitespace
    ))
+
+(defun open-config () (interactive) (find-file "~/.emacs.d/init.el"))
+(defun reload-config () (interactive) (load-file "~/.emacs.d/init.el"))
 
 ;; from https://github.com/gempesaw/dotemacs/blob/emacs/dg-defun.el
 (defun spacemacs/kill-matching-buffers-rudely (regexp &optional internal-too)
