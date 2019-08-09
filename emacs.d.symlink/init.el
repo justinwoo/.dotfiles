@@ -55,6 +55,7 @@
         key-chord
         magit
         markdown-mode
+        nix-mode
         org
         popwin
         powerline
@@ -622,7 +623,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 ;; nix
 (use-package nix-mode
-  :load-path "~/.nix-profile/elisp/nix-mode/"
+  ;; :load-path "~/.nix-profile/elisp/nix-mode/"
   :mode "\\.nix\\'"
   :custom
   (nix-indent-function #'nix-indent-line))
