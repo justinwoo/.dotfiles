@@ -25,22 +25,21 @@ for_window [instance="slack"] move window to scratchpad
 for_window [title="Telegram"] move window to scratchpad
 for_window [instance="nautilus"] move window to scratchpad, scratchpad show
 for_window [instance="vlc"] move window to scratchpad, scratchpad show
-for_window [instance="eog"] move window to scratchpad, scratchpad show
-for_window [instance="feh"] move window to scratchpad, scratchpad show
+for_window [instance="eog"] floating enable
+for_window [instance="feh"] floating enable
 for_window [instance="filezilla"] move window to scratchpad, scratchpad show
 for_window [instance="VirtualBox"] move window to scratchpad, scratchpad show
-for_window [instance="Pinta"] move window to scratchpad, scratchpad show
-for_window [class="Shotwell"] move window to scratchpad, scratchpad show
-for_window [window_role="pop-up"] move window to scratchpad, scratchpad show
-for_window [window_role="dialog"] move window to scratchpad, scratchpad show
-for_window [window_type="dialog"] move window to scratchpad, scratchpad show
-for_window [window_type="utility"] move window to scratchpad, scratchpad show
-for_window [window_type="toolbar"] move window to scratchpad, scratchpad show
-for_window [window_type="splash"] move window to scratchpad, scratchpad show
-for_window [window_type="dropdown_menu"] move window to scratchpad, scratchpad show
-for_window [window_type="menu"] move window to scratchpad, scratchpad show
-for_window [window_type="popup_menu"] move window to scratchpad, scratchpad show
-for_window [window_type="tooltip"] move window to scratchpad, scratchpad show
+for_window [instance="Pinta"] floating enable
+for_window [class="Shotwell"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="utility"] floating enable
+for_window [window_type="toolbar"] floating enable
+for_window [window_type="splash"] floating enable
+for_window [window_type="dropdown_menu"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_type="popup_menu"] floating enable
+for_window [window_type="tooltip"] floating enable
 
  # normal, dialog, utility, toolbar, splash, menu, dropdown_menu, popup_menu, tooltip and notification
 
