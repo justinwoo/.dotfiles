@@ -37,3 +37,4 @@ dhall.tix
 *.BAK
 result*
 dist
+.envrc
