@@ -9,6 +9,8 @@ let
 
   tin-summer = import ./tin-summer.nix {};
 
+  mkgif = import ./mkgif.nix {};
+
   i3-pkgs = rec {
     inherit (pkgs) feh i3 i3status rofi scrot polybarFull;
   };
@@ -47,6 +49,8 @@ in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
   inherit emacs;
 
   inherit tin-summer;
+
+  inherit mkgif;
 
   inherit z;
 
