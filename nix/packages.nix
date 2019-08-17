@@ -2,57 +2,41 @@
 
 let
   easy-dhall = import ./easy-dhall.nix;
-
-  lorri = import ./lorri.nix {};
-
   easy-ps = import ./easy-ps.nix {};
-
-  tin-summer = import ./tin-summer.nix {};
-
-  mkgif = import ./mkgif.nix {};
-
-  i3-pkgs = rec {
-    inherit (pkgs) feh i3 i3status rofi scrot polybarFull;
-  };
-
-  ps-pkgs = {
-    inherit (easy-ps.inputs) purs psc-package-simple purp spago psc-package2nix;
-  };
-
-  dhall-pkgs = {
-    inherit (easy-dhall) dhall-simple dhall-json-simple;
-  };
-
-  gnome3-pkgs = {
-    inherit (pkgs.gnome3) eog evince;
-  };
-
   nix-utils = import ./nix-utils.nix {
     inherit pkgs;
   };
 
-  alacritty = import ./alacritty.nix {
-    inherit pkgs;
+  importFrom = basename: {
+    name = basename;
+    value = import "./${basename}.nix" {
+      inherit pkgs;
+    };
   };
 
-  z = import ./z.nix {
-    inherit pkgs;
-  };
+  my-pkgs = builtins.listToAttrs (map importFrom (builtins.split " " ''
+    alacritty
+    mkgif
+    tin-summer
+    lorri
+    z
+  ''));
 
-  emacs = pkgs.emacs;
+in nix-utils // my-pkgs // {
+  # i3
+  inherit (pkgs)
+    feh i3 i3status rofi scrot polybarFull;
 
-in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
-  inherit alacritty;
+  # ps
+  inherit (easy-ps.inputs)
+    purs psc-package-simple purp spago psc-package2nix;
 
-  inherit lorri;
+  # dhall
+  inherit (easy-dhall)
+    dhall-simple dhall-json-simple;
 
-  inherit emacs;
-
-  inherit tin-summer;
-
-  inherit mkgif;
-
-  inherit z;
+  # gnome
+  inherit (pkgs.gnome3) eog evince;
 
   inherit (pkgs.gitAndTools) git-extras hub;
 
@@ -67,6 +51,7 @@ in i3-pkgs // dhall-pkgs // ps-pkgs // gnome3-pkgs // nix-utils // {
     colormake
     disper
     direnv
+    emacs
     fd
     fzf
     ghc
