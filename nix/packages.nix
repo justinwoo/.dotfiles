@@ -29,7 +29,7 @@ in nix-utils // my-pkgs // {
 
   # ps
   inherit (easy-ps.inputs)
-    purs psc-package-simple purp spago psc-package2nix;
+    purs psc-package-simple spago;
 
   # dhall
   inherit (easy-dhall) dhall-simple;
