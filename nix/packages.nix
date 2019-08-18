@@ -32,8 +32,7 @@ in nix-utils // my-pkgs // {
     purs psc-package-simple purp spago psc-package2nix;
 
   # dhall
-  inherit (easy-dhall)
-    dhall-simple dhall-json-simple;
+  inherit (easy-dhall) dhall-simple;
 
   # gnome
   inherit (pkgs.gnome3) eog evince;
