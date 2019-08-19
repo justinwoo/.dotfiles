@@ -62,7 +62,6 @@
         prettier-js
         projectile
         racer
-        rainbow-delimiters
         rust-mode
         smartparens
         spacemacs-theme
@@ -270,11 +269,6 @@ kill internal buffers too."
   (which-key-mode 1)
   )
 
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-(setq rainbow-delimiters-unmatched-face nil)
-(setq rainbow-delimiters-mismatched-face nil)
-
 (use-package markdown-mode :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -395,7 +389,6 @@ If the error list is visible, hide it.  Otherwise, show it."
   :init
   (progn
     (helm-mode 1)
-    (rainbow-delimiters-mode -1)
     (add-hook 'purescript-mode-hook 'psc-ide-mode)
     (add-hook 'purescript-mode-hook 'company-mode)
     (add-hook 'purescript-mode-hook 'flycheck-mode)
@@ -592,7 +585,6 @@ If the error list is visible, hide it.  Otherwise, show it."
   :init
   (progn
     (helm-mode 1)
-    (rainbow-delimiters-mode -1)
     (add-hook 'intero-mode-hook 'company-mode)
     (add-hook 'intero-mode-hook 'flycheck-mode)
 
