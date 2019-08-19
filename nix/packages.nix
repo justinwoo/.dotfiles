@@ -65,6 +65,7 @@ in nix-utils // my-pkgs // {
     pavucontrol
     playerctl
     ripgrep
+    R
     shellcheck
     sqlite
     sqlitebrowser
