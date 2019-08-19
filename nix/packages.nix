@@ -9,18 +9,18 @@ let
 
   importFrom = basename: {
     name = basename;
-    value = import "./${basename}.nix" {
+    value = import (./. + "/${basename}.nix") {
       inherit pkgs;
     };
   };
 
-  my-pkgs = builtins.listToAttrs (map importFrom (builtins.split " " ''
-    alacritty
-    mkgif
-    tin-summer
-    lorri
-    z
-  ''));
+  my-pkgs = builtins.listToAttrs (map importFrom [
+    "alacritty"
+    "mkgif"
+    "tin-summer"
+    "lorri"
+    "z"
+  ]);
 
 in nix-utils // my-pkgs // {
   # i3
