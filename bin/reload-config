@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source ~/.bashrc
+source ~/.xsessionrc
+
+notify-send "reloaded configsdf"

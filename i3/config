@@ -192,7 +192,7 @@ bindsym $sup+Shift+bracketright move workspace to output right
 bindsym $sup+Shift+bracketleft move workspace to output left
 
 # reload the configuration file
-bindsym $sup+Shift+c exec "i3-msg reload && notify-send 'reloaded config'"
+bindsym $sup+Shift+c exec "reload-config"
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $sup+Shift+r restart
 # refresh monitor layout
