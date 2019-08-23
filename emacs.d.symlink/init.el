@@ -405,11 +405,31 @@ If the error list is visible, hide it.  Otherwise, show it."
       ",mL"  'psc-ide-load-module
       ",mia" 'psc-ide-add-import
       ",mis" 'psc-ide-flycheck-insert-suggestion
+      ",mp"  'run-purty
       ",gg"  'psc-ide-goto-definition
       ",ht"  'psc-ide-show-type)
     (evil-define-key 'visual purescript-mode-map
       ",mii" 'my-purescript-region-imports-suggestions)
     ))
+
+(defun run-purty ()
+  "run purty"
+  (interactive)
+  (let* ((command (format "cd %s && purty %s --write" (projectile-project-root) buffer-file-name))
+         (results "*PURTY STDOUT*")
+         (errors "*PURTY ERRORS*"))
+    (message "running purty")
+    (shell-command command results errors)
+    (if (get-buffer errors)
+        (progn
+          (with-current-buffer errors
+            (message (string-trim (buffer-string))))
+          (kill-buffer errors))
+      (progn
+        (with-current-buffer results
+          (message (string-trim (buffer-string))))
+        (kill-buffer results)
+        (revert-buffer t t t)))))
 
 (defun my-purescript-region-imports-suggestions ()
   "Apply imports suggestions on region"
