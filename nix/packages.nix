@@ -17,9 +17,10 @@ let
   my-pkgs = builtins.listToAttrs (
     map importFrom [
       "alacritty"
-      "mkgif"
-      "tin-summer"
       "lorri"
+      "mkgif"
+      "nixpkgs-fmt"
+      "tin-summer"
       "z"
     ]
   );
