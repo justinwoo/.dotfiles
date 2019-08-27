@@ -12,7 +12,8 @@ let
 
   set = import src;
 
-in pkgs.stdenv.mkDerivation {
+in
+pkgs.stdenv.mkDerivation {
   name = "slides-tools";
 
   phases = [ "installPhase" ];

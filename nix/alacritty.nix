@@ -9,9 +9,9 @@ pkgs.stdenv.mkDerivation {
   };
 
   unpackPhase = ''
-      mkdir -p $out/bin
-      tar xf $src -C $out/bin
-      chmod u+w $out/bin/alacritty
+    mkdir -p $out/bin
+    tar xf $src -C $out/bin
+    chmod u+w $out/bin/alacritty
   '';
 
   dontInstall = true;
