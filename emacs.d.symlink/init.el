@@ -374,6 +374,19 @@ If the error list is visible, hide it.  Otherwise, show it."
   (spacemacs/kill-matching-buffers-rudely "psc-ide")
   (message "killed psc-ide-server"))
 
+(defun my-psc-ide-server-start ()
+  "start without globs"
+  (interactive)
+  (message "starting psc ide with only src and test")
+  (customize-set-variable 'psc-ide-force-user-globs '("src/**/*.purs" "test/**/*.purs"))
+  (psc-ide-server-start (psc-ide-suggest-project-dir)))
+
+(defun my-psc-ide-server-start-default ()
+  "start with default globs"
+  (interactive)
+  (customize-set-variable 'psc-ide-force-user-globs nil)
+  (psc-ide-server-start (psc-ide-suggest-project-dir)))
+
 (defun my-psc-ide-server-restart ()
   "die"
   (interactive)
@@ -398,7 +411,8 @@ If the error list is visible, hide it.  Otherwise, show it."
     (evil-define-key 'normal purescript-mode-map
       ",mt"  'psc-ide-add-clause
       ",mcs" 'psc-ide-case-split
-      ",ms"  'psc-ide-server-start
+      ",ms"  'my-psc-ide-server-start-default
+      ",mS"  'my-psc-ide-server-start
       ",mr"  'my-psc-ide-server-restart
       ",mb"  'psc-ide-rebuild
       ",mB"  'my-build-psc-package-project
