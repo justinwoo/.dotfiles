@@ -52,16 +52,12 @@ nix-utils // my-pkgs
        autorandr
        bash-completion
        bat
-       cabal-install
        colordiff
-       colormake
-       disper
        direnv
        emacs
        fd
        fzf
        ghc
-       gitg
        glibcLocales
        gnumake
        jq

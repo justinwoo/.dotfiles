@@ -1,7 +1,12 @@
+let
+  pkgs = import <nixpkgs> {};
+
+in
 import (
-  builtins.fetchTarball {
-    name = "nixpkgs-nixos";
-    url = "https://github.com/nixos/nixpkgs/archive/f7579996c712b52aca134beb53f6a333f91a429f.tar.gz";
-    sha256 = "18hwd2i0aj7w04jjng6aa52fwminyqvj6f9dqg6rnpcxb30hc4gz";
+  pkgs.fetchFromGitHub {
+    owner = "nixos";
+    repo = "nixpkgs";
+    rev = "ddefb5f067f08d0846e82c60ac44a8791930be66";
+    sha256 = "04mfniqbfl88i991kqq1h3ki7bpbmfalmxq2ih4zngw7wiq6pfx0";
   }
 )
