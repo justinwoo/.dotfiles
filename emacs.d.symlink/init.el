@@ -122,6 +122,7 @@
    "SPC c v" 'reload-config
    "SPC d d" 'dired
    "SPC d f" 'find-file
+   "SPC d j" 'dired
    "SPC e b" 'eval-buffer
    "SPC e c" 'flycheck-clear
    "SPC e l" 'spacemacs/toggle-flycheck-error-list
