@@ -4,7 +4,7 @@ import (
   pkgs.fetchFromGitHub {
     owner = "justinwoo";
     repo = "my-nixpkgs-fmt";
-    rev = "44fdb18c25bc1de31fb23f49bc51d03bb70718f6";
-    sha256 = "17c5wazag1csr9i0kh5qglv1v007q05bq71dx8cbdsvm6vs71k0l";
+    rev = "3ef6bbaf726e4c569e0dc079652b0259e1639620";
+    sha256 = "0qa9ps88gvvmznm4vmzrgzyf2mng8i1pgpdkj8gj86ygxwzqq85x";
   }
 ) {}

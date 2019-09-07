@@ -28,53 +28,53 @@ let
 in
 nix-utils // my-pkgs
 // {
-     # i3
-     inherit (pkgs)
-       feh i3 i3status rofi scrot polybarFull
-       ;
+  # i3
+  inherit (pkgs)
+    feh i3 i3status rofi scrot polybarFull
+    ;
 
-     # ps
-     inherit (easy-ps.inputs)
-       purs psc-package-simple spago purty
-       ;
+  # ps
+  inherit (easy-ps.inputs)
+    purs psc-package-simple spago purty
+    ;
 
-     # dhall
-     inherit (easy-dhall) dhall-simple dhall-json-simple;
+  # dhall
+  inherit (easy-dhall) dhall-simple dhall-json-simple;
 
-     # gnome
-     inherit (pkgs.gnome3) eog evince;
+  # gnome
+  inherit (pkgs.gnome3) eog evince;
 
-     inherit (pkgs.gitAndTools) git-extras hub;
+  inherit (pkgs.gitAndTools) git-extras hub;
 
-     inherit (pkgs.unixtools) route;
+  inherit (pkgs.unixtools) route;
 
-     inherit (pkgs)
-       autorandr
-       bash-completion
-       bat
-       colordiff
-       direnv
-       emacs
-       fd
-       fzf
-       ghc
-       glibcLocales
-       gnumake
-       jq
-       neovim
-       nix-bash-completions
-       nodejs-10_x
-       noto-fonts-cjk
-       pavucontrol
-       playerctl
-       ripgrep
-       R
-       shellcheck
-       sqlite
-       sqlitebrowser
-       tig
-       tmux
-       watchexec
-       xdotool
-       ;
-   }
+  inherit (pkgs)
+    autorandr
+    bash-completion
+    bat
+    colordiff
+    direnv
+    emacs
+    fd
+    fzf
+    ghc
+    glibcLocales
+    gnumake
+    jq
+    neovim
+    nix-bash-completions
+    nodejs-10_x
+    noto-fonts-cjk
+    pavucontrol
+    playerctl
+    ripgrep
+    R
+    shellcheck
+    sqlite
+    sqlitebrowser
+    tig
+    tmux
+    watchexec
+    xdotool
+    ;
+}
