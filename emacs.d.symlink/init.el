@@ -207,11 +207,18 @@ kill internal buffers too."
   (customize-set-variable 'magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1)
   (magit-status))
 
+(defun magit-fast-commit-modified ()
+  "magit please amend commit modified quickly"
+  (interactive)
+  (magit-stage-modified)
+  (magit-commit-extend))
+
 (use-package magit
   :ensure t
   :general
   (general-define-key
    :keymaps 'normal
+   "SPC g e" 'magit-fast-commit-modified
    "SPC g s" 'magit-fullframe-status
    "SPC g a" 'magit-traditional-status
    "SPC g S" 'magit-traditional-status
