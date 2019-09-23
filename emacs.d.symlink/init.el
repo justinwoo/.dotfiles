@@ -547,12 +547,12 @@ If the error list is visible, hide it.  Otherwise, show it."
 (use-package s)
 (use-package projectile)
 
-(defun run-format-nix ()
-  "run format-nix"
+(defun run-nixpkgs-fmt ()
+  "run nixpkgs-fmt"
   (interactive)
-  (let* ((command (format "cd %s && format-nix %s" (projectile-project-root) buffer-file-name))
-         (results "*FORMAT-NIX STDOUT*")
-         (errors "*FORMAT-NIX ERRORS*"))
+  (let* ((command (format "cd %s && nixpkgs-fmt %s" (projectile-project-root) buffer-file-name))
+         (results "*nixpkgs-fmt STDOUT*")
+         (errors "*nixpkgs-fmt ERRORS*"))
     (shell-command command results errors)
     (if (get-buffer errors)
         (progn
@@ -567,7 +567,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 (general-define-key
  :keymaps 'normal
- "SPC m p n" 'run-format-nix)
+ "SPC m p n" 'run-nixpkgs-fmt)
 
 (general-define-key
  :keymaps 'normal
