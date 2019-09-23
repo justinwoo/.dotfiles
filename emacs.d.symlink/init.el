@@ -544,8 +544,8 @@ If the error list is visible, hide it.  Otherwise, show it."
   (prettier-js)
   )
 
-(require 's)
-(require 'projectile)
+(use-package s)
+(use-package projectile)
 
 (defun run-format-nix ()
   "run format-nix"
