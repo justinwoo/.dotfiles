@@ -22,9 +22,7 @@ font pango: Noto Sans CJK JP Bold 11
 # see xprop, xwindow
 # wm_name = title
 for_window [instance="slack"] move window to scratchpad
-for_window [instance="Telegram"] move window to scratchpad
-# fucking hate telegram
-for_window [class="^TelegramDesktop"] floating enable, move absolute position 0 0
+for_window [title="^Telegram$"] move window to scratchpad
 for_window [instance="nautilus"] move window to scratchpad, scratchpad show
 for_window [instance="vlc"] move window to scratchpad, scratchpad show
 for_window [instance="eog"] floating enable
