@@ -55,6 +55,7 @@ nix-utils // my-pkgs
     colordiff
     direnv
     emacs
+    exiftool
     fd
     fzf
     ghc

@@ -14,6 +14,7 @@ alias darkest='xbacklight -set 1'
 alias emk='pkill emacs'
 alias ns='nix-shell'
 alias ns2='nix-shell $SHELL_NIX'
+alias remove_exif='fd -e jpg -e png -x exiftool -all= "{}"'
 
 if [[ -f $(command -v xclip) ]]
 then
