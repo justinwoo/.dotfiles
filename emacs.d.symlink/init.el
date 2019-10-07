@@ -113,7 +113,7 @@
    "SPC /"   'helm-do-ag-project-root
    "SPC ?"   'helm-projectile-rg
    "SPC b b" 'helm-buffers-list
-   "SPC b d" 'kill-this-buffer
+   "SPC b d" 'my-kill-this-buffer
    "SPC b D" 'spacemacs/kill-matching-buffers-rudely
    "SPC b m" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
    "SPC b s" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
@@ -152,6 +152,11 @@
 
 (defun open-config () (interactive) (find-file "~/.emacs.d/init.el"))
 (defun reload-config () (interactive) (load-file "~/.emacs.d/init.el"))
+
+(defun my-kill-this-buffer ()
+  "Why the fuck does kill-this-buffer require menu"
+  (interactive)
+  (kill-buffer (current-buffer)))
 
 ;; from https://github.com/gempesaw/dotemacs/blob/emacs/dg-defun.el
 (defun spacemacs/kill-matching-buffers-rudely (regexp &optional internal-too)
