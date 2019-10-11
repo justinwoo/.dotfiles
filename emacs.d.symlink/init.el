@@ -365,7 +365,25 @@ If the error list is visible, hide it.  Otherwise, show it."
     (set-face-attribute face nil :weight 'semi-bold :height 1.0))
 
   (setq org-bullets-bullet-list '("大" "中" "小" "・"))
-  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
+
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((plantuml . t)))
+
+  (setq org-plantuml-jar-path
+        (expand-file-name "~/.nix-profile/lib/plantuml.jar"))
+
+  (defun my-org-confirm-babel-evaluate (lang body)
+    (not (member lang '("plantuml"))))
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+
+  (evil-define-key 'normal org-mode-map
+    ",gi" 'org-redisplay-inline-images
+    ",ge" 'org-export-dispatch
+    ))
+
 (add-hook 'org-mode-hook 'my/org-mode-hook)
 
 (defun my-build-psc-package-project ()
