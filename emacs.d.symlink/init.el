@@ -50,6 +50,7 @@
         helm-projectile
         helm-rg
         helm-themes
+        htmlize
         ivy
         js2-mode
         key-chord
@@ -57,6 +58,7 @@
         markdown-mode
         nix-mode
         org
+        plantuml-mode
         popwin
         powerline
         prettier-js
@@ -360,9 +362,11 @@ If the error list is visible, hide it.  Otherwise, show it."
                   org-level-3
                   org-level-4
                   org-level-5))
-    (set-face-attribute face nil :weight 'semi-bold :height 1.0)))
+    (set-face-attribute face nil :weight 'semi-bold :height 1.0))
+
+  (setq org-bullets-bullet-list '("大" "中" "小" "・"))
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
 (add-hook 'org-mode-hook 'my/org-mode-hook)
-(setq org-bullets-bullet-list '("大" "中" "小" "・"))
 
 (defun my-build-psc-package-project ()
   "build my project man"
