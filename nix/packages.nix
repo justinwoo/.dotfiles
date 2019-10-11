@@ -63,12 +63,14 @@ nix-utils // my-pkgs // {
     ghc
     glibcLocales
     gnumake
+    graphviz
     jq
     neovim
     nix-bash-completions
     nodejs-10_x
     noto-fonts-cjk
     pavucontrol
+    plantuml
     playerctl
     ripgrep
     R
