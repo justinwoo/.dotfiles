@@ -67,7 +67,7 @@ nix-utils // my-pkgs // {
     jq
     neovim
     nix-bash-completions
-    nodejs-10_x
+    nodejs-12_x
     noto-fonts-cjk
     pavucontrol
     plantuml
