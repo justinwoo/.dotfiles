@@ -8,5 +8,5 @@ echo ensuring dunstrc
 if [[ ! -e ~/.config/dunst/dunstrc ]]
 then
   mkdir -p ~/.config/dunst
-  ln -s "$DOT/i3/dunstrc" ~/.config/dunst/dunstrc
+  ln -sf "$DOT/i3/dunstrc" ~/.config/dunst/dunstrc
 fi
