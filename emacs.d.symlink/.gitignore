@@ -4,3 +4,4 @@ elpa
 transient
 backup
 bookmarks
+*.cache

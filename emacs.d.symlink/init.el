@@ -138,6 +138,7 @@
    "SPC f n" 'make-frame-command
    "SPC f q" 'evil-quit
    "SPC h f" 'helm-find-files
+   "SPC h d" 'helm-do-ag
    "SPC r l" 'bookmark-bmenu-list
    "SPC r m" 'bookmark-set
    "SPC r b" 'bookmark-jump
