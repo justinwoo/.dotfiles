@@ -117,6 +117,7 @@
    "SPC b b" 'helm-buffers-list
    "SPC b d" 'my-kill-this-buffer
    "SPC b D" 'spacemacs/kill-matching-buffers-rudely
+   "SPC b C-d" 'spacemacs/kill-matching-buffers-rudely
    "SPC b m" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
    "SPC b s" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
    "SPC c l" 'comment-line
