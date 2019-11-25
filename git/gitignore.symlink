@@ -38,3 +38,4 @@ dhall.tix
 result*
 dist
 .envrc
+.ignore
