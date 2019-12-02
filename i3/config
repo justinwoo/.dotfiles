@@ -263,12 +263,10 @@ bindsym $sup+Shift+y [instance="eog"] scratchpad show
 bindsym $sup+y [window_role="browser$"] scratchpad show
 bindsym $sup+n [window_role="pop-up"] scratchpad show
 bindsym $sup+Shift+n [window_role="dialog"] scratchpad show
-bindsym $sup+m [instance="emacs"] scratchpad show
 bindsym $sup+i [instance="slack"] scratchpad show
-bindsym $sup+c [title="Slack"] scratchpad show
 bindsym $sup+u [title="Telegram"] scratchpad show
-bindsym $sup+x [title="Telegram"] scratchpad show
 bindsym $sup+Shift+u [title="Hangouts"] scratchpad show
+bindsym $sup+apostrophe [instance="discord"] scratchpad show
 
 # Pulse Audio controls
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
