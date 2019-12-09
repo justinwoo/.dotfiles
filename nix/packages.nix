@@ -5,10 +5,6 @@ let
 
   easy-ps = import ./easy-ps.nix {};
 
-  nix-utils = import ./nix-utils.nix {
-    inherit pkgs;
-  };
-
   importFrom = basename: {
     name = basename;
 
@@ -24,12 +20,13 @@ let
       "mkgif"
       "nixpkgs-fmt"
       "tin-summer"
+      "update-fetch"
       "z"
     ]
   );
 
 in
-nix-utils // my-pkgs // {
+my-pkgs // {
   # i3
 
   inherit (pkgs) feh i3 i3status rofi scrot polybarFull;
