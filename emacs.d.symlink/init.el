@@ -676,10 +676,13 @@ If the error list is visible, hide it.  Otherwise, show it."
   :ensure t
   :mode "\\.rs\\'"
   :init
-  (evil-define-key 'normal rust-mode-map
-    ",gg"  'racer-find-definition
-    ",gG"  'racer-find-definition-other-window
-    ",gf"  'racer-find-definition-other-frame))
+  (progn
+    (add-hook 'racer-mode-hook #'company-mode)
+
+    (evil-define-key 'normal rust-mode-map
+      ",gg"  'racer-find-definition
+      ",gG"  'racer-find-definition-other-window
+      ",gf"  'racer-find-definition-other-frame)))
 
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
