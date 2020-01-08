@@ -323,7 +323,7 @@ set $green #859900
 
 client.focused          $blue  $blue  $base3
 client.unfocused        $base1 $base1 $base3
-client.focused_inactive $base1 $base1 $base3
+client.focused_inactive $base0 $base0 $base3
 client.urgent           $red   $red   $base3
 
 # bar {
