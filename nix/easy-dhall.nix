@@ -6,7 +6,7 @@ import (
   pkgs.fetchFromGitHub {
     owner = "justinwoo";
     repo = "easy-dhall-nix";
-    rev = "e0b4e37a6eb3b6546748fab2814988cf492ac46a";
-    sha256 = "04jf1w7jkv5xinsh8lkl3cd6y750824six83ymiibiblvy81cgf6";
+    rev = "7e063af9bd6f6bd4b4be00dd0a8bff272893fc44";
+    sha256 = "0c47zlxhpjm1hddhxsqy86mkyy7hlym1rjmnapc3b7x7bkchr8za";
   }
 ) {}

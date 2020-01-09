@@ -6,8 +6,8 @@ pkgs.stdenv.mkDerivation {
   src = pkgs.fetchFromGitHub {
     owner = "rupa";
     repo = "z";
-    rev = "e77e9384937bd43eb6ca8f1ba036924f4006df07";
-    sha256 = "0v43ls2cjd4awlp16q4p1zlfjlky53qp8vd3rhdcd61v0jx9yila";
+    rev = "4f08e7febba8d024cbf583544a8cd563e02c3413";
+    sha256 = "0rx75149wnxmbgys0ayyq61rfv4h19j3d1kh27hqa11k5gf2p0lp";
   };
 
   phases = "unpackPhase installPhase";
