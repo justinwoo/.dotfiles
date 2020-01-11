@@ -16,7 +16,7 @@ exec ~/.dotfiles/i3/start-wifi
 exec_always ~/.dotfiles/i3/start-bluetooth
 
 # set the font
-font pango: Noto Sans CJK JP Bold 11
+font pango: Noto Sans CJK JP Regular 12
 
 # for_window
 # see xprop, xwindow
