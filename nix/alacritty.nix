@@ -4,8 +4,8 @@ pkgs.stdenv.mkDerivation {
   name = "alacritty";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/jwilm/alacritty/releases/download/v0.3.3/Alacritty-v0.3.3-ubuntu_18_04_amd64.tar.gz";
-    sha256 = "1h607658gghqnzv5wcx66jxgwb3dddch2189clj7cqc81ppmc25n";
+    url = "https://github.com/jwilm/alacritty/releases/download/v0.4.1/Alacritty-v0.4.1-ubuntu_18_04_amd64.tar.gz";
+    sha256 = "1x2cnzb34gm91vw59cw5cmyxdqms2i0j7bycjfyq37ksi25nil3v";
   };
 
   unpackPhase = ''
