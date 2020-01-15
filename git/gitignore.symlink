@@ -39,3 +39,4 @@ result*
 dist
 .envrc
 .ignore
+.direnv.d
