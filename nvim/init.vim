@@ -81,7 +81,7 @@ map <leader>u :MundoToggle<cr><C-W><C-W>
 map <leader>c :Commentary<cr>
 map <leader>= <C-W>=<cr>
 map <leader>w= <C-W>=<cr>
-map <leader>ww :StripWhiteSpace<cr>
+map <leader>ww :StripWhitespace<cr>
 "add any local configs that need to be added, if they exist
 if filereadable(glob("~/.vimrc.local"))
   source ~/.vimrc.local
