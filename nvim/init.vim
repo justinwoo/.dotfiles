@@ -51,6 +51,9 @@ map <leader>o <C-W><C-W>
 "closing easier
 map <leader>q :q<cr>
 
+"toggle cursor
+map <leader>CC :set cursorline! cursorcolumn!<cr>
+
 "want some familiar keybindings
 map <leader>n :Vexplore<cr>
 map <leader>fj :Explore<cr>
@@ -96,7 +99,8 @@ if executable('rg')
 endif
 
 "yup
-command! SourceDot :source ~/.dotfiles/nvim/init.vim
+command! Reload :source ~/.dotfiles/nvim/init.vim
+map <leader>R :Reload<cr>
 
 " Required for operations modifying multiple buffers like rename.
 set hidden
