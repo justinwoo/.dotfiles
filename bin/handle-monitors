@@ -2,5 +2,4 @@
 
 # fuckin hell
 autorandr --change
-launch-polybar
 source ~/.xsessionrc

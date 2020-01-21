@@ -27,19 +27,11 @@ let
 
 in
 my-pkgs // {
-  # i3
+  inherit (pkgs) feh i3 i3status rofi scrot;
 
-  inherit (pkgs) feh i3 i3status rofi scrot polybarFull;
-
-  # ps
-
-  inherit (easy-ps.inputs) purs psc-package-simple spago purty;
-
-  # dhall
+  inherit (easy-ps.inputs) purs psc-package-simple;
 
   inherit (easy-dhall) dhall-simple dhall-json-simple;
-
-  # gnome
 
   inherit (pkgs.gnome3) eog evince;
 

@@ -6,9 +6,6 @@ exec fcitx-autostart
 # backgrounds
 exec ~/.dotfiles/bin/set-bg
 
-# polybar
-exec_always ~/.dotfiles/bin/launch-polybar
-
 # start up wifi manager?
 exec ~/.dotfiles/i3/start-wifi
 
@@ -17,6 +14,8 @@ exec_always ~/.dotfiles/i3/start-bluetooth
 
 # set the font
 font pango: Noto Sans CJK JP Regular 12
+
+workspace_layout stacking
 
 # for_window
 # see xprop, xwindow
@@ -46,6 +45,9 @@ for_window [window_type="tooltip"] floating enable
 # border
 for_window [class="^.*"] border normal 1
 hide_edge_borders both
+
+# title
+for_window [class="^.*"] title_format "<b>%title (%instance)</b>"
 
 # aliases
 set $sup Mod4
@@ -303,6 +305,7 @@ bindsym $sup+$ctrl+Next exec xbacklight -dec 10 # decrease screen brightness
 title_align center
 
 #colors border background text
+
 # solarized
 set $base03 #002b36
 set $base02 #073642
@@ -321,27 +324,26 @@ set $blue #268bd2
 set $cyan #2aa198
 set $green #859900
 
-client.focused          $blue  $blue  $base3
-client.unfocused        $base1 $base1 $base3
-client.focused_inactive $base0 $base0 $base3
-client.urgent           $red   $red   $base3
+client.focused          $base01 $base01 $base2
+client.unfocused        $base02 $base02 $base1
+client.focused_inactive $base01 $base01 $base2
+client.urgent           $red   $red     $base03
 
-# bar {
-#   status_command LC_TIME=ja_JP.utf8 i3status --config ~/.dotfiles/i3/i3status.conf
-#   workspace_buttons yes
-#   separator_symbol " "
-#   tray_output primary
-#   tray_padding 6
+bar {
+  status_command LC_TIME=ja_JP.utf8 i3status --config ~/.dotfiles/i3/i3status.conf
+  workspace_buttons yes
+  separator_symbol " "
+  tray_padding 6
 
-#   font pango: Noto Sans CJK JP 12
+  font pango: Noto Sans Mono CJK JP Bold 12
 
-#   colors {
-#     background         $base3
-#     statusline         $base03
-#     separator          $base0
-#     focused_workspace  $blue   $blue $base3
-#     active_workspace   $cyan   $cyan $base3
-#     inactive_workspace $blue   $blue $base02
-#     urgent_workspace   $red    $red  $base3
-#   }
-# }
+  colors {
+    background         $base03
+    statusline         $base3
+    separator          $base3
+    focused_workspace  $base3  $base3  $base03
+    active_workspace   $base3  $base3  $base03
+    inactive_workspace $base02 $base02 $base2
+    urgent_workspace   $base1  $base1  $base03
+  }
+}
