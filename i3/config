@@ -162,28 +162,36 @@ bindsym $mod+$sup+c exec resize-sticky 1536 960
 bindsym $ctrl+$sup+$mod+c exec resize-sticky 1920 1080
 bindsym $ctrl+$sup+$mod+x exec resize-sticky 2560 1440
 
+set $ws1 "1:ストゼロ"
+set $ws2 "2:ハイボール"
+set $ws3 "3:酎ハイ"
+set $ws4 "4:サワー"
+set $ws5 "5:焼酎割り"
+set $ws6 "6:ビール"
+set $ws7 "7:ウーロン茶"
+
 # switch to workspace
-bindsym $sup+1 workspace 1
-bindsym $sup+2 workspace 2
-bindsym $sup+3 workspace 3
-bindsym $sup+4 workspace 4
-bindsym $sup+5 workspace 5
-bindsym $sup+6 workspace 6
-bindsym $sup+7 workspace 7
-bindsym $sup+8 workspace 1
-bindsym $sup+9 workspace 2
-bindsym $sup+0 workspace 3
+bindsym $sup+1 workspace $ws1
+bindsym $sup+2 workspace $ws2
+bindsym $sup+3 workspace $ws3
+bindsym $sup+4 workspace $ws4
+bindsym $sup+5 workspace $ws5
+bindsym $sup+6 workspace $ws6
+bindsym $sup+7 workspace $ws7
+bindsym $sup+8 workspace $ws1
+bindsym $sup+9 workspace $ws2
+bindsym $sup+0 workspace $ws3
 # bindsym $sup+8 workspace 8
 # bindsym $sup+9 workspace 9
 # bindsym $sup+0 workspace 10
 
 # move focused container to workspace
-bindsym $sup+Shift+1 move container to workspace 1
-bindsym $sup+Shift+2 move container to workspace 2
-bindsym $sup+Shift+3 move container to workspace 3
-bindsym $sup+Shift+4 move container to workspace 4
-bindsym $sup+Shift+5 move container to workspace 5
-bindsym $sup+Shift+6 move container to workspace 6
+bindsym $sup+Shift+1 move container to workspace $ws1
+bindsym $sup+Shift+2 move container to workspace $ws2
+bindsym $sup+Shift+3 move container to workspace $ws3
+bindsym $sup+Shift+4 move container to workspace $ws4
+bindsym $sup+Shift+5 move container to workspace $ws5
+bindsym $sup+Shift+6 move container to workspace $ws6
 # who needs 10
 # bindsym $sup+Shift+7 move container to workspace 7
 # bindsym $sup+Shift+8 move container to workspace 8
@@ -336,7 +344,7 @@ bar {
   separator_symbol " "
   tray_padding 6
 
-  font pango: Noto Sans Mono CJK JP Bold 12
+  font pango: Noto Sans Mono CJK JP Bold 14
 
   colors {
     background         $base03
