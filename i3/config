@@ -157,9 +157,10 @@ bindsym $sup+Shift+minus move scratchpad
 bindsym $sup+minus scratchpad show
 bindsym $sup+grave scratchpad show
 bindsym $mod+grave scratchpad show
-bindsym $mod+$sup+x exec resize-sticky 1250 800
-bindsym $mod+$sup+c exec resize-sticky 1500 950
-bindsym $ctrl+$sup+$mod+c exec resize-sticky 2000 1200
+bindsym $mod+$sup+x exec resize-sticky 1280 720
+bindsym $mod+$sup+c exec resize-sticky 1536 960
+bindsym $ctrl+$sup+$mod+c exec resize-sticky 1920 1080
+bindsym $ctrl+$sup+$mod+x exec resize-sticky 2560 1440
 
 # switch to workspace
 bindsym $sup+1 workspace 1
