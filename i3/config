@@ -325,10 +325,10 @@ set $blue #268bd2
 set $cyan #2aa198
 set $green #859900
 
-client.focused          $base01 $base01 $base2
-client.unfocused        $base02 $base02 $base1
-client.focused_inactive $base01 $base01 $base2
-client.urgent           $red   $red     $base03
+client.focused          $base02 $base02 $base2
+client.unfocused        $base01 $base01 $base1
+client.focused_inactive $base02 $base02 $base2
+client.urgent           $red    $red    $base03
 
 bar {
   status_command LC_TIME=ja_JP.utf8 i3status --config ~/.dotfiles/i3/i3status.conf
