@@ -334,8 +334,8 @@ set $cyan #2aa198
 set $green #859900
 
 client.focused          $base02 $base02 $base2
-client.unfocused        $base01 $base01 $base1
-client.focused_inactive $base02 $base02 $base2
+client.unfocused        $base00 $base00 $base1
+client.focused_inactive $base01 $base01 $base1
 client.urgent           $red    $red    $base03
 
 bar {
@@ -348,11 +348,11 @@ bar {
 
   colors {
     background         $base03
-    statusline         $base3
+    statusline         $base2
     separator          $base3
-    focused_workspace  $base3  $base3  $base03
-    active_workspace   $base3  $base3  $base03
-    inactive_workspace $base02 $base02 $base2
+    focused_workspace  $base02 $base02 $base2
+    active_workspace   $base02 $base02 $base2
+    inactive_workspace $base02 $base02 $base1
     urgent_workspace   $base1  $base1  $base03
   }
 }
