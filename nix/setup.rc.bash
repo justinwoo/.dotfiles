@@ -7,3 +7,4 @@ export BASH_COMPLETION_USER_DIR="$HOME/.nix-profile/share/bash-completion/comple
 export BAT_THEME='Monokai Extended Light'
 
 alias npf='nixpkgs-fmt'
+alias nrepl='nix repl "<nixpkgs>"'
