@@ -40,3 +40,4 @@ dist
 .envrc
 .ignore
 .direnv.d
+.cache
