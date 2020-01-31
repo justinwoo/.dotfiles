@@ -3,4 +3,4 @@
 source ~/.bashrc
 source ~/.xsessionrc
 
-notify-send "reloaded configsdf"
+notify-send "reloaded configs"
