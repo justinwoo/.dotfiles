@@ -43,7 +43,7 @@ for_window [window_type="tooltip"] floating enable
  # normal, dialog, utility, toolbar, splash, menu, dropdown_menu, popup_menu, tooltip and notification
 
 # border
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border normal 1
 hide_edge_borders smart
 
 # title
