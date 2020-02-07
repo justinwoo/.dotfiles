@@ -162,6 +162,13 @@ bindsym $mod+$sup+c exec resize-sticky 1536 960
 bindsym $ctrl+$sup+$mod+c exec resize-sticky 1920 1080
 bindsym $ctrl+$sup+$mod+x exec resize-sticky 2560 1440
 
+# let's try marking windows
+bindsym $sup+Shift+n mark "mark n"
+bindsym $sup+n [con_mark="mark n"] scratchpad show
+bindsym $sup+Shift+m mark "mark m"
+bindsym $sup+m [con_mark="mark m"] scratchpad show
+bindsym $sup+Shift+slash unmark
+
 set $ws1 "1:ストゼロ"
 set $ws2 "2:ハイボール"
 set $ws3 "3:酎ハイ"
@@ -272,8 +279,6 @@ bindsym $sup+o [class="(Alacritty|Gnome-terminal)"] scratchpad show
 bindsym $sup+p [instance="nautilus"] scratchpad show
 bindsym $sup+Shift+y [instance="eog"] scratchpad show
 bindsym $sup+y [window_role="browser$"] scratchpad show
-bindsym $sup+n [window_role="pop-up"] scratchpad show
-bindsym $sup+Shift+n [window_role="dialog"] scratchpad show
 bindsym $sup+i [instance="slack"] scratchpad show
 bindsym $sup+u [title="Telegram"] scratchpad show
 bindsym $sup+Shift+u [title="Hangouts"] scratchpad show
