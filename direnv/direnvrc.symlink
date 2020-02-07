@@ -61,7 +61,8 @@ use_nix() {
   for e in "${nixexprs[@]}"; do
     watch_file "${e}"
   done
-  watch_file "${direnv}/drv"
+  # this following line causes errors?
+  # watch_file "${direnv}/drv"
   watch_file "${direnv}"
 
   source_env "${envdir}/vars"
