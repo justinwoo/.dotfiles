@@ -1,1 +1,7 @@
-~/Telegram/Updater
+target=~/Telegram/Updater
+
+if [[ -f $target ]]; then
+  $target
+else
+  telegram-desktop
+fi
