@@ -63,8 +63,10 @@ my-pkgs // {
     ripgrep
     R
     shellcheck
+    slack
     sqlite
     sqlitebrowser
+    tdesktop
     tig
     tmux
     watchexec
