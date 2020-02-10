@@ -56,6 +56,7 @@ my-pkgs // {
     jq
     neovim
     nix-bash-completions
+    nix-prefetch-git
     nodejs-12_x
     pavucontrol
     plantuml
