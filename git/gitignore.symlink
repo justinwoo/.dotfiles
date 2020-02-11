@@ -41,3 +41,4 @@ dist
 .ignore
 .direnv.d
 .cache
+stack.yaml.lock
