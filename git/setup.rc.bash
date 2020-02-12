@@ -1,15 +1,20 @@
 # my own git aliases
 alias gpp='git pull --prune'
+
 alias get-git-branch-name='git rev-parse --abbrev-ref HEAD'
 alias ggbn='get-git-branch-name'
+
 alias gib='git branch -v'
-alias gip='git branch --merged master | grep -v "master$" | xargs git branch -d'
+
 alias gs='git status -sb'
 alias gis='git status -sb'
+
 alias gid='git diff'
 alias gids='git diff --staged'
+
 alias getlastcommit='git show --oneline | awk NR==1'
 alias glc='getlastcommit'
+
 alias push-current-branch-to-justinwoo='git push -u justinwoo $(git rev-parse --abbrev-ref HEAD)'
 alias push-current-branch-to-origin='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpj='push-current-branch-to-justinwoo'
@@ -18,24 +23,24 @@ alias gfo='git fetch origin'
 alias gfp='gfo -p && dmb'
 alias gfu='git fetch upstream'
 alias gfj='git fetch justinwoo'
-alias hey-mom-i-fixed-it='echo fixed in $(ggbn): $(glc)'
-alias hmifi='hey-mom-i-fixed-it'
+
 alias delete-merged-branches='git delete-merged-branches'
 alias dmb='delete-merged-branches';
-alias gcd='git co dev'
+
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit --amend'
 alias gcane='git commit --amend --no-edit'
 alias .gcane='git add . && gcane'
 alias gcanera='git commit --amend --no-edit --reset-author'
+
 alias ga='git add'
 alias ga.='git add .'
 alias gap='git add -p'
-alias gac='ga . ; gc'
-alias gr='git reflog | head -10'
-alias grs='git remote show'
-alias gic='git checkout'
+
+alias grl='git reflog | head -10'
+
+alias git-commits-since-origin-master='git log "origin/master..$(ggbn)" --pretty="format:* %s"'
 
 # hub
 alias hc='hub clone'
