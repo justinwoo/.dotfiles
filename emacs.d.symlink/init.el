@@ -74,6 +74,9 @@
         xref
         ))
 
+;; fuck you emacs
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (when (not package-archive-contents) (package-refresh-contents))
 (dolist (package package-list) (when (not (package-installed-p package)) (package-install package)))
 
