@@ -27,3 +27,6 @@ if [[ -f /bin/open ]]
 then
   alias open='xdg-open'
 fi
+
+alias scu='systemctl --user'
+complete -F _systemctl scu
