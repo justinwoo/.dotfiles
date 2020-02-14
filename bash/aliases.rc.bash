@@ -29,4 +29,3 @@ then
 fi
 
 alias scu='systemctl --user'
-complete -F _systemctl scu
