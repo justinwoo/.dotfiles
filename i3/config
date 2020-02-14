@@ -24,6 +24,7 @@ for_window [instance="slack"] move window to scratchpad
 for_window [title="^Telegram$"] move window to scratchpad
 for_window [instance="nautilus"] move window to scratchpad, scratchpad show
 for_window [instance="vlc"] move window to scratchpad, scratchpad show
+for_window [instance="xv"] move window to scratchpad, scratchpad show
 for_window [instance="eog"] floating enable
 for_window [instance="feh"] floating enable
 for_window [instance="filezilla"] move window to scratchpad, scratchpad show
@@ -273,7 +274,7 @@ bindsym $sup+t mode "quickprograms"
 # shortcuts
 bindsym $sup+Shift+Return exec chrome
 bindsym $sup+Shift+p exec nautilus ~/Pictures
-bindsym $sup+semicolon [instance="vlc"] scratchpad show
+bindsym $sup+semicolon [instance="(vlc|xv)"] scratchpad show
 bindsym $sup+Shift+semicolon [instance="filezilla"] scratchpad show
 bindsym $sup+o [class="(Alacritty|Gnome-terminal)"] scratchpad show
 bindsym $sup+p [instance="nautilus"] scratchpad show
