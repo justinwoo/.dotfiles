@@ -64,7 +64,6 @@ my-pkgs // {
     ripgrep
     R
     shellcheck
-    slack
     sqlite
     sqlitebrowser
     tig
