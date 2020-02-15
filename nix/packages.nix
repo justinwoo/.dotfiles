@@ -67,7 +67,6 @@ my-pkgs // {
     slack
     sqlite
     sqlitebrowser
-    tdesktop
     tig
     tmux
     watchexec
