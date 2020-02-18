@@ -7,3 +7,4 @@ nix-build telegram.nix --out-link install-telegram
 echo "run install-telegram if needed."
 
 nix-shell get-slack-deb.nix --run copy-slack-deb
+nix-shell get-vscode-deb.nix --run copy-vscode-deb
