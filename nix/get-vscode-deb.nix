@@ -1,5 +1,4 @@
 { pkgs ? import ./pinned.nix {} }:
-
 let
   src = builtins.fetchurl {
     url = "https://az764295.vo.msecnd.net/stable/c47d83b293181d9be64f27ff093689e8e7aed054/code_1.42.1-1581432938_amd64.deb";
@@ -11,7 +10,6 @@ let
     cp --no-preserve=mode ${src} .
     echo "Remember to dpkg install vscode"
   '';
-
 in
 pkgs.mkShell {
   buildInputs = [ copy-script ];

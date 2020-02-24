@@ -1,5 +1,4 @@
 # shit for slides tooling
-
 let
   pkgs = import <nixpkgs> {};
 
@@ -11,7 +10,6 @@ let
   };
 
   set = import src;
-
 in
 pkgs.stdenv.mkDerivation {
   name = "slides-tools";

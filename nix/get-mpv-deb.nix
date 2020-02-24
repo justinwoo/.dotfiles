@@ -1,5 +1,4 @@
 { pkgs ? import ./pinned.nix {} }:
-
 let
   src = builtins.fetchurl {
     url = "https://non-gnu.uvt.nl/debian/bionic/mpv/mpv_0.32.0+wsl.2_amd64.deb";
@@ -11,7 +10,6 @@ let
     cp --no-preserve=mode ${src} .
     echo "Remember to dpkg install mpv"
   '';
-
 in
 pkgs.mkShell {
   buildInputs = [ copy-script ];

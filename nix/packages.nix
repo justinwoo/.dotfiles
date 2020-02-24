@@ -1,5 +1,4 @@
 { pkgs ? import ./pinned.nix {} }:
-
 let
   easy-dhall = import ./easy-dhall.nix;
 
@@ -24,7 +23,6 @@ let
       "z"
     ]
   );
-
 in
 my-pkgs // {
   inherit (pkgs) feh i3 i3status rofi scrot;

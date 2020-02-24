@@ -1,5 +1,4 @@
 { pkgs ? import ./pinned.nix {} }:
-
 let
   src = builtins.fetchurl {
     url = "https://downloads.slack-edge.com/linux_releases/slack-desktop-4.3.2-amd64.deb";
@@ -11,7 +10,6 @@ let
     cp --no-preserve=mode ${src} .
     echo "Remember to dpkg install slack"
   '';
-
 in
 pkgs.mkShell {
   buildInputs = [ copy-script ];

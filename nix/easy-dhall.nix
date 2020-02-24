@@ -1,6 +1,5 @@
 let
   pkgs = import <nixpkgs> {};
-
 in
 import (
   pkgs.fetchFromGitHub {
