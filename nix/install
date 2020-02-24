@@ -8,3 +8,4 @@ echo "run install-telegram if needed."
 
 nix-shell get-slack-deb.nix --run copy-slack-deb
 nix-shell get-vscode-deb.nix --run copy-vscode-deb
+nix-shell get-mpv-deb.nix --run copy-mpv-deb
