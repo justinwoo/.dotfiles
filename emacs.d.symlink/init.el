@@ -727,6 +727,11 @@ If the error list is visible, hide it.  Otherwise, show it."
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
 (add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
 
+; underscores are part of words in most fucking languages
+(add-hook 'purescript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'rust-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'javascript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
 (helm-mode 1)
 
 ;; after this is trash
