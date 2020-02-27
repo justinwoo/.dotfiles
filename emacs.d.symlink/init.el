@@ -32,6 +32,7 @@
 (setq package-list
       '(
         company
+        company-lsp
         counsel
         counsel-projectile
         diminish
@@ -47,6 +48,7 @@
         helm
         helm-ag
         helm-company
+        helm-lsp
         helm-projectile
         helm-rg
         helm-themes
@@ -54,6 +56,8 @@
         ivy
         js2-mode
         key-chord
+        lsp-mode
+        lsp-ui
         magit
         markdown-mode
         nix-mode
@@ -68,6 +72,7 @@
         smartparens
         spacemacs-theme
         swiper
+        toml-mode
         use-package
         web-mode
         which-key
@@ -677,6 +682,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 ;; rust
 (use-package rust-mode
   :ensure t
+  :hook (rust-mode . lsp)
   :mode "\\.rs\\'"
   :init
   (progn
@@ -686,6 +692,11 @@ If the error list is visible, hide it.  Otherwise, show it."
       ",gg"  'racer-find-definition
       ",gG"  'racer-find-definition-other-window
       ",gf"  'racer-find-definition-other-frame)))
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
+;; if you are helm user
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
