@@ -5,3 +5,4 @@ transient
 backup
 bookmarks
 *.cache
+.lsp-session*
