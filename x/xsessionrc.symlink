@@ -21,3 +21,8 @@ xset s off
 xset -dpms
 
 xset r rate 350 120
+
+if [[ -f ~/.xsessionrc.local ]]
+then
+  source ~/.xsessionrc.local
+fi
