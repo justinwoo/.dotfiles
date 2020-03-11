@@ -683,6 +683,8 @@ If the error list is visible, hide it.  Otherwise, show it."
       ",gf"  'racer-find-definition-other-frame)))
 
 (use-package lsp-ui :commands lsp-ui-mode)
+;; fucking popups am i back in 2001 or something
+(setq lsp-ui-doc-enable nil)
 (use-package company-lsp :commands company-lsp)
 ;; if you are helm user
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
