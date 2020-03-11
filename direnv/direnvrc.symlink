@@ -1,7 +1,7 @@
 # from susan: https://gist.githubusercontent.com/mbbx6spp/731076cb8fc620b064b8e5b28fb1c796/raw/791550658f5a8a39148beaa0fe91d2d4f8cf20b0/.direnvrc
 hash_env() {
   if has shasum; then
-    for e in "${@}"; do shasum -a 256 "${PWD}/${e}"; done | shasum -a 256 | cut -c -64
+    for e in "${@}"; do shasum -a 256 "${HOME}/.direnv.d/${e}"; done | shasum -a 256 | cut -c -64
   else
     fail "do not have shasum to cache environment"
   fi
@@ -38,7 +38,7 @@ load_nix() {
 }
 
 cache_file() {
-  echo "${PWD}/.direnv.d/env-${1}"
+  echo "${HOME}/.direnv.d/env-${1}"
 }
 
 use_nix() {
@@ -51,7 +51,7 @@ use_nix() {
   if [ -z "${hash:-}" ]; then
     load_nix "${hash}"
   else
-    if [ -e "${PWD}/.direnv.d/env-${hash}/drv" ]; then
+    if [ -e "${HOME}/.direnv.d/env-${hash}/drv" ]; then
       log_status "using cached environment (${hash})"
     else
       load_nix "${hash}"
