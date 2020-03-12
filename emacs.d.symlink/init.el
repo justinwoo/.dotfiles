@@ -669,6 +669,7 @@ If the error list is visible, hide it.  Otherwise, show it."
     )))
 
 ;; rust
+(setq lsp-rust-server 'rust-analyzer)
 (use-package rust-mode
   :ensure t
   :hook (rust-mode . lsp)

@@ -18,6 +18,7 @@ let
       "lorri"
       "mkgif"
       "nixpkgs-fmt"
+      "rust-analyzer"
       "tin-summer"
       "update-fetch"
       "z"
