@@ -42,3 +42,4 @@ dist
 .direnv.d
 .cache
 stack.yaml.lock
+*.jwk
