@@ -36,7 +36,6 @@
         counsel
         counsel-projectile
         diminish
-        doom-themes
         evil
         evil-escape
         evil-magit
@@ -60,6 +59,8 @@
         lsp-ui
         magit
         markdown-mode
+        modus-operandi-theme
+        modus-vivendi-theme
         nix-mode
         org
         plantuml-mode
@@ -303,10 +304,9 @@ kill internal buffers too."
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-(use-package doom-themes :ensure t
+(use-package modus-operandi-theme :ensure t
   :preface (defvar region-fg nil)
   :config
-  (load-theme 'spacemacs-light t)
   (set-face-attribute 'default nil
                       :family "Noto Sans Mono CJK JP"
                       :height 110
