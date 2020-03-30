@@ -309,7 +309,7 @@ kill internal buffers too."
   :config
   (set-face-attribute 'default nil
                       :family "Noto Sans Mono CJK JP"
-                      :height 110
+                      :height 100
                       :weight 'normal
                       :width 'normal))
 
