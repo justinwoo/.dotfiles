@@ -3,8 +3,8 @@ window:
     columns: 80
     lines: 24
   padding:
-    x: 4
-    y: 4
+    x: 8
+    y: 8
   decorations: full
 scrolling:
   history: 10000
@@ -18,7 +18,7 @@ font:
     family: "Noto Sans Mono CJK JP"
   italic:
     family: "Noto Sans Mono CJK JP"
-  size: 14.0
+  size: 11.0
   offset:
     x: 1
     y: 1
