@@ -42,6 +42,7 @@ my-pkgs // {
     autorandr
     bash-completion
     bat
+    R
     colordiff
     direnv
     emacs
@@ -52,6 +53,7 @@ my-pkgs // {
     glibcLocales
     gnumake
     graphviz
+    ifconfig
     jq
     neovim
     nix-bash-completions
@@ -61,7 +63,6 @@ my-pkgs // {
     plantuml
     playerctl
     ripgrep
-    R
     shellcheck
     sqlite
     sqlitebrowser
