@@ -15,6 +15,7 @@ let
   my-pkgs = builtins.listToAttrs (
     map importFrom [
       "alacritty"
+      "cached-nix-shell"
       "lorri"
       "mkgif"
       "nixpkgs-fmt"
@@ -53,7 +54,6 @@ my-pkgs // {
     glibcLocales
     gnumake
     graphviz
-    ifconfig
     jq
     neovim
     nix-bash-completions
