@@ -54,6 +54,7 @@
         htmlize
         ivy
         js2-mode
+        jsonnet-mode
         key-chord
         lsp-mode
         lsp-ui
@@ -552,6 +553,10 @@ If the error list is visible, hide it.  Otherwise, show it."
      web-mode-code-indent-offset 2
      web-mode-attr-indent-offset 2)
     (setq-default js-indent-level 2)))
+
+(use-package jsonnet-mode
+  :mode "\\.jsonnet\\'"
+  )
 
 (setq c-default-style "java")
 (setq-default c-basic-offset 2)
