@@ -1,7 +1,5 @@
 { pkgs ? import ./pinned.nix {} }:
 let
-  easy-dhall = import ./easy-dhall.nix;
-
   easy-ps = import ./easy-ps.nix {};
 
   importFrom = basename: {
@@ -15,7 +13,6 @@ let
   my-pkgs = builtins.listToAttrs (
     map importFrom [
       "alacritty"
-      "cached-nix-shell"
       "lorri"
       "mkgif"
       "nixpkgs-fmt"
@@ -45,9 +42,7 @@ in
 my-pkgs // {
   inherit (pkgs) feh i3 i3status rofi scrot;
 
-  inherit (easy-ps.inputs) psc-package-simple;
-
-  inherit (easy-dhall) dhall-simple dhall-json-simple;
+  inherit (easy-ps.inputs) purs psc-package-simple;
 
   inherit (pkgs.gnome3) eog evince;
 
@@ -87,6 +82,4 @@ my-pkgs // {
     watchexec
     xdotool
     ;
-
-  inherit purs-0_13_7;
 }

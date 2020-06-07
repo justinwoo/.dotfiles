@@ -36,7 +36,6 @@
   dash
   dash-functional
   define-word
-  dhall-mode
   diff-hl
   diminish
   doom-modeline

@@ -1,7 +1,3 @@
 #!/usr/bin/env bash
 
-nix-env - f packages.nix - i - j 20
-
-nix-shell get-slack-deb.nix - -run copy-slack-deb
-nix-shell get-vscode-deb.nix - -run copy-vscode-deb
-nix-shell get-mpv-deb.nix - -run copy-mpv-deb
+nix-env -f packages.nix -i -j 20

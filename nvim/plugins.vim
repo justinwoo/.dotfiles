@@ -51,7 +51,6 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' } " interactive command execution in v
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/denite.nvim'
-Plug 'vmchale/dhall-vim' " Dhall
 Plug 'LnL7/vim-nix' " Nix
 Plug 'ntpeters/vim-better-whitespace' " whitespace
 

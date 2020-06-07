@@ -60,7 +60,6 @@ This function should only modify configuration layer settings."
                                       dash
                                       dash-functional
                                       gxref
-                                      dhall-mode
                                       haskell-mode
                                       counsel
                                       web-mode
@@ -737,11 +736,6 @@ layers configuration. You are free to put any user code."
 
   ;; why was this unbound
   (global-set-key (kbd "M-x") 'helm-M-x)
-
-  ;; dhall
-  (use-package dhall-mode
-    :ensure t
-    :mode "\\.dhall\\'")
 
   ;; haskell
   (use-package haskell-mode
