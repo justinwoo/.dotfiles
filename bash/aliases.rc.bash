@@ -24,6 +24,13 @@ then
   alias pbpaste='xclip -selection clipboard -o'
 fi
 
+if [[ -n "$WSL_DISTRO_NAME" ]]
+then
+  alias pbcopy='/mnt/c/Windows/System32/clip.exe'
+  alias pbout='xclip -selection clipboard -o'
+  alias pbpaste='xclip -selection clipboard -o'
+fi
+
 if [[ -f /bin/open ]]
 then
   alias open='xdg-open'
