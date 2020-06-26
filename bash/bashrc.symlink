@@ -41,7 +41,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export LC_CTYPE=en_IE.UTF-8
 export DOT=$HOME/.dotfiles
 export TERMINAL=gnome-terminal
 export PROJECTS=~/Code
