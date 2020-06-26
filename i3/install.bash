@@ -2,6 +2,7 @@ TARGET=~/.config/i3/config
 
 echo ensuring symlink for i3 config at "$TARGET"
 mkdir -p "$DOT"/i3
+mkdir -p "$(dirname $TARGET)"
 ln -sf "$DOT"/i3/config $TARGET
 
 echo ensuring dunstrc
