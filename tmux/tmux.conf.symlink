@@ -64,7 +64,7 @@ set-option -g pane-border-style bg=default,fg=white
 
 # Title
 set-option -g set-titles on
-set-option -g set-titles-string "#{pane_current_path} - #W (#S)"
+set-option -g set-titles-string "#W (tmux: #S)"
 
 # Status
 set -g status-left-length 20
