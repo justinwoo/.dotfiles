@@ -27,9 +27,9 @@ alias gfj='git fetch justinwoo'
 alias delete-merged-branches='git delete-merged-branches'
 alias dmb='delete-merged-branches';
 
-alias gc='git commit'
-alias gcm='git commit -m'
-alias gca='git commit --amend'
+alias gc='git commit -v'
+alias gcm='git commit -v -m'
+alias gca='git commit -v --amend'
 alias gcane='git commit --amend --no-edit'
 alias .gcane='git add . && gcane'
 alias gcanera='git commit --amend --no-edit --reset-author'
