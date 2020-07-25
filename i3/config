@@ -259,7 +259,7 @@ mode "quickprograms" {
         bindsym q exec google-chrome
         bindsym w exec slack
         bindsym e exec telegram
-        bindsym r exec discord
+        bindsym r exec quasselclient
         bindsym a exec nautilus
         bindsym s exec filezilla
         bindsym d exec pinta
@@ -283,7 +283,7 @@ bindsym $sup+y [window_role="browser$"] scratchpad show
 bindsym $sup+i [instance="slack"] scratchpad show
 bindsym $sup+u [title="Telegram"] scratchpad show
 bindsym $sup+Shift+u [title="Hangouts"] scratchpad show
-bindsym $sup+apostrophe [instance="discord"] scratchpad show
+bindsym $sup+apostrophe [instance="quasselclient"] scratchpad show
 
 # Pulse Audio controls
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
