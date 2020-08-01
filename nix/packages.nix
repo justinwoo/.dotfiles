@@ -12,7 +12,6 @@ let
 
   my-pkgs = builtins.listToAttrs (
     map importFrom [
-      "alacritty"
       "lorri"
       "mkgif"
       "nixpkgs-fmt"
@@ -51,6 +50,7 @@ my-pkgs // {
   inherit (pkgs.unixtools) route;
 
   inherit (pkgs)
+    alacritty
     autorandr
     bash-completion
     bat

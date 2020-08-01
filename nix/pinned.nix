@@ -1,11 +1,11 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
 in
 import (
   pkgs.fetchFromGitHub {
     owner = "nixos";
     repo = "nixpkgs";
-    rev = "76e1d5cf3b8f817e4e43f5b0fcdb951426956c35";
-    sha256 = "1iz5dr9xx8qa1m94pjlr0dmb0b1syp2sp1514gw10r877cjxqvd8";
+    rev = "0f8eb0b8f2e3d440556036d6cae54e9576cb901b";
+    sha256 = "0rwhq7cy4xy25gg2in6vah55psdizz7r187zy7z4c2a7pj2hs7ak";
   }
 )
