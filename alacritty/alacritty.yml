@@ -9,8 +9,6 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-  auto_scroll: false
-tabspaces: 8
 font:
   normal:
     family: "Noto Sans Mono CJK JP"
@@ -83,9 +81,6 @@ schemes:
 
 colors: *light
 
-visual_bell:
-  animation: EaseOutExpo
-  duration: 0
 background_opacity: 1.0
 mouse:
   double_click: { threshold: 300 }
@@ -93,7 +88,6 @@ mouse:
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
   save_to_clipboard: false
-dynamic_title: true
 live_config_reload: true
 key_bindings:
   - { key: V,        mods: Control|Shift,    action: Paste               }
