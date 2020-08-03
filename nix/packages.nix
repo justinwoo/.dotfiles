@@ -50,7 +50,6 @@ my-pkgs // {
   inherit (pkgs.unixtools) route;
 
   inherit (pkgs)
-    alacritty
     autorandr
     bash-completion
     bat
