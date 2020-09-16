@@ -74,6 +74,7 @@ my-pkgs // {
     playerctl
     ripgrep
     shellcheck
+    sox
     sqlite
     sqlitebrowser
     tig
