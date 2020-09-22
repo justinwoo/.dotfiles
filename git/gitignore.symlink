@@ -39,6 +39,7 @@ dist
 .envrc
 .ignore
 .direnv.d
+.direnv
 .cache
 stack.yaml.lock
 *.jwk

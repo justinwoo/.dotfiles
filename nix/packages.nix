@@ -1,6 +1,6 @@
-{ pkgs ? import ./pinned.nix {} }:
+{ pkgs ? import ./pinned.nix { } }:
 let
-  easy-ps = import ./easy-ps.nix {};
+  easy-ps = import ./easy-ps.nix { };
 
   importFrom = basename: {
     name = basename;
@@ -14,6 +14,7 @@ let
     map importFrom [
       "lorri"
       "mkgif"
+      "nix-direnv"
       "nixpkgs-fmt"
       "rust-analyzer"
       "tin-summer"
@@ -26,17 +27,19 @@ let
   buildInputs = [ pkgs.gmp pkgs.zlib pkgs.ncurses5 pkgs.stdenv.cc.cc.lib ];
   libPath = pkgs.lib.makeLibraryPath buildInputs;
 
-  purs-0_13_7 = pkgs.runCommand "purs-local" rec {
-    src = pkgs.fetchurl {
-      url = "https://github.com/justinwoo/purescript/releases/download/v0.13.7/purs";
-      sha256 = "1dahif6z40acjsjm0clrq5hqhibdva6s3g8v49k9fjrvnfiwam77";
-    };
-  } ''
+  purs-0_13_7 = pkgs.runCommand "purs-local"
+    rec {
+      src = pkgs.fetchurl {
+        url = "https://github.com/justinwoo/purescript/releases/download/v0.13.7/purs";
+        sha256 = "1dahif6z40acjsjm0clrq5hqhibdva6s3g8v49k9fjrvnfiwam77";
+      };
+    } ''
     mkdir -p $out/bin
     cp $src $out/bin/purs
     chmod +xw $out/bin/purs
     patchelf --interpreter ${dynamic-linker} --set-rpath ${libPath} $out/bin/purs
   '';
+
 in
 my-pkgs // {
   inherit (pkgs) feh i3 i3status rofi scrot;
@@ -52,8 +55,8 @@ my-pkgs // {
   inherit (pkgs)
     autorandr
     bash-completion
-    bat
     R
+    bat
     colordiff
     direnv
     emacs
