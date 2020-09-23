@@ -59,7 +59,7 @@ my-pkgs // {
     bat
     colordiff
     direnv
-    emacs
+    emacs27
     exiftool
     fd
     fzf
@@ -73,7 +73,6 @@ my-pkgs // {
     nix-prefetch-git
     nodejs-12_x
     pavucontrol
-    plantuml
     playerctl
     ripgrep
     shellcheck
