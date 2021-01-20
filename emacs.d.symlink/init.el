@@ -75,7 +75,7 @@
         spacemacs-theme
         swiper
         toml-mode
-        undo-tree
+        undo-fu
         use-package
         web-mode
         which-key
@@ -198,11 +198,9 @@ kill internal buffers too."
 
 (use-package evil
   :ensure t
-  :config
-  (global-undo-tree-mode)
   :init
   (progn
-    (setq evil-undo-system 'undo-tree)
+    (setq evil-undo-system 'undo-fu)
     (evil-mode 1)
     (evil-select-search-module 'evil-search-module 'evil-search)
     (evil-declare-change-repeat 'company-complete)))
@@ -622,9 +620,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 (when (file-exists-p "~/.user-config.el")
   (load-file "~/.user-config.el"))
-
-;; holy hell
-(setq undo-tree-enable-undo-in-region nil)
 
 (use-package helm :ensure t
   :init
