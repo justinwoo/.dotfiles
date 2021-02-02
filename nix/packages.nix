@@ -1,6 +1,6 @@
-{ pkgs ? import ./pinned.nix { } }:
+{ pkgs ? import ./pinned.nix {} }:
 let
-  easy-ps = import ./easy-ps.nix { };
+  easy-ps = import ./easy-ps.nix {};
 
   importFrom = basename: {
     name = basename;

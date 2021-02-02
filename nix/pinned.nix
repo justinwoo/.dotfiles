@@ -5,7 +5,7 @@ import (
   pkgs.fetchFromGitHub {
     owner = "nixos";
     repo = "nixpkgs";
-    rev = "7fab0b1c1acfa89634ed4a330a550c3e39ea59cc";
-    sha256 = "1i9x6q8jclpl1bkyh0743pn1aw5mkfq0q475blln188d4zrixmck";
+    rev = "bf6df7187ebbd1f6614b788de4f5f68f03e4d51a";
+    sha256 = "1y4sk57rq0iwz6ymlazin037q6jwv7d31zws235pqg3ssq6si3fr";
   }
 )
