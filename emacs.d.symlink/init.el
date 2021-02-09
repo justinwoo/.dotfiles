@@ -683,9 +683,10 @@ If the error list is visible, hide it.  Otherwise, show it."
     (add-hook 'racer-mode-hook #'company-mode)
 
     (evil-define-key 'normal rust-mode-map
-      ",gg"  'racer-find-definition
-      ",gG"  'racer-find-definition-other-window
-      ",gf"  'racer-find-definition-other-frame)))
+      ",gg"  'lsp-find-definition
+      ",gr"  'lsp-find-references
+      ",gG"  'lsp-find-type-definition
+      ",gf"  'lsp-find-implementation)))
 
 (use-package lsp-ui :commands lsp-ui-mode)
 ;; fucking popups am i back in 2001 or something
