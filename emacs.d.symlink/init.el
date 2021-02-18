@@ -672,6 +672,9 @@ If the error list is visible, hide it.  Otherwise, show it."
       ",ga" 'intero-apply-suggestions
     )))
 
+;; stop the fucking warnings
+(setq lsp-enable-file-watchers nil)
+
 ;; rust
 (setq lsp-rust-server 'rust-analyzer)
 (use-package rust-mode
