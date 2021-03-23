@@ -55,6 +55,9 @@ alias gl='git log --graph --pretty=format:'\''%Cred%h%Creset -%C(yellow)%d%Crese
 alias gil='git log --decorate=full --stat --graph'
 alias gild='git log --decorate'
 
+# git log lines since origin/master
+alias gll='git log --pretty=format:%s origin/master..'
+
 # hell fuckin yeah get that fuckin shit done
 alias gu='git fetch origin master && git rebase origin/master'
 alias gudev='git fetch origin dev && git rebase origin/dev'
