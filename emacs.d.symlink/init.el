@@ -27,18 +27,17 @@
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
                          ("gnu"       . "http://elpa.gnu.org/packages/")
                          ("melpa"     . "https://melpa.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")))
+                         ))
 (package-initialize)
 (setq package-list
       '(
         company
-        company-lsp
         counsel
         counsel-projectile
         diminish
         evil
+        evil-collection
         evil-escape
-        evil-magit
         evil-surround
         flycheck
         flycheck-rust
@@ -60,8 +59,7 @@
         lsp-ui
         magit
         markdown-mode
-        modus-operandi-theme
-        modus-vivendi-theme
+        modus-themes
         nix-mode
         org
         plantuml-mode
@@ -250,7 +248,9 @@ kill internal buffers too."
    "SPC g b" 'magit-blame-mode)
   :config
   (general-define-key :keymaps 'magit-status-mode-map "SPC" nil)
-  (use-package evil-magit :ensure t))
+  ;; (use-package evil-magit :ensure t)
+  (evil-collection-init 'magit)
+  )
 
 (use-package projectile :ensure t
   :general
@@ -307,8 +307,10 @@ kill internal buffers too."
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-(use-package modus-operandi-theme :ensure t
+(use-package modus-themes :ensure t
   :preface (defvar region-fg nil)
+  :init
+  (modus-themes-load-operandi)
   :config
   (set-face-attribute 'default nil
                       :family "Noto Sans Mono CJK JP"
@@ -654,23 +656,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 (use-package haskell-mode
   :ensure t
   :mode "\\.hs\\'")
-
-(use-package intero :ensure t
-  :init
-  (progn
-    (helm-mode 1)
-    (add-hook 'intero-mode-hook 'company-mode)
-    (add-hook 'intero-mode-hook 'flycheck-mode)
-
-    (evil-define-key 'normal intero-mode-map
-      ",gg" 'intero-goto-definition
-      ",ht" 'intero-type-at
-      ",hi" 'intero-info
-      ",gl" 'intero-repl-load
-      ",ge" 'intero-repl-eval-region
-      ",gr" 'intero-repl
-      ",ga" 'intero-apply-suggestions
-    )))
 
 ;; stop the fucking warnings
 (setq lsp-enable-file-watchers nil)
