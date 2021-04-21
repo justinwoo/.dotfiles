@@ -34,6 +34,7 @@
         company
         counsel
         counsel-projectile
+        dash-functional
         diminish
         evil
         evil-collection
@@ -199,6 +200,7 @@ kill internal buffers too."
   :init
   (progn
     (setq evil-undo-system 'undo-fu)
+    (setq evil-want-keybinding nil)
     (evil-mode 1)
     (evil-select-search-module 'evil-search-module 'evil-search)
     (evil-declare-change-repeat 'company-complete)))
