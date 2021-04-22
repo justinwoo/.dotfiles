@@ -97,8 +97,6 @@
   :config
   (general-evil-setup)
   (setq general-default-keymaps 'evil-normal-state-map)
-  (general-define-key :keymaps 'dired-mode-map "SPC" nil)
-  (general-define-key :keymaps 'compilation-mode-map "SPC" nil)
   (general-define-key
    ";" 'evil-ex)
   (general-define-key
@@ -117,6 +115,8 @@
    "Q"       'evil-execute-macro
    )
   (general-define-key
+   :states 'normal
+   :keymaps 'override
    "C--"     'text-scale-decrease
    "C-0"     '(lambda() (interactive) (text-scale-set 1))
    "C-="     'text-scale-increase
@@ -203,7 +203,13 @@ kill internal buffers too."
     (setq evil-want-keybinding nil)
     (evil-mode 1)
     (evil-select-search-module 'evil-search-module 'evil-search)
-    (evil-declare-change-repeat 'company-complete)))
+    (evil-declare-change-repeat 'company-complete)
+    ))
+
+(use-package evil-collection
+  :init
+  (evil-collection-init 'dired)
+  )
 
 (use-package evil-surround
   :ensure t
@@ -250,7 +256,6 @@ kill internal buffers too."
    "SPC g b" 'magit-blame-mode)
   :config
   (general-define-key :keymaps 'magit-status-mode-map "SPC" nil)
-  ;; (use-package evil-magit :ensure t)
   (evil-collection-init 'magit)
   )
 
