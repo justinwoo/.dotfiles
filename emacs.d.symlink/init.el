@@ -124,6 +124,8 @@
    "M-x"     'helm-M-x
    "SPC /"   'helm-do-ag-project-root
    "SPC ?"   'helm-projectile-rg
+   "SPC p f" 'helm-projectile
+   "SPC p p" 'helm-projectile-switch-project
    "SPC b b" 'helm-buffers-list
    "SPC b d" 'my-kill-this-buffer
    "SPC b D" 'spacemacs/kill-matching-buffers-rudely
@@ -260,11 +262,6 @@ kill internal buffers too."
   )
 
 (use-package projectile :ensure t
-  :general
-  (general-define-key
-   :keymaps 'normal
-   "SPC p f" 'helm-projectile
-   "SPC p p" 'helm-projectile-switch-project)
   :config
   (setq projectile-completion-system 'ivy)
   (projectile-mode 1))
