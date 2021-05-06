@@ -341,6 +341,9 @@ kill internal buffers too."
   (interactive)
   (display-buffer-pop-up-frame (get-buffer "*Flycheck errors*") '()))
 
+(add-to-list 'flycheck-checkers 'python-mypy t)
+(flycheck-add-next-checker 'python-pylint 'python-mypy t)
+
 ;; from spacemacs
 ;; toggle flycheck window
 (defun spacemacs/toggle-flycheck-error-list ()
