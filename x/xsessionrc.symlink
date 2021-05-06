@@ -5,6 +5,10 @@ fi
 
 if [[ -a $(command -v xmodmap) ]]
 then
+  xmodmap -e "keycode 100 = BackSpace" # 変換
+  xmodmap -e "keycode 101 = Return"    # かな
+  xmodmap -e "keycode 102 = Escape"    # 無変換
+
   xmodmap -e "keycode 94 = Shift_L"
   xmodmap -e "keycode 97 = Shift_L"
   xmodmap -e "keycode 67 = Escape"
