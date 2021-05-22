@@ -149,6 +149,7 @@
    "SPC f f" 'flycheck-errors-in-new-frame
    "SPC f j" 'dired-other-frame
    "SPC f n" 'make-frame-command
+   "SPC f c" 'clone-indirect-buffer-other-window
    "SPC f q" 'evil-quit
    "SPC h f" 'helm-find-files
    "SPC h d" 'helm-do-ag
