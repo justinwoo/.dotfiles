@@ -12,12 +12,10 @@ let
 
   my-pkgs = builtins.listToAttrs (
     map importFrom [
-      "lorri"
+      "my-st"
       "mkgif"
       "nix-direnv"
       "nixpkgs-fmt"
-      "rust-analyzer"
-      "tin-summer"
       "update-fetch"
       "z"
     ]
@@ -26,19 +24,6 @@ let
   dynamic-linker = pkgs.stdenv.cc.bintools.dynamicLinker;
   buildInputs = [ pkgs.gmp pkgs.zlib pkgs.ncurses5 pkgs.stdenv.cc.cc.lib ];
   libPath = pkgs.lib.makeLibraryPath buildInputs;
-
-  purs-0_13_7 = pkgs.runCommand "purs-local"
-    rec {
-      src = pkgs.fetchurl {
-        url = "https://github.com/justinwoo/purescript/releases/download/v0.13.7/purs";
-        sha256 = "1dahif6z40acjsjm0clrq5hqhibdva6s3g8v49k9fjrvnfiwam77";
-      };
-    } ''
-    mkdir -p $out/bin
-    cp $src $out/bin/purs
-    chmod +xw $out/bin/purs
-    patchelf --interpreter ${dynamic-linker} --set-rpath ${libPath} $out/bin/purs
-  '';
 
 in
 my-pkgs // {
@@ -55,7 +40,6 @@ my-pkgs // {
   inherit (pkgs)
     autorandr
     bash-completion
-    R
     bat
     colordiff
     direnv
@@ -66,7 +50,6 @@ my-pkgs // {
     ghc
     glibcLocales
     gnumake
-    graphviz
     jq
     neovim
     nix-bash-completions
