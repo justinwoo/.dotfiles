@@ -275,7 +275,7 @@ bindsym $sup+Shift+Return exec chrome
 bindsym $sup+Shift+p exec nautilus ~/Pictures
 bindsym $sup+semicolon [title="(vlc|mpv)"] scratchpad show
 bindsym $sup+Shift+semicolon [instance="filezilla"] scratchpad show
-bindsym $sup+o [class="(Alacritty|Gnome-terminal)"] scratchpad show
+bindsym $sup+o [class="(xterm-256color|terminal|Alacritty|Gnome-terminal)"] scratchpad show
 bindsym $sup+p [instance="nautilus"] scratchpad show
 bindsym $sup+Shift+y [instance="eog"] scratchpad show
 bindsym $sup+y [window_role="browser$"] scratchpad show

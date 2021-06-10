@@ -1,1 +1,1 @@
-alacritty || gnome-terminal
+st -n "terminal" || alacritty || gnome-terminal
