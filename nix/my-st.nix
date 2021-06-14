@@ -5,8 +5,8 @@ import
     pkgs.fetchFromGitHub {
       owner = "justinwoo";
       repo = "my-st";
-      rev = "aec79bbc375a5cb22c7ddac38880f557ff997a69";
-      sha256 = "18x3p2w2zp5j5vcl422i671f4jn17rs9a4f7awsg68bnxb3ljgsf";
+      rev = "7c3247ae7155746f0f961f4148b17db1e9545146";
+      sha256 = "1ymiiaadpj1y56iv9nhp223s9a70j90yprb687skc5lh38bwm2ld";
     }
   )
   { inherit pkgs; }
