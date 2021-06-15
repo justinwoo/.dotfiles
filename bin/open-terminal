@@ -1,1 +1,6 @@
-st -n "terminal" || alacritty || gnome-terminal
+if command -v st
+then
+  st -n "terminal"
+else
+  gnome-terminal
+fi
