@@ -1,8 +1,8 @@
 op() {
-  if command -v xdg-open
+  if command -v xdg-open &>/dev/null
   then
     xdg-open "$1" &>/dev/null & disown
-  elif command -v explorer.exe
+  elif command -v explorer.exe &>/dev/null
   then
     explorer.exe "$1"
   else
