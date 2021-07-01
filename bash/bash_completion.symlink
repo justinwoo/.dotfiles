@@ -1,6 +1,8 @@
 # vim: set syntax=sh:
-for file in $HOME/.nix-profile/etc/bash_completion.d/* ; do
-  . $file
-done
+if [ -f $HOME/.nix-profile/etc/bash_completion.d ]; then
+  for file in $HOME/.nix-profile/etc/bash_completion.d/* ; do
+    . $file
+  done
+fi
 
 complete -F _systemctl scu
