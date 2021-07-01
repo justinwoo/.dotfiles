@@ -47,7 +47,6 @@ my-pkgs // {
     exiftool
     fd
     fzf
-    ghc
     glibcLocales
     gnumake
     jq
@@ -55,13 +54,10 @@ my-pkgs // {
     nix-bash-completions
     nix-prefetch-git
     nodejs-12_x
-    pavucontrol
-    playerctl
     ripgrep
     shellcheck
     sox
     sqlite
-    sqlitebrowser
     tig
     tmux
     watchexec
