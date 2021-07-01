@@ -22,6 +22,7 @@ export GIT_PS1_HIDE_IF_PWD_IGNORED=true
 export GIT_PS1_SHOWCOLORHINTS=true
 
 function my_prompt {
+    local LOCAL_PS1_PREFIX="${LOCAL_PS1_PREFIX:-}"
     local EXIT=$?
     local git_info=''
     local git_color=$GREEN
@@ -108,7 +109,7 @@ function my_prompt {
     local git="$git_color$git_info"
     local usr="$NORMAL\$"
     local jobs_="$MAGENTA$jobs_info"
-    PS1="$jobs_$prefix $dir $git$exit$usr "
+    PS1="$LOCAL_PS1_PREFIX$jobs_$prefix $dir $git$exit$usr "
 }
 
 export PROMPT_COMMAND=my_prompt
