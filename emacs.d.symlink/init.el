@@ -573,23 +573,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 (setq c-default-style "java")
 (setq-default c-basic-offset 2)
 
-(defun run-prettier-standard ()
-  "run prettier-standard"
-  (interactive)
-  (let* ((command (format "cd %s && prettier-standard %s" (projectile-project-root) buffer-file-name))
-         (results "*PRETTIER-STANDARD SOURCES*")
-         (errors "*PRETTIER-STANDARD ERRORS*"))
-    (shell-command command results errors)
-    (if (get-buffer errors)
-        (progn
-          (with-current-buffer errors
-            (message (string-trim (buffer-string))))
-          (kill-buffer errors))
-      (progn
-        (with-current-buffer results
-          (message (string-trim (buffer-string))))
-        (kill-buffer results)))))
-
 (defun run-prettier ()
   "run normal prettier"
   (interactive)
@@ -625,7 +608,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 (general-define-key
  :keymaps 'normal
- "SPC m p s" 'run-prettier-standard
  "SPC m p d" 'run-prettier)
 
 (when (file-exists-p "~/.user-config.el")
