@@ -10,7 +10,7 @@
     separator_color = frame
     sort = yes
     idle_threshold = 10
-    font = Noto Sans Mono CJK JP 14
+    font = Noto Sans Mono CJK JP 11
     line_height = 0
     markup = full
 
