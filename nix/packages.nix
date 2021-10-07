@@ -1,7 +1,5 @@
 { pkgs ? import ./pinned.nix {} }:
 let
-  easy-ps = import ./easy-ps.nix {};
-
   importFrom = basename: {
     name = basename;
 
@@ -28,8 +26,6 @@ let
 in
 my-pkgs // {
   inherit (pkgs) feh i3 i3status rofi scrot;
-
-  inherit (easy-ps.inputs) purs psc-package-simple;
 
   inherit (pkgs.gnome3) eog evince;
 
