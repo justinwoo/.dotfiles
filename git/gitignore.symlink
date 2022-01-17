@@ -35,7 +35,6 @@ scratch*
 *.bak
 *.BAK
 result*
-dist
 .envrc
 .ignore
 .direnv.d
