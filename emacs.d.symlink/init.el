@@ -68,7 +68,7 @@
         powerline
         prettier-js
         projectile
-        racer
+        ;; racer
         rust-mode
         smartparens
         spacemacs-theme
@@ -658,7 +658,7 @@ If the error list is visible, hide it.  Otherwise, show it."
   :mode "\\.rs\\'"
   :init
   (progn
-    (add-hook 'racer-mode-hook #'company-mode)
+    ;; (add-hook 'racer-mode-hook #'company-mode)
 
     (evil-define-key 'normal rust-mode-map
       ",gg"  'lsp-find-definition
@@ -673,7 +673,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 ;; if you are helm user
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
-(add-hook 'rust-mode-hook #'racer-mode)
+;; (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))

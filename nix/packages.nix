@@ -1,4 +1,4 @@
-{ pkgs ? import ./pinned.nix {} }:
+{ pkgs ? import ./pinned.nix { } }:
 let
   importFrom = basename: {
     name = basename;

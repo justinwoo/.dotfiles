@@ -1,1 +1,1 @@
-(import ./pinned.nix {}).bash
+(import ./pinned.nix { }).bash

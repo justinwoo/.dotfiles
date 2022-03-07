@@ -64,7 +64,7 @@ map <leader>gb :Gblame<cr>
 map <leader>gd :Gdiff<cr>
 map <leader>gw :Gwrite<cr>
 map <leader>gr :Gread<cr>
-map <leader>gs :Gstatus<cr>
+map <leader>gs :Git<cr>
 map <leader>gcc :Gcommit<cr>
 map <leader>gca :Gcommit --amend<cr>
 map <leader>gce :Gcommit --amend --no-edit<cr>

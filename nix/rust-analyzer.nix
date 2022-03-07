@@ -1,4 +1,4 @@
-{ pkgs ? import ./pinned.nix {} }:
+{ pkgs ? import ./pinned.nix { } }:
 
 pkgs.stdenv.mkDerivation {
   name = "rust-analyzer";

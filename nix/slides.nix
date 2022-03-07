@@ -1,6 +1,6 @@
 # shit for slides tooling
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
 
   src = pkgs.fetchFromGitHub {
     owner = "justinwoo";

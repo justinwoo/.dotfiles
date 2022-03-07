@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 pkgs.stdenv.mkDerivation {
   name = "z-simple";
@@ -6,8 +6,8 @@ pkgs.stdenv.mkDerivation {
   src = pkgs.fetchFromGitHub {
     owner = "rupa";
     repo = "z";
-    rev = "125f4dc47e15891739dd8262d5b23077fe8fb9ab";
-    sha256 = "0ihs3m8czx2x735r968jl31vs47psbjqfarqpcn891wzd9ygzzm0";
+    rev = "b82ac78a2d4457d2ca09973332638f123f065fd1";
+    sha256 = "0phk9lswwxsypchb11qsnxy1pv5xg1zkrqj8im6x2icma63hfcz2";
   };
 
   phases = "unpackPhase installPhase";
