@@ -43,6 +43,7 @@ my-pkgs // {
     exiftool
     fd
     fzf
+    gh
     glibcLocales
     gnumake
     jq

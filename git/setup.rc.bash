@@ -71,3 +71,6 @@ alias gjreset='git fetch justinwoo $(ggbn) && git reset --hard FETCH_HEAD'
 # update children
 alias gpullallchildren='ls -d */ | xargs -P10 -I{} git -C {} pull'
 alias gpac='gpullallchildren'
+
+# github cli uses some shit that doesn't use actual defined colors for some reason
+export GLAMOUR_STYLE=light
