@@ -42,13 +42,12 @@ alias grl='git reflog | head -10'
 
 alias git-commits-since-origin-master='git log "origin/master..$(ggbn)" --pretty="format:* %s"'
 
-# hub
-alias hc='hub clone'
-alias hb='hub browse'
-alias hpr='hub pull-request'
-alias hrr='hub remote rename'
-alias hrrou='hub remote rename origin upstream'
-alias hrrjo='hub remote rename justinwoo origin'
+# hub/gh
+alias hb='gh repo view --web'
+alias hrrou='git remote rename origin upstream'
+alias hrrjo='git remote rename justinwoo origin'
+# github cli uses some shit that doesn't use actual defined colors for some reason
+export GLAMOUR_STYLE=light
 
 # pretty colors
 alias gl='git log --graph --pretty=format:'\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit'
@@ -71,6 +70,3 @@ alias gjreset='git fetch justinwoo $(ggbn) && git reset --hard FETCH_HEAD'
 # update children
 alias gpullallchildren='ls -d */ | xargs -P10 -I{} git -C {} pull'
 alias gpac='gpullallchildren'
-
-# github cli uses some shit that doesn't use actual defined colors for some reason
-export GLAMOUR_STYLE=light
