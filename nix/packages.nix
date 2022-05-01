@@ -51,6 +51,7 @@ my-pkgs // {
     nix-bash-completions
     nix-prefetch-git
     nodejs-12_x
+    pamixer
     ripgrep
     shellcheck
     sox

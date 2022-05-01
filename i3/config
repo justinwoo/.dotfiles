@@ -291,9 +291,12 @@ bindsym $sup+apostrophe [instance="quasselclient"] scratchpad show
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse set Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse set Master 5%- #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master Playback Switch toggle
-bindsym $sup+Prior exec --no-startup-id amixer -D pulse set Master 5%+ #increase sound volume
-bindsym $sup+Next exec --no-startup-id amixer -D pulse set Master 5%- #decrease sound volume
-bindsym $sup+Home exec --no-startup-id amixer -D pulse set Master Playback Switch toggle
+
+# bindsym $sup+Prior exec --no-startup-id amixer -D pulse set Master 5%+ #increase sound volume
+# bindsym $sup+Next exec --no-startup-id amixer -D pulse set Master 5%- #decrease sound volume
+# bindsym $sup+Home exec --no-startup-id amixer -D pulse set Master Playback Switch toggle
+bindsym $sup+Prior exec pamixer -i 5
+bindsym $sup+Next exec pamixer -d 5
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
