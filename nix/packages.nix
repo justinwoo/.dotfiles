@@ -55,7 +55,7 @@ my-pkgs // {
     ripgrep
     shellcheck
     sox
-    sqlite
+    sqlite-interactive
     tig
     tmux
     watchexec
