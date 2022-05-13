@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
 
-# old script, based on blurring the image:
-# screenshot="/tmp/lockscreen.jpg"
-# resized="/tmp/resized_background.jpg"
-# image="/tmp/lockscreen.png"
-# background="$(find ~/.dotfiles/images/*.jpg | shuf -n 1)"
-# convert "$background" -resize "$(xdpyinfo | awk '/dimensions/{print $2}')" "$resized"
-# scrot -m $screenshot
-# convert -scale 5% -scale 2000% $screenshot $screenshot
-# composite -blend 50x50 -gravity center $resized $screenshot $resized
-# convert -quality 20 $resized $image
-# i3lock -i $image
+# blurred screenshot with overlay image
 
-image="$(find ~/.dotfiles/images/*.jpg | shuf -n 1)"
+screenshot="/tmp/lockscreen.jpg"
+resized="/tmp/resized_background.jpg"
+image="/tmp/lockscreen.png"
 
-# this probably will not work, use dconf editor i guess
-gsettings set org.gnome.desktop.screensaver picture-uri "file://$image"
-gsettings set org.gnome.desktop.background picture-uri "file://$image"
-gnome-screensaver-command -l
+rm "$screenshot"
+rm "$resized"
+rm "$image"
+
+background="$(find ~/.dotfiles/images/*.jpg | shuf -n 1)"
+convert "$background" -resize "$(xdpyinfo | awk '/dimensions/{print $2}')" "$resized"
+scrot -m $screenshot
+convert -scale 5% -scale 2000% $screenshot $screenshot
+composite -blend 10x4 -gravity center $resized $screenshot $resized
+convert -quality 20 $resized $image
+i3lock -i $image
