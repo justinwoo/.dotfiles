@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+# kind of ridiculous "solution" to light cli:
+# sudo chgrp video /sys/class/backlight/*/brightness
+# sudo chmod 664 /sys/class/backlight/*/brightness
+# sudo usermod -a -G video $USER
+
+OPTION=$1
+VALUE=$2
+
+case $OPTION in
+    inc)
+        light -A "$VALUE";;
+    dec)
+        light -U "$VALUE";;
+    set)
+        light -S "$VALUE";;
+    *)
+        echo "need args";
+        exit 1;
+esac
