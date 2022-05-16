@@ -1,2 +1,2 @@
 sudo apt-get install -y curl git i3 imagemagick xautolock xclip xtrace
-sudo apt-get install -y curl dconf-editor fcitx-mozc filezilla gnome-screensaver pavucontrol light mpv rustup vlc
+sudo apt-get install -y curl dconf-editor fcitx-mozc filezilla gnome-screensaver pavucontrol light mpv rustup vlc gnome-screenshot
