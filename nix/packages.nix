@@ -50,7 +50,7 @@ my-pkgs // {
     neovim
     nix-bash-completions
     nix-prefetch-git
-    nodejs-12_x
+    nodejs-14_x
     pamixer
     ripgrep
     shellcheck
