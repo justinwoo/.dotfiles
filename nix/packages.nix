@@ -13,7 +13,6 @@ let
       "my-st"
       "mkgif"
       "nix-direnv"
-      "nixpkgs-fmt"
       "update-fetch"
       "z"
     ]
@@ -39,7 +38,7 @@ my-pkgs // {
     bat
     colordiff
     direnv
-    emacs27
+    emacs28
     exiftool
     fd
     fzf
@@ -50,6 +49,7 @@ my-pkgs // {
     neovim
     nix-bash-completions
     nix-prefetch-git
+    nixpkgs-fmt
     nodejs-14_x
     pamixer
     ripgrep
