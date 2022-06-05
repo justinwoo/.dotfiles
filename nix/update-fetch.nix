@@ -5,8 +5,8 @@ import
     pkgs.fetchFromGitHub {
       owner = "justinwoo";
       repo = "update-fetch";
-      rev = "1d5444d4d44195877ec19a18ba777bae5a366390";
-      sha256 = "152bwggnrq5qdzvhf9ra6xs9q3v6i5nwbr2xjbmbidpp8gan5d05";
+      rev = "fb54d83cd26ccf3ea91a610903478ca3d96afa4d";
+      sha256 = "1f3r0g660izw7akici2l671vvrndjqf7pir4ahzbmh5crgq9mdks";
     }
   )
 {

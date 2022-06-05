@@ -13,6 +13,7 @@ let
       "my-st"
       "mkgif"
       "nix-direnv"
+      "update-fetch"
       "z"
     ]
   );
