@@ -20,7 +20,7 @@ workspace_layout stacking
 # for_window
 # see xprop, xwindow
 # wm_name = title
-for_window [instance="slack"] move window to scratchpad
+for_window [instance="slack"] move window to scratchpad, scratchpad show
 for_window [title="^Telegram$"] move window to scratchpad
 for_window [instance="nautilus"] move window to scratchpad, scratchpad show
 for_window [instance="vlc"] move window to scratchpad, scratchpad show
