@@ -67,8 +67,8 @@ bindsym $sup+Shift+Tab workspace prev
 bindsym $sup+bracketleft workspace prev
 
 # screenshot
-bindsym Print exec scrot -e 'mv $f ~/Pictures'
-bindsym $sup+Shift+s exec gnome-screenshot -a
+bindsym --release Print exec gnome-screenshot
+bindsym --release $sup+Shift+s exec gnome-screenshot -a
 
 # use Mouse+$sup to drag floating windows to their wanted position
 floating_modifier $sup
