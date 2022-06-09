@@ -31,6 +31,7 @@ for_window [instance="filezilla"] move window to scratchpad, scratchpad show
 for_window [instance="VirtualBox"] move window to scratchpad, scratchpad show
 for_window [instance="Pinta"] floating enable
 for_window [class="Shotwell"] floating enable
+for_window [class="Slack"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="dialog"] floating enable
 for_window [window_type="utility"] floating enable

@@ -74,6 +74,7 @@
         spacemacs-theme
         swiper
         toml-mode
+        typescript-mode
         undo-fu
         use-package
         web-mode
@@ -522,6 +523,26 @@ If the error list is visible, hide it.  Otherwise, show it."
           (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
     (message "You need an active region to use this.")))
 
+(use-package typescript-mode
+  :init
+  (progn
+    (helm-mode 1)
+    (add-hook 'typescript-mode-hook 'company-mode)
+    (add-hook 'typescript-mode-hook 'flycheck-mode)
+    (add-hook 'typescript-mode-hook 'lsp-mode)
+  ))
+
+(use-package typescript-mode
+  :mode ("\\.jsx\\'"
+         "\\.tsx\\'")
+  :init
+  (progn
+    (helm-mode 1)
+    (add-hook 'typescript-mode-hook 'company-mode)
+    (add-hook 'typescript-mode-hook 'flycheck-mode)
+    (add-hook 'typescript-mode-hook 'lsp-mode)
+  ))
+
 ;; for references: M-?
 (add-to-list 'xref-backend-functions 'psc-ide-xref-backend)
 
@@ -538,9 +559,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 (define-key evil-insert-state-map (kbd "C-p") 'company-dabbrev)
 
 (setq company-idle-delay 'nil)
-
-(use-package rjsx-mode :mode "\\.js\\'")
-(add-hook 'rjsx-mode-hook 'flycheck-mode)
 
 (use-package web-mode
   :ensure t
