@@ -62,13 +62,13 @@
         markdown-mode
         modus-themes
         nix-mode
+        nixpkgs-fmt
         org
         plantuml-mode
         popwin
         powerline
         prettier-js
         projectile
-        ;; racer
         rust-mode
         smartparens
         spacemacs-theme
@@ -602,27 +602,9 @@ If the error list is visible, hide it.  Otherwise, show it."
 (use-package s)
 (use-package projectile)
 
-(defun run-nixpkgs-fmt ()
-  "run nixpkgs-fmt"
-  (interactive)
-  (let* ((command (format "cd %s && nixpkgs-fmt %s" (projectile-project-root) buffer-file-name))
-         (results "*nixpkgs-fmt STDOUT*")
-         (errors "*nixpkgs-fmt ERRORS*"))
-    (shell-command command results errors)
-    (if (get-buffer errors)
-        (progn
-          (with-current-buffer errors
-            (message (string-trim (buffer-string))))
-          (kill-buffer errors))
-      (progn
-        (with-current-buffer results
-          (message (string-trim (buffer-string))))
-        (kill-buffer results)
-        (revert-buffer t t t)))))
-
 (general-define-key
  :keymaps 'normal
- "SPC m p n" 'run-nixpkgs-fmt)
+ "SPC m p n" 'nixpkgs-fmt-buffer)
 
 (general-define-key
  :keymaps 'normal
@@ -692,7 +674,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 ;; (add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
+;; (add-hook 'racer-mode-hook #'eldoc-mode)
 (with-eval-after-load 'rust-mode
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
