@@ -50,7 +50,7 @@ my-pkgs // {
     nix-bash-completions
     nix-prefetch-git
     nixpkgs-fmt
-    nodejs-14_x
+    nodejs-16_x
     pamixer
     ripgrep
     shellcheck
