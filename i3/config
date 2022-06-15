@@ -105,6 +105,12 @@ bindsym $sup+$down focus down
 bindsym $sup+$up focus up
 bindsym $sup+$right focus right
 
+# change parent focus
+bindsym $sup+$mod+$left focus parent; focus left
+bindsym $sup+$mod+$down focus parent; focus down
+bindsym $sup+$mod+$up focus parent; focus up
+bindsym $sup+$mod+$right focus parent; focus right
+
 # alternatively, you can use the cursor keys:
 bindsym $sup+Left focus left
 bindsym $sup+Down focus down
