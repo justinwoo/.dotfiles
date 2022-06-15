@@ -2,6 +2,12 @@
 
 TARGET=~/.config/nix/nix.conf
 
-echo symlinking nix config to "$TARGET"
 mkdir -p $(dirname $TARGET)
-ln -sf "$DOT/nix/nix.conf" $TARGET
+
+if [ -f $TARGET ]
+then
+    echo "skipping copying nix.conf.default"
+else
+    echo copying nix config to "$TARGET"
+    cp "$DOT/nix/nix.conf.default" $TARGET
+fi
