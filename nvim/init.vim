@@ -60,7 +60,7 @@ map <leader>fj :Explore<cr>
 map <C-P> :GFiles <cr>
 map <C-F> :FZF <cr>
 map <leader>/ :Ack
-map <leader>gb :Gblame<cr>
+map <leader>gb :Git blame<cr>
 map <leader>gd :Gdiff<cr>
 map <leader>gw :Gwrite<cr>
 map <leader>gr :Gread<cr>
