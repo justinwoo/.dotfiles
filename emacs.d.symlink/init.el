@@ -64,6 +64,7 @@
         nix-mode
         nixpkgs-fmt
         org
+        org-roam
         plantuml-mode
         popwin
         powerline
@@ -74,6 +75,7 @@
         spacemacs-theme
         swiper
         toml-mode
+        tide
         typescript-mode
         undo-fu
         use-package
@@ -540,8 +542,25 @@ If the error list is visible, hide it.  Otherwise, show it."
     (helm-mode 1)
     (add-hook 'typescript-mode-hook 'company-mode)
     (add-hook 'typescript-mode-hook 'flycheck-mode)
-    (add-hook 'typescript-mode-hook 'lsp-mode)
-  ))
+    ;; (add-hook 'typescript-mode-hook 'lsp-mode)
+    (add-hook 'typescript-mode-hook #'setup-tide-mode)
+    (evil-define-key 'normal typescript-mode-map
+      ",f"  'tide-fix
+      ",gd" 'tide-jump-to-definition
+      ",gi" 'tide-jump-to-implementation
+      ",ge" 'tide-goto-error
+      ",gl" 'tide-goto-line-reference
+      ",gr" 'tide-goto-reference)
+    ))
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
 
 ;; for references: M-?
 (add-to-list 'xref-backend-functions 'psc-ide-xref-backend)

@@ -6,3 +6,5 @@ backup
 bookmarks
 *.cache
 .lsp-session*
+org-roam.db
+.org-id-locations
