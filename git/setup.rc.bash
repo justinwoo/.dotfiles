@@ -46,6 +46,8 @@ alias git-commits-since-origin-master='git log "origin/master..$(ggbn)" --pretty
 alias hb='gh repo view --web'
 alias hrrou='git remote rename origin upstream'
 alias hrrjo='git remote rename justinwoo origin'
+alias prv="gh pr view --web"
+alias prc="gh pr create --fill --web"
 # github cli uses some shit that doesn't use actual defined colors for some reason
 export GLAMOUR_STYLE=light
 
