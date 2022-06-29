@@ -38,6 +38,7 @@ my-pkgs // {
     bat
     colordiff
     direnv
+    easyeffects
     emacs28
     exiftool
     fd

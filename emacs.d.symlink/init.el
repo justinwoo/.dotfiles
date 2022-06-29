@@ -740,5 +740,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 (helm-mode 1)
 
 ;; after this is trash
-(setq custom-file "/dev/null")
+(setq custom-file "~/.emacs_custom_shit_fest.el")
+(unless (file-exists-p custom-file)
+  (make-empty-file custom-file))
 (load custom-file)
