@@ -17,6 +17,7 @@ alias cns='cached-nix-shell'
 alias ns='nix-shell'
 alias ns2='nix-shell $SHELL_NIX'
 alias remove_exif='fd -e jpg -e png -x exiftool -all= "{}"'
+alias gitroot='git rev-parse --show-toplevel'
 
 if [[ -f $(command -v xclip) ]]
 then
