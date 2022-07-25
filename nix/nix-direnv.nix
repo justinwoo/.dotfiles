@@ -5,8 +5,8 @@ import
     pkgs.fetchFromGitHub {
       owner = "nix-community";
       repo = "nix-direnv";
-      rev = "0e844baa7ff02d29cd45a8627a33dc299d7b1cc8";
-      sha256 = "17f9h4j42cr6dw813rhyp8fc3n4ci1nbh63ag8kxzx7x7l56jsq5";
+      rev = "02e11da5fb485ebc2b3746cbf024fc12f9376a8c";
+      sha256 = "0r4qwkdlz9j7ixiv29dml7c5ckwrd658im1m6hmgbfrsancx9jjk";
     }
   )
 { }

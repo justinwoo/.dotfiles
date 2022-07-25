@@ -36,6 +36,7 @@ my-pkgs // {
     autorandr
     bash-completion
     bat
+    cached-nix-shell
     colordiff
     direnv
     easyeffects
