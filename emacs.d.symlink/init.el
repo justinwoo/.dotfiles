@@ -100,23 +100,29 @@
   :config
   (general-evil-setup)
   (setq general-default-keymaps 'evil-normal-state-map)
+
   (general-define-key
    ";" 'evil-ex)
+
   (general-define-key
    :keymaps 'insert
    "C-/" 'helm-company
    "M-/" 'helm-dabbrev
    "C-p" 'company-dabbrev)
+
   (general-define-key
    :keymaps 'visual
    "SPC a r" 'align-regexp
    "SPC c l" 'comment-or-uncomment-region)
+
   (general-define-key :keymaps 'evil-insert-state-map
                       (general-chord "kj") 'evil-normal-state)
+
   (general-define-key
    :keymaps 'normal
    "Q"       'evil-execute-macro
    )
+
   (general-define-key
    :states 'normal
    :keymaps 'override
@@ -215,6 +221,7 @@ kill internal buffers too."
 (use-package evil-collection
   :init
   (evil-collection-init 'dired)
+  (evil-collection-init 'xref)
   )
 
 (use-package evil-surround
