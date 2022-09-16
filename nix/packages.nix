@@ -39,7 +39,6 @@ my-pkgs // {
     cached-nix-shell
     colordiff
     direnv
-    easyeffects
     emacs28
     exiftool
     fd
