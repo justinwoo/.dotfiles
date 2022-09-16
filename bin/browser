@@ -1,0 +1,7 @@
+source ~/.localrc
+if [ -n $BROWSER ]
+then
+  $BROWSER
+else
+  chrome
+fi

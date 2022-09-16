@@ -278,7 +278,7 @@ mode "quickprograms" {
 bindsym $sup+t mode "quickprograms"
 
 # shortcuts
-bindsym $sup+Shift+Return exec chrome
+bindsym $sup+Shift+Return exec browser
 bindsym $sup+Shift+p exec nautilus ~/Pictures
 bindsym $sup+semicolon [title="(VLC|mpv)"] scratchpad show
 bindsym $sup+Shift+semicolon [instance="filezilla"] scratchpad show
