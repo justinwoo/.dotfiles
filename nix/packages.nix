@@ -11,11 +11,13 @@ let
   my-pkgs = builtins.listToAttrs (
     map importFrom [
       "my-st"
-      "mkgif"
-      "nix-direnv"
-      "update-fetch"
       "z"
-    ]
+    ] ++ pkgs.lib.optional (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit)
+      [
+        "mkgif"
+        "nix-direnv"
+        "update-fetch"
+      ]
   );
 
   dynamic-linker = pkgs.stdenv.cc.bintools.dynamicLinker;
@@ -24,19 +26,12 @@ let
 
 in
 my-pkgs // {
-  inherit (pkgs) feh i3 i3status rofi scrot;
-
-  inherit (pkgs.gnome3) eog evince;
-
   inherit (pkgs.gitAndTools) git-extras hub;
-
-  inherit (pkgs.unixtools) route;
 
   inherit (pkgs)
     autorandr
     bash-completion
     bat
-    cached-nix-shell
     colordiff
     direnv
     emacs28
@@ -44,21 +39,29 @@ my-pkgs // {
     fd
     fzf
     gh
-    glibcLocales
-    gnumake
     jq
     neovim
     nix-bash-completions
     nix-prefetch-git
     nixpkgs-fmt
     nodejs-16_x
-    pamixer
     ripgrep
     shellcheck
-    sox
     sqlite-interactive
     tig
     tmux
+    ;
+} // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit) {
+  inherit (pkgs) feh i3 i3status rofi scrot;
+  inherit (pkgs.gnome3) eog evince;
+  inherit (pkgs.unixtools) route;
+
+  inherit (pkgs)
+    cached-nix-shell
+    glibcLocales
+    gnumake
+    pamixer
+    sox
     watchexec
     xdotool
     ;
