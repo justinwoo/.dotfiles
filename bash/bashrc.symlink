@@ -53,6 +53,10 @@ if [[ -f ~/.nix-profile/z/z.sh ]]; then
   . ~/.nix-profile/z/z.sh
 fi
 
+if [[ $(uname -m) == 'arm64' && $(uname) == 'Darwin' ]]; then
+  source ~/.darwinrc
+fi
+
 # local should come last???
 if [[ -f ~/.localrc ]]
 then

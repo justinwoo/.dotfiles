@@ -1,0 +1,2 @@
+# why is this not picked up in completions?
+source ~/.nix-profile/share/bash-completion/completions/git-prompt.sh
