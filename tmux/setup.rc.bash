@@ -40,5 +40,8 @@ tk() {
     fi
 }
 
-complete -F _tm tm
-complete -F _tm tk
+if [[ -f $(command -v complete) ]]
+then
+    complete -F _tm tm
+    complete -F _tm tk
+fi

@@ -207,12 +207,13 @@ kill internal buffers too."
    (reusable-frames . visible)
    (window-height   . 0.33)))
 
+(setq evil-want-keybinding nil)
+
 (use-package evil
   :ensure t
   :init
   (progn
     (setq evil-undo-system 'undo-fu)
-    (setq evil-want-keybinding nil)
     (evil-mode 1)
     (evil-select-search-module 'evil-search-module 'evil-search)
     (evil-declare-change-repeat 'company-complete)
@@ -328,8 +329,10 @@ kill internal buffers too."
   (modus-themes-load-operandi)
   :config
   (set-face-attribute 'default nil
-                      :family "Noto Sans Mono CJK JP"
-                      :height 100
+                      :family (cond ((eq system-type 'darwin) "Monaco")
+                                    (t "Noto Sans Mono CJK JP"))
+                      :height (cond ((eq system-type 'darwin) 140)
+                                    (t 100))
                       :weight 'normal
                       :width 'normal))
 

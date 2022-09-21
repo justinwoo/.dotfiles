@@ -22,4 +22,8 @@ _c() {
     COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
   fi
 }
-complete -F _c c
+
+if [[ -f $(command -v complete) ]]
+then
+  complete -F _c c
+fi

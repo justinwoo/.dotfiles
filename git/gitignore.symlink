@@ -42,3 +42,4 @@ result*
 .cache
 stack.yaml.lock
 *.jwk
+*.local*

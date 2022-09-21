@@ -5,4 +5,7 @@ if [ -f $HOME/.nix-profile/etc/bash_completion.d ]; then
   done
 fi
 
-complete -F _systemctl scu
+if [[ -f $(command -v complete) ]]
+then
+  complete -F _systemctl scu
+fi

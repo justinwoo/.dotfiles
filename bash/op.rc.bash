@@ -11,4 +11,7 @@ op() {
   fi
 }
 
-complete -o default -o bashdefault op
+if [[ -f $(command -v complete) ]]
+then
+  complete -o default -o bashdefault op
+fi
