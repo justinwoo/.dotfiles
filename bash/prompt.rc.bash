@@ -73,9 +73,19 @@ function my_prompt {
             git_color=$RED
         fi
 
-        __git_ps1_show_upstream
         # shellcheck disable=2154
-        diff=$p
+        if [[ -z $OSX ]]
+        then
+            __git_ps1_show_upstream
+            diff=$p
+        else
+            GIT_PS1=$(__git_ps1)
+            if [[ $GIT_PS1 == *"|"* ]]; then
+                diff=" $(__git_ps1  | cut -d '(' -f 2 | cut -d '|' -f 2 | cut -d ')' -f 1)"
+            else
+                diff=""
+            fi
+        fi
         if [[ $diff != *=* ]]; then
             git_info+="$MAGENTA$diff"
         fi
