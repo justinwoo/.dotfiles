@@ -195,3 +195,9 @@ key_bindings:
   - { key: F10,      mods: Super,   chars: "\x1b[21;3~"                  }
   - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                  }
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                  }
+  # https://godoc.org/github.com/tiborvass/uniline/ansi#Code
+  # https://github.com/jwilm/alacritty/issues/93#issuecomment-334790547
+  - { key: F,  mods: Alt,           chars: "\x1bf"                       }
+  - { key: B,  mods: Alt,           chars: "\x1bb"                       }
+  # https://github.com/jwilm/alacritty/issues/93#issuecomment-427592040
+  - { key: D,  mods: Alt,           chars: "\x1bd"                       }
