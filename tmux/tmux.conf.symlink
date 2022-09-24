@@ -77,6 +77,8 @@ set -g status-left-length 20
 set -g status-right-length 150
 set -g status-left '#[fg=blue](#S) #[default]'
 set-option -g status-right ''
-set-window-option -g window-status-format '#[fg=white]#{window_index} #[fg=default]#{pane_current_command} #[fg=default]#(echo "#{pane_current_path}" | rev | cut -d'/' -f-1 | rev) #[bg=default]'
-set-window-option -g window-status-current-format '#[fg=magenta]#{window_index} #[fg=blue]#{pane_current_command} #[fg=blue]#(echo "#{pane_current_path}" | rev | cut -d'/' -f-1 | rev) #[bg=default]'
+set-window-option -g window-status-format '#[fg=white]#{window_index} #[fg=default]#{pane_current_command} #[fg=default]#(basename #{pane_current_path}) #[bg=default]'
+set-window-option -g window-status-current-format '#[fg=magenta]#{window_index} #[fg=blue]#{pane_current_command} #[fg=blue]#(basename #{pane_current_path}) #[bg=default]'
 set -g window-status-activity-style 'fg=cyan'
+
+source-file ~/.tmux.conf.local
