@@ -4,8 +4,6 @@ set-option -g default-shell $SHELL
 bind % split-window -h -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
-bind Tab next-window
-bind S-Tab next-window
 bind z resize-pane -Z
 set -g status-keys vi
 set -g history-limit 10000
@@ -23,6 +21,12 @@ bind h select-pane -L
 bind l select-pane -R
 bind k select-pane -U
 bind j select-pane -D
+bind -n C-M-h select-pane -L
+bind -n C-M-l select-pane -R
+bind -n C-M-k select-pane -U
+bind -n C-M-j select-pane -D
+bind -n C-M-n next-window
+bind -n C-M-p previous-window
 
 # reload shit
 bind r source-file ~/.tmux.conf
@@ -46,7 +50,7 @@ bind-key ` send-prefix
 setw -g mode-keys vi
 
 # new omniconfig for mouse
-set-option -g -q mouse on
+set -g mouse on
 
 # take some of JaredCTaylor's tmux config
 set -sg escape-time 0
@@ -61,6 +65,7 @@ set -g display-panes-time 2000
 # random styling
 # status line
 set -g status-justify left
+# TODO: does this bg color work anywhere really
 set -g status-style fg=white,bg=black
 set -g status-interval 30
 
