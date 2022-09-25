@@ -6,6 +6,10 @@ enc() {
   $EMACS "emacs $1 & disown" 2> /dev/null
 }
 
+encp() {
+  $EMACS "emacs $PWD & disown" 2> /dev/null
+}
+
 # start daemon
 emd() {
   $EMACS "emacs --daemon"
