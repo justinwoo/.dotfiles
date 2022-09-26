@@ -27,6 +27,7 @@ bind -n C-M-k select-pane -U
 bind -n C-M-j select-pane -D
 bind -n C-M-n next-window
 bind -n C-M-p previous-window
+bind -n C-M-z resize-pane -Z
 
 # reload shit
 bind r source-file ~/.tmux.conf
