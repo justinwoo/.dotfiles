@@ -159,7 +159,7 @@
    "SPC f d" 'delete-frame
    "SPC f f" 'flycheck-errors-in-new-frame
    "SPC f j" 'dired-other-frame
-   "SPC f n" 'make-frame-command
+   "SPC f n" 'my-make-frame-command
    "SPC f c" 'clone-indirect-buffer-other-window
    "SPC f q" 'evil-quit
    "SPC h f" 'helm-find-files
@@ -180,6 +180,16 @@
 
 (defun open-config () (interactive) (find-file "~/.emacs.d/init.el"))
 (defun reload-config () (interactive) (load-file "~/.emacs.d/init.el"))
+
+(defun my-make-frame-command ()
+  "from the original make-frame-command"
+  (interactive)
+  (if (display-graphic-p)
+      (make-frame)
+    (select-frame (make-frame)))
+  ;; lol make-frame alist args dont work
+  (set-frame-size (selected-frame) 100 40)
+  )
 
 (defun my-kill-this-buffer ()
   "Why the fuck does kill-this-buffer require menu"
