@@ -137,6 +137,8 @@
    "SPC p p" 'helm-projectile-switch-project
    "SPC b b" 'helm-buffers-list
    "SPC b d" 'my-kill-this-buffer
+   "SPC b n" 'next-buffer
+   "SPC b p" 'previous-buffer
    "SPC b D" 'spacemacs/kill-matching-buffers-rudely
    "SPC b C-d" 'spacemacs/kill-matching-buffers-rudely
    "SPC b m" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
