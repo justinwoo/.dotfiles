@@ -188,7 +188,7 @@
       (make-frame)
     (select-frame (make-frame)))
   ;; lol make-frame alist args dont work
-  (set-frame-size (selected-frame) 100 40)
+  (set-frame-size (selected-frame) 100 100)
   )
 
 (defun my-kill-this-buffer ()
