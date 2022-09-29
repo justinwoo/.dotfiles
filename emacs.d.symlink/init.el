@@ -121,6 +121,10 @@
   (general-define-key
    :keymaps 'normal
    "Q"       'evil-execute-macro
+   "M-h"     'evil-window-left
+   "M-l"     'evil-window-right
+   "M-j"     'evil-window-down
+   "M-k"     'evil-window-up
    )
 
   (general-define-key
@@ -157,7 +161,7 @@
    "SPC f D" 'delete-other-frames
    "SPC f b" 'display-buffer-other-frame
    "SPC f d" 'delete-frame
-   "SPC f f" 'flycheck-errors-in-new-frame
+   "SPC f f" 'find-file-other-frame
    "SPC f j" 'dired-other-frame
    "SPC f n" 'my-make-frame-command
    "SPC f c" 'clone-indirect-buffer-other-window

@@ -1,3 +1,7 @@
+shell:
+  program: /opt/homebrew/bin/bash
+  args:
+    - --login
 window:
   opacity: 0.9
   dimensions:
@@ -208,3 +212,11 @@ key_bindings:
   - { key: N,        mods: Alt,     chars: "\x1bn"                       }
   - { key: P,        mods: Alt,     chars: "\x1bp"                       }
   - { key: Z,        mods: Alt,     chars: "\x1bz"                       }
+
+  # https://github.com/alacritty/alacritty/wiki/Keyboard-mappings
+  - { key: Space,     mods: Alt,          chars: " "                     }
+  - { key: Back, mods: Super, chars: "\x15" } # delete word/line
+  - { key: Left,     mods: Alt,     chars: "\x1bb"                       } # one word left
+  - { key: Right,    mods: Alt,     chars: "\x1bf"                       } # one word right
+  - { key: Left,     mods: Command, chars: "\x1bOH",   mode: AppCursor   } # Home
+  - { key: Right,    mods: Command, chars: "\x1bOF",   mode: AppCursor   } # End
