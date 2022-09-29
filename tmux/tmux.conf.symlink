@@ -21,6 +21,13 @@ bind h select-pane -L
 bind l select-pane -R
 bind k select-pane -U
 bind j select-pane -D
+bind -n M-h select-pane -L
+bind -n M-l select-pane -R
+bind -n M-k select-pane -U
+bind -n M-j select-pane -D
+bind -n M-n next-window
+bind -n M-p previous-window
+bind -n C-M-z resize-pane -Z
 bind -n C-M-h select-pane -L
 bind -n C-M-l select-pane -R
 bind -n C-M-k select-pane -U
