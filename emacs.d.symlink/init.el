@@ -125,6 +125,7 @@
    "M-l"     'evil-window-right
    "M-j"     'evil-window-down
    "M-k"     'evil-window-up
+   "s-p"     'projectile-find-file
    )
 
   (general-define-key
