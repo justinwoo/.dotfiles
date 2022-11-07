@@ -9,20 +9,17 @@ let
   };
 
   my-pkgs = builtins.listToAttrs (
-    map importFrom [
+    map importFrom ([
       "my-st"
       "z"
-    ] ++ pkgs.lib.optional (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit)
+    ] ++ pkgs.lib.optionals (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit)
       [
         "mkgif"
         "nix-direnv"
-        "update-fetch"
+        # "update-fetch"
       ]
+    )
   );
-
-  dynamic-linker = pkgs.stdenv.cc.bintools.dynamicLinker;
-  buildInputs = [ pkgs.gmp pkgs.zlib pkgs.ncurses5 pkgs.stdenv.cc.cc.lib ];
-  libPath = pkgs.lib.makeLibraryPath buildInputs;
 
 in
 my-pkgs // {
@@ -42,7 +39,7 @@ my-pkgs // {
     jq
     neovim
     nix-bash-completions
-    nix-prefetch-git
+    # nix-prefetch-git
     nixpkgs-fmt
     nodejs-16_x
     ripgrep
@@ -54,14 +51,11 @@ my-pkgs // {
 } // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit) {
   inherit (pkgs) feh i3 i3status rofi scrot;
   inherit (pkgs.gnome3) eog evince;
-  inherit (pkgs.unixtools) route;
 
   inherit (pkgs)
-    cached-nix-shell
     glibcLocales
     gnumake
     pamixer
-    sox
     watchexec
     xdotool
     ;
