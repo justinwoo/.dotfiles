@@ -43,3 +43,4 @@ result*
 stack.yaml.lock
 *.jwk
 *.local*
+local/
