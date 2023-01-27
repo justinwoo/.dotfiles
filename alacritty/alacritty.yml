@@ -3,7 +3,7 @@ shell:
   args:
     - --login
 window:
-  opacity: 0.9
+  opacity: 0.95
   dimensions:
     columns: 100
     lines: 30
