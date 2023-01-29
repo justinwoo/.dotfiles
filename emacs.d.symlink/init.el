@@ -16,7 +16,7 @@
 (load-library "iso-transl")
 (setq default-buffer-file-coding-system 'utf-8)
 (tool-bar-mode 0)
-(toggle-scroll-bar 0)
+; (toggle-scroll-bar 0)
 (menu-bar-mode -1)
 (setq default-fill-column 81)
 (setq fci-rule-column 81)
