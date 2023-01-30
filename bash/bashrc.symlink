@@ -55,6 +55,8 @@ fi
 
 if [[ $(uname -m) == 'arm64' && $(uname) == 'Darwin' ]]; then
   export OSX=TRUE
+  export MACOS=TRUE
+  export DARWIN=TRUE
   # please
   export HOMEBREW_NO_AUTO_UPDATE=TRUE
   source ~/.darwinrc

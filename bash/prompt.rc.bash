@@ -74,7 +74,7 @@ function my_prompt {
         fi
 
         # shellcheck disable=2154
-        if [[ -z $OSX ]]
+        if [[ -z $MACOS ]]
         then
             __git_ps1_show_upstream
             diff=$p
