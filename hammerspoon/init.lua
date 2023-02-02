@@ -1,20 +1,5 @@
-function toggleApp(appName)
-    local app = hs.appfinder.appFromName(appName)
-
-    if (app) then
-        if (app:isFrontmost()) then
-            app:hide()
-        else
-            app:activate()
-        end
-    else
-        hs.alert.show("Could not find app from name: " .. appName)
-    end
-end
-
-function bindApp(modifiers, key, appName)
-    hs.hotkey.bind(modifiers, key, function() toggleApp(appName) end)
-end
+require("functions")
+require("filters")
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function() hs.reload() end)
 
@@ -29,5 +14,26 @@ bindApp({"alt"}, "y", "Google Chrome")
 bindApp({"alt"}, "i", "Slack")
 bindApp({"alt"}, ";", "mpv")
 bindApp({"alt", "shift"}, ";", "FileZilla")
+
+hs.hotkey.bind({"alt"}, "[", function()
+    local focused = hs.window.focusedWindow()
+    focused:focusWindowWest(nonScratchFilter:getWindows(), true)
+end)
+
+hs.hotkey.bind({"alt"}, "]", function()
+    local focused = hs.window.focusedWindow()
+    focused:focusWindowEast(nonScratchFilter:getWindows(), true)
+end)
+
+hs.hotkey.bind({"alt"}, "c", function()
+    local focused = hs.window.focusedWindow()
+    focused:centerOnScreen()
+end)
+
+hs.hotkey.bind({"alt", "shift"}, "3", function()
+    local focused = hs.window.focusedWindow()
+    focused:setSize(hs.geometry.size(1400, 900))
+    focused:centerOnScreen()
+end)
 
 hs.alert.show("Config loaded")
