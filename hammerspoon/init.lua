@@ -36,4 +36,10 @@ hs.hotkey.bind({"alt", "shift"}, "3", function()
     focused:centerOnScreen()
 end)
 
+hs.hotkey.bind({"alt", "shift"}, "4", function()
+    local focused = hs.window.focusedWindow()
+    focused:setSize(hs.geometry.size(1600, 1000))
+    focused:centerOnScreen()
+end)
+
 hs.alert.show("Config loaded")
