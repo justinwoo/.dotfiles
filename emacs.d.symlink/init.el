@@ -56,6 +56,7 @@
         js2-mode
         jsonnet-mode
         key-chord
+        lua-mode
         lsp-mode
         lsp-ui
         magit
@@ -345,7 +346,7 @@ kill internal buffers too."
 (use-package modus-themes :ensure t
   :preface (defvar region-fg nil)
   :init
-  (modus-themes-load-operandi)
+  (load-theme 'modus-operandi :no-confirm)
   :config
   (set-face-attribute 'default nil
                       :family (cond ((eq system-type 'darwin) "Monaco")
@@ -553,6 +554,10 @@ If the error list is visible, hide it.  Otherwise, show it."
           (evil-next-line (- line-end 1 line-start))
           (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
     (message "You need an active region to use this.")))
+
+(use-package lua-mode
+  :mode ("\\.lua\\'")
+  )
 
 (use-package typescript-mode
   :init
