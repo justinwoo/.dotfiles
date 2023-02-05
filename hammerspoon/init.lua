@@ -1,5 +1,6 @@
 require("functions")
 require("filters")
+require("grid")
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function() hs.reload() end)
 
@@ -28,6 +29,14 @@ end)
 hs.hotkey.bind({"alt"}, "c", function()
     local focused = hs.window.focusedWindow()
     focused:centerOnScreen()
+end)
+
+hs.hotkey.bind({"alt", "shift"}, "1", function()
+    hs.window.focusedWindow():move(hs.geometry({x = 0, y = 0, w = 0.5, h = 1}))
+end)
+
+hs.hotkey.bind({"alt", "shift"}, "2", function()
+    hs.window.focusedWindow():move(hs.geometry({x = 0.5, y = 0, w = 0.5, h = 1}))
 end)
 
 hs.hotkey.bind({"alt", "shift"}, "3", function()
