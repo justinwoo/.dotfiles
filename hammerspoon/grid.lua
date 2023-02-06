@@ -1,4 +1,4 @@
-gridWidth = 4
+gridWidth = 3
 
 hs.grid.setMargins(hs.geometry({0, 0}))
 
