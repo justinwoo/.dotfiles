@@ -1,5 +1,7 @@
 gridWidth = 4
 
+hs.grid.setMargins(hs.geometry({0, 0}))
+
 function updateGridGeometry(displayAlert)
     hs.grid.setGrid(hs.geometry({w = gridWidth, h = 1}))
     if (displayAlert) then hs.alert.show("Grid width: " .. gridWidth) end
