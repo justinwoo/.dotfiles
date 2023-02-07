@@ -85,6 +85,11 @@
         xref
         ))
 
+;; mac os
+(setq mac-command-modifier 'super)
+(setq mac-option-modifier 'meta)
+(global-set-key (kbd "s-p") '(lambda () (interactive) (message "Stop trying to print!!!")))
+
 ;; fuck you emacs
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -126,7 +131,7 @@
    "M-l"     'evil-window-right
    "M-j"     'evil-window-down
    "M-k"     'evil-window-up
-   "s-p"     'projectile-find-file
+   ;; "s-p"     'projectile-find-file
    "M-p"     'projectile-find-file
    )
 
