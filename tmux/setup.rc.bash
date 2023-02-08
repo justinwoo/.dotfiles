@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+if [[ -z $MACOS ]]
+then
+    export TMUX_SHELL="/opt/homebrew/bin/bash"
+else
+    export TMUX_SHELL="$SHELL"
+fi
+
 alias tks="tmux kill-session"
 alias tkS="tmux kill-server"
 

@@ -1,5 +1,5 @@
 set-option default-terminal "xterm-256color"
-set-option -g default-shell $SHELL
+set-option -g default-shell $TMUX_SHELL
 
 # open new windows in whatever that's not my home
 bind % split-window -h -c "#{pane_current_path}"
