@@ -39,6 +39,19 @@ hs.hotkey.bind({"alt", "shift"}, "2", function()
     hs.window.focusedWindow():move(hs.geometry({x = 0.5, y = 0, w = 0.5, h = 1}))
 end)
 
+hs.hotkey.bind({"alt", "shift"}, "[", function()
+    hs.window.focusedWindow():move(hs.geometry({x = 0, y = 0, w = 0.333, h = 1}))
+end)
+
+hs.hotkey.bind({"alt", "shift"}, "]", function()
+    hs.window.focusedWindow():move(hs.geometry({
+        x = 0.667,
+        y = 0,
+        w = 0.334,
+        h = 1
+    }))
+end)
+
 hs.hotkey.bind({"alt", "shift"}, "3", function()
     local focused = hs.window.focusedWindow()
     focused:setSize(hs.geometry.size(1400, 900))
