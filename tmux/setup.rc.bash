@@ -2,9 +2,9 @@
 
 if [[ -z $MACOS ]]
 then
-    export TMUX_SHELL="/opt/homebrew/bin/bash"
-else
     export TMUX_SHELL="$SHELL"
+else
+    export TMUX_SHELL="/opt/homebrew/bin/bash"
 fi
 
 alias tks="tmux kill-session"
