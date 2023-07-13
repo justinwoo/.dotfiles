@@ -40,6 +40,7 @@
         evil-collection
         evil-escape
         evil-surround
+        evil-matchit
         flycheck
         flycheck-rust
         general
@@ -255,6 +256,12 @@ kill internal buffers too."
   :init
   (progn
     (global-evil-surround-mode 1)))
+
+(use-package evil-matchit
+  :ensure t
+  :init
+  (progn
+    (global-evil-matchit-mode 1)))
 
 (use-package evil-escape :ensure t
   :diminish evil-escape-mode
