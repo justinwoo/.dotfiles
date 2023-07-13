@@ -247,6 +247,7 @@ kill internal buffers too."
 
 (use-package evil-collection
   :init
+  (setq evil-want-keybinding nil)
   (evil-collection-init 'dired)
   (evil-collection-init 'xref)
   )
