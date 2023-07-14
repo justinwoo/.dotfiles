@@ -1,4 +1,4 @@
-{ pkgs ? import ./pinned.nix { } }:
+{ pkgs ? import <nixpkgs> { } }:
 let
   importFrom = basename: {
     name = basename;
@@ -10,7 +10,6 @@ let
 
   my-pkgs = builtins.listToAttrs (
     map importFrom ([
-      "my-st"
       "z"
     ] ++ pkgs.lib.optionals (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit)
       [
@@ -23,7 +22,7 @@ let
 
 in
 my-pkgs // {
-  inherit (pkgs.gitAndTools) git-extras hub;
+  inherit (pkgs.gitAndTools) git git-extras hub;
 
   inherit (pkgs)
     autorandr
@@ -41,7 +40,7 @@ my-pkgs // {
     nix-bash-completions
     # nix-prefetch-git
     nixpkgs-fmt
-    nodejs-16_x
+    nodejs-18_x
     ripgrep
     shellcheck
     sqlite-interactive
