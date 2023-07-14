@@ -19,6 +19,10 @@ bindApp({"alt"}, "i", "Slack")
 bindApp({"alt"}, ";", "mpv")
 bindApp({"alt", "shift"}, ";", "FileZilla")
 
+hs.hotkey.bind({"cmd"}, "p", function()
+    hs.alert.show("No printing allowed")
+end)
+
 hs.hotkey.bind({"alt"}, "[", function()
     local focused = hs.window.focusedWindow()
     focused:focusWindowWest(nonScratchFilter:getWindows(), true)
