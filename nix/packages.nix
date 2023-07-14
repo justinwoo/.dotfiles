@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import ./pinned.nix { } }:
 let
   importFrom = basename: {
     name = basename;
@@ -10,6 +10,7 @@ let
 
   my-pkgs = builtins.listToAttrs (
     map importFrom ([
+      "my-st"
       "z"
     ] ++ pkgs.lib.optionals (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit)
       [
