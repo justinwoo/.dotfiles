@@ -45,14 +45,11 @@ export DOT=$HOME/.dotfiles
 export TERMINAL=gnome-terminal
 export PROJECTS=~/Code
 
-for file in "$DOT"/*/*.rc.bash; do
-  source "$file";
-done;
-
 if [[ -f ~/.nix-profile/z/z.sh ]]; then
   . ~/.nix-profile/z/z.sh
 fi
 
+# do MACOS setup before other scripts
 if [[ $(uname -m) == 'arm64' && $(uname) == 'Darwin' ]]; then
   export OSX=TRUE
   export MACOS=TRUE
@@ -61,6 +58,10 @@ if [[ $(uname -m) == 'arm64' && $(uname) == 'Darwin' ]]; then
   export HOMEBREW_NO_AUTO_UPDATE=TRUE
   source ~/.darwinrc
 fi
+
+for file in "$DOT"/*/*.rc.bash; do
+  source "$file";
+done;
 
 # local should come last???
 if [[ -f ~/.localrc ]]
