@@ -3,14 +3,12 @@ require("filters")
 require("grid")
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function() hs.reload() end)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L", function()
-    hs.caffeinate.lockScreen()
-end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L",
+               function() hs.caffeinate.lockScreen() end)
 
 hs.hotkey.bind({"alt"}, "`",
                function() hs.application.frontmostApplication():hide() end)
 
-bindApp({"alt", "shift"}, "p", "Finder")
 bindApp({"alt"}, "e", "emacs")
 bindApp({"alt"}, "o", "iTerm2")
 bindApp({"alt"}, "u", "Telegram")
@@ -19,9 +17,18 @@ bindApp({"alt"}, "i", "Slack")
 bindApp({"alt"}, ";", "mpv")
 bindApp({"alt", "shift"}, ";", "FileZilla")
 
-hs.hotkey.bind({"cmd"}, "p", function()
-    hs.alert.show("No printing allowed")
+hs.hotkey.bind({"alt", "shift"}, "p", function()
+    local finder = hs.appfinder.appFromName('Finder')
+    local windows = finder:allWindows()
+    if #windows == 1 then
+        hs.execute("open /Users/justin/Desktop/")
+    else
+        toggleApp("Finder")
+    end
 end)
+
+hs.hotkey
+    .bind({"cmd"}, "p", function() hs.alert.show("No printing allowed") end)
 
 hs.hotkey.bind({"ctrl", "alt"}, "return", function()
     local focused = hs.window.focusedWindow()

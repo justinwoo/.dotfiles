@@ -29,4 +29,3 @@ end
 function bindApp(modifiers, key, appName)
     hs.hotkey.bind(modifiers, key, function() toggleApp(appName) end)
 end
-
