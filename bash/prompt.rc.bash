@@ -122,4 +122,4 @@ function my_prompt {
     PS1="$LOCAL_PS1_PREFIX$jobs_$prefix $dir $git$exit$usr "
 }
 
-export PROMPT_COMMAND=my_prompt
+export PROMPT_COMMAND="my_prompt;$PROMPT_COMMAND"
