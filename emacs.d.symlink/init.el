@@ -573,15 +573,6 @@ If the error list is visible, hide it.  Otherwise, show it."
   )
 
 (use-package typescript-mode
-  :init
-  (progn
-    (helm-mode 1)
-    (add-hook 'typescript-mode-hook 'company-mode)
-    (add-hook 'typescript-mode-hook 'flycheck-mode)
-    (add-hook 'typescript-mode-hook 'lsp-mode)
-  ))
-
-(use-package typescript-mode
   :mode ("\\.jsx\\'"
          "\\.tsx\\'")
   :init
