@@ -2,18 +2,16 @@
   "title": "My rules",
   "rules": [
     {
-      "description": "Toggle iTerm2",
+      "description": "Home to ctrl+a",
       "manipulators": [
         {
           "from": {
-            "key_code": "o",
-            "modifiers": {
-              "mandatory": ["left_option"]
-            }
+            "key_code": "home"
           },
           "to": [
             {
-              "shell_command": "osascript ~/.dotfiles/applescripts/toggle-program.applescript iTerm2"
+              "key_code": "a",
+              "modifiers": "control"
             }
           ],
           "type": "basic"
@@ -21,18 +19,22 @@
       ]
     },
     {
-      "description": "Toggle Telegram",
+      "description": "Shift+home to shift+ctrl+a",
       "manipulators": [
         {
           "from": {
-            "key_code": "u",
+            "key_code": "home",
             "modifiers": {
-              "mandatory": ["left_option"]
+              "mandatory": ["shift"]
             }
           },
           "to": [
             {
-              "shell_command": "osascript ~/.dotfiles/applescripts/toggle-program.applescript Telegram"
+              "key_code": "a",
+              "modifiers": [
+                "shift",
+                "control"
+              ]
             }
           ],
           "type": "basic"
@@ -40,18 +42,16 @@
       ]
     },
     {
-      "description": "Toggle mpv",
+      "description": "End to ctrl+e",
       "manipulators": [
         {
           "from": {
-            "key_code": "semicolon",
-            "modifiers": {
-              "mandatory": ["left_option"]
-            }
+            "key_code": "end"
           },
           "to": [
             {
-              "shell_command": "osascript ~/.dotfiles/applescripts/bring-to-front-by-search.applescript mpv"
+              "key_code": "e",
+              "modifiers": "control"
             }
           ],
           "type": "basic"
@@ -59,37 +59,22 @@
       ]
     },
     {
-      "description": "Toggle Emacs",
+      "description": "Shift+end to shift+ctrl+e",
       "manipulators": [
         {
           "from": {
-            "key_code": "e",
+            "key_code": "end",
             "modifiers": {
-              "mandatory": ["left_option"]
+              "mandatory": ["shift"]
             }
           },
           "to": [
             {
-              "shell_command": "osascript ~/.dotfiles/applescripts/bring-to-front-by-search.applescript emacs"
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "Dismiss current",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "grave_accent_and_tilde",
-            "modifiers": {
-              "mandatory": ["left_option"]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "osascript ~/.dotfiles/applescripts/dismiss-current.applescript"
+              "key_code": "e",
+              "modifiers": [
+                "shift",
+                "control"
+              ]
             }
           ],
           "type": "basic"
