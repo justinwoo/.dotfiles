@@ -17,7 +17,9 @@ function toggleApp(appName)
 
     if (app) then
         if (app:isFrontmost()) then
+            local windows = hs.window.filter.defaultCurrentSpace:getWindows()
             app:hide()
+            windows[2]:focus()
         else
             app:activate()
         end

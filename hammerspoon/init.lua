@@ -6,8 +6,11 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function() hs.reload() end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L",
                function() hs.caffeinate.lockScreen() end)
 
-hs.hotkey.bind({"alt"}, "`",
-               function() hs.application.frontmostApplication():hide() end)
+hs.hotkey.bind({"alt"}, "`", function()
+    local windows = hs.window.filter.defaultCurrentSpace:getWindows()
+    hs.application.frontmostApplication():hide()
+    windows[2]:focus()
+end)
 
 bindApp({"alt"}, "e", "emacs")
 bindApp({"alt"}, "o", "iTerm2")
