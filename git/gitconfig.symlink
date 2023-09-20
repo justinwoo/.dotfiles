@@ -12,6 +12,7 @@
         wc = whatchanged
         count = !git shortlog -sn
         l = log
+        rl = reflog --format='%C(auto)%h %<|(17)%gd %C(blue)%ci%C(reset) %s'
 [color]
         diff = auto
         status = auto
