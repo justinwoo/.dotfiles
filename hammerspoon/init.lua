@@ -30,8 +30,8 @@ hs.hotkey.bind({"alt", "shift"}, "p", function()
     end
 end)
 
-hs.hotkey
-    .bind({"cmd"}, "p", function() hs.alert.show("No printing allowed") end)
+-- hs.hotkey
+--     .bind({"cmd"}, "p", function() hs.alert.show("No printing allowed") end)
 
 hs.hotkey.bind({"ctrl", "alt"}, "return", function()
     local focused = hs.window.focusedWindow()
