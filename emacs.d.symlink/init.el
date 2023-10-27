@@ -93,6 +93,9 @@
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
 
+(when (eq system-type 'darwin)
+  (setq dired-use-ls-dired nil))
+
 ;; fuck you emacs
 (defalias 'yes-or-no-p 'y-or-n-p)
 
