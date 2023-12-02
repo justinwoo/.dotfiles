@@ -17,7 +17,7 @@ bindApp({"alt"}, "o", "iTerm2")
 bindApp({"alt"}, "u", "Telegram")
 bindApp({"alt"}, "y", "Google Chrome")
 bindApp({"alt"}, "i", "Slack")
-bindApp({"alt"}, ";", "mpv")
+bindApp({"alt"}, ";", "IINA")
 bindApp({"alt", "shift"}, ";", "FileZilla")
 
 hs.hotkey.bind({"alt", "shift"}, "p", function()

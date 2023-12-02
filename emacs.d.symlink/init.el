@@ -89,7 +89,9 @@
 ;; mac os
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
-(global-set-key (kbd "s-p") '(lambda () (interactive) (message "Stop trying to print!!!")))
+(global-set-key (kbd "s-p") #'(lambda () (interactive) (message "Stop trying to print!!!")))
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
 
 ;; fuck you emacs
 (defalias 'yes-or-no-p 'y-or-n-p)

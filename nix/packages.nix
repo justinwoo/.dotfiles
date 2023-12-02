@@ -10,10 +10,10 @@ let
 
   my-pkgs = builtins.listToAttrs (
     map importFrom ([
-      "my-st"
       "z"
     ] ++ pkgs.lib.optionals (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit)
       [
+        "my-st"
         "mkgif"
         "nix-direnv"
         # "update-fetch"
@@ -31,7 +31,7 @@ my-pkgs // {
     bat
     colordiff
     direnv
-    emacs28
+    emacs29
     exiftool
     fd
     fzf
