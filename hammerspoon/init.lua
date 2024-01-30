@@ -86,4 +86,20 @@ hs.hotkey.bind({"alt", "shift"}, "4", function()
     focused:centerOnScreen(0)
 end)
 
+-- hell on earth
+hs.hotkey.bind({"shift"}, "escape",
+               function() hs.eventtap.keyStroke({"shift"}, "`") end)
+
+hs.hotkey.bind({"cmd"}, "escape",
+               function() hs.eventtap.keyStroke({"cmd"}, "`") end)
+
+hs.hotkey.bind({"shift", "cmd"}, "escape",
+               function() hs.eventtap.keyStroke({"shift", "cmd"}, "`") end)
+
+hs.hotkey.bind({"alt"}, "escape",
+               function() hs.eventtap.keyStroke({"alt"}, "`") end)
+
+hs.hotkey
+    .bind({"ctrl"}, "escape", function() hs.eventtap.keyStroke({}, "`") end)
+
 hs.alert.show("Config loaded")
