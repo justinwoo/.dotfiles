@@ -76,6 +76,7 @@
         smartparens
         spacemacs-theme
         swiper
+        terraform-mode
         toml-mode
         tide
         typescript-mode
@@ -369,7 +370,7 @@ kill internal buffers too."
   (set-face-attribute 'default nil
                       :family (cond ((eq system-type 'darwin) "Monaco")
                                     (t "Noto Sans Mono CJK JP"))
-                      :height (cond ((eq system-type 'darwin) 140)
+                      :height (cond ((eq system-type 'darwin) 130)
                                     (t 100))
                       :weight 'normal
                       :width 'normal))
@@ -629,9 +630,11 @@ If the error list is visible, hide it.  Otherwise, show it."
          "\\.scss\\'"))
 
 (use-package js2-mode
-  :mode "\\.js\\'"
+  :mode ("\\.js\\'"
+         "\\.mjs\\'")
   :init
   (progn
+    (setup-tide-mode)
     (setq js2-strict-missing-semi-warning nil)
     (setq js2-missing-semi-one-line-override nil)
     ;; wtf who doesn't use 2-space JS indent
@@ -645,6 +648,8 @@ If the error list is visible, hide it.  Otherwise, show it."
      web-mode-code-indent-offset 2
      web-mode-attr-indent-offset 2)
     (setq-default js-indent-level 2)))
+
+(flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
 (use-package jsonnet-mode
   :mode "\\.jsonnet\\'"
@@ -746,6 +751,22 @@ If the error list is visible, hide it.  Otherwise, show it."
   :mode "\\.nix\\'"
   :custom
   (nix-indent-function #'nix-indent-line))
+
+;; tf
+(use-package terraform-mode
+  ;; if using straight
+  ;; :straight t
+
+  ;; if using package.el
+  ;; :ensure t
+  :custom (terraform-indent-level 4)
+  :config
+  (defun my-terraform-mode-init ()
+    ;; if you want to use outline-minor-mode
+    ;; (outline-minor-mode 1)
+    )
+
+  (add-hook 'terraform-mode-hook 'my-terraform-mode-init))
 
 ;; holy fucking shit
 (setq-default search-invisible t)
