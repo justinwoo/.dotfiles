@@ -40,6 +40,7 @@
         evil-collection
         evil-escape
         evil-surround
+        evil-string-inflection
         evil-matchit
         flycheck
         flycheck-rust
@@ -75,10 +76,11 @@
         rust-mode
         smartparens
         spacemacs-theme
+        string-inflection
         swiper
         terraform-mode
-        toml-mode
         tide
+        toml-mode
         typescript-mode
         undo-fu
         use-package
@@ -269,6 +271,9 @@ kill internal buffers too."
   :init
   (progn
     (global-evil-matchit-mode 1)))
+
+(use-package evil-string-inflection
+  :ensure t)
 
 (use-package evil-escape :ensure t
   :diminish evil-escape-mode
