@@ -53,7 +53,7 @@ bind ']' run "tmux set-buffer \"$(xclip -o -selection clipboard)\"; tmux paste-b
 # bind a new prefix
 set -g prefix '`'
 # surely this cant go wrong
-set -g prefix 'Escape'
+set -g prefix2 'Escape'
 # allow me to freaking use grave
 bind-key ` send-prefix
 
