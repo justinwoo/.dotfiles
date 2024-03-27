@@ -48,7 +48,7 @@ hs.hotkey.bind({"alt"}, "]", function()
     focused:focusWindowEast(nonScratchFilter:getWindows(), true)
 end)
 
-hs.hotkey.bind({"alt"}, "c", function()
+hs.hotkey.bind({"alt", "shift"}, "c", function()
     local focused = hs.window.focusedWindow()
     focused:centerOnScreen(0)
 end)
