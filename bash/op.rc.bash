@@ -1,13 +1,16 @@
 op() {
-  if command -v xdg-open &>/dev/null
+  if [ -n "$MACOS" ]
   then
-    xdg-open "$1" &>/dev/null & disown
+    open "$@"
+  elif command -v xdg-open &>/dev/null
+  then
+    xdg-open "$@" &>/dev/null & disown
   elif command -v explorer.exe &>/dev/null
   then
-    explorer.exe "$1"
+    explorer.exe "$@"
   else
     echo "trying xdg-open but wtf"
-    xdg-open "$1" &>/dev/null & disown
+    xdg-open "$@" &>/dev/null & disown
   fi
 }
 
