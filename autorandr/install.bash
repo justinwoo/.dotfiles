@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[[ $MACOS ]] && exit 0
+
 TARGET=~/.config/autorandr/postswitch
 
 echo "installing autorandr postswitch"
