@@ -57,6 +57,11 @@ if [[ $(uname -m) == 'arm64' && $(uname) == 'Darwin' ]]; then
   # please
   export HOMEBREW_NO_AUTO_UPDATE=TRUE
   source ~/.darwinrc
+
+  # MacOS is stupid
+  if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+  fi
 fi
 
 for file in "$DOT"/*/*.rc.bash; do
