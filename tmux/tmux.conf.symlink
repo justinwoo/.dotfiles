@@ -97,4 +97,7 @@ set-window-option -g window-status-format '#[fg=white]#{window_index} #[fg=defau
 set-window-option -g window-status-current-format '#[fg=magenta]#{window_index} #[fg=blue]#{pane_current_command} #[fg=blue]#(basename #{pane_current_path}) #[bg=default]'
 set -g window-status-activity-style 'fg=cyan'
 
-source-file ~/.tmux.conf.local
+# Mac OS
+set -g status-style fg=white,bg=white
+set-window-option -g window-status-format '#[fg=gray]#{window_index} #[fg=gray]#{pane_current_command} #(basename #{pane_current_path})'
+set-window-option -g window-status-current-format '#[fg=magenta]#{window_index} #[fg=blue]#{pane_current_command} #(basename #{pane_current_path})'
