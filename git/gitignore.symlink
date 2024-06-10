@@ -43,3 +43,4 @@ stack.yaml.lock
 *.jwk
 *.local*
 local/
+.hiefiles/

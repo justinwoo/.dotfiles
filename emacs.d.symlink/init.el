@@ -808,6 +808,12 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 (helm-mode 1)
 
+;; specific to machine
+(setq local-config-file "~/.emacs.local.el")
+(unless (file-exists-p local-config-file)
+  (make-empty-file local-config-file))
+(load local-config-file)
+
 ;; after this is trash
 (setq custom-file "~/.emacs_custom_shit_fest.el")
 (unless (file-exists-p custom-file)
