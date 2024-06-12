@@ -467,118 +467,99 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 (add-hook 'org-mode-hook 'my/org-mode-hook)
 
-(defun my-build-psc-package-project ()
-  "build my project man"
-  (interactive)
-  (save-buffer)
-  (let ((default-directory (projectile-project-root))
-        (success-buffer-name "*PSC-PACKAGE BUILD SUCCESS*")
-        (error-buffer-name "*PSC-PACKAGE BUILD ERRORS*"))
-    (when (buffer-live-p (get-buffer success-buffer-name)) (kill-buffer success-buffer-name))
-    (when (buffer-live-p (get-buffer error-buffer-name)) (kill-buffer error-buffer-name))
-    (if (file-exists-p "psc-package.json")
-        (shell-command "psc-package build -- 'test/**/*.purs'" success-buffer-name error-buffer-name)
-      (error "wtf no psc-package.json"))
-    (if (get-buffer error-buffer-name)
-        (switch-to-buffer-other-window error-buffer-name)
-      (switch-to-buffer-other-window success-buffer-name)
-      (message "Project build succeeded."))))
+;; (defun my-build-psc-package-project ()
+;;   "build my project man"
+;;   (interactive)
+;;   (save-buffer)
+;;   (let ((default-directory (projectile-project-root))
+;;         (success-buffer-name "*PSC-PACKAGE BUILD SUCCESS*")
+;;         (error-buffer-name "*PSC-PACKAGE BUILD ERRORS*"))
+;;     (when (buffer-live-p (get-buffer success-buffer-name)) (kill-buffer success-buffer-name))
+;;     (when (buffer-live-p (get-buffer error-buffer-name)) (kill-buffer error-buffer-name))
+;;     (if (file-exists-p "psc-package.json")
+;;         (shell-command "psc-package build -- 'test/**/*.purs'" success-buffer-name error-buffer-name)
+;;       (error "wtf no psc-package.json"))
+;;     (if (get-buffer error-buffer-name)
+;;         (switch-to-buffer-other-window error-buffer-name)
+;;       (switch-to-buffer-other-window success-buffer-name)
+;;       (message "Project build succeeded."))))
 
-(defun my-psc-ide-server-kill-buffer ()
-  "die"
-  (interactive)
-  (spacemacs/kill-matching-buffers-rudely "psc-ide")
-  (message "killed psc-ide-server"))
+;; (defun my-psc-ide-server-kill-buffer ()
+;;   "die"
+;;   (interactive)
+;;   (spacemacs/kill-matching-buffers-rudely "psc-ide")
+;;   (message "killed psc-ide-server"))
 
-(defun my-psc-ide-server-start ()
-  "start without globs"
-  (interactive)
-  (message "starting psc ide with only src and test")
-  (customize-set-variable 'psc-ide-force-user-globs '("src/**/*.purs" "test/**/*.purs"))
-  (psc-ide-server-start (psc-ide-suggest-project-dir)))
+;; (defun my-psc-ide-server-start ()
+;;   "start without globs"
+;;   (interactive)
+;;   (message "starting psc ide with only src and test")
+;;   (customize-set-variable 'psc-ide-force-user-globs '("src/**/*.purs" "test/**/*.purs"))
+;;   (psc-ide-server-start (psc-ide-suggest-project-dir)))
 
-(defun my-psc-ide-server-start-default ()
-  "start with default globs"
-  (interactive)
-  (customize-set-variable 'psc-ide-force-user-globs nil)
-  (psc-ide-server-start (psc-ide-suggest-project-dir)))
+;; (defun my-psc-ide-server-start-default ()
+;;   "start with default globs"
+;;   (interactive)
+;;   (customize-set-variable 'psc-ide-force-user-globs nil)
+;;   (psc-ide-server-start (psc-ide-suggest-project-dir)))
 
-(defun my-psc-ide-server-restart ()
-  "die"
-  (interactive)
-  (kill-buffer (get-buffer "*psc-ide-server*"))
-  (psc-ide-server-start (psc-ide-suggest-project-dir)))
+;; (defun my-psc-ide-server-restart ()
+;;   "die"
+;;   (interactive)
+;;   (kill-buffer (get-buffer "*psc-ide-server*"))
+;;   (psc-ide-server-start (psc-ide-suggest-project-dir)))
 
-(use-package purescript-mode :ensure t
-  :load-path "~/Code/new-purescript-mode/")
-;; :load-path "~/.nix-profile/elisp/purescript-mode-local/"
-;; :diminish 'purescript-indentation-mode)
+;; (use-package purescript-mode :ensure t
+;;   :load-path "~/Code/new-purescript-mode/")
+;; ;; :load-path "~/.nix-profile/elisp/purescript-mode-local/"
+;; ;; :diminish 'purescript-indentation-mode)
 
-(use-package psc-ide :ensure t
-  ;; :load-path "~/.nix-profile/elisp/psc-ide-local/"
-  :load-path "~/Code/psc-ide-emacs/"
-  :init
-  (progn
-    (helm-mode 1)
-    (add-hook 'purescript-mode-hook 'psc-ide-mode)
-    (add-hook 'purescript-mode-hook 'company-mode)
-    (add-hook 'purescript-mode-hook 'flycheck-mode)
+;; (use-package psc-ide :ensure t
+;;   ;; :load-path "~/.nix-profile/elisp/psc-ide-local/"
+;;   :load-path "~/Code/psc-ide-emacs/"
+;;   :init
+;;   (progn
+;;     (helm-mode 1)
+;;     (add-hook 'purescript-mode-hook 'psc-ide-mode)
+;;     (add-hook 'purescript-mode-hook 'company-mode)
+;;     (add-hook 'purescript-mode-hook 'flycheck-mode)
 
-    (evil-define-key 'normal purescript-mode-map
-      ",mt"  'psc-ide-add-clause
-      ",mcs" 'psc-ide-case-split
-      ",ms"  'my-psc-ide-server-start-default
-      ",mS"  'my-psc-ide-server-start
-      ",mr"  'my-psc-ide-server-restart
-      ",mb"  'psc-ide-rebuild
-      ",mB"  'my-build-psc-package-project
-      ",mq"  'my-psc-ide-server-kill-buffer
-      ",ml"  'psc-ide-load-all
-      ",mL"  'psc-ide-load-module
-      ",mia" 'psc-ide-add-import
-      ",mis" 'psc-ide-flycheck-insert-suggestion
-      ",mp"  'run-purty
-      ",gg"  'psc-ide-goto-definition
-      ",ht"  'psc-ide-show-type)
-    (evil-define-key 'visual purescript-mode-map
-      ",mii" 'my-purescript-region-imports-suggestions)
-    ))
+;;     (evil-define-key 'normal purescript-mode-map
+;;       ",mt"  'psc-ide-add-clause
+;;       ",mcs" 'psc-ide-case-split
+;;       ",ms"  'my-psc-ide-server-start-default
+;;       ",mS"  'my-psc-ide-server-start
+;;       ",mr"  'my-psc-ide-server-restart
+;;       ",mb"  'psc-ide-rebuild
+;;       ",mB"  'my-build-psc-package-project
+;;       ",mq"  'my-psc-ide-server-kill-buffer
+;;       ",ml"  'psc-ide-load-all
+;;       ",mL"  'psc-ide-load-module
+;;       ",mia" 'psc-ide-add-import
+;;       ",mis" 'psc-ide-flycheck-insert-suggestion
+;;       ",mp"  'run-purty
+;;       ",gg"  'psc-ide-goto-definition
+;;       ",ht"  'psc-ide-show-type)
+;;     (evil-define-key 'visual purescript-mode-map
+;;       ",mii" 'my-purescript-region-imports-suggestions)
+;;     ))
 
-(defun run-purty ()
-  "run purty"
-  (interactive)
-  (let* ((command (format "cd %s && purty %s --write" (projectile-project-root) buffer-file-name))
-         (results "*PURTY STDOUT*")
-         (errors "*PURTY ERRORS*"))
-    (message "running purty")
-    (shell-command command results errors)
-    (if (get-buffer errors)
-        (progn
-          (with-current-buffer errors
-            (message (string-trim (buffer-string))))
-          (kill-buffer errors))
-      (progn
-        (with-current-buffer results
-          (message (string-trim (buffer-string))))
-        (kill-buffer results)
-        (revert-buffer t t t)))))
-
-(defun my-purescript-region-imports-suggestions ()
-  "Apply imports suggestions on region"
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (let* ((line-start (line-number-at-pos (region-beginning)))
-               (line-end (line-number-at-pos (region-end))))
-          (dolist (line (number-sequence line-start
-                                         (- line-end 1)))
-            (goto-line line)
-            (psc-ide-flycheck-insert-suggestion))
-          (goto-line line-start)
-          (evil-visual-line)
-          (evil-next-line (- line-end 1 line-start))
-          (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
-    (message "You need an active region to use this.")))
+;; (defun my-purescript-region-imports-suggestions ()
+;;   "Apply imports suggestions on region"
+;;   (interactive)
+;;   (if (region-active-p)
+;;       (progn
+;;         (let* ((line-start (line-number-at-pos (region-beginning)))
+;;                (line-end (line-number-at-pos (region-end))))
+;;           (dolist (line (number-sequence line-start
+;;                                          (- line-end 1)))
+;;             (goto-line line)
+;;             (psc-ide-flycheck-insert-suggestion))
+;;           (goto-line line-start)
+;;           (evil-visual-line)
+;;           (evil-next-line (- line-end 1 line-start))
+;;           (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
+;;     (message "You need an active region to use this.")))
 
 (use-package lua-mode
   :mode ("\\.lua\\'")
@@ -613,10 +594,10 @@ If the error list is visible, hide it.  Otherwise, show it."
   (company-mode +1))
 
 ;; for references: M-?
-(add-to-list 'xref-backend-functions 'psc-ide-xref-backend)
+;; (add-to-list 'xref-backend-functions 'psc-ide-xref-backend)
 
-(with-eval-after-load 'company
-  (add-to-list 'company-backends 'company-psc-ide-backend))
+;; (with-eval-after-load 'company
+;;   (add-to-list 'company-backends 'company-psc-ide-backend))
 
 (global-company-mode)
 
@@ -800,10 +781,10 @@ If the error list is visible, hide it.  Otherwise, show it."
 (superword-mode t)
 
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
-(add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
+;; (add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
 
 ; underscores are part of words in most fucking languages
-(add-hook 'purescript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+;; (add-hook 'purescript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'rust-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'javascript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
