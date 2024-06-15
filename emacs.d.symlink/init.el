@@ -375,7 +375,7 @@ kill internal buffers too."
   (set-face-attribute 'default nil
                       :family (cond ((eq system-type 'darwin) "Monaco")
                                     (t "Noto Sans Mono CJK JP"))
-                      :height (cond ((eq system-type 'darwin) 130)
+                      :height (cond ((eq system-type 'darwin) 120)
                                     (t 100))
                       :weight 'normal
                       :width 'normal))
