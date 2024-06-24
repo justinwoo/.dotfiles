@@ -4,4 +4,4 @@ fi
 
 source ~/.bashrc
 
-export PATH="$HOME/.bin:$HOME/.dotfiles/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.dotfiles/bin:$PATH"
