@@ -1,26 +1,26 @@
 # EMACS="nix-shell $DOT/nix/emacs.nix --run"
-EMACS="bash -c"
+# EMACS="bash -c"
 
 # start emacs with given argument (usually a directory) or nothing
 enc() {
-  $EMACS "emacs $1 & disown" 2> /dev/null
+  emacs "$1" & disown 2> /dev/null
 }
 
 encp() {
-  $EMACS "emacs $PWD & disown" 2> /dev/null
+  emacs "$PWD" & disown 2> /dev/null
 }
 
 # start daemon
 emd() {
-  $EMACS "emacs --daemon"
+  emacs --daemon "$1"
 }
 
 # start a terminal client with arg
 em() {
-  $EMACS "emacsclient -t $1"
+  emacsclient -t "$1"
 }
 
 # start a gui client with arg
 ge() {
-  $EMACS "emacsclient -nc $1"
+  emacsclient -nc "$1"
 }
