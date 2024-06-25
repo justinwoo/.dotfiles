@@ -32,9 +32,17 @@ function bindApp(modifiers, key, appName)
     hs.hotkey.bind(modifiers, key, function() toggleApp(appName) end)
 end
 
+local alertId
+
+function round5(n)
+    local r = n % 5
+    return r >= 5 / 2 and n + 5 - r or n - r
+end
+
 function volumeChange(delta)
     local currentVolume = hs.audiodevice.defaultOutputDevice():volume()
-    local newVolume = math.floor(math.min(currentVolume + delta, 100))
+    local newVolume = round5(math.floor(math.min(currentVolume + delta, 100)))
     hs.audiodevice.defaultOutputDevice():setVolume(newVolume)
-    hs.alert.show("Volume set to " .. newVolume .. "%")
+    hs.alert.closeSpecific(alertId)
+    alertId = hs.alert.show("Volume: " .. newVolume .. "%")
 end
