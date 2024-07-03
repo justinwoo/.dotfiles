@@ -136,6 +136,7 @@
   (general-define-key
    :keymaps 'normal
    "Q"       'evil-execute-macro
+   "D"       'evil-delete-whole-line
    "M-h"     'evil-window-left
    "M-l"     'evil-window-right
    "M-j"     'evil-window-down
