@@ -690,7 +690,7 @@ If the error list is visible, hide it.  Otherwise, show it."
   (progn
     (require 'helm)
     ;; rebind spc / and *
-    (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case")
+    (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case --sort path")
     (setq helm-mode-handle-completion-in-region t)
     (setq helm-completion-in-region-fuzzy-match t)
     (setq helm-recentf-fuzzy-match t)
