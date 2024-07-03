@@ -46,3 +46,15 @@ function volumeChange(delta)
     hs.alert.closeSpecific(alertId)
     alertId = hs.alert.show("Volume: " .. newVolume .. "%")
 end
+
+function volumeDown()
+    local volumeDownKey = "SOUND_DOWN"
+    hs.eventtap.event.newSystemKeyEvent(volumeDownKey, true):post()
+    hs.eventtap.event.newSystemKeyEvent(volumeDownKey, false):post()
+end
+
+function volumeUp()
+    local volumeUpKey = "SOUND_UP"
+    hs.eventtap.event.newSystemKeyEvent(volumeUpKey, true):post()
+    hs.eventtap.event.newSystemKeyEvent(volumeUpKey, false):post()
+end

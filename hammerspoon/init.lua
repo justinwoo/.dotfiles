@@ -31,9 +31,11 @@ hs.hotkey.bind({"alt", "shift"}, "p", function()
     end
 end)
 
-hs.hotkey.bind({"ctrl", "shift"}, "left", function() volumeChange(-5) end)
+-- hs.hotkey.bind({"ctrl", "shift"}, "left", function() volumeChange(-5) end)
+-- hs.hotkey.bind({"ctrl", "shift"}, "right", function() volumeChange(5) end)
 
-hs.hotkey.bind({"ctrl", "shift"}, "right", function() volumeChange(5) end)
+hs.hotkey.bind({"ctrl", "shift"}, "left", volumeDown)
+hs.hotkey.bind({"ctrl", "shift"}, "right", volumeUp)
 
 -- hs.hotkey
 --     .bind({"cmd"}, "p", function() hs.alert.show("No printing allowed") end)
