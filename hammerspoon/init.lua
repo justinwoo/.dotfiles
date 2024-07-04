@@ -93,6 +93,12 @@ hs.hotkey.bind({"alt", "shift"}, "4", function()
     focused:centerOnScreen(0)
 end)
 
+hs.hotkey.bind({"alt", "shift"}, "5", function()
+    local focused = hs.window.focusedWindow()
+    focused:setSize(hs.geometry.size(1000, 800))
+    focused:centerOnScreen(0)
+end)
+
 -- hell on earth
 hs.hotkey.bind({"shift"}, "escape",
                function() hs.eventtap.keyStroke({"shift"}, "`") end)
