@@ -95,7 +95,7 @@ end)
 
 hs.hotkey.bind({"alt", "shift"}, "5", function()
     local focused = hs.window.focusedWindow()
-    focused:setSize(hs.geometry.size(1000, 800))
+    focused:setSize(hs.geometry.size(1200, 800))
     focused:centerOnScreen(0)
 end)
 
