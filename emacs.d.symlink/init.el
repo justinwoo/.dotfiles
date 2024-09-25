@@ -93,6 +93,7 @@
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
 (global-set-key (kbd "s-p") #'(lambda () (interactive) (message "Stop trying to print!!!")))
+(global-set-key (kbd "s-q") #'(lambda () (interactive) (message "Stop closing!!!")))
 (global-set-key (kbd "s-t") #'(lambda () (interactive) (message "Fucking font menu")))
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
