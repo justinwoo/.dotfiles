@@ -16,7 +16,9 @@
 (load-library "iso-transl")
 (setq default-buffer-file-coding-system 'utf-8)
 (tool-bar-mode 0)
-; (toggle-scroll-bar 0)
+
+;; (toggle-scroll-bar 0)
+
 (menu-bar-mode -1)
 (setq default-fill-column 81)
 (setq fci-rule-column 81)
@@ -244,6 +246,12 @@ kill internal buffers too."
    (window-height   . 0.33)))
 
 (setq evil-want-keybinding nil)
+
+(defun my-evil-indent-buffer ()
+  "Indent the entire buffer using evil-indent."
+  (interactive)
+  (save-excursion
+    (evil-indent (point-min) (point-max))))
 
 (use-package evil
   :ensure t
@@ -660,11 +668,9 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 (general-define-key
  :keymaps 'normal
- "SPC m p n" 'nixpkgs-fmt-buffer)
-
-(general-define-key
- :keymaps 'normal
- "SPC m p d" 'run-prettier)
+ "SPC m p n" 'nixpkgs-fmt-buffer
+ "SPC m p d" 'run-prettier
+ "SPC i" 'my-evil-indent-buffer)
 
 (when (file-exists-p "~/.user-config.el")
   (load-file "~/.user-config.el"))
@@ -785,7 +791,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
 ;; (add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
 
-; underscores are part of words in most fucking languages
+;; underscores are part of words in most fucking languages
 ;; (add-hook 'purescript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'rust-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'javascript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
