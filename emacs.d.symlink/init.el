@@ -28,7 +28,6 @@
                          ("gnu"       . "http://elpa.gnu.org/packages/")
                          ("melpa"     . "https://melpa.org/packages/")
                          ))
-(package-initialize)
 (setq package-list
       '(
         company
@@ -58,9 +57,8 @@
         js2-mode
         jsonnet-mode
         key-chord
-        lua-mode
-        lsp-mode
         lsp-ui
+        lua-mode
         magit
         markdown-mode
         modus-themes
@@ -81,6 +79,8 @@
         terraform-mode
         tide
         toml-mode
+        ;; treesit
+        treesit-auto
         typescript-mode
         undo-fu
         use-package
@@ -88,6 +88,13 @@
         which-key
         xref
         ))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
 ;; mac os
 (setq mac-command-modifier 'super)
@@ -144,7 +151,7 @@
    "M-j"     'evil-window-down
    "M-k"     'evil-window-up
    ;; "s-p"     'projectile-find-file
-   "M-p"     'projectile-find-file
+   ;; "M-p"     'projectile-find-file
    )
 
   (general-define-key
@@ -387,6 +394,12 @@ kill internal buffers too."
 
 ;; fucking flycheck
 (use-package flycheck :ensure t
+  :ensure t
+  :bind
+  (:map
+   flycheck-mode-map
+   ("M-n" . flycheck-next-error)
+   ("M-p" . flycheck-previous-error))
   :init
   (progn
     (setq flycheck-check-syntax-automatically
@@ -396,7 +409,9 @@ kill internal buffers too."
             save
             ))
     (setq flycheck-idle-change-delay 0.5))
-  (use-package popwin :ensure t))
+  (global-flycheck-mode))
+
+(use-package popwin :ensure t)
 
 (defun flycheck-errors-in-new-frame ()
   (interactive)
@@ -563,43 +578,259 @@ If the error list is visible, hide it.  Otherwise, show it."
 ;;           (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
 ;;     (message "You need an active region to use this.")))
 
+;; TODO: code completion with typescript mode changes
+
+(use-package lsp-mode
+      :diminish "LSP"
+      :ensure t
+      :hook ((lsp-mode . lsp-diagnostics-mode)
+             (lsp-mode . lsp-enable-which-key-integration)
+             ((tsx-ts-mode
+               typescript-ts-mode
+               js-ts-mode) . lsp-deferred))
+      :custom
+      (lsp-keymap-prefix "C-c l")           ; Prefix for LSP actions
+      (lsp-completion-provider :none)       ; Using Corfu as the provider
+      (lsp-diagnostics-provider :flycheck)
+      (lsp-session-file (locate-user-emacs-file ".lsp-session"))
+      (lsp-log-io nil)                      ; IMPORTANT! Use only for debugging! Drastically affects performance
+      (lsp-keep-workspace-alive nil)        ; Close LSP server if all project buffers are closed
+      (lsp-idle-delay 0.5)                  ; Debounce timer for `after-change-function'
+      ;; core
+      (lsp-enable-xref t)                   ; Use xref to find references
+      (lsp-auto-configure t)                ; Used to decide between current active servers
+      (lsp-eldoc-enable-hover t)            ; Display signature information in the echo area
+      (lsp-enable-dap-auto-configure t)     ; Debug support
+      (lsp-enable-file-watchers nil)
+      (lsp-enable-folding nil)              ; I disable folding since I use origami
+      (lsp-enable-imenu t)
+      (lsp-enable-indentation nil)          ; I use prettier
+      (lsp-enable-links nil)                ; No need since we have `browse-url'
+      (lsp-enable-on-type-formatting nil)   ; Prettier handles this
+      (lsp-enable-suggest-server-download t) ; Useful prompt to download LSP providers
+      (lsp-enable-symbol-highlighting t)     ; Shows usages of symbol at point in the current buffer
+      (lsp-enable-text-document-color nil)   ; This is Treesitter's job
+
+      (lsp-ui-sideline-show-hover nil)      ; Sideline used only for diagnostics
+      (lsp-ui-sideline-diagnostic-max-lines 20) ; 20 lines since typescript errors can be quite big
+      ;; completion
+      (lsp-completion-enable t)
+      (lsp-completion-enable-additional-text-edit t) ; Ex: auto-insert an import for a completion candidate
+      (lsp-enable-snippet t)                         ; Important to provide full JSX completion
+      (lsp-completion-show-kind t)                   ; Optional
+      ;; headerline
+      (lsp-headerline-breadcrumb-enable t)  ; Optional, I like the breadcrumbs
+      (lsp-headerline-breadcrumb-enable-diagnostics nil) ; Don't make them red, too noisy
+      (lsp-headerline-breadcrumb-enable-symbol-numbers nil)
+      (lsp-headerline-breadcrumb-icons-enable nil)
+      ;; modeline
+      (lsp-modeline-code-actions-enable nil) ; Modeline should be relatively clean
+      (lsp-modeline-diagnostics-enable nil)  ; Already supported through `flycheck'
+      (lsp-modeline-workspace-status-enable nil) ; Modeline displays "LSP" when lsp-mode is enabled
+      (lsp-signature-doc-lines 1)                ; Don't raise the echo area. It's distracting
+      (lsp-ui-doc-use-childframe t)              ; Show docs for symbol at point
+      (lsp-eldoc-render-all nil)            ; This would be very useful if it would respect `lsp-signature-doc-lines', currently it's distracting
+      ;; lens
+      (lsp-lens-enable nil)                 ; Optional, I don't need it
+      ;; semantic
+      (lsp-semantic-tokens-enable nil)      ; Related to highlighting, and we defer to treesitter
+
+      :init
+      (setq lsp-use-plists t)
+
+      :preface
+      (defun lsp-booster--advice-json-parse (old-fn &rest args)
+        "Try to parse bytecode instead of json."
+        (or
+         (when (equal (following-char) ?#)
+
+           (let ((bytecode (read (current-buffer))))
+             (when (byte-code-function-p bytecode)
+               (funcall bytecode))))
+         (apply old-fn args)))
+      (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
+        "Prepend emacs-lsp-booster command to lsp CMD."
+        (let ((orig-result (funcall old-fn cmd test?)))
+          (if (and (not test?)                             ;; for check lsp-server-present?
+                   (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+                   lsp-use-plists
+                   (not (functionp 'json-rpc-connection))  ;; native json-rpc
+                   (executable-find "emacs-lsp-booster"))
+              (progn
+                (message "Using emacs-lsp-booster for %s!" orig-result)
+                (cons "emacs-lsp-booster" orig-result))
+            orig-result)))
+      :init
+      (setq lsp-use-plists t)
+      ;; Initiate https://github.com/blahgeek/emacs-lsp-booster for performance
+      (advice-add (if (progn (require 'json)
+                             (fboundp 'json-parse-buffer))
+                      'json-parse-buffer
+                    'json-read)
+                  :around
+                  #'lsp-booster--advice-json-parse)
+      (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command))
+
+    (use-package lsp-completion
+      :no-require
+      :hook ((lsp-mode . lsp-completion-mode)))
+
+    (use-package lsp-ui
+      :ensure t
+      :commands
+      (lsp-ui-doc-show
+       lsp-ui-doc-glance)
+      :bind (:map lsp-mode-map
+                  ("C-c C-d" . 'lsp-ui-doc-glance))
+      :after (lsp-mode evil)
+      :config (setq lsp-ui-doc-enable t
+                    evil-lookup-func #'lsp-ui-doc-glance ; Makes K in evil-mode toggle the doc for symbol at point
+                    lsp-ui-doc-show-with-cursor nil      ; Don't show doc when cursor is over symbol - too distracting
+                    lsp-ui-doc-include-signature t       ; Show signature
+                    lsp-ui-doc-position 'at-point))
+
+(use-package lsp-eslint
+  :demand t
+  :after lsp-mode)
+
 (use-package lua-mode
   :mode ("\\.lua\\'")
   )
 
-(use-package typescript-mode
-  :mode ("\\.jsx\\'"
-         "\\.tsx\\'")
-  :init
-  (progn
-    (helm-mode 1)
-    (add-hook 'typescript-mode-hook 'company-mode)
-    (add-hook 'typescript-mode-hook 'flycheck-mode)
-    ;; (add-hook 'typescript-mode-hook 'lsp-mode)
-    (add-hook 'typescript-mode-hook #'setup-tide-mode)
-    (evil-define-key 'normal typescript-mode-map
-      ",f"  'tide-fix
-      ",gd" 'tide-jump-to-definition
-      ",gi" 'tide-jump-to-implementation
-      ",ge" 'tide-goto-error
-      ",gl" 'tide-goto-line-reference
-      ",gr" 'tide-goto-reference)
-    ))
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  (company-mode +1))
+;; (use-package treesit
+;;       :mode (("\\.tsx\\'" . tsx-ts-mode)
+;;              ("\\.js\\'"  . typescript-ts-mode)
+;;              ("\\.mjs\\'" . typescript-ts-mode)
+;;              ("\\.mts\\'" . typescript-ts-mode)
+;;              ("\\.cjs\\'" . typescript-ts-mode)
+;;              ("\\.ts\\'"  . typescript-ts-mode)
+;;              ("\\.jsx\\'" . tsx-ts-mode)
+;;              ("\\.json\\'" .  json-ts-mode)
+;;              )
+;;       :preface
+;;       (defun os/setup-install-grammars ()
+;;         "Install Tree-sitter grammars if they are absent."
+;;         (interactive)
+;;         (dolist (grammar
+;;                  '((css . ("https://github.com/tree-sitter/tree-sitter-css" "v0.20.0"))
+;;                    (bash "https://github.com/tree-sitter/tree-sitter-bash")
+;;                    (html . ("https://github.com/tree-sitter/tree-sitter-html" "v0.20.1"))
+;;                    (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.21.2" "src"))
+;;                    (json . ("https://github.com/tree-sitter/tree-sitter-json" "v0.20.2"))
+;;                    (python . ("https://github.com/tree-sitter/tree-sitter-python" "v0.20.4"))
+;;                    (go "https://github.com/tree-sitter/tree-sitter-go" "v0.20.0")
+;;                    (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+;;                    (make "https://github.com/alemuller/tree-sitter-make")
+;;                    (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+;;                    (cmake "https://github.com/uyha/tree-sitter-cmake")
+;;                    (c "https://github.com/tree-sitter/tree-sitter-c")
+;;                    (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+;;                    (toml "https://github.com/tree-sitter/tree-sitter-toml")
+;;                    (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
+;;                    (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src"))
+;;                    (yaml . ("https://github.com/ikatyang/tree-sitter-yaml" "v0.5.0"))
+;;                    (prisma "https://github.com/victorhqc/tree-sitter-prisma")))
+;;           (add-to-list 'treesit-language-source-alist grammar)
+;;           ;; Only install `grammar' if we don't already have it
+;;           ;; installed. However, if you want to *update* a grammar then
+;;           ;; this obviously prevents that from happening.
+;;           (unless (treesit-language-available-p (car grammar))
+;;             (treesit-install-language-grammar (car grammar)))))
 
-;; for references: M-?
-;; (add-to-list 'xref-backend-functions 'psc-ide-xref-backend)
+;;       ;; Optional, but recommended. Tree-sitter enabled major modes are
+;;       ;; distinct from their ordinary counterparts.
+;;       ;;
+;;       ;; You can remap major modes with `major-mode-remap-alist'. Note
+;;       ;; that this does *not* extend to hooks! Make sure you migrate them
+;;       ;; also
+;;       (dolist (mapping
+;;                '((python-mode . python-ts-mode)
+;;                  (css-mode . css-ts-mode)
+;;                  (typescript-mode . typescript-ts-mode)
+;;                  (js-mode . typescript-ts-mode)
+;;                  (js2-mode . typescript-ts-mode)
+;;                  (c-mode . c-ts-mode)
+;;                  (c++-mode . c++-ts-mode)
+;;                  (c-or-c++-mode . c-or-c++-ts-mode)
+;;                  (bash-mode . bash-ts-mode)
+;;                  (css-mode . css-ts-mode)
+;;                  (json-mode . json-ts-mode)
+;;                  (js-json-mode . json-ts-mode)
+;;                  (sh-mode . bash-ts-mode)
+;;                  (sh-base-mode . bash-ts-mode)))
+;;         (add-to-list 'major-mode-remap-alist mapping))
+;;       :config
+;;       (os/setup-install-grammars))
 
-;; (with-eval-after-load 'company
-;;   (add-to-list 'company-backends 'company-psc-ide-backend))
+;; (use-package typescript-mode
+;;   :mode ("\\.jsx\\'"
+;;          "\\.tsx\\'")
+;;   :init
+;;   (progn
+;;     (helm-mode 1)
+;;     (add-hook 'typescript-mode-hook 'company-mode)
+;;     (add-hook 'typescript-mode-hook 'flycheck-mode)
+;;     ;; (add-hook 'typescript-mode-hook 'lsp-mode)
+;;     (add-hook 'typescript-mode-hook #'setup-tide-mode)
+;;     (evil-define-key 'normal typescript-mode-map
+;;       ",f"  'tide-fix
+;;       ",gd" 'tide-jump-to-definition
+;;       ",gi" 'tide-jump-to-implementation
+;;       ",ge" 'tide-goto-error
+;;       ",gl" 'tide-goto-line-reference
+;;       ",gr" 'tide-goto-reference)
+;;     ))
+
+;; (defun setup-tide-mode ()
+;;   (interactive)
+;;   (tide-setup)
+;;   (flycheck-mode +1)
+;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+;;   (eldoc-mode +1)
+;;   (tide-hl-identifier-mode +1)
+;;   (company-mode +1))
+
+;; ;; for references: M-?
+;; ;; (add-to-list 'xref-backend-functions 'psc-ide-xref-backend)
+
+;; ;; (with-eval-after-load 'company
+;; ;;   (add-to-list 'company-backends 'company-psc-ide-backend))
+
+;; (use-package web-mode
+;;   :ensure t
+;;   :mode ("\\.html\\'"
+;;          "\\.css\\'"
+;;          "\\.scss\\'"))
+
+;; (use-package js2-mode
+;;   :mode ("\\.js\\'"
+;;          "\\.mjs\\'")
+;;   :init
+;;   (progn
+;;     (setup-tide-mode)
+;;     (setq js2-strict-missing-semi-warning nil)
+;;     (setq js2-missing-semi-one-line-override nil)
+;;     ;; wtf who doesn't use 2-space JS indent
+;;     (setq-default
+;;      ;; js2-mode
+;;      js2-basic-offset 2
+;;      ;; web-mode
+;;      css-indent-offset 2
+;;      web-mode-markup-indent-offset 2
+;;      web-mode-css-indent-offset 2
+;;      web-mode-code-indent-offset 2
+;;      web-mode-attr-indent-offset 2)
+;;     (setq-default js-indent-level 2)))
+
+;; (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+
 
 (global-company-mode)
 
@@ -611,35 +842,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 (define-key evil-insert-state-map (kbd "C-p") 'company-dabbrev)
 
 (setq company-idle-delay 'nil)
-
-(use-package web-mode
-  :ensure t
-  :mode ("\\.html\\'"
-         "\\.css\\'"
-         "\\.scss\\'"))
-
-(use-package js2-mode
-  :mode ("\\.js\\'"
-         "\\.mjs\\'")
-  :init
-  (progn
-    (setup-tide-mode)
-    (setq js2-strict-missing-semi-warning nil)
-    (setq js2-missing-semi-one-line-override nil)
-    ;; wtf who doesn't use 2-space JS indent
-    (setq-default
-     ;; js2-mode
-     js2-basic-offset 2
-     ;; web-mode
-     css-indent-offset 2
-     web-mode-markup-indent-offset 2
-     web-mode-css-indent-offset 2
-     web-mode-code-indent-offset 2
-     web-mode-attr-indent-offset 2)
-    (setq-default js-indent-level 2)))
-
-(flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
-
 (use-package jsonnet-mode
   :mode "\\.jsonnet\\'"
   )
