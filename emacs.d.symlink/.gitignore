@@ -11,3 +11,4 @@ org-roam.db
 .org-id-locations
 eln-cache
 projects
+tree-sitter
