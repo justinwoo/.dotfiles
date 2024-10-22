@@ -5,7 +5,7 @@ alias get-git-branch-name='git rev-parse --abbrev-ref HEAD'
 alias ggbn='get-git-branch-name'
 
 alias gb='git branch'
-alias gib='git branch -v'
+alias gib='git-branches-details'
 
 alias gs='git status -sb'
 alias gis='git status -sb'

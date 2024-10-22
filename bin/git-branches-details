@@ -1,0 +1,8 @@
+format="%(color:red bold)%(refname:short) %(color:reset) \
+%(color:normal dim)%(committerdate:format:%d %B %Y - %H:%M)%(color:reset)
+    %(color:yellow)%(objectname:short)%(color:reset) \
+%(subject)%(color:reset)"
+
+git for-each-ref refs/heads/ \
+  --sort=authordate \
+  --format="$format"
