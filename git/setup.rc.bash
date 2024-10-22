@@ -4,7 +4,7 @@ alias gpp='git pull --prune'
 alias get-git-branch-name='git rev-parse --abbrev-ref HEAD'
 alias ggbn='get-git-branch-name'
 
-alias gb='git branch'
+alias gb='git branch --sort=-authordate'
 alias gib='git-branches-details'
 
 alias gs='git status -sb'

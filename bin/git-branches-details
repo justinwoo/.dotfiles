@@ -4,5 +4,5 @@ format="%(color:red bold)%(refname:short) %(color:reset) \
 %(subject)%(color:reset)"
 
 git for-each-ref refs/heads/ \
-  --sort=authordate \
+  --sort=-authordate \
   --format="$format"
