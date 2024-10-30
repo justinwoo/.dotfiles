@@ -146,7 +146,7 @@
    "M-j"     'evil-window-down
    "M-k"     'evil-window-up
    ;; "s-p"     'projectile-find-file
-   "M-p"     'projectile-find-file
+   ;; "M-p"     'projectile-find-file
    )
 
   (general-define-key
@@ -180,6 +180,8 @@
    "SPC e l" 'spacemacs/toggle-flycheck-error-list
    "SPC e n" 'flycheck-next-error
    "SPC e p" 'flycheck-previous-error
+   "M-n" 'flycheck-next-error
+   "M-p" 'flycheck-previous-error
    "SPC f D" 'delete-other-frames
    "SPC f b" 'display-buffer-other-frame
    "SPC f d" 'delete-frame
