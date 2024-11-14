@@ -1,7 +1,9 @@
-format="%(color:red bold)%(refname:short) %(color:reset) \
-%(color:normal dim)%(committerdate:format:%d %B %Y - %H:%M)%(color:reset)
-    %(color:yellow)%(objectname:short)%(color:reset) \
-%(subject)%(color:reset)"
+branchname="%(color:red bold)%(refname:short)%(color:reset)"
+datetime="%(color:normal dim)%(committerdate:format:%d %B %Y - %H:%M)%(color:reset)"
+commit_sha="%(color:yellow)%(objectname:short)%(color:reset)"
+commit_subject="%(subject)%(color:reset)"
+format="$branchname $datetime
+  $commit_sha $commit_subject"
 
 git for-each-ref refs/heads/ \
   --sort=-authordate \
