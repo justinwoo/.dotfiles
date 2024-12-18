@@ -577,17 +577,39 @@ If the error list is visible, hide it.  Otherwise, show it."
   :mode ("\\.lua\\'")
   )
 
-(use-package typescript-mode
+;; (use-package typescript-mode
+;;   :mode ("\\.jsx\\'"
+;;          "\\.tsx\\'")
+;;   :init
+;;   (progn
+;;     (helm-mode 1)
+;;     (add-hook 'typescript-mode-hook 'company-mode)
+;;     (add-hook 'typescript-mode-hook 'flycheck-mode)
+
+;;     ;; (add-hook 'typescript-mode-hook 'lsp-mode)
+
+;;     (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;;     (evil-define-key 'normal typescript-mode-map
+;;       ",f"  'tide-fix
+;;       ",gd" 'tide-jump-to-definition
+;;       ",gi" 'tide-jump-to-implementation
+;;       ",ge" 'tide-goto-error
+;;       ",gl" 'tide-goto-line-reference
+;;       ",gr" 'tide-goto-reference)
+;;     ))
+
+(use-package typescript-ts-mode
   :mode ("\\.jsx\\'"
          "\\.tsx\\'")
   :init
   (progn
     (helm-mode 1)
-    (add-hook 'typescript-mode-hook 'company-mode)
-    (add-hook 'typescript-mode-hook 'flycheck-mode)
-    ;; (add-hook 'typescript-mode-hook 'lsp-mode)
-    (add-hook 'typescript-mode-hook #'setup-tide-mode)
-    (evil-define-key 'normal typescript-mode-map
+    (add-hook 'typescript-ts-mode-hook 'company-mode)
+    (add-hook 'typescript-ts-mode-hook 'flycheck-mode)
+    (add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
+
+    (evil-define-key 'normal typescript-ts-mode-map
       ",f"  'tide-fix
       ",gd" 'tide-jump-to-definition
       ",gi" 'tide-jump-to-implementation
@@ -628,25 +650,25 @@ If the error list is visible, hide it.  Otherwise, show it."
          "\\.css\\'"
          "\\.scss\\'"))
 
-(use-package js2-mode
-  :mode ("\\.js\\'"
-         "\\.mjs\\'")
-  :init
-  (progn
-    (setup-tide-mode)
-    (setq js2-strict-missing-semi-warning nil)
-    (setq js2-missing-semi-one-line-override nil)
-    ;; wtf who doesn't use 2-space JS indent
-    (setq-default
-     ;; js2-mode
-     js2-basic-offset 2
-     ;; web-mode
-     css-indent-offset 2
-     web-mode-markup-indent-offset 2
-     web-mode-css-indent-offset 2
-     web-mode-code-indent-offset 2
-     web-mode-attr-indent-offset 2)
-    (setq-default js-indent-level 2)))
+;; (use-package js2-mode
+;;   :mode ("\\.js\\'"
+;;          "\\.mjs\\'")
+;;   :init
+;;   (progn
+;;     (setup-tide-mode)
+;;     (setq js2-strict-missing-semi-warning nil)
+;;     (setq js2-missing-semi-one-line-override nil)
+;;     ;; wtf who doesn't use 2-space JS indent
+;;     (setq-default
+;;      ;; js2-mode
+;;      js2-basic-offset 2
+;;      ;; web-mode
+;;      css-indent-offset 2
+;;      web-mode-markup-indent-offset 2
+;;      web-mode-css-indent-offset 2
+;;      web-mode-code-indent-offset 2
+;;      web-mode-attr-indent-offset 2)
+;;     (setq-default js-indent-level 2)))
 
 (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
