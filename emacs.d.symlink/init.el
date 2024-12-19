@@ -83,6 +83,7 @@
         terraform-mode
         tide
         toml-mode
+        treesit-auto
         typescript-mode
         undo-fu
         use-package
@@ -310,6 +311,14 @@ kill internal buffers too."
   (interactive)
   (magit-stage-modified)
   (magit-commit-extend))
+
+;; fucking treesitter
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
 (use-package magit
   :ensure t
@@ -605,6 +614,7 @@ If the error list is visible, hide it.  Otherwise, show it."
   :init
   (progn
     (helm-mode 1)
+    (add-hook 'typescript-ts-mode-hook 'tide-mode)
     (add-hook 'typescript-ts-mode-hook 'company-mode)
     (add-hook 'typescript-ts-mode-hook 'flycheck-mode)
     (add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
@@ -670,7 +680,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 ;;      web-mode-attr-indent-offset 2)
 ;;     (setq-default js-indent-level 2)))
 
-(flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+;; (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
 
 (use-package jsonnet-mode
   :mode "\\.jsonnet\\'"
