@@ -14,6 +14,7 @@ end)
 
 bindApp({"alt"}, "e", "emacs")
 bindApp({"alt"}, "o", "iTerm2")
+bindApp({"alt"}, "o", "Ghostty")
 bindApp({"alt"}, "u", "Telegram")
 bindApp({"alt", "shift"}, "u", "UpNote")
 bindApp({"alt"}, "y", "Google Chrome")
