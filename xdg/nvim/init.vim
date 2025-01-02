@@ -9,6 +9,7 @@ set clipboard=unnamedplus
 
 " dio porco
 set bg=light
+hi Normal guibg=NONE ctermbg=NONE
 
 "asdfsdf
 set expandtab
@@ -99,7 +100,7 @@ if executable('rg')
 endif
 
 "yup
-command! Reload :source ~/.dotfiles/nvim/init.vim
+command! Reload :source ~/.config/nvim/init.vim
 map <leader>R :Reload<cr>
 
 " Required for operations modifying multiple buffers like rename.
