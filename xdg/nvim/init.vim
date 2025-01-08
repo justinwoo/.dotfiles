@@ -105,13 +105,3 @@ map <leader>R :Reload<cr>
 
 " Required for operations modifying multiple buffers like rename.
 set hidden
-
-let g:LanguageClient_serverCommands = {
-    \ 'purescript': ['purescript-language-server', '--stdio', '--config', '{}']
-    \ }
-
-nnoremap ,h :call LanguageClient#textDocument_hover()<CR>
-nnoremap ,d :call LanguageClient#textDocument_definition()<CR>
-nnoremap ,r :call LanguageClient#textDocument_rename()<CR>
-
-au FileType purescript let &l:commentstring='-- %s'

@@ -31,17 +31,6 @@ Plug 'tpope/vim-obsession' " session
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] } " JSX support
 
-" PureScript
-Plug 'purescript-contrib/purescript-vim', { 'for': ['purescript', 'purs'] }
-
-" Haskell
-Plug 'neovimhaskell/haskell-vim'
-Plug 'ujihisa/unite-haskellimport'
-
-" CSS
-Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
-Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' } " sass scss syntax support
-
 " Markdown
 Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
 
@@ -51,7 +40,6 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' } " interactive command execution in v
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/denite.nvim'
-Plug 'LnL7/vim-nix' " Nix
 Plug 'ntpeters/vim-better-whitespace' " whitespace
 
 call plug#end()
