@@ -31,7 +31,7 @@ my-pkgs // {
     bat
     colordiff
     direnv
-    emacs29
+    # emacs29
     exiftool
     fd
     fzf
