@@ -13,6 +13,7 @@ hs.hotkey.bind({"alt"}, "`", function()
 end)
 
 bindApp({"alt"}, "e", "emacs")
+bindApp({"alt"}, "w", "Code")
 bindApp({"alt"}, "o", "iTerm2")
 bindApp({"alt"}, "o", "Ghostty")
 bindApp({"alt"}, "u", "Telegram")
