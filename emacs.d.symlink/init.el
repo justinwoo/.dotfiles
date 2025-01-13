@@ -46,6 +46,7 @@
         evil-matchit
         flycheck
         flycheck-rust
+        fzf
         general
         git
         helm
@@ -89,6 +90,9 @@
         use-package
         web-mode
         which-key
+
+        vertico
+
         xref
         ))
 
@@ -293,6 +297,27 @@ kill internal buffers too."
   :diminish evil-escape-mode
   :config
   (evil-escape-mode))
+
+(use-package fzf
+  :general
+  (general-define-key
+   :keymaps 'normal
+   "SPC g e" 'magit-fast-commit-modified
+   "SPC g s" 'magit-fullframe-status
+   "SPC g a" 'magit-traditional-status
+   "SPC g S" 'magit-traditional-status
+   "SPC g b" 'magit-blame)
+  :config
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/executable "fzf"
+        fzf/git-grep-args "-i --line-number %s"
+        ;; command used for `fzf-grep-*` functions
+        ;; example usage for ripgrep:
+        ;; fzf/grep-command "rg --no-heading -nH"
+        fzf/grep-command "grep -nrH"
+        ;; If nil, the fzf buffer will appear at the top of the window
+        fzf/position-bottom t
+        fzf/window-height 15))
 
 (defun magit-traditional-status ()
   "open magit-status with the traditional half-frame view"
@@ -613,7 +638,7 @@ If the error list is visible, hide it.  Otherwise, show it."
          "\\.tsx\\'")
   :init
   (progn
-    (helm-mode 1)
+    ;; (helm-mode 1)
     (add-hook 'typescript-ts-mode-hook 'tide-mode)
     (add-hook 'typescript-ts-mode-hook 'company-mode)
     (add-hook 'typescript-ts-mode-hook 'flycheck-mode)
@@ -709,28 +734,28 @@ If the error list is visible, hide it.  Otherwise, show it."
 (when (file-exists-p "~/.user-config.el")
   (load-file "~/.user-config.el"))
 
-(use-package helm :ensure t
-  :init
-  (progn
-    (require 'helm)
-    ;; rebind spc / and *
-    (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case --sort path")
-    (setq helm-mode-handle-completion-in-region t)
-    (setq helm-completion-in-region-fuzzy-match t)
-    (setq helm-recentf-fuzzy-match t)
-    (setq helm-buffers-fuzzy-matching t)
-    (setq helm-recentf-fuzzy-match t)
-    (setq helm-buffers-fuzzy-matching t)
-    (setq helm-locate-fuzzy-match t)
-    (setq helm-M-x-fuzzy-match t)
-    (setq helm-semantic-fuzzy-match t)
-    (setq helm-imenu-fuzzy-match t)
-    (setq helm-apropos-fuzzy-match t)
-    (setq helm-lisp-fuzzy-completion t)
-    (setq helm-session-fuzzy-match t)
-    (setq helm-etags-fuzzy-match t)
-    (evil-select-search-module 'evil-search-module 'evil-search)
-    (evil-declare-change-repeat 'company-complete)))
+;; (use-package helm :ensure t
+;;   :init
+;;   (progn
+;;     (require 'helm)
+;;     ;; rebind spc / and *
+;;     (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case --sort path")
+;;     (setq helm-mode-handle-completion-in-region t)
+;;     (setq helm-completion-in-region-fuzzy-match t)
+;;     (setq helm-recentf-fuzzy-match t)
+;;     (setq helm-buffers-fuzzy-matching t)
+;;     (setq helm-recentf-fuzzy-match t)
+;;     (setq helm-buffers-fuzzy-matching t)
+;;     (setq helm-locate-fuzzy-match t)
+;;     (setq helm-M-x-fuzzy-match t)
+;;     (setq helm-semantic-fuzzy-match t)
+;;     (setq helm-imenu-fuzzy-match t)
+;;     (setq helm-apropos-fuzzy-match t)
+;;     (setq helm-lisp-fuzzy-completion t)
+;;     (setq helm-session-fuzzy-match t)
+;;     (setq helm-etags-fuzzy-match t)
+;;     (evil-select-search-module 'evil-search-module 'evil-search)
+;;     (evil-declare-change-repeat 'company-complete)))
 
 ;; let's see
 (setq x-wait-for-event-timeout nil)
@@ -767,7 +792,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 (setq lsp-ui-doc-enable nil)
 (use-package company-lsp :commands company-lsp)
 ;; if you are helm user
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+;; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 ;; (add-hook 'rust-mode-hook #'racer-mode)
 ;; (add-hook 'racer-mode-hook #'eldoc-mode)
@@ -830,7 +855,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 (add-hook 'rust-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'javascript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
-(helm-mode 1)
+;; (helm-mode 1)
 
 ;; specific to machine
 (setq local-config-file "~/.emacs.local.el")
