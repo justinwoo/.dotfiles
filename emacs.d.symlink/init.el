@@ -56,10 +56,6 @@
         helm-projectile
         helm-rg
         helm-themes
-        htmlize
-        ivy
-        js2-mode
-        jsonnet-mode
         key-chord
         lua-mode
         lsp-mode
@@ -482,156 +478,8 @@ If the error list is visible, hide it.  Otherwise, show it."
      ))
   (message "Set flycheck to check on change"))
 
-(defun my/org-mode-hook ()
-  "Stop the org-level headers from increasing in height relative to the other text."
-  (dolist (face '(org-level-1
-                  org-level-2
-                  org-level-3
-                  org-level-4
-                  org-level-5))
-    (set-face-attribute face nil :weight 'semi-bold :height 1.0))
-
-  (setq org-bullets-bullet-list '("大" "中" "小" "・"))
-
-  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((plantuml . t)))
-
-  (setq org-plantuml-jar-path
-        (expand-file-name "~/.nix-profile/lib/plantuml.jar"))
-
-  (defun my-org-confirm-babel-evaluate (lang body)
-    (not (member lang '("plantuml"))))
-  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
-
-  (evil-define-key 'normal org-mode-map
-    ",gi" 'org-redisplay-inline-images
-    ",ge" 'org-export-dispatch
-    ))
-
-(add-hook 'org-mode-hook 'my/org-mode-hook)
-
-;; (defun my-build-psc-package-project ()
-;;   "build my project man"
-;;   (interactive)
-;;   (save-buffer)
-;;   (let ((default-directory (projectile-project-root))
-;;         (success-buffer-name "*PSC-PACKAGE BUILD SUCCESS*")
-;;         (error-buffer-name "*PSC-PACKAGE BUILD ERRORS*"))
-;;     (when (buffer-live-p (get-buffer success-buffer-name)) (kill-buffer success-buffer-name))
-;;     (when (buffer-live-p (get-buffer error-buffer-name)) (kill-buffer error-buffer-name))
-;;     (if (file-exists-p "psc-package.json")
-;;         (shell-command "psc-package build -- 'test/**/*.purs'" success-buffer-name error-buffer-name)
-;;       (error "wtf no psc-package.json"))
-;;     (if (get-buffer error-buffer-name)
-;;         (switch-to-buffer-other-window error-buffer-name)
-;;       (switch-to-buffer-other-window success-buffer-name)
-;;       (message "Project build succeeded."))))
-
-;; (defun my-psc-ide-server-kill-buffer ()
-;;   "die"
-;;   (interactive)
-;;   (spacemacs/kill-matching-buffers-rudely "psc-ide")
-;;   (message "killed psc-ide-server"))
-
-;; (defun my-psc-ide-server-start ()
-;;   "start without globs"
-;;   (interactive)
-;;   (message "starting psc ide with only src and test")
-;;   (customize-set-variable 'psc-ide-force-user-globs '("src/**/*.purs" "test/**/*.purs"))
-;;   (psc-ide-server-start (psc-ide-suggest-project-dir)))
-
-;; (defun my-psc-ide-server-start-default ()
-;;   "start with default globs"
-;;   (interactive)
-;;   (customize-set-variable 'psc-ide-force-user-globs nil)
-;;   (psc-ide-server-start (psc-ide-suggest-project-dir)))
-
-;; (defun my-psc-ide-server-restart ()
-;;   "die"
-;;   (interactive)
-;;   (kill-buffer (get-buffer "*psc-ide-server*"))
-;;   (psc-ide-server-start (psc-ide-suggest-project-dir)))
-
-;; (use-package purescript-mode :ensure t
-;;   :load-path "~/Code/new-purescript-mode/")
-;; ;; :load-path "~/.nix-profile/elisp/purescript-mode-local/"
-;; ;; :diminish 'purescript-indentation-mode)
-
-;; (use-package psc-ide :ensure t
-;;   ;; :load-path "~/.nix-profile/elisp/psc-ide-local/"
-;;   :load-path "~/Code/psc-ide-emacs/"
-;;   :init
-;;   (progn
-;;     (helm-mode 1)
-;;     (add-hook 'purescript-mode-hook 'psc-ide-mode)
-;;     (add-hook 'purescript-mode-hook 'company-mode)
-;;     (add-hook 'purescript-mode-hook 'flycheck-mode)
-
-;;     (evil-define-key 'normal purescript-mode-map
-;;       ",mt"  'psc-ide-add-clause
-;;       ",mcs" 'psc-ide-case-split
-;;       ",ms"  'my-psc-ide-server-start-default
-;;       ",mS"  'my-psc-ide-server-start
-;;       ",mr"  'my-psc-ide-server-restart
-;;       ",mb"  'psc-ide-rebuild
-;;       ",mB"  'my-build-psc-package-project
-;;       ",mq"  'my-psc-ide-server-kill-buffer
-;;       ",ml"  'psc-ide-load-all
-;;       ",mL"  'psc-ide-load-module
-;;       ",mia" 'psc-ide-add-import
-;;       ",mis" 'psc-ide-flycheck-insert-suggestion
-;;       ",mp"  'run-purty
-;;       ",gg"  'psc-ide-goto-definition
-;;       ",ht"  'psc-ide-show-type)
-;;     (evil-define-key 'visual purescript-mode-map
-;;       ",mii" 'my-purescript-region-imports-suggestions)
-;;     ))
-
-;; (defun my-purescript-region-imports-suggestions ()
-;;   "Apply imports suggestions on region"
-;;   (interactive)
-;;   (if (region-active-p)
-;;       (progn
-;;         (let* ((line-start (line-number-at-pos (region-beginning)))
-;;                (line-end (line-number-at-pos (region-end))))
-;;           (dolist (line (number-sequence line-start
-;;                                          (- line-end 1)))
-;;             (goto-line line)
-;;             (psc-ide-flycheck-insert-suggestion))
-;;           (goto-line line-start)
-;;           (evil-visual-line)
-;;           (evil-next-line (- line-end 1 line-start))
-;;           (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
-;;     (message "You need an active region to use this.")))
-
 (use-package lua-mode
-  :mode ("\\.lua\\'")
-  )
-
-;; (use-package typescript-mode
-;;   :mode ("\\.jsx\\'"
-;;          "\\.tsx\\'")
-;;   :init
-;;   (progn
-;;     (helm-mode 1)
-;;     (add-hook 'typescript-mode-hook 'company-mode)
-;;     (add-hook 'typescript-mode-hook 'flycheck-mode)
-
-;;     ;; (add-hook 'typescript-mode-hook 'lsp-mode)
-
-;;     (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
-;;     (evil-define-key 'normal typescript-mode-map
-;;       ",f"  'tide-fix
-;;       ",gd" 'tide-jump-to-definition
-;;       ",gi" 'tide-jump-to-implementation
-;;       ",ge" 'tide-goto-error
-;;       ",gl" 'tide-goto-line-reference
-;;       ",gr" 'tide-goto-reference)
-;;     ))
+  :mode ("\\.lua\\'"))
 
 (use-package typescript-ts-mode
   :mode ("\\.jsx\\'"
@@ -662,12 +510,6 @@ If the error list is visible, hide it.  Otherwise, show it."
   (tide-hl-identifier-mode +1)
   (company-mode +1))
 
-;; for references: M-?
-;; (add-to-list 'xref-backend-functions 'psc-ide-xref-backend)
-
-;; (with-eval-after-load 'company
-;;   (add-to-list 'company-backends 'company-psc-ide-backend))
-
 (global-company-mode)
 
 (global-set-key (kbd "C-SPC") 'company-complete)
@@ -684,32 +526,6 @@ If the error list is visible, hide it.  Otherwise, show it."
   :mode ("\\.html\\'"
          "\\.css\\'"
          "\\.scss\\'"))
-
-;; (use-package js2-mode
-;;   :mode ("\\.js\\'"
-;;          "\\.mjs\\'")
-;;   :init
-;;   (progn
-;;     (setup-tide-mode)
-;;     (setq js2-strict-missing-semi-warning nil)
-;;     (setq js2-missing-semi-one-line-override nil)
-;;     ;; wtf who doesn't use 2-space JS indent
-;;     (setq-default
-;;      ;; js2-mode
-;;      js2-basic-offset 2
-;;      ;; web-mode
-;;      css-indent-offset 2
-;;      web-mode-markup-indent-offset 2
-;;      web-mode-css-indent-offset 2
-;;      web-mode-code-indent-offset 2
-;;      web-mode-attr-indent-offset 2)
-;;     (setq-default js-indent-level 2)))
-
-;; (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
-
-(use-package jsonnet-mode
-  :mode "\\.jsonnet\\'"
-  )
 
 (setq c-default-style "java")
 (setq-default c-basic-offset 2)
@@ -848,10 +664,8 @@ If the error list is visible, hide it.  Otherwise, show it."
 (superword-mode t)
 
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
-;; (add-hook 'purescript-mode-hook #'turn-off-evil-auto-indent)
 
 ;; underscores are part of words in most fucking languages
-;; (add-hook 'purescript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'rust-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'javascript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
