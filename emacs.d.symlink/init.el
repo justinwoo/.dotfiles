@@ -6,7 +6,7 @@
 (setq gnutils-min-prime-bits 4096)
 (setq tags-revert-without-query t)
 (setq-default show-trailing-whitespace t)
-(setq show-trailing-whitespace t)
+(setq show-trailing-whitespace nil)
 (setq inhibit-startup-screen t)
 (setq kill-buffer-query-functions nil)
 (prefer-coding-system 'utf-8)
@@ -34,58 +34,70 @@
 (setq package-list
       '(
         company
+
+        consult
+
         counsel
         counsel-projectile
+
         dash-functional
         diminish
+
+        embark
+        embark-consult
+
         evil
         evil-collection
         evil-escape
         evil-surround
         evil-string-inflection
         evil-matchit
+
         flycheck
-        flycheck-rust
+
         fzf
         general
         git
+
         helm
+
         helm-ag
         helm-company
-        helm-lsp
         helm-projectile
         helm-rg
         helm-themes
+
         key-chord
-        lua-mode
-        lsp-mode
-        lsp-ui
         magit
+
+        marginalia
+
         markdown-mode
         modus-themes
         nix-mode
         nixpkgs-fmt
-        org
-        org-roam
-        plantuml-mode
+
+        orderless
+
         popwin
         powerline
         prettier-js
         projectile
-        rust-mode
         smartparens
         spacemacs-theme
         string-inflection
         swiper
-        terraform-mode
+
         tide
-        toml-mode
+
         treesit-auto
         typescript-mode
         undo-fu
         use-package
         web-mode
         which-key
+
+        wgrep
 
         vertico
 
@@ -157,17 +169,29 @@
    "C-0"     '(lambda() (interactive) (text-scale-set 1))
    "C-="     'text-scale-increase
    "C-u"     'evil-scroll-up
-   "M-x"     'helm-M-x
-   "SPC /"   'helm-do-ag-project-root
+   ;; "M-x"     'helm-M-x
+   ;; "SPC /"   'helm-do-ag-project-root
+   "SPC /"   'consult-ripgrep
+
    "SPC ?"   'helm-projectile-rg
-   "SPC p f" 'helm-projectile
-   "SPC p p" 'helm-projectile-switch-project
-   "SPC b b" 'helm-buffers-list
+
+   ;; "SPC p f" 'helm-projectile
+
+   "SPC p f" 'consult-fd
+
+   ;; "SPC p p" 'helm-projectile-switch-project
+
+   ;; "SPC b b" 'helm-buffers-list
+
+   "SPC b b" 'consult-buffer
+   "SPC b f" 'consult-buffer-other-frame
+
    "SPC b d" 'my-kill-this-buffer
    "SPC b n" 'next-buffer
    "SPC b p" 'previous-buffer
    "SPC b D" 'spacemacs/kill-matching-buffers-rudely
    "SPC b C-d" 'spacemacs/kill-matching-buffers-rudely
+
    "SPC b m" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
    "SPC b s" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
    "SPC c l" 'comment-line
@@ -271,6 +295,10 @@ kill internal buffers too."
   :init
   (setq evil-want-keybinding nil)
   (evil-collection-init 'dired)
+  (evil-collection-init 'magit)
+  (evil-collection-init 'typescript)
+  (evil-collection-init 'vertico)
+  (evil-collection-init 'wgrep)
   (evil-collection-init 'xref)
   )
 
@@ -360,10 +388,68 @@ kill internal buffers too."
   (evil-collection-init 'magit)
   )
 
-(use-package projectile :ensure t
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package vertico
+  :ensure t
   :config
-  (setq projectile-completion-system 'ivy)
-  (projectile-mode 1))
+  (setq vertico-cycle t)
+  (setq vertico-resize nil)
+  (vertico-mode 1)
+  )
+
+(use-package marginalia
+  :ensure t
+  :config
+  (marginalia-mode 1)
+  )
+
+(use-package consult
+  :ensure t
+  :config
+  )
+
+(use-package embark
+  :ensure t
+
+  :general
+  (general-define-key
+   :keymaps 'normal
+   "SPC ." 'embark-act
+   "SPC ;" 'embark-dwim)
+
+  :bind
+  (("C-." . embark-act)
+   ("C-;" . embark-dwim)
+   ("C-e" . embark-export)
+   ("C-h B" . embark-bindings))
+
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package wgrep
+  :ensure t
+  :config
+  (require 'wgrep)
+  )
 
 (use-package powerline
   :ensure t
