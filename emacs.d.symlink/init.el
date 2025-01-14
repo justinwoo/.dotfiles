@@ -34,11 +34,7 @@
 (setq package-list
       '(
         company
-
         consult
-
-        counsel
-        counsel-projectile
 
         dash-functional
         diminish
@@ -58,14 +54,6 @@
         fzf
         general
         git
-
-        helm
-
-        helm-ag
-        helm-company
-        helm-projectile
-        helm-rg
-        helm-themes
 
         key-chord
         magit
@@ -138,8 +126,6 @@
 
   (general-define-key
    :keymaps 'insert
-   "C-/" 'helm-company
-   "M-/" 'helm-dabbrev
    "C-p" 'company-dabbrev)
 
   (general-define-key
@@ -169,20 +155,8 @@
    "C-0"     '(lambda() (interactive) (text-scale-set 1))
    "C-="     'text-scale-increase
    "C-u"     'evil-scroll-up
-   ;; "M-x"     'helm-M-x
-   ;; "SPC /"   'helm-do-ag-project-root
    "SPC /"   'consult-ripgrep
-
-   "SPC ?"   'helm-projectile-rg
-
-   ;; "SPC p f" 'helm-projectile
-
    "SPC p f" 'consult-fd
-
-   ;; "SPC p p" 'helm-projectile-switch-project
-
-   ;; "SPC b b" 'helm-buffers-list
-
    "SPC b b" 'consult-buffer
    "SPC b f" 'consult-buffer-other-frame
 
@@ -215,8 +189,6 @@
    "SPC f n" 'my-make-frame-command
    "SPC f c" 'clone-indirect-buffer-other-window
    "SPC f q" 'evil-quit
-   "SPC h f" 'helm-find-files
-   "SPC h d" 'helm-do-ag
    "SPC r l" 'bookmark-bmenu-list
    "SPC r m" 'bookmark-set
    "SPC r b" 'bookmark-jump
@@ -225,7 +197,6 @@
    "SPC m p w" 'set-flycheck-save-only
    "SPC o"   'other-window
    "SPC t s" 'flycheck-mode
-   "SPC v"   'helm-buffers-list
    "SPC w s" 'split-window-below
    "SPC w v" 'split-window-right
    "SPC x" 'delete-trailing-whitespace
@@ -283,23 +254,18 @@ kill internal buffers too."
 (use-package evil
   :ensure t
   :init
-  (progn
-    (setq evil-undo-system 'undo-fu)
-    (setq evil-want-keybinding nil)
-    (evil-mode 1)
-    (evil-select-search-module 'evil-search-module 'evil-search)
-    (evil-declare-change-repeat 'company-complete)
-    ))
+  (setq evil-undo-system 'undo-fu)
+  :config
+  (evil-mode 1)
+  (evil-select-search-module 'evil-search-module 'evil-search)
+  (evil-declare-change-repeat 'company-complete)
+  )
 
 (use-package evil-collection
+  :after evil
+  :ensure t
   :init
-  (setq evil-want-keybinding nil)
-  (evil-collection-init 'dired)
-  (evil-collection-init 'magit)
-  (evil-collection-init 'typescript)
-  (evil-collection-init 'vertico)
-  (evil-collection-init 'wgrep)
-  (evil-collection-init 'xref)
+  (evil-collection-init)
   )
 
 (use-package evil-surround
@@ -572,7 +538,6 @@ If the error list is visible, hide it.  Otherwise, show it."
          "\\.tsx\\'")
   :init
   (progn
-    ;; (helm-mode 1)
     (add-hook 'typescript-ts-mode-hook 'tide-mode)
     (add-hook 'typescript-ts-mode-hook 'company-mode)
     (add-hook 'typescript-ts-mode-hook 'flycheck-mode)
@@ -636,29 +601,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 (when (file-exists-p "~/.user-config.el")
   (load-file "~/.user-config.el"))
 
-;; (use-package helm :ensure t
-;;   :init
-;;   (progn
-;;     (require 'helm)
-;;     ;; rebind spc / and *
-;;     (setq helm-ag-base-command "rg --vimgrep --no-heading --smart-case --sort path")
-;;     (setq helm-mode-handle-completion-in-region t)
-;;     (setq helm-completion-in-region-fuzzy-match t)
-;;     (setq helm-recentf-fuzzy-match t)
-;;     (setq helm-buffers-fuzzy-matching t)
-;;     (setq helm-recentf-fuzzy-match t)
-;;     (setq helm-buffers-fuzzy-matching t)
-;;     (setq helm-locate-fuzzy-match t)
-;;     (setq helm-M-x-fuzzy-match t)
-;;     (setq helm-semantic-fuzzy-match t)
-;;     (setq helm-imenu-fuzzy-match t)
-;;     (setq helm-apropos-fuzzy-match t)
-;;     (setq helm-lisp-fuzzy-completion t)
-;;     (setq helm-session-fuzzy-match t)
-;;     (setq helm-etags-fuzzy-match t)
-;;     (evil-select-search-module 'evil-search-module 'evil-search)
-;;     (evil-declare-change-repeat 'company-complete)))
-
 ;; let's see
 (setq x-wait-for-event-timeout nil)
 
@@ -688,18 +630,6 @@ If the error list is visible, hide it.  Otherwise, show it."
       ",gr"  'lsp-find-references
       ",gG"  'lsp-find-type-definition
       ",gf"  'lsp-find-implementation)))
-
-(use-package lsp-ui :commands lsp-ui-mode)
-;; fucking popups am i back in 2001 or something
-(setq lsp-ui-doc-enable nil)
-(use-package company-lsp :commands company-lsp)
-;; if you are helm user
-;; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
-
-;; (add-hook 'rust-mode-hook #'racer-mode)
-;; (add-hook 'racer-mode-hook #'eldoc-mode)
-(with-eval-after-load 'rust-mode
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;; nix
 (use-package nix-mode
@@ -754,8 +684,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 ;; underscores are part of words in most fucking languages
 (add-hook 'rust-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'javascript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-
-;; (helm-mode 1)
 
 ;; specific to machine
 (setq local-config-file "~/.emacs.local.el")
