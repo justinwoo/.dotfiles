@@ -549,6 +549,7 @@ If the error list is visible, hide it.  Otherwise, show it."
       ",gi" 'tide-jump-to-implementation
       ",ge" 'tide-goto-error
       ",gl" 'tide-goto-line-reference
+      ",gR" 'tide-restart-server
       ",gr" 'tide-goto-reference)
     ))
 
