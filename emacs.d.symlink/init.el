@@ -33,8 +33,8 @@
 (package-initialize)
 (setq package-list
       '(
-        company
         consult
+        corfu
 
         dash-functional
         diminish
@@ -122,10 +122,6 @@
 
   (general-define-key
    ";" 'evil-ex)
-
-  (general-define-key
-   :keymaps 'insert
-   "C-p" 'company-dabbrev)
 
   (general-define-key
    :keymaps 'visual
@@ -257,7 +253,6 @@ kill internal buffers too."
   :config
   (evil-mode 1)
   (evil-select-search-module 'evil-search-module 'evil-search)
-  (evil-declare-change-repeat 'company-complete)
   )
 
 (use-package evil-collection
@@ -375,7 +370,25 @@ kill internal buffers too."
 
 (use-package consult
   :ensure t
-  :config
+  )
+
+(defun corfu-move-to-minibuffer ()
+  (interactive)
+  (pcase completion-in-region--data
+    (`(,beg ,end ,table ,pred ,extras)
+     (let ((completion-extra-properties extras)
+           completion-cycle-threshold completion-cycling)
+       (consult-completion-in-region beg end table pred)))))
+
+(use-package corfu
+  :init
+  (global-corfu-mode)
+  :bind
+  (("C-SPC" . 'completion-at-point)
+   )
+ :config
+  (keymap-set corfu-map "C-/" #'corfu-move-to-minibuffer)
+  (add-to-list 'corfu-continue-commands #'corfu-move-to-minibuffer)
   )
 
 (use-package embark
@@ -415,25 +428,6 @@ kill internal buffers too."
   :config
   (require 'wgrep)
   )
-
-(use-package company
-  :ensure t
-  :diminish company-mode
-  :config
-  (global-company-mode)
-  (setq company-dabbrev-downcase nil)
-  (setq company-idle-delay 'nil)
-  :general
-  (general-define-key
-   :keymaps 'insert
-   "C-SPC" 'company-complete)
-  (general-define-key
-   :keymaps 'company-active-map
-   "<tab>" 'company-complete-selection
-   "C-n" 'company-select-next
-   "C-j" 'company-select-next
-   "C-p" 'company-select-previous
-   "C-k" 'company-select-previous))
 
 (use-package swiper :ensure t
   :general
@@ -527,37 +521,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 (use-package lua-mode
   :mode ("\\.lua\\'"))
 
-;; (use-package tsx-ts-mode
-;;   :mode ("\\.jsx\\'"
-;;          "\\.js\\'"
-;;          "\\.ts\\'"
-;;          "\\.tsx\\'")
-;;   :init
-;;   (progn
-;;     (add-hook 'tsx-ts-mode-hook #'setup-tide-mode)
-;;     (add-hook 'tsx-ts-mode-hook 'tide-mode)
-;;     (add-hook 'tsx-ts-mode-hook 'company-mode)
-;;     (add-hook 'tsx-ts-mode-hook 'flycheck-mode)
-
-;;     (evil-define-key 'normal tsx-ts-mode-map
-;;       ",f"  'tide-fix
-;;       ",gd" 'tide-jump-to-definition
-;;       ",gi" 'tide-jump-to-implementation
-;;       ",ge" 'tide-goto-error
-;;       ",gl" 'tide-goto-line-reference
-;;       ",gR" 'tide-restart-server
-;;       ",gr" 'tide-goto-reference)
-;;     ))
-
-;; (defun setup-tide-mode ()
-;;   (interactive)
-;;   (tide-setup)
-;;   (flycheck-mode +1)
-;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-;;   (eldoc-mode +1)
-;;   (tide-hl-identifier-mode +1)
-;;   (company-mode +1))
-
 (use-package lsp-mode
   :diminish "LSP"
   :ensure t
@@ -567,17 +530,6 @@ If the error list is visible, hide it.  Otherwise, show it."
   :config
   ; TODO
   )
-
-(use-package company
-  :ensure t
-  :init
-  (global-company-mode)
-  :bind
-  (("C-SPC" . company-complete)
-   ("C-S-SPC" . company-dabbrev)
-   ("M-SPC" . company-dabbrev))
-  :custom
-  (company-idle-delay nil))
 
 (use-package web-mode
   :ensure t
@@ -621,22 +573,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 ;; stop the fucking warnings
 (setq lsp-enable-file-watchers nil)
-
-;; rust
-(setq lsp-rust-server 'rust-analyzer)
-(use-package rust-mode
-  :ensure t
-  :hook (rust-mode . lsp)
-  :mode "\\.rs\\'"
-  :init
-  (progn
-    ;; (add-hook 'racer-mode-hook #'company-mode)
-
-    (evil-define-key 'normal rust-mode-map
-      ",gg"  'lsp-find-definition
-      ",gr"  'lsp-find-references
-      ",gG"  'lsp-find-type-definition
-      ",gf"  'lsp-find-implementation)))
 
 ;; nix
 (use-package nix-mode
