@@ -68,7 +68,6 @@
         orderless
 
         popwin
-        powerline
         prettier-js
         projectile
         smartparens
@@ -417,11 +416,6 @@ kill internal buffers too."
   (require 'wgrep)
   )
 
-(use-package powerline
-  :ensure t
-  :config
-  (powerline-center-evil-theme))
-
 (use-package company
   :ensure t
   :diminish company-mode
@@ -675,10 +669,6 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 ;; escape key sequence
 (setq-default evil-escape-key-sequence "kj")
-
-;; no powerline freaking separator
-;; what the fuck did this break forward search before
-(setq powerline-default-separator 'bar)
 
 ;; good job evil indent
 (defun turn-off-evil-auto-indent ()
