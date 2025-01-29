@@ -533,45 +533,57 @@ If the error list is visible, hide it.  Otherwise, show it."
 (use-package lua-mode
   :mode ("\\.lua\\'"))
 
-(use-package typescript-ts-mode
-  :mode ("\\.jsx\\'"
-         "\\.tsx\\'")
+;; (use-package tsx-ts-mode
+;;   :mode ("\\.jsx\\'"
+;;          "\\.js\\'"
+;;          "\\.ts\\'"
+;;          "\\.tsx\\'")
+;;   :init
+;;   (progn
+;;     (add-hook 'tsx-ts-mode-hook #'setup-tide-mode)
+;;     (add-hook 'tsx-ts-mode-hook 'tide-mode)
+;;     (add-hook 'tsx-ts-mode-hook 'company-mode)
+;;     (add-hook 'tsx-ts-mode-hook 'flycheck-mode)
+
+;;     (evil-define-key 'normal tsx-ts-mode-map
+;;       ",f"  'tide-fix
+;;       ",gd" 'tide-jump-to-definition
+;;       ",gi" 'tide-jump-to-implementation
+;;       ",ge" 'tide-goto-error
+;;       ",gl" 'tide-goto-line-reference
+;;       ",gR" 'tide-restart-server
+;;       ",gr" 'tide-goto-reference)
+;;     ))
+
+;; (defun setup-tide-mode ()
+;;   (interactive)
+;;   (tide-setup)
+;;   (flycheck-mode +1)
+;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+;;   (eldoc-mode +1)
+;;   (tide-hl-identifier-mode +1)
+;;   (company-mode +1))
+
+(use-package lsp-mode
+  :diminish "LSP"
+  :ensure t
+  :hook ((lsp-mode . lsp-diagnostics-mode)
+         (lsp-mode . lsp-enable-which-key-integration)
+         (tsx-ts-mode . lsp-deferred))
+  :config
+  ; TODO
+  )
+
+(use-package company
+  :ensure t
   :init
-  (progn
-    (add-hook 'typescript-ts-mode-hook 'tide-mode)
-    (add-hook 'typescript-ts-mode-hook 'company-mode)
-    (add-hook 'typescript-ts-mode-hook 'flycheck-mode)
-    (add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
-
-    (evil-define-key 'normal typescript-ts-mode-map
-      ",f"  'tide-fix
-      ",gd" 'tide-jump-to-definition
-      ",gi" 'tide-jump-to-implementation
-      ",ge" 'tide-goto-error
-      ",gl" 'tide-goto-line-reference
-      ",gR" 'tide-restart-server
-      ",gr" 'tide-goto-reference)
-    ))
-
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  (company-mode +1))
-
-(global-company-mode)
-
-(global-set-key (kbd "C-SPC") 'company-complete)
-(global-set-key (kbd "C-S-SPC") 'company-dabbrev)
-(global-set-key (kbd "M-SPC") 'company-dabbrev)
-
-(define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-(define-key evil-insert-state-map (kbd "C-p") 'company-dabbrev)
-
-(setq company-idle-delay 'nil)
+  (global-company-mode)
+  :bind
+  (("C-SPC" . company-complete)
+   ("C-S-SPC" . company-dabbrev)
+   ("M-SPC" . company-dabbrev))
+  :custom
+  (company-idle-delay nil))
 
 (use-package web-mode
   :ensure t
