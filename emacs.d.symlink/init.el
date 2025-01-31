@@ -39,6 +39,9 @@
         dash-functional
         diminish
 
+        eglot
+        consult-eglot
+        flycheck-eglot
         embark
         embark-consult
 
@@ -69,16 +72,13 @@
 
         popwin
         prettier-js
-        projectile
         smartparens
         spacemacs-theme
         string-inflection
-        swiper
 
         tide
 
         treesit-auto
-        typescript-mode
         undo-fu
         use-package
         web-mode
@@ -139,8 +139,6 @@
    "M-l"     'evil-window-right
    "M-j"     'evil-window-down
    "M-k"     'evil-window-up
-   ;; "s-p"     'projectile-find-file
-   ;; "M-p"     'projectile-find-file
    )
 
   (general-define-key
@@ -154,6 +152,7 @@
    "SPC p f" 'consult-fd
    "SPC b b" 'consult-buffer
    "SPC b f" 'consult-buffer-other-frame
+   "SPC s"   'consult-line
 
    "SPC b d" 'my-kill-this-buffer
    "SPC b n" 'next-buffer
@@ -429,12 +428,6 @@ kill internal buffers too."
   (require 'wgrep)
   )
 
-(use-package swiper :ensure t
-  :general
-  (general-define-key
-   :keymaps 'normal
-   "SPC s" 'swiper))
-
 (use-package diminish :ensure t)
 
 (use-package which-key :ensure t
@@ -521,15 +514,35 @@ If the error list is visible, hide it.  Otherwise, show it."
 (use-package lua-mode
   :mode ("\\.lua\\'"))
 
-(use-package lsp-mode
-  :diminish "LSP"
+;; (use-package lsp-mode
+;;   :diminish "LSP"
+;;   :ensure t
+;;   :hook ((lsp-mode . lsp-diagnostics-mode)
+;;          (lsp-mode . lsp-enable-which-key-integration)
+;;          (tsx-ts-mode . lsp-deferred))
+;;   :config
+;;   ; TODO
+;;   )
+
+(use-package eglot
   :ensure t
-  :hook ((lsp-mode . lsp-diagnostics-mode)
-         (lsp-mode . lsp-enable-which-key-integration)
-         (tsx-ts-mode . lsp-deferred))
+  :general
+  (general-define-key
+   :keymaps 'normal
+   ", f" #'eglot-code-action-quickfix)
+
   :config
-  ; TODO
-  )
+  (add-to-list 'eglot-server-programs
+               '((typescript-ts-mode)
+                 . ("typescript-language-server" "--stdio")))
+  (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+  (add-hook 'typescript-ts-mode-hook 'eglot-ensure))
+
+(use-package flycheck-eglot
+  :ensure t
+  :after (flycheck eglot)
+  :config
+  (global-flycheck-eglot-mode 1))
 
 (use-package web-mode
   :ensure t
@@ -549,7 +562,6 @@ If the error list is visible, hide it.  Otherwise, show it."
   )
 
 (use-package s)
-(use-package projectile)
 
 (general-define-key
  :keymaps 'normal
