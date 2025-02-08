@@ -49,13 +49,13 @@ function my_prompt {
         if [ "$(git config --bool bash.showUntrackedFiles)" != "false" ] &&
                git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- ':/*' \
                    >/dev/null 2>/dev/null; then
-            git_info+=" 異物"
+            git_info+=" 汚"
             git_color=$RED
         fi
 
         # stash has trash
         if git rev-parse --verify --quiet refs/stash >/dev/null; then
-            git_info+=" 在庫"
+            git_info+=" 庫"
             git_color=$YELLOW
         fi
 
