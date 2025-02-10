@@ -23,6 +23,9 @@ bindApp({"alt"}, "i", "Slack")
 bindApp({"alt"}, ";", "IINA")
 bindApp({"alt", "shift"}, ";", "FileZilla")
 
+bindApp({"ctrl", "alt", "cmd"}, "m", "Maps")
+bindApp({"ctrl", "alt", "cmd"}, "n", "Calendar")
+
 hs.hotkey.bind({"alt", "shift"}, "p", function()
     local finder = hs.appfinder.appFromName('Finder')
     local windows = finder:allWindows()
