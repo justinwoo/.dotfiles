@@ -529,12 +529,14 @@ If the error list is visible, hide it.  Otherwise, show it."
   :general
   (general-define-key
    :keymaps 'normal
-   ", f" #'eglot-code-action-quickfix)
+   ", e e" #'eglot
+   ", e f" #'eglot-code-action-quickfix)
 
   :config
-  (add-to-list 'eglot-server-programs
-               '((typescript-ts-mode)
-                 . ("typescript-language-server" "--stdio")))
+  (advice-add 'jsonrpc--log-event :override #'ignore)
+
+  (setf (plist-get eglot-events-buffer-config :size) 0)
+
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure))
 
