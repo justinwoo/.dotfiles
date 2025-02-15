@@ -12,6 +12,7 @@ function dump(o)
     end
 end
 
+local appAlertId
 function toggleApp(appName)
     local app = hs.appfinder.appFromName(appName)
 
@@ -24,7 +25,8 @@ function toggleApp(appName)
             app:activate()
         end
     else
-        hs.alert.show("Could not find app from name: " .. appName)
+        hs.alert.closeSpecific(appAlertId)
+        appAlertId = hs.alert.show("Could not find app from name: " .. appName)
     end
 end
 
@@ -32,19 +34,18 @@ function bindApp(modifiers, key, appName)
     hs.hotkey.bind(modifiers, key, function() toggleApp(appName) end)
 end
 
-local alertId
-
 function round5(n)
     local r = n % 5
     return r >= 5 / 2 and n + 5 - r or n - r
 end
 
+local volumeAlertId
 function volumeChange(delta)
     local currentVolume = hs.audiodevice.defaultOutputDevice():volume()
     local newVolume = round5(math.floor(math.min(currentVolume + delta, 100)))
     hs.audiodevice.defaultOutputDevice():setVolume(newVolume)
-    hs.alert.closeSpecific(alertId)
-    alertId = hs.alert.show("Volume: " .. newVolume .. "%")
+    hs.alert.closeSpecific(volumeAlertId)
+    volumeAlertId = hs.alert.show("Volume: " .. newVolume .. "%")
 end
 
 function volumeDown()
@@ -57,4 +58,10 @@ function volumeUp()
     local volumeUpKey = "SOUND_UP"
     hs.eventtap.event.newSystemKeyEvent(volumeUpKey, true):post()
     hs.eventtap.event.newSystemKeyEvent(volumeUpKey, false):post()
+end
+
+local messageAlertId
+function alert(text)
+    hs.alert.closeSpecific(messageAlertId)
+    messageAlertId = hs.alert.show(text)
 end

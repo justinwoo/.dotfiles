@@ -1,3 +1,4 @@
+require("config")
 require("functions")
 require("filters")
 require("grid")
@@ -43,7 +44,7 @@ hs.hotkey.bind({"ctrl", "shift"}, "left", volumeDown)
 hs.hotkey.bind({"ctrl", "shift"}, "right", volumeUp)
 
 -- hs.hotkey
---     .bind({"cmd"}, "p", function() hs.alert.show("No printing allowed") end)
+--     .bind({"cmd"}, "p", function() alert("No printing allowed") end)
 
 hs.hotkey.bind({"ctrl", "alt"}, "return", function()
     local focused = hs.window.focusedWindow()
@@ -104,6 +105,22 @@ hs.hotkey.bind({"alt", "shift"}, "5", function()
     focused:centerOnScreen(0)
 end)
 
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "J", function()
+    hs.keycodes.currentSourceID(
+        "com.apple.inputmethod.Kotoeri.RomajiTyping.Japanese")
+    alert("日本語")
+end)
+
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "K", function()
+    hs.keycodes.currentSourceID("com.apple.keylayout.US")
+    alert("English")
+end)
+
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "H", function()
+    hs.keycodes.currentSourceID("com.apple.inputmethod.TCIM.Pinyin")
+    alert("漢字")
+end)
+
 local laptop = os.getenv("LAPTOP")
 if not laptop then
     -- hell on earth
@@ -124,4 +141,4 @@ if not laptop then
 
 end
 
-hs.alert.show("Config loaded")
+alert("Config loaded")
