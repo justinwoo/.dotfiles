@@ -16,7 +16,4 @@ macos-titlebar-style = native
 window-theme = system
 
 macos-option-as-alt = true
-macos-icon = custom-style
-macos-icon-frame = beige
-macos-icon-screen-color = #000000
-macos-icon-ghost-color = #000000
+macos-icon = chalkboard
