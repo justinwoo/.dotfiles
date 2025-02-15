@@ -117,9 +117,19 @@ hs.hotkey.bind({"ctrl", "alt", "cmd"}, "K", function()
     alert("English")
 end)
 
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "L", function()
+    hs.keycodes.currentSourceID("com.apple.keylayout.Swedish-Pro")
+    alert("Swedish")
+end)
+
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "H", function()
     hs.keycodes.currentSourceID("com.apple.inputmethod.TCIM.Pinyin")
     alert("漢字")
+end)
+
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, ";", function()
+    hs.keycodes.currentSourceID("com.apple.inputmethod.Korean.2SetKorean")
+    alert("한글")
 end)
 
 local laptop = os.getenv("LAPTOP")
