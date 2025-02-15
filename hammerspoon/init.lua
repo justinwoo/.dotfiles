@@ -4,8 +4,9 @@ require("filters")
 require("grid")
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function() hs.reload() end)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L",
-               function() hs.caffeinate.lockScreen() end)
+
+-- hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L",
+--                function() hs.caffeinate.lockScreen() end)
 
 hs.hotkey.bind({"alt"}, "`", function()
     local windows = hs.window.filter.defaultCurrentSpace:getWindows()
