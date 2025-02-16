@@ -3,10 +3,7 @@ require("functions")
 require("filters")
 require("grid")
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function() hs.reload() end)
-
--- hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L",
---                function() hs.caffeinate.lockScreen() end)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", hs.reload)
 
 hs.hotkey.bind({"alt"}, "`", function()
     local windows = hs.window.filter.defaultCurrentSpace:getWindows()
@@ -23,7 +20,7 @@ bindApp({"alt", "shift"}, "u", "UpNote")
 bindApp({"alt"}, "y", "Google Chrome")
 bindApp({"alt"}, "i", "Slack")
 bindApp({"alt"}, ";", "IINA")
-bindApp({"alt", "shift"}, ";", "FileZilla")
+bindApp({"alt", "shift"}, ";", "Transmit")
 
 bindApp({"ctrl", "alt", "cmd"}, "m", "Maps")
 bindApp({"ctrl", "alt", "cmd"}, "n", "Calendar")
@@ -33,19 +30,14 @@ hs.hotkey.bind({"alt", "shift"}, "p", function()
     local windows = finder:allWindows()
     if #windows == 1 then
         hs.execute("open /Users/justin/Desktop/")
+        resizeFinder()
     else
         toggleApp("Finder")
     end
 end)
 
--- hs.hotkey.bind({"ctrl", "shift"}, "left", function() volumeChange(-5) end)
--- hs.hotkey.bind({"ctrl", "shift"}, "right", function() volumeChange(5) end)
-
 hs.hotkey.bind({"ctrl", "shift"}, "left", volumeDown)
 hs.hotkey.bind({"ctrl", "shift"}, "right", volumeUp)
-
--- hs.hotkey
---     .bind({"cmd"}, "p", function() alert("No printing allowed") end)
 
 hs.hotkey.bind({"ctrl", "alt"}, "return", function()
     local focused = hs.window.focusedWindow()
@@ -88,23 +80,11 @@ hs.hotkey.bind({"alt", "shift"}, "]", function()
     }))
 end)
 
-hs.hotkey.bind({"alt", "shift"}, "3", function()
-    local focused = hs.window.focusedWindow()
-    focused:setSize(hs.geometry.size(1400, 900))
-    focused:centerOnScreen(0)
-end)
+hs.hotkey.bind({"alt", "shift"}, "3", function() setFocusedSize(1400, 900) end)
 
-hs.hotkey.bind({"alt", "shift"}, "4", function()
-    local focused = hs.window.focusedWindow()
-    focused:setSize(hs.geometry.size(1600, 1000))
-    focused:centerOnScreen(0)
-end)
+hs.hotkey.bind({"alt", "shift"}, "4", function() setFocusedSize(1600, 1000) end)
 
-hs.hotkey.bind({"alt", "shift"}, "5", function()
-    local focused = hs.window.focusedWindow()
-    focused:setSize(hs.geometry.size(1200, 800))
-    focused:centerOnScreen(0)
-end)
+hs.hotkey.bind({"alt", "shift"}, "5", function() setFocusedSize(1200, 800) end)
 
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "J", function()
     hs.keycodes.currentSourceID(

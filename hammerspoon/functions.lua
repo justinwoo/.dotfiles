@@ -65,3 +65,46 @@ function alert(text)
     hs.alert.closeSpecific(messageAlertId)
     messageAlertId = hs.alert.show(text)
 end
+
+function setFocusedSize(x, y)
+    local focused = hs.window.focusedWindow()
+    focused:setSize(hs.geometry.size(x, y))
+    focused:centerOnScreen(0)
+end
+
+function findFinder()
+    local finder = hs.appfinder.appFromName('Finder')
+    local windows = finder:allWindows()
+    if #windows == 1 then
+        hs.execute("open /Users/justin/Desktop/")
+        resizeFinder()
+    else
+        toggleApp("Finder")
+    end
+end
+
+function resizeFinder()
+    local attempts = 0
+    local maxAttempts = 3
+
+    function pred()
+        attempts = attempts + 1
+        local finder = hs.application.get("Finder")
+
+        if finder ~= nil then
+            local win = finder:mainWindow()
+            if win then
+                win:setSize(1200, 700)
+                win:centerOnScreen(0)
+                return true
+            end
+        elseif attempts >= maxAttempts then
+            alert("Couldnt' find Finder after " .. maxAttempts .. " attempts")
+            return true
+        end
+
+        return false
+    end
+
+    hs.timer.doUntil(pred, action, 0.05)
+end
