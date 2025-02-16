@@ -30,8 +30,10 @@ function toggleApp(appName)
     end
 end
 
-function bindApp(modifiers, key, appName)
-    hs.hotkey.bind(modifiers, key, function() toggleApp(appName) end)
+function getToggleApp(appName) return function() toggleApp(appName) end end
+
+function getLaunchOrFocus(appName)
+    return function() hs.application.launchOrFocus(appName) end
 end
 
 function round5(n)
