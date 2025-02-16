@@ -33,7 +33,22 @@ end
 function getToggleApp(appName) return function() toggleApp(appName) end end
 
 function getLaunchOrFocus(appName)
-    return function() hs.application.launchOrFocus(appName) end
+    return function()
+        local app = hs.appfinder.appFromName(appName)
+
+        if (app) then
+            if (app:isFrontmost()) then
+                local windows =
+                    hs.window.filter.defaultCurrentSpace:getWindows()
+                app:hide()
+                windows[2]:focus()
+            else
+                app:activate()
+            end
+        else
+            hs.application.launchOrFocus(appName)
+        end
+    end
 end
 
 function round5(n)
