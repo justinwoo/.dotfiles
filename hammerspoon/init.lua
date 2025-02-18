@@ -24,6 +24,7 @@ hs.hotkey.bind({"alt", "shift"}, ";", getLaunchOrFocus("Transmit"))
 
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "m", getLaunchOrFocus("Maps"))
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "n", getLaunchOrFocus("Calendar"))
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "w", getLaunchOrFocus("Weather"))
 
 hs.hotkey.bind({"alt", "shift"}, "p", function()
     local finder = hs.appfinder.appFromName('Finder')
