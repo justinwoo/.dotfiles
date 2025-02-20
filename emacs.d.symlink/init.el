@@ -139,6 +139,7 @@
    "M-l"     'evil-window-right
    "M-j"     'evil-window-down
    "M-k"     'evil-window-up
+   "Z Z"     #'(lambda () (interactive) (message "Stop closing!!!"))
    )
 
   (general-define-key
