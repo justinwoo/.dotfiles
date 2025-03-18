@@ -13,15 +13,14 @@ end)
 
 hs.hotkey.bind({"alt"}, "e", getToggleApp("emacs"))
 hs.hotkey.bind({"alt"}, "w", getToggleApp("Code"))
-hs.hotkey.bind({"alt"}, "u", getToggleApp("Telegram"))
-hs.hotkey.bind({"alt", "shift"}, "u", getToggleApp("UpNote"))
 hs.hotkey.bind({"alt"}, "y", getToggleApp("Google Chrome"))
 hs.hotkey.bind({"alt"}, "i", getToggleApp("Slack"))
 hs.hotkey.bind({"alt"}, ";", getToggleApp("IINA"))
 hs.hotkey.bind({"alt"}, "o", getToggleApp("Ghostty"))
 
+hs.hotkey.bind({"alt"}, "u", getLaunchOrFocus("Telegram"))
 hs.hotkey.bind({"alt", "shift"}, ";", getLaunchOrFocus("Transmit"))
-
+hs.hotkey.bind({"alt", "shift"}, "u", getLaunchOrFocus("UpNote"))
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "m", getLaunchOrFocus("Maps"))
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "n", getLaunchOrFocus("Calendar"))
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "w", getLaunchOrFocus("Weather"))
