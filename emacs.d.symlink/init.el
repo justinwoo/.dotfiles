@@ -321,6 +321,35 @@ kill internal buffers too."
   (magit-stage-modified)
   (magit-commit-extend))
 
+(setq treesit-language-source-alist
+  '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+    (c "https://github.com/tree-sitter/tree-sitter-c")
+    (cmake "https://github.com/uyha/tree-sitter-cmake")
+    (common-lisp "https://github.com/theHamsta/tree-sitter-commonlisp")
+    (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+    (css "https://github.com/tree-sitter/tree-sitter-css")
+    (csharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
+    (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+    (go "https://github.com/tree-sitter/tree-sitter-go")
+    (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+    (go-mod "https://github.com/camdencheek/tree-sitter-go-mod")
+    (html "https://github.com/tree-sitter/tree-sitter-html")
+    (js . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+    (json "https://github.com/tree-sitter/tree-sitter-json")
+    (lua "https://github.com/Azganoth/tree-sitter-lua")
+    (make "https://github.com/alemuller/tree-sitter-make")
+    (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+    (python "https://github.com/tree-sitter/tree-sitter-python")
+    (r "https://github.com/r-lib/tree-sitter-r")
+    (rust "https://github.com/tree-sitter/tree-sitter-rust")
+    (toml "https://github.com/tree-sitter/tree-sitter-toml")
+    (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+    (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+    (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+(add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))
+
 ;; fucking treesitter
 (use-package treesit-auto
   :custom
@@ -534,12 +563,27 @@ If the error list is visible, hide it.  Otherwise, show it."
    ", e f" #'eglot-code-action-quickfix)
 
   :config
-  (advice-add 'jsonrpc--log-event :override #'ignore)
+  ;; (advice-add 'jsonrpc--log-event :override #'ignore)
+  ;; (setf (plist-get eglot-events-buffer-config :size) 0)
+  ;; (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+  ;; (add-hook 'typescript-ts-mode-hook 'eglot-ensure))
 
-  (setf (plist-get eglot-events-buffer-config :size) 0)
+  ;; from https://github.com/joaotavora/eglot/discussions/993
+  ;; No event buffers, disable providers cause a lot of hover traffic. Shutdown unused servers.
+  ;; (setq eglot-events-buffer-size 0
+  ;;       eglot-ignored-server-capabilities '(:hoverProvider
+  ;;                                           :documentHighlightProvider)
+  ;;       eglot-autoshutdown t)
+  ;; Show all of the available eldoc information when we want it. This way Flymake errors
+  ;; don't just get clobbered by docstrings.
+  ;; (add-hook 'eglot-managed-mode-hook
+  ;;           (lambda ()
+  ;;             "Make sure Eldoc will show us all of the feedback at point."
+  ;;             (setq-local eldoc-documentation-strategy
+  ;;                         #'eldoc-documentation-compose)))
+  ;; (fset #'jsonrpc--log-event #'ignore)
+  )
 
-  (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
-  (add-hook 'typescript-ts-mode-hook 'eglot-ensure))
 
 (use-package flycheck-eglot
   :ensure t
@@ -626,8 +670,8 @@ If the error list is visible, hide it.  Otherwise, show it."
   (setq-local evil-auto-indent nil))
 
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-(setq tab-width 2)
+(setq-default tab-width 4)
+(setq tab-width 4)
 (setq-default evil-shift-width 2)
 (setq evil-shift-width 2)
 
@@ -635,9 +679,9 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 (add-hook 'haskell-mode-hook #'turn-off-evil-auto-indent)
 
-;; underscores are part of words in most fucking languages
-(add-hook 'rust-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-(add-hook 'javascript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+;; ;; underscores are part of words in most fucking languages
+;; (add-hook 'rust-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+;; (add-hook 'javascript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
 ;; specific to machine
 (setq local-config-file "~/.emacs.local.el")
