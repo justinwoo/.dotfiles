@@ -56,6 +56,7 @@ set -g prefix '`'
 set -g prefix2 'Escape'
 # allow me to freaking use grave
 bind-key ` send-prefix
+bind-key Escape send-keys Escape
 
 # set vi style keys
 setw -g mode-keys vi

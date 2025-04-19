@@ -45,3 +45,4 @@ stack.yaml.lock
 local/
 .hiefiles/
 timestamp
+kubeconfig
