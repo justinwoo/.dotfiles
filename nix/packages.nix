@@ -47,6 +47,7 @@ my-pkgs // {
     sqlite-interactive
     tig
     tmux
+    watchexec
     ;
 } // pkgs.lib.optionalAttrs (pkgs.stdenv.isLinux && pkgs.stdenv.is64bit) {
   inherit (pkgs) feh i3 i3status rofi scrot;

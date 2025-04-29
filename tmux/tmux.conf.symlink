@@ -38,13 +38,14 @@ bind -n C-M-p previous-window
 bind -n C-M-z resize-pane -Z
 
 # reload shit
-bind r source-file ~/.tmux.conf
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
 # copy-mode-vi rebinds jesus
 bind -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
 bind -T copy-mode-vi 'v' send-keys -X begin-selection
 bind -T copy-mode-vi 'x' send-keys -X clear-selection
-bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard'
+# bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard'
+bind -T copy-mode-vi 'y' send-keys -X copy-selection -x
 
 bind v copy-mode
 unbind ']'
