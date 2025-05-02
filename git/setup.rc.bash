@@ -1,3 +1,11 @@
+git_master() {
+    if git show-ref --verify --quiet refs/remotes/origin/master; then
+        echo "master"
+    else
+        echo "main"
+    fi
+}
+
 # my own git aliases
 alias gpp='git pull --prune'
 
@@ -41,7 +49,7 @@ alias gap='git add -p'
 
 alias grl='git reflog | head -10'
 
-alias git-commits-since-origin-master='git log "origin/master..$(ggbn)" --pretty="format:* %s"'
+alias git-commits-since-origin-master='git log "origin/$(git_master)..$(ggbn)" --pretty="format:* %s"'
 
 # hub/gh
 alias hb='gh repo view --web'
@@ -58,17 +66,15 @@ alias gil='git log --decorate=full --stat --graph'
 alias gild='git log --decorate'
 
 # git log lines since origin/master
-alias gll='git log --pretty=format:%s origin/master..'
+alias gll='git log --pretty=format:%s origin/$(git_master)..'
 
-# hell fuckin yeah get that fuckin shit done
-alias gu='git fetch origin master && git rebase origin/master'
-alias gudev='git fetch origin dev && git rebase origin/dev'
-alias gupdate='git fetch origin master && git rebase origin/master'
-alias gmupdate='git fetch origin main && git rebase origin/main'
+alias master='gfo -p; git co $(git_master); gupdate;'
+alias gupdate='git fetch origin $(git_master) && git rebase origin/$(git_master)'
+
+alias gupstream='git fetch upstream $(git_master) && git rebase FETCH_HEAD'
+
 alias gbupdate='git fetch origin $(ggbn) && git rebase FETCH_HEAD'
 alias gbupstream='git fetch upstream $(ggbn) && git rebase FETCH_HEAD'
-alias gupstream='git fetch upstream master && git rebase FETCH_HEAD'
-alias gmupstream='git fetch upstream main && git rebase FETCH_HEAD'
 alias greset='git fetch origin $(ggbn) && git reset --hard FETCH_HEAD'
 alias gureset='git fetch upstream $(ggbn) && git reset --hard FETCH_HEAD'
 alias gjreset='git fetch justinwoo $(ggbn) && git reset --hard FETCH_HEAD'
