@@ -647,7 +647,7 @@ If the error list is visible, hide it.  Otherwise, show it."
 
   ;; if using package.el
   ;; :ensure t
-  :custom (terraform-indent-level 4)
+  :custom (terraform-indent-level 2)
   :config
   (defun my-terraform-mode-init ()
     ;; if you want to use outline-minor-mode
