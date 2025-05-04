@@ -29,6 +29,7 @@ my-pkgs // {
     autorandr
     bash-completion
     bat
+    black
     colordiff
     direnv
     # emacs29
