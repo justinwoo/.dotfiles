@@ -9,14 +9,6 @@ bind z resize-pane -Z
 set -g status-keys vi
 set -g history-limit 10000
 
-# clipboard should work or i want a refund
-# move x clipboard into tmux paste buffer
-unbind C-p
-bind C-p run "tmux set-buffer \"$(xclip -o -selection clipboard)\"; tmux paste-buffer"
-# move tmux copy buffer into x clipboard
-unbind C-c
-bind C-c run "tmux show-buffer | xclip -i -selection clipboard &>/dev/null"
-
 # wtf is this
 bind h select-pane -L
 bind l select-pane -R
