@@ -72,13 +72,6 @@ function my_prompt {
         git_info+=' '
     fi
 
-    local prefix
-    if [ -z "$IN_NIX_SHELL" ]; then
-        prefix="$NORMAL"馬
-    else
-        prefix="$BLUE"肉
-    fi
-
     local jobs_info
     local jobs_count
     jobs_count=$(($(jobs -r | wc -l) + $(jobs -s | wc -l)))
@@ -95,7 +88,7 @@ function my_prompt {
     local git="$git_color$git_info"
     local usr="$NORMAL\$"
     local jobs_="$MAGENTA$jobs_info"
-    PS1="$LOCAL_PS1_PREFIX$jobs_$prefix $dir $git$exit$usr "
+    PS1="$LOCAL_PS1_PREFIX$jobs_$dir $git$exit$usr "
 }
 
 export PROMPT_COMMAND="my_prompt;$PROMPT_COMMAND"
