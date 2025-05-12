@@ -37,7 +37,10 @@ function my_prompt {
             git_color=$RED
         fi
 
-        if echo "$git_status" | grep -q '^1'; then
+        if ! git diff --quiet; then
+            git_info+="*"
+            git_color=$RED
+        elif echo "$git_status" | grep -q '^1'; then
             git_info+="+"
             git_color=$YELLOW
         fi
