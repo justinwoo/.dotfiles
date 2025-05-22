@@ -563,6 +563,10 @@ If the error list is visible, hide it.  Otherwise, show it."
    ", e f" #'eglot-code-action-quickfix)
 
   :config
+  (add-to-list 'eglot-server-programs
+               '((typescript-mode web-mode) . ("vtsls"))
+               )
+
   ;; (advice-add 'jsonrpc--log-event :override #'ignore)
   ;; (setf (plist-get eglot-events-buffer-config :size) 0)
   ;; (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
