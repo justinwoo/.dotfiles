@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BLUEMAN="$HOME/.nix-profile/bin/blueman-applet"
+BLUEMAN="$DOT/nix/result-env/bin/blueman-applet"
 
 if [[ -a $BLUEMAN ]]
 then

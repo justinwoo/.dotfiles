@@ -13,8 +13,8 @@ pkgs.stdenv.mkDerivation {
   phases = "unpackPhase installPhase";
 
   installPhase = ''
-    mkdir -p $out/z
-    cp -R $src/* $out/z
-    chmod +x $out/z/z.sh
+    mkdir -p $out/share/z
+    cp -R $src/* $out/share/z
+    chmod +x $out/share/z/z.sh
   '';
 }

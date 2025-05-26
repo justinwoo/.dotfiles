@@ -496,110 +496,6 @@ dump."
   (evil-leader/set-key "en" 'flycheck-next-error)
   (evil-leader/set-key "ep" 'flycheck-previous-error))
 
-(defun my/org-mode-config ()
-  "make org mode less ugly"
-  (defun my/org-mode-hook ()
-    "Stop the org-level headers from increasing in height relative to the other text."
-    (dolist (face '(org-level-1
-                    org-level-2
-                    org-level-3
-                    org-level-4
-                    org-level-5))
-      (set-face-attribute face nil :weight 'semi-bold :height 1.0)))
-  (add-hook 'org-mode-hook 'my/org-mode-hook)
-  (setq org-bullets-bullet-list '("大" "中" "小" "・")))
-
-(defun my-build-psc-package-project ()
-  "build my project man"
-  (interactive)
-  (save-buffer)
-  (let ((default-directory (projectile-project-root))
-        (success-buffer-name "*PSC-PACKAGE BUILD SUCCESS*")
-        (error-buffer-name "*PSC-PACKAGE BUILD ERRORS*"))
-    (when (buffer-live-p (get-buffer success-buffer-name)) (kill-buffer success-buffer-name))
-    (when (buffer-live-p (get-buffer error-buffer-name)) (kill-buffer error-buffer-name))
-    (if (file-exists-p "psc-package.json")
-        (shell-command "psc-package build -- 'test/**/*.purs'" success-buffer-name error-buffer-name)
-      (error "wtf no psc-package.json"))
-    (if (get-buffer error-buffer-name)
-        (switch-to-buffer-other-window error-buffer-name)
-      (switch-to-buffer-other-window success-buffer-name)
-      (message "Project build succeeded."))))
-
-(defun my-psc-ide-server-kill-buffer ()
-  "die"
-  (interactive)
-  (kill-buffer (get-buffer "*psc-ide-server*")))
-
-(defun my-psc-ide-server-restart ()
-  "die"
-  (interactive)
-  (kill-buffer (get-buffer "*psc-ide-server*"))
-  (psc-ide-server-start (psc-ide-suggest-project-dir)))
-
-(defun my/purescript-config ()
-  "purescript"
-  (use-package purescript-mode
-    :load-path "~/Code/new-purescript-mode/")
-    ;; :load-path "~/.nix-profile/elisp/purescript-mode-local/"
-    ;; :diminish 'purescript-indentation-mode)
-
-  (use-package psc-ide
-    ;; :load-path "~/.nix-profile/elisp/psc-ide-local/"
-    :load-path "~/Code/psc-ide-emacs/"
-    :init
-    (progn
-      (add-hook 'purescript-mode-hook 'psc-ide-mode)
-      (add-hook 'purescript-mode-hook 'company-mode)
-      (add-hook 'purescript-mode-hook 'flycheck-mode)
-      (spacemacs/declare-prefix-for-mode 'purescript-mode "mm" "purescript/psc-ide")
-
-      (spacemacs/set-leader-keys-for-major-mode 'purescript-mode
-        "mt"  'psc-ide-add-clause
-        "mcs" 'psc-ide-case-split
-        "ms"  'psc-ide-server-start
-        "mr"  'my-psc-ide-server-restart
-        "mb"  'psc-ide-rebuild
-        "mB"  'my-build-psc-package-project
-        "mq"  'my-psc-ide-server-kill-buffer
-        "ml"  'psc-ide-load-all
-        "mL"  'psc-ide-load-module
-        "mia" 'psc-ide-add-import
-        "mis" 'psc-ide-flycheck-insert-suggestion
-        "mii" 'my/purescript-region-imports-suggestions
-        "gg"  'psc-ide-goto-definition
-        "hT"  'psc-ide-show-type-expanded
-        "ht"  'psc-ide-show-type)
-      ))
-
-  (defun my/purescript-region-imports-suggestions ()
-    "Apply imports suggestions on region"
-    (interactive)
-    (if (region-active-p)
-        (progn
-          (let* ((line-start (line-number-at-pos (region-beginning)))
-                 (line-end (line-number-at-pos (region-end))))
-            (dolist (line (number-sequence line-start
-                                           (- line-end 1)))
-              (goto-line line)
-              (psc-ide-flycheck-insert-suggestion))
-            (goto-line line-start)
-            (evil-visual-line)
-            (evil-next-line (- line-end 1 line-start))
-            (flush-lines "^[[:space:]]*$" (region-beginning) (point))))
-      (message "You need an active region to use this.")))
-
-  (defun psc-ide-show-type-expanded ()
-    "show the type at point, expanded"
-    (interactive)
-    (psc-ide-show-type t))
-
-  ;; for references: M-?
-  (add-to-list 'xref-backend-functions 'psc-ide-xref-backend)
-
-  (with-eval-after-load 'company
-    (add-to-list 'company-backends 'company-psc-ide-backend)))
-
 (defun my/company-config ()
   "company config"
   (global-company-mode)
@@ -744,7 +640,6 @@ layers configuration. You are free to put any user code."
 
   ;; nix
   (use-package nix-mode
-    :load-path "~/.nix-profile/elisp/nix-mode/"
     :mode "\\.nix\\'"
     :custom
     (nix-indent-function #'nix-indent-line))

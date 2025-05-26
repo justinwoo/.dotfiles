@@ -1,2 +1,4 @@
 # why is this not picked up in completions?
-source ~/.nix-profile/share/bash-completion/completions/git-prompt.sh
+# source ~/.nix-profile/share/bash-completion/completions/git-prompt.sh
+
+source ~/.dotfiles/nix/result-env/share/bash-completion/completions/git-prompt.sh

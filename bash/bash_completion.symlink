@@ -5,6 +5,14 @@ if [ -f $HOME/.nix-profile/etc/bash_completion.d ]; then
   done
 fi
 
+if [ -f $DOT/nix/result-env/etc/bash_completion.d ]; then
+  for file in $DOT/nix/result-env/etc/bash_completion.d/* ; do
+    . $file
+  done
+fi
+
+
+
 if [[ -f $(command -v complete) ]]
 then
   complete -F _systemctl scu

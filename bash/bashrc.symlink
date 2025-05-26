@@ -20,7 +20,7 @@ export EDITOR='nvim' >> ~/.bashrc
 export GIT_EDITOR='nvim' >> ~/.bashrc
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
-export XDG_DATA_DIRS="$HOME/.nix-profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+export XDG_DATA_DIRS="$HOME/.nix-profile/share:$DOT/nix/result-env/.nix-profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
 
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -39,15 +39,17 @@ if ! shopt -oq posix; then
   if [ -f $NIX_SHARE_COMPLETION ]; then
     . $NIX_SHARE_COMPLETION
   fi
+  NIX_SHARE_COMPLETION="$DOT/nix/result-env/share/bash-completion/bash_completion"
+  if [ -f $NIX_SHARE_COMPLETION ]; then
+    . $NIX_SHARE_COMPLETION
+  fi
 fi
 
 export DOT=$HOME/.dotfiles
 export TERMINAL=gnome-terminal
 export PROJECTS=~/Code
 
-if [[ -f ~/.nix-profile/z/z.sh ]]; then
-  . ~/.nix-profile/z/z.sh
-fi
+. $DOT/nix/result-env/share/z/z.sh
 
 # do MACOS setup before other scripts
 if [[ $(uname -m) == 'arm64' && $(uname) == 'Darwin' ]]; then

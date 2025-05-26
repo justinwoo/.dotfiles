@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-nix-build packages.nix -j 20
-nix-env -f packages.nix -i -j 20
+# nix-build packages.nix -j 20
+# nix-env -f packages.nix -i -j 20
+
+nix-build env.nix -j 20 --out-link result-env
