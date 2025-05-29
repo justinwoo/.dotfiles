@@ -10,13 +10,10 @@ let
       hub
     ]
   ) ++ (with pkgs; [
-    autorandr
     bash-completion
     bat
-    black
     colordiff
     direnv
-    exiftool
     fd
     fzf
     gh
