@@ -398,6 +398,10 @@ kill internal buffers too."
 
 (use-package consult
   :ensure t
+  :config
+  (setq consult-async-input-debounce 0
+      consult-async-input-throttle 0
+      consult-async-refresh-delay 0)
   )
 
 (defun corfu-move-to-minibuffer ()
