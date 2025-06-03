@@ -24,6 +24,7 @@ let
     nodejs-18_x
     ripgrep
     shellcheck
+    shfmt
     sqlite-interactive
     tig
     tmux

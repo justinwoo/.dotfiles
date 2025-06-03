@@ -75,6 +75,7 @@
         smartparens
         spacemacs-theme
         string-inflection
+        shfmt
 
         terraform-mode
         treesit-auto
@@ -622,6 +623,7 @@ If the error list is visible, hide it.  Otherwise, show it."
  :keymaps 'normal
  "SPC m p n" 'nixpkgs-fmt-buffer
  "SPC m p d" 'run-prettier
+ "SPC m p s" 'shfmt-buffer
  "SPC i" 'my-evil-indent-buffer)
 
 (when (file-exists-p "~/.user-config.el")
@@ -632,6 +634,11 @@ If the error list is visible, hide it.  Otherwise, show it."
 
 ;; guess im using this or something dunno
 (setq org-agenda-files '("~/org/notes.org"))
+
+(use-package shfmt
+  :config
+  (customize-set-variable 'shfmt-arguments (list "-i" "4"))
+  )
 
 ;; haskell
 (use-package haskell-mode
