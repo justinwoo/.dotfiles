@@ -3,7 +3,7 @@
 
 # start emacs with given argument (usually a directory) or nothing
 enc() {
-  emacs "$1" & disown 2> /dev/null
+  emacs "${1:-$PWD}" & disown 2> /dev/null
 }
 
 encp() {
@@ -12,15 +12,15 @@ encp() {
 
 # start daemon
 emd() {
-  emacs --daemon "$1"
+  emacs --daemon "${1:-$PWD}"
 }
 
 # start a terminal client with arg
 em() {
-  emacsclient -t "$1"
+  emacsclient -t "${1:-$PWD}"
 }
 
 # start a gui client with arg
 ge() {
-  emacsclient -nc "$1"
+  emacsclient -nc "${1:-$PWD}"
 }
