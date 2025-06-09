@@ -17,6 +17,7 @@ let
     fd
     fzf
     gh
+    gnutar
     jq
     neovim
     nix-bash-completions
