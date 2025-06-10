@@ -29,6 +29,7 @@ let
     sqlite-interactive
     tig
     tmux
+    vivid
     watchexec
   ] ++ [
     z
