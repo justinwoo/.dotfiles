@@ -22,7 +22,7 @@ let
     neovim
     nix-bash-completions
     nixpkgs-fmt
-    nodejs-18_x
+    nodejs_22
     ripgrep
     shellcheck
     shfmt
