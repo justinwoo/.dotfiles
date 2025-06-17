@@ -568,8 +568,11 @@ If the error list is visible, hide it.  Otherwise, show it."
    ", e f" #'eglot-code-action-quickfix)
 
   :config
+  (setq eglot-server-programs
+        (assq-delete-all 'haskell-mode eglot-server-programs))
   (add-to-list 'eglot-server-programs
-               '((typescript-mode web-mode) . ("vtsls"))
+               '((typescript-mode js-mode web-mode) . ("vtsls"))
+               '((haskell-mode) . ("static-ls"))
                )
 
   ;; (advice-add 'jsonrpc--log-event :override #'ignore)
@@ -626,6 +629,15 @@ If the error list is visible, hide it.  Otherwise, show it."
  "SPC m p s" 'shfmt-buffer
  "SPC i" 'my-evil-indent-buffer)
 
+(add-to-list 'load-path (expand-file-name "src" user-emacs-directory))
+
+(use-package ormolu
+  :general
+  (general-define-key
+   :keymaps 'haskell-mode-map
+   :states 'normal
+   "SPC m p o" #'ormolu-buffer))
+
 (when (file-exists-p "~/.user-config.el")
   (load-file "~/.user-config.el"))
 
@@ -643,7 +655,8 @@ If the error list is visible, hide it.  Otherwise, show it."
 ;; haskell
 (use-package haskell-mode
   :ensure t
-  :mode "\\.hs\\'")
+  :mode "\\.hs\\'"
+  )
 
 ;; stop the fucking warnings
 (setq lsp-enable-file-watchers nil)
