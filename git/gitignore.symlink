@@ -46,3 +46,4 @@ local/
 .hiefiles/
 timestamp
 kubeconfig
+CLAUDE.md
