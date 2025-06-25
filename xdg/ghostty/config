@@ -1,8 +1,5 @@
 command = /opt/homebrew/bin/bash -l
 
-theme = Builtin Solarized Light
-foreground = #000000
-
 shell-integration-features = no-cursor
 cursor-style-blink = false
 
@@ -17,3 +14,7 @@ window-theme = system
 
 macos-option-as-alt = true
 macos-icon = chalkboard
+
+theme = Builtin Solarized Light
+foreground = #000000
+background = #fefcf8
