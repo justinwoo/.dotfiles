@@ -572,7 +572,7 @@ If the error list is visible, hide it.  Otherwise, show it."
   ;;       (assq-delete-all 'haskell-mode eglot-server-programs))
   (add-to-list 'eglot-server-programs
                '((typescript-mode js-mode web-mode) . ("vtsls"))
-               '((haskell-mode) . ("haskell-language-server-wrapper"))
+               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp"))
                )
 
   ;; (advice-add 'jsonrpc--log-event :override #'ignore)
