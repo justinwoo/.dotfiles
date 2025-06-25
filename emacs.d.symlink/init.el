@@ -568,11 +568,11 @@ If the error list is visible, hide it.  Otherwise, show it."
    ", e f" #'eglot-code-action-quickfix)
 
   :config
-  (setq eglot-server-programs
-        (assq-delete-all 'haskell-mode eglot-server-programs))
+  ;; (setq eglot-server-programs
+  ;;       (assq-delete-all 'haskell-mode eglot-server-programs))
   (add-to-list 'eglot-server-programs
                '((typescript-mode js-mode web-mode) . ("vtsls"))
-               '((haskell-mode) . ("static-ls"))
+               '((haskell-mode) . ("haskell-language-server-wrapper"))
                )
 
   ;; (advice-add 'jsonrpc--log-event :override #'ignore)
