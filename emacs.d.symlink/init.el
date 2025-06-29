@@ -200,14 +200,18 @@
 (defun open-config () (interactive) (find-file "~/.emacs.d/init.el"))
 (defun reload-config () (interactive) (load-file "~/.emacs.d/init.el"))
 
+(setq default-frame-alist
+      '((width . 100)
+        (height . 60)
+        (left . 0)
+        (top . 0)))
+
 (defun my-make-frame-command ()
   "from the original make-frame-command"
   (interactive)
   (if (display-graphic-p)
       (make-frame)
     (select-frame (make-frame)))
-  ;; lol make-frame alist args dont work
-  (set-frame-size (selected-frame) 100 100)
   )
 
 (defun my-kill-this-buffer ()
