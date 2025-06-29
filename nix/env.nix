@@ -13,11 +13,13 @@ let
     bash-completion
     bat
     colordiff
+    coreutils
     direnv
     fd
     fzf
     gh
     gnutar
+    gnused
     jq
     neovim
     nix-bash-completions
