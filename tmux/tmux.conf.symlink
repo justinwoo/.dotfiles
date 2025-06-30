@@ -1,97 +1,130 @@
-set-option default-terminal "xterm-256color"
-set-option -g default-shell $TMUX_SHELL
+# -- General -------------------------------------------------------------------
 
-# open new windows in whatever that's not my home
+# Set shell
+set-option -g default-shell $TMUX_SHELL
+set-option default-terminal "xterm-256color"
+# Enable 24-bit True Color
+set-option -sa terminal-overrides ",xterm*:Tc"
+
+# Set history limit
+set -g history-limit 10000
+
+# Start windows and panes at 1, not 0
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Automatically renumber windows when one is closed
+set-option -g renumber-windows on
+
+# Set escape time to 0 for responsiveness
+set -sg escape-time 0
+
+# Disable repeat time to prevent input storms
+set-option -g repeat-time 0
+
+# Enable mouse mode
+set -g mouse on
+
+# Reload config
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+# -- Key Bindings --------------------------------------------------------------
+
+# Set prefix keys
+set -g prefix '`'
+set -g prefix2 'Escape'
+bind-key ` send-prefix
+bind-key Escape send-keys Escape
+
+# New windows and panes open in current path
 bind % split-window -h -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
-bind z resize-pane -Z
-set -g status-keys vi
-set -g history-limit 10000
 
-# wtf is this
+# Zoom pane (deduplicated)
+bind z resize-pane -Z
+bind -n C-M-z resize-pane -Z
+
+# Pane switching (keeping all user's bindings as requested)
 bind h select-pane -L
 bind l select-pane -R
 bind k select-pane -U
 bind j select-pane -D
+
 bind -n M-h select-pane -L
 bind -n M-l select-pane -R
 bind -n M-k select-pane -U
 bind -n M-j select-pane -D
-bind -n M-n next-window
-bind -n M-p previous-window
-bind -n C-M-z resize-pane -Z
+
 bind -n C-M-h select-pane -L
 bind -n C-M-l select-pane -R
 bind -n C-M-k select-pane -U
 bind -n C-M-j select-pane -D
+
+# Window switching
+bind -n M-n next-window
+bind -n M-p previous-window
 bind -n C-M-n next-window
 bind -n C-M-p previous-window
-bind -n C-M-z resize-pane -Z
 
-# reload shit
-bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+# -- Clipboard (macOS) ---------------------------------------------------------
 
-# copy-mode-vi rebinds jesus
-bind -T copy-mode-vi 'C-v' send-keys -X rectangle-toggle
-bind -T copy-mode-vi 'v' send-keys -X begin-selection
-bind -T copy-mode-vi 'x' send-keys -X clear-selection
-# bind -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard'
-bind -T copy-mode-vi 'y' send-keys -X copy-selection -x
-
-bind v copy-mode
-unbind ']'
-bind ']' run "tmux set-buffer \"$(xclip -o -selection clipboard)\"; tmux paste-buffer"
-
-# bind a new prefix
-set -g prefix '`'
-# surely this cant go wrong
-set -g prefix2 'Escape'
-# allow me to freaking use grave
-bind-key ` send-prefix
-bind-key Escape send-keys Escape
-
-# set vi style keys
+# Set vi style keys for copy mode
 setw -g mode-keys vi
 
-# new omniconfig for mouse
-set -g mouse on
+# Use pbcopy to copy to the macOS clipboard
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
 
-# take some of JaredCTaylor's tmux config
-set -sg escape-time 0
-set-option -g renumber-windows on
+# Use pbpaste to paste from the macOS clipboard
+bind v copy-mode
+unbind ']'
+bind ']' run "pbpaste | tmux load-buffer - ; tmux paste-buffer"
+
+
+# -- Visuals -------------------------------------------------------------------
+
+# Set vi mode for status line
+set -g status-keys vi
+
+# Aggressive resize
 setw -g aggressive-resize on
+
+# Monitor activity
 setw -g monitor-activity on
 set -g visual-activity on
-set -g base-index 1
-set -g pane-base-index 1
+
+# Pane display time
 set -g display-panes-time 2000
 
-# random styling
-# status line
-set -g status-justify left
-# TODO: does this bg color work anywhere really
-set -g status-style fg=white,bg=black
-set -g status-interval 30
-
-# Split
-set-option -g pane-active-border-style bg=default,fg=blue
-set-option -g pane-border-style bg=default,fg=white
-
-# Title
+# Set title
 set-option -g set-titles on
 set-option -g set-titles-string "#W (tmux: #S)"
 
-# Status
-set -g status-left-length 20
-set -g status-right-length 150
-set -g status-left '#[fg=blue](#S) #[default]'
-set-option -g status-right ''
-set-window-option -g window-status-format '#[fg=white]#{window_index} #[fg=default]#{pane_current_command} #[fg=default]#(basename #{pane_current_path}) #[bg=default]'
-set-window-option -g window-status-current-format '#[fg=magenta]#{window_index} #[fg=blue]#{pane_current_command} #[fg=blue]#(basename #{pane_current_path}) #[bg=default]'
-set -g window-status-activity-style 'fg=cyan'
+# Report focus events
+set-option -g focus-events on
 
-# Mac OS
-set -g status-style fg=white,bg=white
-set-window-option -g window-status-format '#[fg=gray]#{window_index} #[fg=gray]#{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
-set-window-option -g window-status-current-format '#[fg=magenta]#{window_index} #[fg=blue]#{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
+# -- Status Bar (Text-Color Theme) ---------------------------------------------
+set -g status-position bottom
+set -g status-justify left
+set -g status-style fg=black,bg=white
+set -g status-interval 30
+
+# Left side
+set -g status-left-length 40
+set -g status-left "#[fg=blue](#S) #[default]"
+
+# Right side
+set -g status-right-length 150
+set-option -g status-right '#[fg=gray]%d %b %R'
+
+# Window status
+set-window-option -g window-status-format '#[fg=gray]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
+set-window-option -g window-status-current-format '#[fg=blue]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
+set -g window-status-activity-style 'fg=blue'
+
+# Pane borders
+set-option -g pane-active-border-style fg=blue
+set-option -g pane-border-style fg=gray
