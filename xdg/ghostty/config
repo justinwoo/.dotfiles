@@ -15,6 +15,6 @@ window-theme = system
 macos-option-as-alt = true
 macos-icon = chalkboard
 
-theme = Monokai Pro Light
+theme = Builtin Solarized Light
 foreground = #000000
-background = #f8f8f8
+background = #fefeee

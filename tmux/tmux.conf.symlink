@@ -109,7 +109,7 @@ set-option -g focus-events on
 # -- Status Bar (Text-Color Theme) ---------------------------------------------
 set -g status-position bottom
 set -g status-justify left
-set -g status-style fg=white,bg=black
+set -g status-style fg=black,bg=white
 set -g status-interval 30
 
 # Left side
