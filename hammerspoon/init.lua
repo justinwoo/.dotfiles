@@ -80,11 +80,34 @@ hs.hotkey.bind({"alt", "shift"}, "]", function()
     }))
 end)
 
-hs.hotkey.bind({"alt", "shift"}, "3", function() setFocusedSize(1400, 900) end)
+local resolutions = {
+    { label = "1920 x 1080", width = 1920, height = 1080 },
+}
 
-hs.hotkey.bind({"alt", "shift"}, "4", function() setFocusedSize(1600, 1000) end)
+local function setAndAlert(width, height, label)
+    local win = hs.window.focusedWindow()
+    if not win then return end
+    local f = win:frame()
+    local screen = win:screen():frame()
+    f.w = width
+    f.h = height
+    f.x = screen.x + (screen.w - f.w) / 2
+    f.y = screen.y + (screen.h - f.h) / 2
+    win:setFrame(f)
+    alert("Window: " .. label)
+end
 
-hs.hotkey.bind({"alt", "shift"}, "5", function() setFocusedSize(1200, 800) end)
+hs.hotkey.bind({"alt", "shift"}, "3", function()
+    setAndAlert(1920, 1080, "1920 x 1080")
+end)
+
+hs.hotkey.bind({"alt", "shift"}, "4", function()
+    setAndAlert(1600, 1000, "1600 x 1000")
+end)
+
+hs.hotkey.bind({"alt", "shift"}, "5", function()
+    setAndAlert(1200, 800, "1200 x 800")
+end)
 
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "J", function()
     hs.keycodes.currentSourceID(
