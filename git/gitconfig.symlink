@@ -7,8 +7,10 @@
         co = checkout
         cl = clean
         br = branch
+        s = show --stat
         st = status
         re = rebase
+        wt = worktree
         wc = whatchanged
         count = !git shortlog -sn
         l = log

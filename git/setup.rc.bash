@@ -81,3 +81,17 @@ alias gjreset='git fetch justinwoo $(ggbn) && git reset --hard FETCH_HEAD'
 # update children
 alias gpullallchildren='ls -d */ | xargs -P10 -I{} git -C {} pull'
 alias gpac='gpullallchildren'
+
+alias g='git'
+if type __git_complete &>/dev/null; then
+  __git_complete g __git_main
+fi
+
+complete -F _git_pull gpp
+complete -F _git_reflog grl
+complete -F _git_log gil
+complete -F _git_reset greset
+complete -F _git_reset gureset
+complete -F _git_reset gjreset
+complete -F _git_reset gundo
+complete -F _git_submodule gsu
