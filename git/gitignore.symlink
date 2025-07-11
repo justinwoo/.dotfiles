@@ -42,7 +42,7 @@ result*
 stack.yaml.lock
 *.jwk
 *.local*
-local/
+local*
 .hiefiles/
 timestamp
 kubeconfig
