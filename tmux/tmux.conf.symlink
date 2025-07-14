@@ -117,14 +117,15 @@ set -g status-left-length 40
 set -g status-left "#[fg=blue](#S) #[default]"
 
 # Right side
+set -g status-fg color245
 set -g status-right-length 150
-set-option -g status-right '#[fg=gray]%d %b %R'
+set-option -g status-right '%d %b %R'
 
 # Window status
-set-window-option -g window-status-format '#[fg=gray]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
+set-window-option -g window-status-format '#[fg=color245]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
 set-window-option -g window-status-current-format '#[fg=blue]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
-set -g window-status-activity-style 'fg=blue'
+set -g window-status-activity-style 'fg=yellow'
 
 # Pane borders
-set-option -g pane-active-border-style fg=blue
-set-option -g pane-border-style fg=gray
+set-option -g pane-active-border-style 'fg=blue'
+set-option -g pane-border-style 'fg=color249'
