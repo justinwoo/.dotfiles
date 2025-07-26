@@ -18,3 +18,5 @@ macos-icon = chalkboard
 theme = Builtin Solarized Light
 foreground = #000000
 background = #fefeee
+
+background-opacity = 0.95
