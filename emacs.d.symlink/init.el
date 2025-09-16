@@ -26,9 +26,9 @@
 (setq display-line-numbers-type 'relative)
 (global-hl-line-mode 0)
 (require 'package)
-(setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-                         ("gnu"       . "http://elpa.gnu.org/packages/")
+(setq package-archives '(("gnu"       . "http://elpa.gnu.org/packages/")
                          ("melpa"     . "https://melpa.org/packages/")
+                         ("nongnu"    . "https://elpa.nongnu.org/nongnu/")
                          ))
 (package-initialize)
 (setq package-list
@@ -642,6 +642,49 @@ If the error list is visible, hide it.  Otherwise, show it."
    :states 'normal
    "SPC m p o" #'ormolu-buffer))
 
+;; Try to use eat if available, otherwise fall back to compilation-mode
+(when (package-installed-p 'eat)
+  (require 'eat nil t))
+
+;; Download claude-code.el manually
+(unless (file-directory-p "~/.emacs.d/claude-code")
+  (make-directory "~/.emacs.d/claude-code" t))
+(unless (file-exists-p "~/.emacs.d/claude-code/claude-code.el")
+  (url-copy-file "https://raw.githubusercontent.com/stevemolitor/claude-code.el/main/claude-code.el"
+                 "~/.emacs.d/claude-code/claude-code.el" t))
+(add-to-list 'load-path "~/.emacs.d/claude-code")
+
+(use-package claude-code
+  :ensure nil
+  :general
+  (general-define-key
+   :keymaps 'normal
+   :states 'normal
+   "SPC v v" 'claude-code-switch-to-buffer
+   "SPC v c" 'claude-code
+   "SPC v C" 'claude-code-continue
+   "SPC v r" 'claude-code-send-region
+   "SPC v s" 'claude-code-send-command
+   "SPC v x" 'claude-code-send-command-with-context
+   "SPC v o" 'claude-code-send-buffer-file
+   "SPC v e" 'claude-code-fix-error-at-point
+   "SPC v t" 'claude-code-toggle
+   "SPC v k" 'claude-code-kill
+   "SPC v K" 'claude-code-kill-all
+   "SPC v f" 'claude-code-fork
+   "SPC v /" 'claude-code-slash-commands
+   "SPC v m" 'claude-code-transient
+   "SPC v d" 'claude-code-start-in-directory
+   "SPC v b" 'claude-code-select-buffer
+   "SPC v R" 'claude-code-resume
+   "SPC v i" 'claude-code-new-instance
+   "SPC v z" 'claude-code-toggle-read-only-mode)
+  :config
+  (claude-code-mode)
+  ;; Use eat if available, otherwise use compilation-mode
+  (setq claude-code-terminal-backend 
+        (if (featurep 'eat) 'eat 'compilation-mode)))
+
 (when (file-exists-p "~/.user-config.el")
   (load-file "~/.user-config.el"))
 
@@ -726,3 +769,16 @@ If the error list is visible, hide it.  Otherwise, show it."
 (unless (file-exists-p custom-file)
   (make-empty-file custom-file))
 (load custom-file)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-vc-selected-packages
+   '((claude-code :url "https://github.com/stevemolitor/claude-code.el"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
