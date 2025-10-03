@@ -19,5 +19,7 @@ theme = Builtin Solarized Light
 foreground = #000000
 background = #fefeee
 
-background-opacity = 0.95
-# background-image = /Users/justin/.dotfiles/images/20150623_103354-EFFECTS.jpg
+background-opacity = 0.98
+background-image-opacity = 0.05
+background-image-fit = cover
+background-image = /Users/justin/bg.jpg

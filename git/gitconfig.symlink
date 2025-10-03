@@ -15,6 +15,7 @@
         count = !git shortlog -sn
         l = log
         rl = reflog --format='%C(auto)%h %<|(17)%gd %C(blue)%ci%C(reset) %s'
+        commit-messages-since-origin-master = log origin/master..HEAD --format="%H%n%B%n"
 [color]
         diff = auto
         status = auto
