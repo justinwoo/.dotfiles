@@ -95,7 +95,8 @@ setw -g aggressive-resize on
 
 # Monitor activity
 setw -g monitor-activity on
-set -g visual-activity on
+set -g visual-activity off
+set -g activity-action none
 
 # Pane display time
 set -g display-panes-time 2000
@@ -110,7 +111,7 @@ set-option -g focus-events on
 # -- Status Bar (Text-Color Theme) ---------------------------------------------
 set -g status-position bottom
 set -g status-justify left
-set -g status-style fg=black,bg=white
+set -g status-style fg=black,bg=color254
 set -g status-interval 30
 
 # Left side
@@ -124,7 +125,7 @@ set-option -g status-right '%d %b %R'
 
 # Window status
 set-window-option -g window-status-format '#[fg=color245]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
-set-window-option -g window-status-current-format '#[fg=blue]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
+set-window-option -g window-status-current-format '#[fg=blue,bold]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
 set -g window-status-activity-style 'fg=yellow'
 
 # Pane borders
