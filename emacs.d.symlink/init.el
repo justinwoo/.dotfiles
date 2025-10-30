@@ -150,6 +150,7 @@
    "C-="     'text-scale-increase
    "C-u"     'evil-scroll-up
    "SPC /"   'consult-ripgrep
+   "SPC ?"   'consult-ripgrep-directory
    "SPC p f" 'consult-fd
    "SPC b b" 'consult-buffer
    "SPC b f" 'consult-buffer-other-frame
@@ -199,6 +200,12 @@
 
 (defun open-config () (interactive) (find-file "~/.emacs.d/init.el"))
 (defun reload-config () (interactive) (load-file "~/.emacs.d/init.el"))
+
+(defun consult-ripgrep-directory ()
+  "Run consult-ripgrep in a directory chosen by the user."
+  (interactive)
+  (let ((dir (read-directory-name "Search in directory: ")))
+    (consult-ripgrep dir)))
 
 (setq default-frame-alist
       '((width . 100)

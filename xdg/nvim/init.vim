@@ -61,6 +61,7 @@ map <leader>fj :Explore<cr>
 map <C-P> :GFiles <cr>
 map <C-F> :FZF <cr>
 map <leader>/ :Ack
+map <leader>? :call AckDirectory()<cr>
 map <leader>gb :Git blame<cr>
 map <leader>gd :Gdiff<cr>
 map <leader>gw :Gwrite<cr>
@@ -83,6 +84,22 @@ map <leader>c :Commentary<cr>
 map <leader>= <C-W>=<cr>
 map <leader>w= <C-W>=<cr>
 map <leader>ww :StripWhitespace<cr>
+
+"search in specific directory
+function! AckDirectory()
+  call inputsave()
+  let search_term = input('Search for: ')
+  call inputrestore()
+  if !empty(search_term)
+    call inputsave()
+    let dir = input('Search in directory: ', getcwd(), 'dir')
+    call inputrestore()
+    if !empty(dir)
+      execute 'Ack! ' . shellescape(search_term) . ' ' . fnameescape(dir)
+    endif
+  endif
+endfunction
+
 "add any local configs that need to be added, if they exist
 if filereadable(glob("~/.vimrc.local"))
   source ~/.vimrc.local
