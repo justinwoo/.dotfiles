@@ -37,10 +37,14 @@ function my_prompt {
             git_color=$RED
         fi
 
-        if ! git diff --quiet; then
+        # Check for changes from git status output (much faster than git diff --quiet)
+        # Format: "1 XY ..." where X=staged status, Y=unstaged status
+        if echo "$git_status" | grep -q '^1 .[^.]'; then
+            # Unstaged changes detected (Y != '.')
             git_info+="*"
             git_color=$RED
         elif echo "$git_status" | grep -q '^1'; then
+            # Only staged changes
             git_info+="+"
             git_color=$YELLOW
         fi
@@ -56,17 +60,31 @@ function my_prompt {
         fi
 
         # shellcheck disable=2154
-        local diff
-        if [[ -z $MACOS ]]; then
-            __git_ps1_show_upstream
-            diff=""
-        else
-            GIT_PS1=$(__git_ps1)
-            if [[ $GIT_PS1 == *"|"* ]]; then
-                diff=" $(__git_ps1 | cut -d '(' -f 2 | cut -d '|' -f 2 | cut -d ')' -f 1)"
+        local diff=""
+        if [[ -n $MACOS ]]; then
+            # Async cached upstream check
+            local head_sha=$(git rev-parse HEAD 2>/dev/null)
+            local upstream_sha=$(git rev-parse @{u} 2>/dev/null)
+            local cache_key="${head_sha}_${upstream_sha}"
+            local cache_file="/tmp/git_ps1_cache_$$_${cache_key}"
+
+            if [[ -f "$cache_file" ]]; then
+                # Use cached result
+                diff=$(cat "$cache_file")
             else
-                diff=""
+                # Clean old cache files for this shell
+                rm -f /tmp/git_ps1_cache_$$_* 2>/dev/null
+
+                # Start async update
+                (
+                    local result=$(__git_ps1)
+                    if [[ $result == *"|"* ]]; then
+                        echo "$result" | cut -d '(' -f 2 | cut -d '|' -f 2 | cut -d ')' -f 1 > "$cache_file"
+                    fi
+                ) &
+                disown
             fi
+            [[ -n $diff ]] && diff=" $diff"
         fi
         if [[ $diff != *=* ]]; then
             git_info+="$MAGENTA$diff"
@@ -91,7 +109,11 @@ function my_prompt {
     local git="$git_color$git_info"
     local usr="$NORMAL\$"
     local jobs_="$MAGENTA$jobs_info"
+
     PS1="$LOCAL_PS1_PREFIX$jobs_$dir $git$exit$usr "
 }
 
-export PROMPT_COMMAND="my_prompt;$PROMPT_COMMAND"
+# Only add my_prompt if not already present
+if [[ $PROMPT_COMMAND != *my_prompt* ]]; then
+    export PROMPT_COMMAND="my_prompt;$PROMPT_COMMAND"
+fi
