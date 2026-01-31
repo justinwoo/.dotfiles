@@ -19,7 +19,7 @@ hs.hotkey.bind({"alt"}, "o", getToggleApp("Ghostty"))
 
 hs.hotkey.bind({"alt"}, "i", getLaunchOrFocus("Slack"))
 hs.hotkey.bind({"alt"}, "u", getLaunchOrFocus("Telegram"))
-hs.hotkey.bind({"alt", "shift"}, ";", getLaunchOrFocus("Transmit"))
+hs.hotkey.bind({"alt", "shift"}, ";", getLaunchOrFocus("Filezilla"))
 hs.hotkey.bind({"alt", "shift"}, "u", getLaunchOrFocus("UpNote"))
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "m", getLaunchOrFocus("Maps"))
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "n", getLaunchOrFocus("Calendar"))

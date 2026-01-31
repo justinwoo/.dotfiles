@@ -45,7 +45,6 @@ stack.yaml.lock
 local
 local/
 .hiefiles/
-timestamp
 kubeconfig
 CLAUDE.md
 worktree*
