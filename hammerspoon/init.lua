@@ -13,7 +13,7 @@ end)
 
 hs.hotkey.bind({"alt"}, "e", getToggleApp("emacs"))
 hs.hotkey.bind({"alt"}, "w", getToggleApp("Code"))
-hs.hotkey.bind({"alt"}, "y", getToggleApp("Google Chrome"))
+hs.hotkey.bind({"alt"}, "y", getToggleApp("Signal"))
 hs.hotkey.bind({"alt"}, ";", getToggleApp("IINA"))
 hs.hotkey.bind({"alt"}, "o", getToggleApp("Ghostty"))
 
