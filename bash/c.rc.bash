@@ -1,7 +1,7 @@
 c() {
   if [ $# == 1 ]
   then
-    cd "$PROJECTS/$1" || echo "error: could not go to ${$PROJECTS/$1}";
+    cd "$PROJECTS/$1" || echo "error: could not go to $PROJECTS/$1";
   elif [ $# == 0 ]
   then
     cd "$PROJECTS" || echo "error: no location $PROJECTS";
@@ -23,7 +23,7 @@ _c() {
   fi
 }
 
-if [[ -f $(command -v complete) ]]
+if command -v complete &>/dev/null
 then
   complete -F _c c
 fi
