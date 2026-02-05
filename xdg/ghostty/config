@@ -21,7 +21,7 @@ background = #fefeee
 
 background-opacity = 0.98
 background-image-opacity = 0.05
-background-image-fit = cover
-background-image = /Users/justin/bg.jpg
+# background-image-fit = cover
+# background-image = /Users/justin/bg.jpg
 
 link-url = true
