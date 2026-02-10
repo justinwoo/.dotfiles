@@ -1,0 +1,1 @@
+export ENABLE_TOOL_SEARCH=false
