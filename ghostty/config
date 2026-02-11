@@ -1,0 +1,27 @@
+command = /opt/homebrew/bin/bash -l
+
+shell-integration-features = no-cursor
+cursor-style-blink = false
+
+adjust-cell-height = 10%
+font-family = Monaco
+
+window-padding-x = 8
+window-padding-y = 8
+
+macos-titlebar-style = native
+window-theme = system
+
+macos-option-as-alt = true
+macos-icon = chalkboard
+
+theme = Builtin Solarized Light
+foreground = #000000
+background = #fefeee
+
+background-opacity = 0.98
+background-image-opacity = 0.05
+# background-image-fit = cover
+# background-image = /Users/justin/bg.jpg
+
+link-url = true

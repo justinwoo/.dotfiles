@@ -2,9 +2,9 @@
 
 # Set shell
 set-option -g default-shell $TMUX_SHELL
-set-option default-terminal "tmux-256color"
+set-option -g default-terminal "tmux-256color"
 # Enable 24-bit True Color
-set-option -sa terminal-overrides ",xterm*:Tc"
+set-option -sa terminal-overrides ",xterm*:RGB"
 set-option -sa terminal-overrides ",ghostty:RGB"
 
 # Set history limit
