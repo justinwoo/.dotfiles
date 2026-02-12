@@ -16,7 +16,7 @@
       "Right Option Key Sends": 2,
       "Transparency": 0.02,
       "Minimum Contrast": 0,
-      "Use Bright Bold": true,
+      "Use Bright Bold": false,
       "Ansi 0 Color": {
         "Red Component": 0.027450980392156862,
         "Green Component": 0.21176470588235294,
@@ -60,9 +60,9 @@
         "Color Space": "sRGB"
       },
       "Ansi 7 Color": {
-        "Red Component": 0.93333333333333335,
-        "Green Component": 0.90980392156862744,
-        "Blue Component": 0.83529411764705885,
+        "Red Component": 0.73333333333333328,
+        "Green Component": 0.70980392156862748,
+        "Blue Component": 0.63529411764705879,
         "Color Space": "sRGB"
       },
       "Ansi 8 Color": {
