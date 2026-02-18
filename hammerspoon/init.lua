@@ -155,4 +155,34 @@ if not laptop then
 
 end
 
+-- Copy latest screenshot file path to clipboard and paste (Ctrl+Opt+Cmd+V)
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "V", function()
+    local output = hs.execute("defaults read com.apple.screencapture location 2>/dev/null")
+    local dir = output and output:gsub("%s+$", "") or ""
+    if dir == "" then dir = os.getenv("HOME") .. "/Desktop" end
+
+    local latest = nil
+    local latestTime = 0
+
+    for file in hs.fs.dir(dir) do
+        if file:match("^Screenshot.*%.png$") or file:match("^Screen Shot.*%.png$") then
+            local path = dir .. "/" .. file
+            local attrs = hs.fs.attributes(path)
+            if attrs and attrs.modification > latestTime then
+                latestTime = attrs.modification
+                latest = path
+            end
+        end
+    end
+
+    if latest then
+        hs.pasteboard.setContents(latest)
+        hs.timer.doAfter(0.05, function()
+            hs.eventtap.keyStroke({"cmd"}, "v")
+        end)
+    else
+        alert("No screenshots found")
+    end
+end)
+
 alert("Config loaded")
