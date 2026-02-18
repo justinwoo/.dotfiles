@@ -61,35 +61,9 @@ function my_prompt {
 
         # shellcheck disable=2154
         local diff=""
-        if [[ -n $MACOS ]]; then
-            # Async cached upstream check
-            local head_sha=$(git rev-parse HEAD 2>/dev/null)
-            local upstream_sha=$(git rev-parse @{u} 2>/dev/null)
-            local git_dir=$(git rev-parse --git-dir 2>/dev/null)
-            local op_state=""
-            [[ -d "$git_dir/rebase-merge" ]] && op_state="rebase-merge"
-            [[ -d "$git_dir/rebase-apply" ]] && op_state="rebase-apply"
-            [[ -f "$git_dir/MERGE_HEAD" ]] && op_state="merge"
-            local cache_key="${head_sha}_${upstream_sha}_${op_state}"
-            local cache_file="/tmp/git_ps1_cache_$$_${cache_key}"
-
-            if [[ -f "$cache_file" ]]; then
-                # Use cached result
-                diff=$(cat "$cache_file")
-            else
-                # Clean old cache files for this shell
-                rm -f /tmp/git_ps1_cache_$$_* 2>/dev/null
-
-                # Start async update
-                (
-                    local result=$(__git_ps1)
-                    if [[ $result == *"|"* ]]; then
-                        echo "$result" | cut -d '(' -f 2 | cut -d '|' -f 2 | cut -d ')' -f 1 > "$cache_file"
-                    fi
-                ) &
-                disown
-            fi
-            [[ -n $diff ]] && diff=" $diff"
+        local ps1_result=$(__git_ps1)
+        if [[ $ps1_result == *"|"* ]]; then
+            diff=" $(echo "$ps1_result" | cut -d '(' -f 2 | cut -d '|' -f 2 | cut -d ')' -f 1)"
         fi
         if [[ $diff != *=* ]]; then
             git_info+="$MAGENTA$diff"
