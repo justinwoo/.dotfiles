@@ -2,6 +2,7 @@ alias reload!='. ~/.bashrc'
 alias vi='nvim'
 alias nv="nvim"
 alias pb='pbcopy'
+alias pbt='tr -d "\n" | pb'
 alias po='pbpaste'
 alias l='ls -lht --color'
 alias rec='recent'

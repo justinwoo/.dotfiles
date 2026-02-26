@@ -155,8 +155,25 @@ if not laptop then
 
 end
 
--- Copy latest screenshot file path to clipboard and paste (Ctrl+Opt+Cmd+V)
+-- Preview and paste latest screenshot (Ctrl+Opt+Cmd+V)
+-- Shows a preview overlay; click or press Escape to dismiss and paste
+local screenshotPreview = nil
+local screenshotPreviewEsc = nil
+
+local function dismissScreenshotPreview()
+    if screenshotPreview then
+        screenshotPreview:delete()
+        screenshotPreview = nil
+    end
+    if screenshotPreviewEsc then
+        screenshotPreviewEsc:delete()
+        screenshotPreviewEsc = nil
+    end
+end
+
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "V", function()
+    dismissScreenshotPreview()
+
     local output = hs.execute("defaults read com.apple.screencapture location 2>/dev/null")
     local dir = output and output:gsub("%s+$", "") or ""
     if dir == "" then dir = os.getenv("HOME") .. "/Desktop" end
@@ -175,14 +192,56 @@ hs.hotkey.bind({"ctrl", "alt", "cmd"}, "V", function()
         end
     end
 
-    if latest then
-        hs.pasteboard.setContents(latest)
-        hs.timer.doAfter(0.05, function()
-            hs.eventtap.keyStroke({"cmd"}, "v")
-        end)
-    else
+    if not latest then
         alert("No screenshots found")
+        return
     end
+
+    local image = hs.image.imageFromPath(latest)
+    if not image then
+        alert("Failed to load image")
+        return
+    end
+
+    -- Put file path on clipboard for pasting
+    hs.pasteboard.setContents(latest)
+
+    -- Calculate preview size (max 600x400, maintain aspect ratio)
+    local imgSize = image:size()
+    local maxW, maxH = 600, 400
+    local scale = math.min(maxW / imgSize.w, maxH / imgSize.h, 1)
+    local previewW = imgSize.w * scale
+    local previewH = imgSize.h * scale
+
+    -- Anchor to top-center of screen
+    local screen = hs.screen.mainScreen():frame()
+    local x = screen.x + (screen.w - previewW) / 2
+    local y = screen.y + 40
+
+    screenshotPreview = hs.canvas.new({x = x, y = y, w = previewW, h = previewH})
+    screenshotPreview:level(hs.canvas.windowLevels.overlay)
+    screenshotPreview[1] = {
+        type = "rectangle",
+        fillColor = {white = 0, alpha = 0.8},
+        roundedRectRadii = {xRadius = 8, yRadius = 8},
+    }
+    screenshotPreview[2] = {
+        type = "image",
+        image = image,
+        imageAlignment = "center",
+        imageScaling = "proportionallyUpOrDown",
+    }
+    screenshotPreview:clickActivating(false)
+    screenshotPreview:behavior({"canJoinAllSpaces", "stationary", "ignoresCycle"})
+    screenshotPreview:show()
+
+    -- Paste immediately, dismiss preview after 1 second
+    hs.timer.doAfter(0.1, function()
+        hs.eventtap.keyStroke({"cmd"}, "v")
+    end)
+    hs.timer.doAfter(1, function()
+        dismissScreenshotPreview()
+    end)
 end)
 
 alert("Config loaded")

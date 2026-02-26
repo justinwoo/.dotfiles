@@ -44,8 +44,10 @@ stack.yaml.lock
 *.local*
 local
 local/
+tmp/
 .hiefiles/
 kubeconfig
 CLAUDE.md
 worktree*
 .redpanda-agent
+__pycache__/
