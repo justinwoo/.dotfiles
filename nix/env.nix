@@ -33,6 +33,7 @@ let
     tmux
     vivid
     watchexec
+    mermaid-cli
   ] ++ [
     z
   ]);
