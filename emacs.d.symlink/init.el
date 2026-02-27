@@ -414,6 +414,8 @@ kill internal buffers too."
   (setq consult-async-input-debounce 0
       consult-async-input-throttle 0
       consult-async-refresh-delay 0)
+  (setq consult-fd-args '((if (executable-find "fdfind" 'remote) "fdfind" "fd")
+                          "--color=never" "--full-path" "--follow"))
   )
 
 (defun corfu-move-to-minibuffer ()
