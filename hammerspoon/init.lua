@@ -174,26 +174,20 @@ end
 hs.hotkey.bind({"ctrl", "alt", "cmd"}, "V", function()
     dismissScreenshotPreview()
 
-    local output = hs.execute("defaults read com.apple.screencapture location 2>/dev/null")
-    local dir = output and output:gsub("%s+$", "") or ""
-    if dir == "" then dir = os.getenv("HOME") .. "/Desktop" end
-
-    local latest = nil
-    local latestTime = 0
-
-    for file in hs.fs.dir(dir) do
-        if file:match("^Screenshot.*%.png$") or file:match("^Screen Shot.*%.png$") then
-            local path = dir .. "/" .. file
-            local attrs = hs.fs.attributes(path)
-            if attrs and attrs.modification > latestTime then
-                latestTime = attrs.modification
-                latest = path
-            end
-        end
+    local home = os.getenv("HOME")
+    local desktop = home .. "/Desktop"
+    local latest = hs.execute(
+        "ls -t " .. desktop .. " | grep -iE '\\.(png|jpg|jpeg|gif|webp|heic|tiff)$' | head -1"
+    )
+    latest = latest and latest:gsub("%s+$", "") or ""
+    if latest == "" then
+        alert("No image files found on Desktop")
+        return
     end
+    latest = desktop .. "/" .. latest
 
-    if not latest then
-        alert("No screenshots found")
+    if not hs.fs.attributes(latest) then
+        alert("Image file not accessible: " .. latest)
         return
     end
 
