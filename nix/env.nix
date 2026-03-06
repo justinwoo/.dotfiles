@@ -34,6 +34,7 @@ let
     vivid
     watchexec
     mermaid-cli
+    lazydocker
   ] ++ [
     z
   ]);
