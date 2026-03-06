@@ -128,6 +128,11 @@ set-window-option -g window-status-format '#[fg=color245]#{window_index} #{?#{==
 set-window-option -g window-status-current-format '#[fg=blue,bold]#{window_index} #{?#{==:#{window_name},#{pane_current_command}},#{pane_current_command},#{window_name}} #(basename #{pane_current_path})'
 set -g window-status-activity-style 'fg=yellow'
 
+# Reset pane backgrounds
+set-option -g window-style 'bg=default'
+set-option -g window-active-style 'bg=default'
+
 # Pane borders
+set-option -g pane-border-indicators arrows
 set-option -g pane-active-border-style 'fg=blue'
 set-option -g pane-border-style 'fg=color249'
