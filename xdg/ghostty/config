@@ -15,13 +15,15 @@ window-theme = system
 macos-option-as-alt = true
 macos-icon = chalkboard
 
-theme = Monokai Pro Light Sun
+theme = Apple System Colors Light
 foreground = #000000
 # background = #fefeee
 
-background-opacity = 0.98
-background-image-opacity = 0.05
+background-opacity = 1.0
+# background-image-opacity = 0.05
 # background-image-fit = cover
 # background-image = /Users/justin/bg.jpg
+
+shell-integration = none
 
 link-url = true
