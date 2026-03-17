@@ -386,6 +386,13 @@ kill internal buffers too."
   :config
   (general-define-key :keymaps 'magit-status-mode-map "SPC" nil)
   (evil-collection-init 'magit)
+  (add-hook 'magit-post-display-buffer-hook
+            (lambda ()
+              (when (and (derived-mode-p 'magit-diff-mode 'magit-revision-mode)
+                         (not (one-window-p)))
+                (let ((target-height (truncate (* 0.8 (frame-height)))))
+                  (window-resize (selected-window)
+                                 (- target-height (window-height)))))))
   )
 
 (use-package orderless
