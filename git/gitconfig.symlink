@@ -1,6 +1,6 @@
 [user]
-        name = justinwoo
-        email = moomoowoo@gmail.com
+	name = justinwoo
+	email = moomoowoo@gmail.com
 [credential]
         helper = cache
 [alias]
