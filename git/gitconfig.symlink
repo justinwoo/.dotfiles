@@ -24,6 +24,7 @@
 [core]
         excludesfile = ~/.gitignore
         editor = vim
+        pager = delta
 [apply]
         whitespace = nowarn
 [merge]
@@ -41,5 +42,12 @@
         #
         # Setting to git 2.0 default to suppress warning message
         default = simple
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	syntax-theme = GitHub
 [github]
 	user = justinwoo

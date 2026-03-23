@@ -384,6 +384,9 @@ kill internal buffers too."
    "SPC"     nil
    "SPC g b" 'magit-blame-mode)
   :config
+  (setq magit-diff-refine-hunk 'all)
+  (setq magit-diff-expansion-threshold 20)
+  (setq magit-diff-highlight-trailing t)
   (general-define-key :keymaps 'magit-status-mode-map "SPC" nil)
   (evil-collection-init 'magit)
   (add-hook 'magit-post-display-buffer-hook
@@ -394,6 +397,18 @@ kill internal buffers too."
                   (window-resize (selected-window)
                                  (- target-height (window-height)))))))
   )
+
+(unless (package-installed-p 'difftastic)
+  (package-vc-install "https://github.com/pkryger/difftastic.el"))
+
+(use-package difftastic
+  :ensure nil
+  :after magit
+  :config
+  (eval-after-load 'magit-diff
+    '(transient-append-suffix 'magit-diff '(-1 -1)
+       [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
+        ("S" "Difftastic show" difftastic-magit-show)])))
 
 (use-package orderless
   :ensure t
@@ -791,7 +806,8 @@ If the error list is visible, hide it.  Otherwise, show it."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-vc-selected-packages
-   '((claude-code :url "https://github.com/stevemolitor/claude-code.el"))))
+   '((difftastic :vc-backend Git :url
+		 "https://github.com/pkryger/difftastic.el"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -32,6 +32,8 @@ let
       watchexec
       mermaid-cli
       lazydocker
+      difftastic
+      delta
     ] ++ [
       z
     ]);
