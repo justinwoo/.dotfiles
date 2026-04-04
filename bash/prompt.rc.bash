@@ -28,45 +28,62 @@ function my_prompt {
     local git_color=$GREEN
 
     if git rev-parse --is-inside-work-tree &> /dev/null; then
-        local git_status
-        git_status=$(git status --porcelain=v2 --branch 2>/dev/null)
+        local git_path_blacklist=("nixpkgs")
+        local git_blacklisted=false
+        for pattern in "${git_path_blacklist[@]}"; do
+            if [[ $PWD == *"$pattern"* ]]; then
+                git_blacklisted=true
+                break
+            fi
+        done
 
-        git_info=$(echo "$git_status" | grep '^# branch.head' | awk '{print $3}')
-        if [[ -z $git_info ]]; then
-            git_info="新"
-            git_color=$RED
-        fi
+        if [[ $git_blacklisted == true ]]; then
+            git_info=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+            if [[ -z $git_info ]]; then
+                git_info="新"
+                git_color=$RED
+            fi
+        else
+            local git_status
+            git_status=$(git status --porcelain=v2 --branch 2>/dev/null)
 
-        # Check for changes from git status output (much faster than git diff --quiet)
-        # Format: "1 XY ..." where X=staged status, Y=unstaged status
-        if echo "$git_status" | grep -q '^1 .[^.]'; then
-            # Unstaged changes detected (Y != '.')
-            git_info+="*"
-            git_color=$RED
-        elif echo "$git_status" | grep -q '^1'; then
-            # Only staged changes
-            git_info+="+"
-            git_color=$YELLOW
-        fi
+            git_info=$(echo "$git_status" | grep '^# branch.head' | awk '{print $3}')
+            if [[ -z $git_info ]]; then
+                git_info="新"
+                git_color=$RED
+            fi
 
-        if echo "$git_status" | grep -q '^?'; then
-            git_info+=" 汚"
-            git_color=$RED
-        fi
+            # Check for changes from git status output (much faster than git diff --quiet)
+            # Format: "1 XY ..." where X=staged status, Y=unstaged status
+            if echo "$git_status" | grep -q '^1 .[^.]'; then
+                # Unstaged changes detected (Y != '.')
+                git_info+="*"
+                git_color=$RED
+            elif echo "$git_status" | grep -q '^1'; then
+                # Only staged changes
+                git_info+="+"
+                git_color=$YELLOW
+            fi
 
-        if git rev-parse --verify --quiet refs/stash >/dev/null; then
-            git_info+=" 庫"
-            git_color=$YELLOW
-        fi
+            if echo "$git_status" | grep -q '^?'; then
+                git_info+=" 汚"
+                git_color=$RED
+            fi
 
-        # shellcheck disable=2154
-        local diff=""
-        local ps1_result=$(__git_ps1)
-        if [[ $ps1_result == *"|"* ]]; then
-            diff=" $(echo "$ps1_result" | cut -d '(' -f 2 | cut -d '|' -f 2 | cut -d ')' -f 1)"
-        fi
-        if [[ $diff != *=* ]]; then
-            git_info+="$MAGENTA$diff"
+            if git rev-parse --verify --quiet refs/stash >/dev/null; then
+                git_info+=" 庫"
+                git_color=$YELLOW
+            fi
+
+            # shellcheck disable=2154
+            local diff=""
+            local ps1_result=$(__git_ps1)
+            if [[ $ps1_result == *"|"* ]]; then
+                diff=" $(echo "$ps1_result" | cut -d '(' -f 2 | cut -d '|' -f 2 | cut -d ')' -f 1)"
+            fi
+            if [[ $diff != *=* ]]; then
+                git_info+="$MAGENTA$diff"
+            fi
         fi
 
         git_info+=' '
