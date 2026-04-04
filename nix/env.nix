@@ -28,6 +28,7 @@ let
       sqlite-interactive
       tig
       tmux
+      ty
       vivid
       watchexec
       mermaid-cli
