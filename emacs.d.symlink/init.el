@@ -609,6 +609,8 @@ If the error list is visible, hide it.  Otherwise, show it."
                '((typescript-mode js-mode web-mode) . ("vtsls"))
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp"))
                )
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("ty" "server")))
 
   ;; (advice-add 'jsonrpc--log-event :override #'ignore)
   ;; (setf (plist-get eglot-events-buffer-config :size) 0)
