@@ -133,6 +133,9 @@ alias prc="gh pr create --fill --web"
 alias pr="prc"
 # github cli uses some shit that doesn't use actual defined colors for some reason
 export GLAMOUR_STYLE=light
+# i wnat to get rid of gh cli
+export GH_TELEMETRY=false
+export DO_NOT_TRACK=true
 
 # pretty colors
 alias gl='git log --graph --pretty=format:'\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit'
