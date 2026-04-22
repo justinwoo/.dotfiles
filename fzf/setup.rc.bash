@@ -6,5 +6,13 @@ then
   source "$DOT/nix/result-env/share/fzf/completion.bash"
 fi
 
+export FZF_CTRL_R_OPTS="
+  --scheme=history
+  --sort
+  --reverse
+  --no-sort
+  --preview 'echo {}'
+  --preview-window=down:2:wrap"
+
 export FZF_CTRL_T_COMMAND="fd --type f"
 export FZF_ALT_C_COMMAND="fd --type d"
