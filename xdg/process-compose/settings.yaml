@@ -1,5 +1,5 @@
 theme: Light Modern
 sort:
-    by: RESTARTS
+    by: STATUS
     isReversed: false
 disable_exit_confirmation: false
