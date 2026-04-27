@@ -16,8 +16,8 @@ export HISTSIZE=-1
 export HISTTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-export EDITOR='nvim' >> ~/.bashrc
-export GIT_EDITOR='nvim' >> ~/.bashrc
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 export XDG_DATA_DIRS="$HOME/.nix-profile/share:$DOT/nix/result-env/.nix-profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
