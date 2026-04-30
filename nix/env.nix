@@ -31,6 +31,7 @@ let
       ty
       vivid
       watchexec
+      d2
       mermaid-cli
       lazydocker
       difftastic

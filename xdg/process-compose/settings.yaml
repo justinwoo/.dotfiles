@@ -1,5 +1,5 @@
 theme: Light Modern
 sort:
     by: STATUS
-    isReversed: false
+    isReversed: true
 disable_exit_confirmation: false
