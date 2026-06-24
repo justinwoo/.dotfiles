@@ -30,3 +30,5 @@ link-url = true
 
 copy-on-select = clipboard
 window-inherit-working-directory = true
+
+term = xterm-256color
