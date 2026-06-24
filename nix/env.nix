@@ -28,6 +28,7 @@ let
       sqlite-interactive
       tig
       tmux
+      uv
       ty
       vivid
       watchexec
