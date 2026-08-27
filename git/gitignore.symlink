@@ -52,3 +52,4 @@ worktree*
 .redpanda-agent
 __pycache__/
 .claude
+org2
