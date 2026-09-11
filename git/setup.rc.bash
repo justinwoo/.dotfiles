@@ -36,9 +36,17 @@ alias gfj='git fetch justinwoo'
 alias delete-merged-branches='git delete-merged-branches'
 alias dmb='delete-merged-branches'
 
+# Print the worktree path a branch is checked out in, if any
+function git-worktree-path-for-branch {
+    git worktree list --porcelain | awk -v want="refs/heads/$1" '
+        /^worktree /  { path = substr($0, 10) }
+        /^branch /    { if (substr($0, 8) == want) { print path; exit } }
+    '
+}
+
 # Delete local branches whose commits are already in main (handles squash/rebase merges)
 function deep-dmb {
-    local main_branch current_branch branches msg commit
+    local main_branch current_branch branches msg commit wt this_wt
     local -a to_delete to_keep
 
     if ! git rev-parse --show-toplevel > /dev/null 2>&1; then
@@ -48,8 +56,10 @@ function deep-dmb {
 
     main_branch=$(git_master)
     current_branch=$(git rev-parse --abbrev-ref HEAD)
+    this_wt=$(git rev-parse --show-toplevel)
 
     git fetch --prune origin 2>/dev/null || true
+    git worktree prune
 
     branches=$(git branch --format='%(refname:short)' | grep -v "^${main_branch}$" | grep -v "^${current_branch}$" || true)
 
@@ -87,7 +97,14 @@ function deep-dmb {
     fi
 
     echo "Branches with commits in $main_branch (will delete):"
-    printf "  %s\n" "${to_delete[@]}"
+    for branch in "${to_delete[@]}"; do
+        wt=$(git-worktree-path-for-branch "$branch")
+        if [ -n "$wt" ]; then
+            echo "  $branch  (also removes worktree $wt)"
+        else
+            echo "  $branch"
+        fi
+    done
     echo ""
 
     if [ ${#to_keep[@]} -gt 0 ]; then
@@ -101,8 +118,20 @@ function deep-dmb {
 
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         for branch in "${to_delete[@]}"; do
+            wt=$(git-worktree-path-for-branch "$branch")
+            if [ -n "$wt" ]; then
+                if [ "$wt" = "$this_wt" ]; then
+                    echo "Skipping $branch: checked out in the current worktree." >&2
+                    continue
+                fi
+                if ! git worktree remove "$wt"; then
+                    echo "Skipping $branch: could not remove worktree $wt (uncommitted changes?)." >&2
+                    continue
+                fi
+            fi
             git branch -D "$branch"
         done
+        git worktree prune
         echo "Done."
     else
         echo "Aborted."
