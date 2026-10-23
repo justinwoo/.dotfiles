@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+"""
+Stitch images together with ImageMagick.
+
+Images are joined along one axis (vertical by default). With --cols N, they are
+grouped N at a time: each group is laid out across the axis, then the groups are
+joined along it. Mixed aspect ratios are handled without cropping: images in a
+group are scaled to a shared size so the group forms a clean strip, and every
+strip is scaled to the same length. A short last group keeps the cell size of
+the full groups and is centered on the background color, unless it is wider
+than its grid slots (e.g. a landscape after portraits), in which case it is
+scaled up to fill the full length.
+
+Examples:
+  stitch a.jpg b.jpg                   # stack top to bottom
+  stitch a.jpg b.jpg c.jpg d.jpg --2x  # 2xN grid
+  stitch a.jpg b.jpg --horizontal      # left to right
+  stitch --2x                          # paste paths, then Ctrl-D
+"""
+
+import argparse
+import shlex
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+
+# EXIF orientations that rotate the image by 90 degrees.
+ROTATED = {"LeftTop", "RightTop", "RightBottom", "LeftBottom"}
+
+
+def parse_pasted(text):
+    """Parse pasted paths: one or more per line, quoted or backslash-escaped."""
+    paths = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            tokens = shlex.split(line)
+        except ValueError:
+            tokens = [line]
+        for token in tokens:
+            if token.startswith("file://"):
+                token = token[len("file://"):]
+            paths.append(token)
+    return paths
+
+
+def read_paths(args_paths):
+    if args_paths:
+        return args_paths
+    if sys.stdin.isatty():
+        print("Paste image paths, then Ctrl-D:", file=sys.stderr)
+    return parse_pasted(sys.stdin.read())
+
+
+def dimensions(paths):
+    """Return (width, height) for each path, after EXIF auto-orientation."""
+    result = subprocess.run(
+        ["magick", "identify", "-format", "%w %h %[orientation]\n"]
+        + [f"{p}[0]" for p in paths],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        sys.exit(result.stderr.strip())
+    dims = []
+    for line in result.stdout.splitlines():
+        w, h, orientation = line.split(" ", 2)
+        w, h = int(w), int(h)
+        dims.append((h, w) if orientation in ROTATED else (w, h))
+    return dims
+
+
+def split_evenly(total, weights):
+    """Split an integer total proportionally to weights, summing exactly to total."""
+    sizes, acc, running = [], 0.0, 0
+    weight_sum = sum(weights)
+    for weight in weights:
+        acc += weight
+        size = round(total * acc / weight_sum) - running
+        sizes.append(size)
+        running += size
+    return sizes
+
+
+def layout(dims, cols, gap, size):
+    """
+    Compute the resize geometry for every image.
+
+    Works in (across, along) coordinates: "across" is the axis groups are laid
+    out on (width when stacking vertically) and "along" is the stitch axis.
+    Returns a list of groups, each a list of (index, across, along) cells, plus
+    the final strip length on the across axis.
+    """
+    groups = [list(range(i, min(i + cols, len(dims)))) for i in range(0, len(dims), cols)]
+    full = [g for g in groups if len(g) == cols] or groups
+
+    # Each strip's natural length: images scaled to the smallest "along" size
+    # in the group, laid side by side. Never upscale by default.
+    def natural_length(group):
+        along = min(dims[i][1] for i in group)
+        return sum(dims[i][0] * along / dims[i][1] for i in group)
+
+    length = size or int(min(natural_length(g) for g in full) + gap * (cols - 1))
+
+    cells = []
+    full_along = []
+    for group in groups:
+        ratios = [dims[i][0] / dims[i][1] for i in group]
+        if len(group) == len(full[0]):
+            avail = length - gap * (len(group) - 1)
+            along = round(avail / sum(ratios))
+            full_along.append(along)
+        else:
+            # Short last group: keep the cell size of full groups if it fits
+            # its grid slots (centered, padded). If it is wider than its slots,
+            # e.g. a landscape after portraits, scale it to fill the strip.
+            along = round(sum(full_along) / len(full_along))
+            avail = round(along * sum(ratios))
+            max_avail = length - gap * (len(group) - 1)
+            slots = (length - gap * (cols - 1)) * len(group) / cols
+            if avail > min(slots * 1.05, max_avail):
+                avail = max_avail
+                along = round(avail / sum(ratios))
+        across = split_evenly(avail, ratios)
+        cells.append([(i, a, along) for i, a in zip(group, across)])
+    return cells, length
+
+
+def build_command(paths, cells, length, vertical, gap, bg, quality, output):
+    # Vertical: groups are rows (+append), rows stack (-append).
+    inner, outer = ("+", "-") if vertical else ("-", "+")
+    cmd = ["magick", "-background", bg, "-gravity", "center"]
+    for group in cells:
+        cmd.append("(")
+        for i, across, along in group:
+            w, h = (across, along) if vertical else (along, across)
+            cmd += ["(", paths[i], "-auto-orient", "-resize", f"{w}x{h}!", ")"]
+        cmd += [f"{inner}smush", str(gap)]
+        extent = f"{length}x" if vertical else f"x{length}"
+        cmd += ["-extent", extent, ")"]
+    cmd += [f"{outer}smush", str(gap), "-quality", str(quality), str(output)]
+    return cmd
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("paths", nargs="*", help="image files (read from stdin if omitted)")
+    direction = parser.add_mutually_exclusive_group()
+    direction.add_argument("-v", "--vertical", action="store_true", help="top to bottom (default)")
+    direction.add_argument("-H", "--horizontal", action="store_true", help="left to right")
+    parser.add_argument("--cols", type=int, default=1, help="images per row (per column with --horizontal)")
+    parser.add_argument("--2x", dest="cols", action="store_const", const=2, help="same as --cols 2")
+    parser.add_argument("-o", "--output", help="output file (default: ./stitched-<timestamp>.jpg)")
+    parser.add_argument("-s", "--size", type=int, help="output width (height with --horizontal); default avoids upscaling")
+    parser.add_argument("-g", "--gap", type=int, default=0, help="pixels between images")
+    parser.add_argument("--bg", default="white", help="background color for gaps and padding")
+    parser.add_argument("-q", "--quality", type=int, default=92)
+    parser.add_argument("--open", action="store_true", help="open the result when done")
+    args = parser.parse_args()
+
+    if args.cols < 1:
+        parser.error("--cols must be at least 1")
+
+    paths = [str(Path(p).expanduser()) for p in read_paths(args.paths)]
+    if not paths:
+        parser.error("no image paths given")
+    missing = [p for p in paths if not Path(p).is_file()]
+    if missing:
+        sys.exit("not found:\n  " + "\n  ".join(missing))
+
+    vertical = not args.horizontal
+    dims = dimensions(paths)
+    if not vertical:
+        dims = [(h, w) for w, h in dims]
+
+    cells, length = layout(dims, args.cols, args.gap, args.size)
+
+    output = Path(args.output or f"stitched-{datetime.now():%Y%m%d-%H%M%S}.jpg")
+    cmd = build_command(paths, cells, length, vertical, args.gap, args.bg, args.quality, output)
+    subprocess.run(cmd, check=True)
+
+    result = subprocess.run(
+        ["magick", "identify", "-format", "%wx%h", str(output)],
+        capture_output=True, text=True,
+    )
+    print(f"{output} ({result.stdout.strip()})")
+    if args.open:
+        subprocess.run(["open", str(output)])
+
+
+if __name__ == "__main__":
+    main()
