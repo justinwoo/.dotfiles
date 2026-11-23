@@ -37,6 +37,7 @@ let
       lazydocker
       difftastic
       delta
+      pi-coding-agent
     ] ++ [
       z
     ]);

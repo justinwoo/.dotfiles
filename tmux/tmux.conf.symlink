@@ -26,6 +26,10 @@ set-option -g repeat-time 0
 # Enable mouse mode
 set -g mouse on
 
+# extended keys...
+set -g extended-keys on
+set -g extended-keys-format csi-u
+
 # Reload config
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
