@@ -38,6 +38,8 @@ let
       difftastic
       delta
       pi-coding-agent
+      aws-iam-authenticator
+      awscli2
     ] ++ [
       z
     ]);

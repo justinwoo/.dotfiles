@@ -59,3 +59,6 @@
 	syntax-theme = GitHub
 [github]
 	user = justinwoo
+# machine-local/private config (gitignored; ignored if missing)
+[include]
+	path = ~/.dotfiles/local/git/gitconfig
