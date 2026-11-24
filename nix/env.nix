@@ -40,6 +40,7 @@ let
       pi-coding-agent
       aws-iam-authenticator
       awscli2
+      wget
     ] ++ [
       z
     ]);
